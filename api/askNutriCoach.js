@@ -25,6 +25,7 @@ export default async function handler(req, res) {
     `;
 
     try {
+        // Usamos gemini-1.5-flash optimizado para la API de Vercel
         const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
         
         const geminiResponse = await fetch(geminiUrl, {
@@ -46,7 +47,7 @@ export default async function handler(req, res) {
 
         if (data.error) {
             console.error("Error de Gemini API:", data.error);
-            return res.status(500).json({ reply: 'Tuve un inconveniente al pensar la respuesta. Intenta de nuevo en unos segundos.' });
+            return res.status(500).json({ reply: `Error de la API: ${data.error.message || 'Desconocido'}` });
         }
 
         const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No pude generar una respuesta en este momento.';
