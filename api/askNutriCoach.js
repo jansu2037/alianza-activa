@@ -25,8 +25,7 @@ export default async function handler(req, res) {
     `;
 
     try {
-        // Usamos gemini-1.5-flash asegurando la ruta estable
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${apiKey}`;
         
         const geminiResponse = await fetch(geminiUrl, {
             method: 'POST',
@@ -48,7 +47,7 @@ export default async function handler(req, res) {
 
         if (data.error) {
             console.error("Error de Gemini API:", data.error);
-            return res.status(500).json({ reply: `Error de la API: ${data.error.message || 'Intenta de nuevo en unos segundos.'}` });
+            return res.status(500).json({ reply: `Error de la API: ${data.error.message || 'Intenta de nuevo.'}` });
         }
 
         const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No pude generar una respuesta en este momento.';
