@@ -129,6 +129,10 @@
                     <i class="fa-solid fa-scale-balanced"></i>
                     <span>Equivalencias</span>
                 </button>
+                <button onclick="switchTab(7)" id="btn-tab-7" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
+                    <i class="fa-solid fa-utensils text-orange-400"></i>
+                    <span>Recetas Oficiales</span>
+                </button>
                 <button onclick="switchTab(5)" id="btn-tab-5" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
                     <i class="fa-solid fa-robot text-amber-400"></i>
                     <span>NutriCoach IA</span>
@@ -256,6 +260,84 @@
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 40g a 50g Palta (Aguacate)</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 15g Frutos secos (Nueces)</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 15g Mantequilla de maní natural</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 7: RECETAS OFICIALES ALIANZA ACTIVA -->
+            <section id="content-tab-7" class="tab-content hidden space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
+                    <div class="flex items-center gap-3 mb-2 text-orange-400">
+                        <i class="fa-solid fa-utensils text-2xl"></i>
+                        <h2 class="text-2xl font-bold text-white">🍳 Recetas Oficiales Alianza Activa</h2>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Preparaciones estandarizadas con precisión matemática y 0% de error en macronutrientes para los días de Alta Energía y Control.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Receta 1 -->
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center gap-3 text-amber-400 border-b border-slate-800 pb-3">
+                            <i class="fa-solid fa-cookie-bite text-xl"></i>
+                            <h3 class="font-bold text-white">Pancakes de Cookies & Avena</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 font-semibold">Ideal para Desayunos de Alta Energía (Lunes, Miércoles, Viernes)</p>
+                        <ul class="text-xs text-slate-300 space-y-2">
+                            <li><strong class="text-amber-400">Ingredientes:</strong></li>
+                            <li>• 30g de Batido F1 Cookies (Herbalife)</li>
+                            <li>• 40g de Avena instantánea</li>
+                            <li>• 1 Huevo entero (50g)</li>
+                            <li>• 50ml de Agua</li>
+                        </ul>
+                        <p class="text-xs text-slate-400 italic pt-2">💡 Licuar todo junto y cocinar en sartén antiadherente a fuego medio hasta dorar ambos lados.</p>
+                    </div>
+
+                    <!-- Receta 2 -->
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center gap-3 text-orange-400 border-b border-slate-800 pb-3">
+                            <i class="fa-solid fa-mug-hot text-xl"></i>
+                            <h3 class="font-bold text-white">Porridge Tibio de Cookies</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 font-semibold">Ideal para Media Tarde / Merienda de Alta Energía</p>
+                        <ul class="text-xs text-slate-300 space-y-2">
+                            <li><strong class="text-orange-400">Ingredientes:</strong></li>
+                            <li>• 50g de Avena tradicional en crudo</li>
+                            <li>• 200ml de Agua</li>
+                            <li>• 30g de Batido F1 Cookies (Herbalife)</li>
+                        </ul>
+                        <p class="text-xs text-slate-400 italic pt-2">💡 Cocinar la avena tradicional con el agua hasta espesar, retirar del fuego e integrar el batido al final para conservar los nutrientes.</p>
+                    </div>
+
+                    <!-- Receta 3 -->
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center gap-3 text-emerald-400 border-b border-slate-800 pb-3">
+                            <i class="fa-solid fa-blender text-xl"></i>
+                            <h3 class="font-bold text-white">Batido Cookies Libre (Control)</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 font-semibold">Ideal para Desayuno y Merienda en días de Control y Recuperación</p>
+                        <ul class="text-xs text-slate-300 space-y-2">
+                            <li><strong class="text-emerald-400">Ingredientes:</strong></li>
+                            <li>• 30g de Batido F1 Cookies (Herbalife)</li>
+                            <li>• Claras de huevo y Avena tradicional según bloques de precisión</li>
+                            <li>• Agua o hielo a gusto</li>
+                        </ul>
+                        <p class="text-xs text-slate-400 italic pt-2">💡 Se puede licuar todo junto o preparar un bizcochuelo express de microondas con la misma mezcla.</p>
+                    </div>
+
+                    <!-- Receta 4 -->
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center gap-3 text-amber-400 border-b border-slate-800 pb-3">
+                            <i class="fa-solid fa-shield-halved text-xl"></i>
+                            <h3 class="font-bold text-white">Reglas de Precisión Alianza Activa</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 font-semibold">Normas obligatorias para 0% de error</p>
+                        <ul class="text-xs text-slate-300 space-y-2">
+                            <li>• <strong>Alimentos en crudo:</strong> Pesar siempre antes de cocinar.</li>
+                            <li>• <strong>Huevos:</strong> Expresados siempre por unidad entera.</li>
+                            <li>• <strong>Suplementación:</strong> Respetar el timing pre y post entreno indicado por el Coach.</li>
                         </ul>
                     </div>
                 </div>
@@ -402,7 +484,6 @@
         const API_KEY = "AIzaSyA2Sk6s2i2_bcJ_fJc4BEyMw3y9hU79_Nw";
         const PROJECT_ID = "alianza-activa";
 
-        // Conexión directa al ID exacto de tu base de datos (default y (default))
         let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
 
         const defaultClients = [
@@ -410,34 +491,33 @@
                 name: "Angela",
                 pass: "angela2026",
                 tab1: [
-                    "Desayuno: 2 Huevos enteros cocidos a gusto + 40g de Pan integral",
+                    "Desayuno: Pancakes de Cookies & Avena (Receta Oficial)",
                     "Media Mañana: 150g de Fruta (Manzana verde o Kiwi)",
                     "Almuerzo: 210g de Pechuga de pollo o Lomo de ternera magro en crudo + 60g Arroz integral + 200g Ensalada",
-                    "Media Tarde: 2 Huevos enteros + 60g Pan integral",
+                    "Media Tarde: Porridge Tibio de Cookies (Receta Oficial)",
                     "Cena: Lunes: 200g Lomo magro + Ensalada + 40g Palta / Miércoles: 200g Pollo + Ensalada + 60g Zapallo"
                 ],
                 tab2: [
-                    "Desayuno: 2 Huevos enteros + 40g Pan integral",
+                    "Desayuno: Batido Cookies Libre + 2 Huevos enteros",
                     "Media Mañana: 150g Fruta (Sin proteína)",
                     "Almuerzo: 150g Proteína + 50g Carbohidrato + 10g Aceite de oliva + 200g Ensalada",
-                    "Media Tarde: 2 Huevos enteros + 120g Papa o Batata en crudo",
+                    "Media Tarde: Batido Cookies Libre + 120g Papa o Batata en crudo",
                     "Cena: Rotación de pescado y pollo magro con vegetales"
                 ],
                 tab3: [
+                    "Batido F1 Cookies (Herbalife): 2 tarros",
                     "Huevos: 1 maple de 30 unidades",
                     "Pechuga de pollo: 1.5 kg en crudo",
                     "Carne roja magra: 450g",
-                    "Pan integral: 1 paquete (460g)",
+                    "Avena tradicional e instantánea: 1 kg",
                     "Arroz integral o Parboil: 500g",
-                    "Fruta fresca: 1.2 kg (Manzana verde o Kiwi)",
-                    "Vegetales verdes: 3 kg (Espinaca, brócoli, zucchini)"
+                    "Fruta fresca: 1.2 kg",
+                    "Vegetales verdes: 3 kg"
                 ]
             }
         ];
 
-        // --- SISTEMA DE SEGURIDAD ESTRICTO AÑADIDO ---
         let isUserAdmin = false;
-        
         let clientsDB = defaultClients;
         let activeClient = clientsDB[0];
 
@@ -464,7 +544,6 @@
             }
         }
 
-        // Auto-detección del endpoint de la base de datos
         async function fetchClientsFromFirebase() {
             const endpoints = [
                 `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
@@ -505,9 +584,8 @@
             btn.disabled = false;
             btn.innerText = "Ingresar al Sistema";
 
-            // Acceso Administrador Coach
             if (val === "jansu2037rsc") {
-                isUserAdmin = true; // Candado abierto
+                isUserAdmin = true;
                 activeClient = {
                     name: "Coach Roberto",
                     tab1: ["Modo Administrador - Coach"],
@@ -517,23 +595,22 @@
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
                 document.getElementById('admin-tab-btn').classList.remove('hidden');
-                renderDynamicContent(); // Actualiza los nombres en la interfaz
+                renderDynamicContent();
                 renderAdminPanel();
                 switchTab(6);
                 return;
             }
 
-            // Acceso de Cliente normal
             const found = clientsDB.find(c => c.pass.trim() === val) || defaultClients.find(c => c.pass.trim() === val);
             if (found) {
-                isUserAdmin = false; // Candado cerrado a nivel código
+                isUserAdmin = false;
                 activeClient = found;
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
-                document.getElementById('admin-tab-btn').classList.add('hidden'); // Ocultar forzosamente
+                document.getElementById('admin-tab-btn').classList.add('hidden');
                 renderDynamicContent();
                 initFoodRain();
-                switchTab(1); // Manda al cliente a Alta Energía obligatoriamente
+                switchTab(1);
             } else {
                 errEl.classList.remove('hidden');
             }
@@ -556,20 +633,21 @@
                 name,
                 pass,
                 tab1: [
-                    "Desayuno: 2 Huevos enteros + 40g Pan integral",
+                    "Desayuno: Pancakes de Cookies & Avena",
                     "Media Mañana: 150g de Fruta fresca",
                     "Almuerzo: 180g Proteína magra + 50g Arroz en crudo + 200g Ensalada",
-                    "Media Tarde: 2 Huevos enteros + 40g Pan integral",
+                    "Media Tarde: Porridge Tibio de Cookies",
                     "Cena: 180g Pollo o Ternera + Vegetales verdes"
                 ],
                 tab2: [
-                    "Desayuno: 2 Huevos enteros + 40g Pan integral",
+                    "Desayuno: Batido Cookies Libre",
                     "Media Mañana: 150g Fruta",
                     "Almuerzo: 150g Proteína + 40g Arroz + Ensalada",
-                    "Media Tarde: 2 Huevos enteros + 120g Papa",
+                    "Media Tarde: Batido Cookies Libre + 120g Papa",
                     "Cena: Pescado blanco con vegetales"
                 ],
                 tab3: [
+                    "Batido F1 Cookies: 2 tarros",
                     "Huevos: 1 maple de 30 unidades",
                     "Pechuga de pollo: 1.5 kg",
                     "Arroz o Avena: 500g",
@@ -578,7 +656,6 @@
             };
 
             try {
-                // Intentar guardar primero en el endpoint detectado
                 let saved = false;
                 const endpoints = [
                     FIRESTORE_BASE,
@@ -627,7 +704,6 @@
             loadClientDietForEditing();
 
             const container = document.getElementById('clients-list-container');
-            
             if (clientsDB.length === 0) {
                 container.innerHTML = `<p class="text-sm text-slate-500 italic p-3 bg-slate-950 rounded-xl">No hay clientes registrados en Firestore.</p>`;
                 return;
@@ -780,7 +856,8 @@
         }
 
         function switchTab(tabNumber) {
-            for (let i = 1; i <= 6; i++) {
+            const tabs = [1, 2, 3, 4, 5, 6, 7];
+            tabs.forEach(i => {
                 const content = document.getElementById('content-tab-' + i);
                 const btn = document.getElementById('btn-tab-' + i) || (i === 6 ? document.getElementById('admin-tab-btn') : null);
                 if (content) content.classList.add('hidden');
@@ -788,11 +865,11 @@
                 if (btn && i !== 6) {
                     btn.className = 'tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer';
                 }
-                // Si es el botón de admin (6), le forzamos 'hidden' si NO eres el coach
                 if (btn && i === 6) {
                     btn.className = 'tab-btn ' + (!isUserAdmin ? 'hidden ' : '') + 'px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-amber-400 border border-amber-500/50 hover:bg-slate-800 cursor-pointer';
                 }
-            }
+            });
+
             const activeContent = document.getElementById('content-tab-' + tabNumber);
             const activeBtn = document.getElementById('btn-tab-' + tabNumber) || (tabNumber === 6 ? document.getElementById('admin-tab-btn') : null);
             
@@ -801,7 +878,6 @@
             if (activeBtn) {
                 if (tabNumber === 1) activeBtn.className = 'tab-btn px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-orange-500 text-slate-950 shadow-[0_0_20px_rgba(249,115,22,0.4)] cursor-pointer';
                 else if (tabNumber === 2) activeBtn.className = 'tab-btn px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-emerald-400 text-slate-950 shadow-[0_0_20px_rgba(52,211,153,0.4)] cursor-pointer';
-                // Al estar activo, aseguramos nuevamente que no se destape si no eres admin
                 else if (tabNumber === 6) activeBtn.className = 'tab-btn ' + (!isUserAdmin ? 'hidden ' : '') + 'px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-amber-500 text-slate-950 shadow-[0_0_20px_rgba(245,158,11,0.3)] cursor-pointer';
                 else activeBtn.className = 'tab-btn px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-amber-500 text-slate-950 shadow-[0_0_20px_rgba(245,158,11,0.3)] cursor-pointer';
             }
