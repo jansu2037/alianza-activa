@@ -31,7 +31,7 @@
 </head>
 <body class="text-slate-200 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950 antialiased relative overflow-x-hidden">
 
-    <!-- PANTALLA DE ACCESO / LOGIN & EMBUDO PÚBLICO -->
+    <!-- LOGIN Y EMBUDO PÚBLICO -->
     <div id="login-screen" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-8 max-w-xl w-full shadow-[0_0_50px_rgba(245,158,11,0.2)] text-center space-y-6 my-auto">
             <div class="w-20 h-20 mx-auto rounded-full bg-slate-950 border-2 border-amber-500 flex items-center justify-center text-amber-400 text-3xl shadow-inner">
@@ -55,14 +55,12 @@
                 <div class="text-center">
                     <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-bold uppercase tracking-wider">¿No tienes plan todavía?</span>
                     <h3 class="text-lg font-bold text-white mt-2">Obtuve tu Diagnóstico con IA 24/7</h3>
-                    <p class="text-xs text-slate-400 mt-1">Calcula tu objetivo nutricional con Roberto (Alianza Activa).</p>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <input type="text" id="lead-name" placeholder="Tu Nombre" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:border-amber-500 outline-none">
                     <select id="lead-goal" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:border-amber-500 outline-none">
                         <option value="Hipertrofia / Pierna">Hipertrofia / Pierna</option>
                         <option value="Definición / Control">Definición / Control</option>
-                        <option value="Bienestar y Energía">Bienestar y Energía</option>
                     </select>
                 </div>
                 <button onclick="sendLeadWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition-all text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg">
@@ -78,25 +76,14 @@
             <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=2070')] bg-cover bg-center opacity-85"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-950/85 to-slate-950"></div>
             
-            <div class="relative max-w-4xl mx-auto px-4 py-12 md:py-16 flex flex-col items-center justify-center text-center gap-6">
-                <div class="w-32 h-32 md:w-40 md:h-40 relative group z-10 mb-2 flex items-center justify-center bg-slate-900 rounded-full border-2 border-amber-500/60 shadow-[0_0_35px_rgba(245,158,11,0.4)] overflow-hidden">
-                    <div class="absolute inset-0 bg-amber-500 rounded-full blur-[40px] opacity-30 transition-opacity duration-700 group-hover:opacity-60"></div>
-                    <div class="relative flex flex-col items-center justify-center w-full h-full p-2 z-10 text-amber-400">
-                        <i class="fa-solid fa-shield-halved text-4xl md:text-5xl drop-shadow-lg mb-1"></i>
-                        <span class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-amber-200">Alianza Activa</span>
-                    </div>
+            <div class="relative max-w-4xl mx-auto px-4 py-12 flex flex-col items-center justify-center text-center gap-6">
+                <div class="w-32 h-32 relative group z-10 flex items-center justify-center bg-slate-900 rounded-full border-2 border-amber-500/60 shadow-[0_0_35px_rgba(245,158,11,0.4)]">
+                    <i class="fa-solid fa-shield-halved text-4xl text-amber-400"></i>
                 </div>
-                
                 <div class="space-y-3 z-10 flex flex-col items-center">
-                    <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/40 text-amber-400 text-xs font-bold uppercase tracking-[0.2em] shadow-lg backdrop-blur-md">
-                        <i class="fa-solid fa-book-open"></i> Guía de Alimentación Oficial
-                    </span>
-                    <h1 id="header-client-title" class="text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 drop-shadow-lg pb-1">
+                    <h1 id="header-client-title" class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">
                         Fitness Alianza Activa
                     </h1>
-                    <p class="text-slate-300 font-medium text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-                        Plan nutricional personalizado de 7 días para rendimiento máximo y composición corporal óptima.
-                    </p>
                 </div>
             </div>
         </header>
@@ -104,152 +91,98 @@
         <!-- BARRA DE NAVEGACIÓN -->
         <nav class="bg-slate-950/95 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-xl shadow-xl no-print">
             <div class="max-w-4xl mx-auto px-4 flex overflow-x-auto gap-2 py-3 scrollbar-none justify-start md:justify-center">
-                <button onclick="switchTab(1)" id="btn-tab-1" class="tab-btn px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-orange-500 text-slate-950 shadow-[0_0_20px_rgba(249,115,22,0.4)] cursor-pointer">
-                    <i class="fa-solid fa-bolt"></i>
-                    <span>Alta Energía</span>
+                <button onclick="switchTab(1)" id="btn-tab-1" class="tab-btn px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-orange-500 text-slate-950 cursor-pointer">
+                    <i class="fa-solid fa-bolt"></i><span>Alta Energía</span>
                 </button>
-                <button onclick="switchTab(2)" id="btn-tab-2" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-arrows-rotate"></i>
-                    <span>Control</span>
+                <button onclick="switchTab(2)" id="btn-tab-2" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 cursor-pointer">
+                    <i class="fa-solid fa-arrows-rotate"></i><span>Control</span>
                 </button>
-                <button onclick="switchTab(3)" id="btn-tab-3" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span>Compras</span>
+                <button onclick="switchTab(3)" id="btn-tab-3" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 cursor-pointer">
+                    <i class="fa-solid fa-cart-shopping"></i><span>Compras</span>
                 </button>
-                <button onclick="switchTab(4)" id="btn-tab-4" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-scale-balanced"></i>
-                    <span>Equivalencias</span>
+                <button onclick="switchTab(4)" id="btn-tab-4" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 cursor-pointer">
+                    <i class="fa-solid fa-scale-balanced"></i><span>Equivalencias</span>
                 </button>
-                <button onclick="switchTab(7)" id="btn-tab-7" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-utensils text-orange-400"></i>
-                    <span>Recetas</span>
+                <button onclick="switchTab(7)" id="btn-tab-7" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 cursor-pointer">
+                    <i class="fa-solid fa-utensils text-orange-400"></i><span>Recetas</span>
                 </button>
-                <button onclick="switchTab(8)" id="btn-tab-8" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-store text-emerald-400"></i>
-                    <span>Tienda & Protein Bar</span>
+                <button onclick="switchTab(8)" id="btn-tab-8" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 cursor-pointer">
+                    <i class="fa-solid fa-store text-emerald-400"></i><span>Tienda & Protein Bar</span>
                 </button>
-                <button onclick="switchTab(5)" id="btn-tab-5" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-robot text-amber-400"></i>
-                    <span>NutriCoach IA</span>
+                <button onclick="switchTab(5)" id="btn-tab-5" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 cursor-pointer">
+                    <i class="fa-solid fa-robot text-amber-400"></i><span>NutriCoach IA</span>
                 </button>
-                <button id="admin-tab-btn" onclick="switchTab(6)" class="tab-btn hidden px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-amber-400 border border-amber-500/50 hover:bg-slate-800 cursor-pointer">
-                    <i class="fa-solid fa-sliders"></i>
-                    <span>Panel Coach</span>
+                <button id="admin-tab-btn" onclick="switchTab(6)" class="tab-btn hidden px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-amber-400 border border-amber-500/50 cursor-pointer">
+                    <i class="fa-solid fa-sliders"></i><span>Panel Coach</span>
                 </button>
             </div>
         </nav>
 
         <main class="relative z-10 max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
-
-            <!-- SECCIÓN 1: ALTA ENERGÍA -->
             <section id="content-tab-1" class="tab-content space-y-6">
-                <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden relative">
-                    <div class="relative p-6 md:p-8 border-b border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div>
-                            <div class="inline-flex items-center space-x-2 text-orange-400 mb-2 font-bold">
-                                <i class="fa-solid fa-calendar-days text-sm"></i>
-                                <span class="text-xs uppercase tracking-widest">Lunes, Miércoles y Viernes</span>
-                            </div>
-                            <h2 class="text-2xl md:text-3xl font-black text-white">Alta Energía (Pierna)</h2>
-                        </div>
-                        <button onclick="shareWhatsApp('tab1')" class="no-print bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer">
-                            <i class="fa-brands fa-whatsapp text-base"></i> Compartir Día
-                        </button>
-                    </div>
+                <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex justify-between items-center">
+                    <h2 class="text-2xl font-black text-white">Alta Energía (Pierna)</h2>
+                    <button onclick="shareWhatsApp('tab1')" class="bg-emerald-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl cursor-pointer"><i class="fa-brands fa-whatsapp"></i> Compartir</button>
                 </div>
                 <div id="tab1-meals-container" class="space-y-4"></div>
             </section>
 
-            <!-- SECCIÓN 2: CONTROL Y RECUPERACIÓN -->
             <section id="content-tab-2" class="tab-content hidden space-y-6">
-                <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden relative">
-                    <div class="relative p-6 md:p-8 border-b border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div>
-                            <div class="inline-flex items-center space-x-2 text-emerald-400 mb-2 font-bold">
-                                <i class="fa-solid fa-calendar-days text-sm"></i>
-                                <span class="text-xs uppercase tracking-widest">Martes, Jueves, Sábado y Domingo</span>
-                            </div>
-                            <h2 class="text-2xl md:text-3xl font-black text-white">Control y Recuperación</h2>
-                        </div>
-                        <button onclick="shareWhatsApp('tab2')" class="no-print bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer">
-                            <i class="fa-brands fa-whatsapp text-base"></i> Compartir Día
-                        </button>
-                    </div>
+                <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 flex justify-between items-center">
+                    <h2 class="text-2xl font-black text-white">Control y Recuperación</h2>
+                    <button onclick="shareWhatsApp('tab2')" class="bg-emerald-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl cursor-pointer"><i class="fa-brands fa-whatsapp"></i> Compartir</button>
                 </div>
                 <div id="tab2-meals-container" class="space-y-4"></div>
             </section>
 
-            <!-- SECCIÓN 3: LISTA DE COMPRAS -->
             <section id="content-tab-3" class="tab-content hidden space-y-6">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                        <h2 class="text-2xl font-bold text-white mb-2">🛒 Lista de Compras Semanal</h2>
-                        <p class="text-slate-300 text-sm">Cantidades calculadas en crudo para la semana exacta.</p>
-                    </div>
-                    <button onclick="shareWhatsApp('tab3')" class="no-print bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer">
-                        <i class="fa-brands fa-whatsapp text-base"></i> Mandar Súper por WhatsApp
-                    </button>
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-white">🛒 Lista de Compras</h2>
+                    <button onclick="shareWhatsApp('tab3')" class="bg-emerald-600 text-white text-xs font-bold px-4 py-2.5 rounded-xl cursor-pointer"><i class="fa-brands fa-whatsapp"></i> Compartir</button>
                 </div>
                 <div id="tab3-shopping-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN 4: GUÍA DE EQUIVALENCIAS -->
             <section id="content-tab-4" class="tab-content hidden space-y-6">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
-                    <h2 class="text-2xl font-bold text-white mb-2">Guía de Sustitutos y Equivalencias</h2>
-                    <p class="text-slate-300 text-sm">Intercambios directos para mantener tu plan intacto.</p>
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <h2 class="text-2xl font-bold text-white mb-2">Guía de Equivalencias</h2>
+                    <p class="text-slate-300 text-sm">Intercambios directos oficiales.</p>
                 </div>
             </section>
 
-            <!-- SECCIÓN 7: RECETAS OFICIALES -->
             <section id="content-tab-7" class="tab-content hidden space-y-6">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
                     <h2 class="text-2xl font-bold text-white mb-2">🍳 Recetas Oficiales Alianza Activa</h2>
-                    <p class="text-slate-300 text-sm">Preparaciones estandarizadas con 0% de error en macronutrientes.</p>
+                    <p class="text-slate-300 text-sm">Pancakes, Porridge y Batido Cookies.</p>
                 </div>
             </section>
 
-            <!-- SECCIÓN 8: TIENDA & PROTEIN BAR (CON ESTADOS TIPO INSTAGRAM Y DINÁMICA DE ADMIN) -->
+            <!-- TIENDA & PROTEIN BAR (CON ESTADOS TIPO INSTAGRAM) -->
             <section id="content-tab-8" class="tab-content hidden space-y-6">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
                     <h2 class="text-2xl font-bold text-white mb-2">🛍️ Tienda Oficial & Protein Bar Anubis</h2>
-                    <p class="text-slate-300 text-sm">Estados del día, videos demostrativos y suplementación de alto rendimiento.</p>
+                    <p class="text-slate-300 text-sm">Estados diarios, videos y suplementación.</p>
                 </div>
 
-                <!-- ESTADOS / HISTORIAS ESTILO INSTAGRAM -->
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-                    <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider"><i class="fa-solid fa-circle-notch mr-2"></i> Estados del Día (Protein Bar & Productos)</h3>
-                    <div id="instagram-stories-container" class="flex gap-4 overflow-x-auto pb-2 scrollbar-none">
-                        <!-- Las historias se cargan dinámicamente -->
-                    </div>
+                    <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider"><i class="fa-solid fa-circle-notch"></i> Estados del Día (Historias)</h3>
+                    <div id="instagram-stories-container" class="flex gap-4 overflow-x-auto pb-2 scrollbar-none"></div>
                 </div>
 
-                <!-- Apartado de Videos dinámicos -->
-                <div class="grid md:grid-cols-2 gap-6" id="dynamic-videos-container">
-                    <!-- Se carga dinámicamente desde el panel coach -->
-                </div>
-
-                <!-- Catálogo de Productos dinámico -->
-                <div class="grid md:grid-cols-3 gap-6 pt-4" id="dynamic-store-container">
-                    <!-- Se carga dinámicamente desde el panel coach -->
-                </div>
+                <div class="grid md:grid-cols-2 gap-6" id="dynamic-videos-container"></div>
+                <div class="grid md:grid-cols-3 gap-6 pt-4" id="dynamic-store-container"></div>
             </section>
 
-            <!-- SECCIÓN 5: NUTRICOACH IA -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div>
-                        <h2 class="text-2xl md:text-3xl font-black text-white" id="ai-title-name">NutriCoach IA</h2>
-                        <p class="text-slate-300 text-sm mt-1">Pregúntale lo que necesites sobre equivalencias, porciones o intercambios.</p>
-                    </div>
-                    <button onclick="resetChat()" class="no-print bg-slate-800 text-slate-300 text-xs px-3 py-2 rounded-xl cursor-pointer">Limpiar Chat</button>
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-white" id="ai-title-name">NutriCoach IA</h2>
+                    <button onclick="resetChat()" class="bg-slate-800 text-slate-300 text-xs px-3 py-2 rounded-xl cursor-pointer">Limpiar</button>
                 </div>
-
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[520px]">
                     <div id="chat-messages" class="flex-grow p-6 overflow-y-auto space-y-4">
                         <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0">AI</div>
-                            <div id="ai-welcome-msg" class="bg-slate-800 text-slate-200 p-4 rounded-2xl text-sm border border-slate-700">¡Hola! Estoy acá para lo que necesites.</div>
+                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm">AI</div>
+                            <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl text-sm border border-slate-700">¡Hola! Estoy acá para lo que necesites.</div>
                         </div>
                     </div>
                     <div class="p-4 bg-slate-950 border-t border-slate-800 flex gap-3 items-center">
@@ -259,46 +192,25 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN 6: PANEL COACH (CON GESTIÓN DE TIENDA Y ESTADOS TIPO INSTAGRAM) -->
+            <!-- PANEL COACH -->
             <section id="content-tab-6" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-6">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-sliders text-2xl text-amber-400"></i>
-                            <div>
-                                <h2 class="text-2xl font-bold text-white">Panel Coach: Gestión de Tienda & Contenido</h2>
-                                <p class="text-slate-400 text-sm">Sube estados estilo Instagram, edita productos y administra tu tienda.</p>
-                            </div>
-                        </div>
+                    <div class="border-b border-slate-800 pb-4">
+                        <h2 class="text-2xl font-bold text-white">Panel Coach: Gestión de Tienda & Contenido</h2>
+                        <p class="text-slate-400 text-sm">Sube historias estilo Instagram y administra clientes.</p>
                     </div>
 
-                    <!-- GESTOR DE ESTADOS / HISTORIAS TIPO INSTAGRAM -->
                     <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                        <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider">📸 Agregar Estado / Historia a la Tienda</h3>
+                        <h3 class="font-bold text-amber-400 text-sm uppercase">📸 Publicar Estado / Historia en la Tienda</h3>
                         <div class="grid md:grid-cols-2 gap-4">
                             <input type="text" id="story-title" placeholder="Título (Ej: Batido Post-Entreno)" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white outline-none">
-                            <input type="text" id="story-img" placeholder="URL de la Foto/Imagen" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white outline-none">
+                            <input type="text" id="story-img" placeholder="URL de la Foto / Imagen" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white outline-none">
                         </div>
-                        <button onclick="addStory()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition-all text-xs cursor-pointer">
-                            Publicar Estado en la Tienda
-                        </button>
+                        <button onclick="addStory()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-xs cursor-pointer">Publicar Estado</button>
                     </div>
 
-                    <!-- GESTOR DE PRODUCTOS Y VIDEOS DE TIENDA -->
                     <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                        <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider">🛍️ Personalizar Productos y Videos de Tienda</h3>
-                        <div class="space-y-3">
-                            <label class="text-xs text-slate-400 font-semibold">Editar HTML / Configuración de Productos de la Tienda</label>
-                            <textarea id="edit-store-config" rows="6" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none"></textarea>
-                        </div>
-                        <button onclick="saveStoreConfig()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition-all text-xs cursor-pointer">
-                            Actualizar Tienda en la Nube
-                        </button>
-                    </div>
-
-                    <!-- REGISTRO DE CLIENTES -->
-                    <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                        <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider">➕ Registrar Nuevo Cliente en Firebase</h3>
+                        <h3 class="font-bold text-amber-400 text-sm uppercase">➕ Registrar Nuevo Cliente en Firebase</h3>
                         <div class="grid md:grid-cols-2 gap-4">
                             <input type="text" id="new-client-name" placeholder="Nombre" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white outline-none">
                             <input type="text" id="new-client-pass" placeholder="Contraseña" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white outline-none">
@@ -311,22 +223,17 @@
                     </div>
                 </div>
             </section>
-
         </main>
 
-        <footer class="relative mt-16 py-16 text-center text-xs text-slate-400 border-t border-amber-500/30 bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=2070')">
-            <div class="absolute inset-0 bg-slate-950/90"></div>
-            <div class="relative max-w-4xl mx-auto px-4 z-10">
-                <p class="font-black text-amber-400 uppercase tracking-widest text-sm">Fitness Alianza Activa</p>
-                <p class="text-slate-400 text-xs mt-1">Nutrición de Alto Rendimiento - Río Grande, Tierra del Fuego</p>
-            </div>
+        <footer class="relative mt-16 py-16 text-center text-xs text-slate-400 border-t border-amber-500/30 bg-slate-950">
+            <p class="font-black text-amber-400 uppercase tracking-widest text-sm">Fitness Alianza Activa</p>
+            <p class="text-slate-400 text-xs mt-1">Río Grande, Tierra del Fuego</p>
         </footer>
     </div>
 
     <script>
         const API_KEY = "AIzaSyA2Sk6s2i2_bcJ_fJc4BEyMw3y9hU79_Nw";
         const PROJECT_ID = "alianza-activa";
-        let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
 
         let defaultStories = [
             { title: "Batido Cookies", img: "https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&q=80&w=300" },
@@ -349,7 +256,7 @@
         let isUserAdmin = false;
         let activeClient = clientsDB[0];
 
-        async function verifyPassword() {
+        function verifyPassword() {
             const val = document.getElementById('access-password').value.trim();
             const errEl = document.getElementById('login-error');
             if (val === "jansu2037rsc") {
@@ -358,7 +265,7 @@
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
                 document.getElementById('admin-tab-btn').classList.remove('hidden');
-                renderAdminPanel();
+                renderStoreFront();
                 switchTab(6);
                 return;
             }
@@ -376,7 +283,6 @@
         }
 
         function renderStoreFront() {
-            // Renderizar Historias tipo Instagram
             const storiesContainer = document.getElementById('instagram-stories-container');
             if(storiesContainer) {
                 storiesContainer.innerHTML = defaultStories.map(s => `
@@ -389,7 +295,6 @@
                 `).join('');
             }
 
-            // Renderizar Videos
             const vidContainer = document.getElementById('dynamic-videos-container');
             if(vidContainer) {
                 vidContainer.innerHTML = `
@@ -408,13 +313,12 @@
                 `;
             }
 
-            // Renderizar Productos
             const storeContainer = document.getElementById('dynamic-store-container');
             if(storeContainer) {
                 storeContainer.innerHTML = defaultStoreProducts.map(p => `
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
                         <div>
-                            <div class="w-12 h-12 rounded-xl bg-${p.color}-500/10 text-${p.color}-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid ${p.icon}"></i></div>
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid ${p.icon}"></i></div>
                             <h3 class="font-bold text-white text-base">${p.name}</h3>
                             <p class="text-xs text-slate-400 mt-1">${p.desc}</p>
                         </div>
@@ -429,16 +333,12 @@
         function addStory() {
             const title = document.getElementById('story-title').value.trim();
             const img = document.getElementById('story-img').value.trim();
-            if(!title || !img) { alert("Completa título y URL de imagen."); return; }
+            if(!title || !img) { alert("Completa título y URL."); return; }
             defaultStories.push({ title, img });
-            alert("✅ ¡Estado agregado con éxito a la tienda!");
+            alert("✅ ¡Estado publicado con éxito!");
             document.getElementById('story-title').value = "";
             document.getElementById('story-img').value = "";
             renderStoreFront();
-        }
-
-        function saveStoreConfig() {
-            alert("✅ ¡Configuración de tienda actualizada correctamente!");
         }
 
         function orderProductWhatsApp(productName) {
@@ -468,10 +368,6 @@
             `;
         }
 
-        function renderAdminPanel() {
-            renderStoreFront();
-        }
-
         function switchTab(tabNumber) {
             [1, 2, 3, 4, 5, 6, 7, 8].forEach(i => {
                 const el = document.getElementById('content-tab-' + i);
@@ -480,6 +376,31 @@
             const active = document.getElementById('content-tab-' + tabNumber);
             if(active) active.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const container = document.getElementById('chat-messages');
+            const q = input.value.trim();
+            if(!q) return;
+            container.innerHTML += `<div class="text-right text-sm bg-amber-500 text-slate-950 p-3 rounded-xl ml-auto max-w-[80%]">${q}</div>`;
+            input.value = "";
+            try {
+                const res = await fetch('/api/askNutriCoach', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: q, clientName: activeClient.name })
+                });
+                const data = await res.json();
+                container.innerHTML += `<div class="text-left text-sm bg-slate-800 text-slate-200 p-3 rounded-xl mr-auto max-w-[80%]">${data.reply || "Entendido."}</div>`;
+            } catch(e) {
+                container.innerHTML += `<div class="text-left text-sm bg-slate-800 text-slate-200 p-3 rounded-xl mr-auto max-w-[80%]">Error de conexión.</div>`;
+            }
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function resetChat() {
+            document.getElementById('chat-messages').innerHTML = `<div class="bg-slate-800 text-slate-200 p-4 rounded-2xl text-sm">Chat reiniciado.</div>`;
         }
     </script>
 </body>
