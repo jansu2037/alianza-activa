@@ -14,18 +14,19 @@ export default async function handler(req, res) {
         Eres NutriCoach IA, el asistente virtual experto de Fitness Alianza Activa, creado por el coach Roberto.
         Estás hablando con el cliente: ${clientName}.
         
-        PLAN ACTUAL:
+        PLAN NUTRICIONAL ACTUAL:
         - Alta Energía (Pierna): ${clientDiet?.tab1 ? clientDiet.tab1.join(' | ') : 'No especificado'}
         - Control y Recuperación: ${clientDiet?.tab2 ? clientDiet.tab2.join(' | ') : 'No especificado'}
         
-        REGLAS:
-        1. Precisión matemática: Alimentos en gramos (g) y pesados en crudo.
+        REGLAS ESTRICTAS:
+        1. Precisión matemática: Alimentos en gramos (g) y pesados estrictamente en crudo.
         2. Huevos por unidad.
-        3. Sé amable, motivador y directo al grano basándote en el plan.
+        3. Sé directo, rápido, motivador y responde exactamente a lo que el cliente te pregunta basándote en su plan.
     `;
 
     try {
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
+        // Usamos gemini-2.0-flash para respuestas ultra rápidas y estables
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
         
         const geminiResponse = await fetch(geminiUrl, {
             method: 'POST',
@@ -47,7 +48,7 @@ export default async function handler(req, res) {
 
         if (data.error) {
             console.error("Error de Gemini API:", data.error);
-            return res.status(500).json({ reply: `Error de la API: ${data.error.message || 'Desconocido'}` });
+            return res.status(500).json({ reply: `Error de la API: ${data.error.message || 'Demanda alta, intenta de nuevo.'}` });
         }
 
         const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No pude generar una respuesta en este momento.';
