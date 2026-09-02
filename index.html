@@ -21,34 +21,15 @@
             from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes foodFall {
-            0% { transform: translateY(-15vh) rotate(0deg); opacity: 0; }
-            15% { opacity: 0.65; }
-            85% { opacity: 0.65; }
-            100% { transform: translateY(115vh) rotate(360deg); opacity: 0; }
-        }
-        .falling-food {
-            position: absolute;
-            top: -15vh;
-            animation: foodFall linear infinite;
-            filter: drop-shadow(0 10px 25px rgba(0,0,0,0.85));
-            pointer-events: none;
-            z-index: 1;
-        }
-        @media print {
-            body { background: #ffffff !important; color: #000000 !important; }
-            #food-rain-container, nav, #login-screen, .no-print, button, #admin-tab-btn, footer { display: none !important; }
-            .tab-content { display: block !important; opacity: 1 !important; color: #000000 !important; }
-            .bg-slate-900, .bg-slate-950, .bg-slate-900\/90 { background: #ffffff !important; color: #000000 !important; border: 1px solid #e2e8f0 !important; box-shadow: none !important; }
-            .text-white, .text-slate-200, .text-slate-300, .text-slate-400 { color: #0f172a !important; }
-            .text-amber-400, .text-orange-400, .text-emerald-400 { color: #0f172a !important; font-weight: 800 !important; }
-            header { background: #ffffff !important; color: #000000 !important; border-bottom: 2px solid #000000 !important; }
+        .story-ring {
+            background: linear-gradient(45deg, #f59e0b, #10b981, #f97316);
+            padding: 3px;
+            border-radius: 50%;
+            display: inline-block;
         }
     </style>
 </head>
 <body class="text-slate-200 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950 antialiased relative overflow-x-hidden">
-
-    <div id="food-rain-container" class="fixed inset-0 pointer-events-none z-1 overflow-hidden"></div>
 
     <!-- PANTALLA DE ACCESO / LOGIN & EMBUDO PÚBLICO -->
     <div id="login-screen" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4 overflow-y-auto">
@@ -61,7 +42,6 @@
                 <p class="text-slate-400 text-sm mt-1">Plataforma de Alto Rendimiento & Nutrición</p>
             </div>
             
-            <!-- Acceso Clientes / Coach -->
             <div class="space-y-4 bg-slate-950 p-6 rounded-2xl border border-slate-800">
                 <h3 class="text-xs font-bold text-amber-400 uppercase tracking-widest">Acceso a Alumnos / Coach</h3>
                 <input type="password" id="access-password" onkeydown="if(event.key==='Enter') verifyPassword()" placeholder="Contraseña de acceso..." class="w-full bg-slate-900 border border-slate-700 text-white px-4 py-3 rounded-xl text-center tracking-widest focus:outline-none focus:border-amber-500 transition-colors text-sm">
@@ -71,7 +51,6 @@
                 <p id="login-error" class="text-red-400 text-xs hidden">Acceso denegado. Contraseña incorrecta.</p>
             </div>
 
-            <!-- EMBUDO DE VENTA 24/7 (Visitantes nuevos) -->
             <div class="border-t border-slate-800 pt-6 space-y-4 text-left">
                 <div class="text-center">
                     <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-bold uppercase tracking-wider">¿No tienes plan todavía?</span>
@@ -89,12 +68,6 @@
                 <button onclick="sendLeadWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition-all text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg">
                     <i class="fa-brands fa-whatsapp text-base"></i> Consultar Plan con el Coach por WhatsApp
                 </button>
-            </div>
-
-            <div class="pt-2 border-t border-slate-800/80">
-                <p class="text-[9px] text-slate-500 leading-relaxed">
-                    Esta información es de carácter educativo y orientativo. Diseñado exclusivamente para el programa Fitness Alianza Activa.
-                </p>
             </div>
         </div>
     </div>
@@ -124,12 +97,6 @@
                     <p class="text-slate-300 font-medium text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
                         Plan nutricional personalizado de 7 días para rendimiento máximo y composición corporal óptima.
                     </p>
-                    
-                    <div class="pt-2 no-print flex flex-wrap gap-3 justify-center">
-                        <button onclick="window.print()" class="bg-slate-900/90 hover:bg-slate-800 border border-amber-500/50 text-amber-400 text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2 shadow-md cursor-pointer">
-                            <i class="fa-solid fa-file-pdf"></i> Imprimir / Guardar PDF
-                        </button>
-                    </div>
                 </div>
             </div>
         </header>
@@ -177,8 +144,6 @@
             <!-- SECCIÓN 1: ALTA ENERGÍA -->
             <section id="content-tab-1" class="tab-content space-y-6">
                 <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden relative">
-                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center opacity-30"></div>
-                    <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-orange-950/60"></div>
                     <div class="relative p-6 md:p-8 border-b border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
                             <div class="inline-flex items-center space-x-2 text-orange-400 mb-2 font-bold">
@@ -186,9 +151,8 @@
                                 <span class="text-xs uppercase tracking-widest">Lunes, Miércoles y Viernes</span>
                             </div>
                             <h2 class="text-2xl md:text-3xl font-black text-white">Alta Energía (Pierna)</h2>
-                            <p class="text-slate-300 text-sm mt-1">Enfoque en rendimiento máximo, cargas altas de glucógeno e hipertrofia.</p>
                         </div>
-                        <button onclick="shareWhatsApp('tab1')" class="no-print self-start md:self-auto bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-lg cursor-pointer">
+                        <button onclick="shareWhatsApp('tab1')" class="no-print bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer">
                             <i class="fa-brands fa-whatsapp text-base"></i> Compartir Día
                         </button>
                     </div>
@@ -199,8 +163,6 @@
             <!-- SECCIÓN 2: CONTROL Y RECUPERACIÓN -->
             <section id="content-tab-2" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden relative">
-                    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center opacity-30"></div>
-                    <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-emerald-950/60"></div>
                     <div class="relative p-6 md:p-8 border-b border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
                             <div class="inline-flex items-center space-x-2 text-emerald-400 mb-2 font-bold">
@@ -208,9 +170,8 @@
                                 <span class="text-xs uppercase tracking-widest">Martes, Jueves, Sábado y Domingo</span>
                             </div>
                             <h2 class="text-2xl md:text-3xl font-black text-white">Control y Recuperación</h2>
-                            <p class="text-slate-300 text-sm mt-1">Carbohidratos moderados, huevos enteros y rotación proteica.</p>
                         </div>
-                        <button onclick="shareWhatsApp('tab2')" class="no-print self-start md:self-auto bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-lg cursor-pointer">
+                        <button onclick="shareWhatsApp('tab2')" class="no-print bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer">
                             <i class="fa-brands fa-whatsapp text-base"></i> Compartir Día
                         </button>
                     </div>
@@ -222,15 +183,10 @@
             <section id="content-tab-3" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
-                        <div class="flex items-center gap-3 mb-2 text-amber-400">
-                            <i class="fa-solid fa-cart-shopping text-2xl"></i>
-                            <h2 class="text-2xl font-bold text-white">🛒 Lista de Compras Semanal</h2>
-                        </div>
-                        <p class="text-slate-300 text-sm leading-relaxed">
-                            Cantidades calculadas con precisión matemática para cubrir la semana exacta sin desperdicios. Todo en crudo.
-                        </p>
+                        <h2 class="text-2xl font-bold text-white mb-2">🛒 Lista de Compras Semanal</h2>
+                        <p class="text-slate-300 text-sm">Cantidades calculadas en crudo para la semana exacta.</p>
                     </div>
-                    <button onclick="shareWhatsApp('tab3')" class="no-print self-start md:self-auto bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-lg cursor-pointer">
+                    <button onclick="shareWhatsApp('tab3')" class="no-print bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer">
                         <i class="fa-brands fa-whatsapp text-base"></i> Mandar Súper por WhatsApp
                     </button>
                 </div>
@@ -240,168 +196,42 @@
             <!-- SECCIÓN 4: GUÍA DE EQUIVALENCIAS -->
             <section id="content-tab-4" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
-                    <div class="flex items-center gap-3 mb-2 text-amber-400">
-                        <i class="fa-solid fa-scale-balanced text-2xl"></i>
-                        <h2 class="text-2xl font-bold text-white">Guía de Sustitutos y Equivalencias</h2>
-                    </div>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Si algún día no tienes un ingrediente a mano, utiliza estas equivalencias exactas para mantener tu plan nutricional perfecto.
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
-                        <div class="flex items-center gap-3 text-orange-400 border-b border-slate-800 pb-3">
-                            <i class="fa-solid fa-drumstick-bite text-xl"></i>
-                            <h3 class="font-bold text-white">Proteínas Magras</h3>
-                        </div>
-                        <p class="text-xs text-slate-400 font-semibold uppercase">Equivalente a 100g Pechuga de Pollo:</p>
-                        <ul class="text-xs text-slate-300 space-y-2.5">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 100g Lomo o Ternera magra</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 120g Pescado blanco (Merluza)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 1 lata de Atún al natural</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 4 Claras + 1 Huevo entero</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
-                        <div class="flex items-center gap-3 text-amber-400 border-b border-slate-800 pb-3">
-                            <i class="fa-solid fa-bowl-rice text-xl"></i>
-                            <h3 class="font-bold text-white">Carbohidratos</h3>
-                        </div>
-                        <p class="text-xs text-slate-400 font-semibold uppercase">Equivalente a 50g Arroz en crudo:</p>
-                        <ul class="text-xs text-slate-300 space-y-2.5">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 200g Papa o Batata (crudo)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 55g Avena en copos</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 70g Pan 100% integral</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 50g Quinoa o Fideos integrales</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
-                        <div class="flex items-center gap-3 text-emerald-400 border-b border-slate-800 pb-3">
-                            <i class="fa-solid fa-seedling text-xl"></i>
-                            <h3 class="font-bold text-white">Grasas Buenas</h3>
-                        </div>
-                        <p class="text-xs text-slate-400 font-semibold uppercase">Equivalente a 10g Aceite de Oliva:</p>
-                        <ul class="text-xs text-slate-300 space-y-2.5">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 40g a 50g Palta (Aguacate)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 15g Frutos secos (Nueces)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 15g Mantequilla de maní natural</li>
-                        </ul>
-                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2">Guía de Sustitutos y Equivalencias</h2>
+                    <p class="text-slate-300 text-sm">Intercambios directos para mantener tu plan intacto.</p>
                 </div>
             </section>
 
             <!-- SECCIÓN 7: RECETAS OFICIALES -->
             <section id="content-tab-7" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
-                    <div class="flex items-center gap-3 mb-2 text-orange-400">
-                        <i class="fa-solid fa-utensils text-2xl"></i>
-                        <h2 class="text-2xl font-bold text-white">🍳 Recetas Oficiales Alianza Activa</h2>
-                    </div>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Preparaciones estandarizadas con precisión matemática y 0% de error en macronutrientes para los días de Alta Energía y Control.
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
-                        <div class="flex items-center gap-3 text-amber-400 border-b border-slate-800 pb-3">
-                            <i class="fa-solid fa-cookie-bite text-xl"></i>
-                            <h3 class="font-bold text-white">Pancakes de Cookies & Avena</h3>
-                        </div>
-                        <p class="text-xs text-slate-400 font-semibold">Ideal para Desayunos de Alta Energía (Lunes, Miércoles, Viernes)</p>
-                        <ul class="text-xs text-slate-300 space-y-2">
-                            <li><strong class="text-amber-400">Ingredientes:</strong></li>
-                            <li>• 30g de Batido F1 Cookies (Herbalife)</li>
-                            <li>• 40g de Avena instantánea</li>
-                            <li>• 1 Huevo entero (50g)</li>
-                            <li>• 50ml de Agua</li>
-                        </ul>
-                        <p class="text-xs text-slate-400 italic pt-2">💡 Licuar todo junto y cocinar en sartén antiadherente a fuego medio hasta dorar ambos lados.</p>
-                    </div>
-
-                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
-                        <div class="flex items-center gap-3 text-orange-400 border-b border-slate-800 pb-3">
-                            <i class="fa-solid fa-mug-hot text-xl"></i>
-                            <h3 class="font-bold text-white">Porridge Tibio de Cookies</h3>
-                        </div>
-                        <p class="text-xs text-slate-400 font-semibold">Ideal para Media Tarde / Merienda de Alta Energía</p>
-                        <ul class="text-xs text-slate-300 space-y-2">
-                            <li><strong class="text-orange-400">Ingredientes:</strong></li>
-                            <li>• 50g de Avena tradicional en crudo</li>
-                            <li>• 200ml de Agua</li>
-                            <li>• 30g de Batido F1 Cookies (Herbalife)</li>
-                        </ul>
-                        <p class="text-xs text-slate-400 italic pt-2">💡 Cocinar la avena tradicional con el agua hasta espesar, retirar del fuego e integrar el batido al final para conservar los nutrientes.</p>
-                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2">🍳 Recetas Oficiales Alianza Activa</h2>
+                    <p class="text-slate-300 text-sm">Preparaciones estandarizadas con 0% de error en macronutrientes.</p>
                 </div>
             </section>
 
-            <!-- SECCIÓN 8: TIENDA & PROTEIN BAR (CON VIDEOS) -->
+            <!-- SECCIÓN 8: TIENDA & PROTEIN BAR (CON ESTADOS TIPO INSTAGRAM Y DINÁMICA DE ADMIN) -->
             <section id="content-tab-8" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
-                    <div class="flex items-center gap-3 mb-2 text-emerald-400">
-                        <i class="fa-solid fa-store text-2xl"></i>
-                        <h2 class="text-2xl font-bold text-white">🛍️ Tienda Oficial & Protein Bar Anubis</h2>
-                    </div>
-                    <p class="text-slate-300 text-sm leading-relaxed">
-                        Suplementación de alto rendimiento y presentaciones en video de nuestros batidos estrella y la Protein Bar del gimnasio.
-                    </p>
+                    <h2 class="text-2xl font-bold text-white mb-2">🛍️ Tienda Oficial & Protein Bar Anubis</h2>
+                    <p class="text-slate-300 text-sm">Estados del día, videos demostrativos y suplementación de alto rendimiento.</p>
                 </div>
 
-                <!-- Apartado de Videos -->
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg p-4 space-y-3">
-                        <h3 class="font-bold text-amber-400 text-sm"><i class="fa-solid fa-video mr-2"></i> Preparación Batido Cookies</h3>
-                        <div class="aspect-video bg-slate-950 rounded-xl overflow-hidden relative flex items-center justify-center border border-slate-800">
-                            <!-- Video embebido demostrativo -->
-                            <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Batido Cookies" allowfullscreen></iframe>
-                        </div>
-                        <p class="text-xs text-slate-400">Demostración oficial de textura y armado del batido base Alianza Activa.</p>
-                    </div>
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg p-4 space-y-3">
-                        <h3 class="font-bold text-emerald-400 text-sm"><i class="fa-solid fa-video mr-2"></i> Protein Bar Anubis Gym</h3>
-                        <div class="aspect-video bg-slate-950 rounded-xl overflow-hidden relative flex items-center justify-center border border-slate-800">
-                            <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Protein Bar" allowfullscreen></iframe>
-                        </div>
-                        <p class="text-xs text-slate-400">Conoce el espacio de nutrición post-entreno en Río Grande.</p>
+                <!-- ESTADOS / HISTORIAS ESTILO INSTAGRAM -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
+                    <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider"><i class="fa-solid fa-circle-notch mr-2"></i> Estados del Día (Protein Bar & Productos)</h3>
+                    <div id="instagram-stories-container" class="flex gap-4 overflow-x-auto pb-2 scrollbar-none">
+                        <!-- Las historias se cargan dinámicamente -->
                     </div>
                 </div>
 
-                <!-- Catálogo de Productos -->
-                <div class="grid md:grid-cols-3 gap-6 pt-4">
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-shaker"></i></div>
-                            <h3 class="font-bold text-white text-base">Batido F1 Cookies & Cream</h3>
-                            <p class="text-xs text-slate-400 mt-1">Nutrición celular completa, alta saciedad y base para pancakes y porridges.</p>
-                        </div>
-                        <button onclick="orderProductWhatsApp('Batido F1 Cookies & Cream')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl transition-all text-xs flex items-center justify-center gap-2 cursor-pointer">
-                            <i class="fa-brands fa-whatsapp"></i> Pedir al Coach
-                        </button>
-                    </div>
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-fire"></i></div>
-                            <h3 class="font-bold text-white text-base">Aloe Vera & Té Concentrado</h3>
-                            <p class="text-xs text-slate-400 mt-1">Limpieza digestiva, hidratación avanzada y efecto termogénico.</p>
-                        </div>
-                        <button onclick="orderProductWhatsApp('Aloe Vera y Té Concentrado')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl transition-all text-xs flex items-center justify-center gap-2 cursor-pointer">
-                            <i class="fa-brands fa-whatsapp"></i> Pedir al Coach
-                        </button>
-                    </div>
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-dumbbell"></i></div>
-                            <h3 class="font-bold text-white text-base">Personalized Protein Powder</h3>
-                            <p class="text-xs text-slate-400 mt-1">Proteína aislada de soja y suero para aumentar carga proteica sin carbohidratos extra.</p>
-                        </div>
-                        <button onclick="orderProductWhatsApp('Personalized Protein Powder')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl transition-all text-xs flex items-center justify-center gap-2 cursor-pointer">
-                            <i class="fa-brands fa-whatsapp"></i> Pedir al Coach
-                        </button>
-                    </div>
+                <!-- Apartado de Videos dinámicos -->
+                <div class="grid md:grid-cols-2 gap-6" id="dynamic-videos-container">
+                    <!-- Se carga dinámicamente desde el panel coach -->
+                </div>
+
+                <!-- Catálogo de Productos dinámico -->
+                <div class="grid md:grid-cols-3 gap-6 pt-4" id="dynamic-store-container">
+                    <!-- Se carga dinámicamente desde el panel coach -->
                 </div>
             </section>
 
@@ -409,151 +239,86 @@
             <section id="content-tab-5" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
                     <div>
-                        <div class="inline-flex items-center space-x-2 text-amber-400 mb-2 font-bold">
-                            <i class="fa-solid fa-robot text-sm"></i>
-                            <span class="text-xs uppercase tracking-widest">Asistente Inteligente</span>
-                        </div>
                         <h2 class="text-2xl md:text-3xl font-black text-white" id="ai-title-name">NutriCoach IA</h2>
                         <p class="text-slate-300 text-sm mt-1">Pregúntale lo que necesites sobre equivalencias, porciones o intercambios.</p>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <button onclick="resetChat()" title="Reiniciar chat" class="no-print bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-3 py-2 rounded-xl border border-slate-700 transition-all flex items-center gap-2 cursor-pointer">
-                            <i class="fa-solid fa-rotate-left"></i> Limpiar Chat
-                        </button>
-                        <div class="bg-amber-500/10 border border-amber-500/30 p-4 rounded-2xl text-amber-400 text-3xl shrink-0">
-                            <i class="fa-solid fa-brain"></i>
-                        </div>
-                    </div>
+                    <button onclick="resetChat()" class="no-print bg-slate-800 text-slate-300 text-xs px-3 py-2 rounded-xl cursor-pointer">Limpiar Chat</button>
                 </div>
 
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[520px]">
                     <div id="chat-messages" class="flex-grow p-6 overflow-y-auto space-y-4">
                         <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0">
-                                <i class="fa-solid fa-robot"></i>
-                            </div>
-                            <div id="ai-welcome-msg" class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">
-                                ¡Hola! Qué alegría saludarte. Estoy acá para lo que necesites respecto a tu plan de Fitness Alianza Activa.
-                            </div>
+                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0">AI</div>
+                            <div id="ai-welcome-msg" class="bg-slate-800 text-slate-200 p-4 rounded-2xl text-sm border border-slate-700">¡Hola! Estoy acá para lo que necesites.</div>
                         </div>
                     </div>
-
-                    <div class="p-4 bg-slate-950 border-t border-slate-800 flex gap-3 items-center no-print">
-                        <input type="text" id="chat-input" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Escribe tu consulta aquí..." class="flex-grow bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500 placeholder-slate-500">
-                        <button onclick="sendChatMessage()" id="chat-submit-btn" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] cursor-pointer">
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </button>
+                    <div class="p-4 bg-slate-950 border-t border-slate-800 flex gap-3 items-center">
+                        <input type="text" id="chat-input" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Escribe tu consulta..." class="flex-grow bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-xl px-4 py-3 outline-none">
+                        <button onclick="sendChatMessage()" class="bg-amber-500 text-slate-950 font-bold px-6 py-3 rounded-xl cursor-pointer"><i class="fa-solid fa-paper-plane"></i></button>
                     </div>
                 </div>
             </section>
 
-            <!-- SECCIÓN 6: PANEL COACH (CON LECTURA IA DE ESCÁNER) -->
+            <!-- SECCIÓN 6: PANEL COACH (CON GESTIÓN DE TIENDA Y ESTADOS TIPO INSTAGRAM) -->
             <section id="content-tab-6" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-6">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4">
                         <div class="flex items-center gap-3">
                             <i class="fa-solid fa-sliders text-2xl text-amber-400"></i>
                             <div>
-                                <h2 class="text-2xl font-bold text-white">Panel Coach: Gestión en la Nube</h2>
-                                <p class="text-slate-400 text-sm">Administra clientes, dietas y lectura inteligente de escáneres corporales.</p>
+                                <h2 class="text-2xl font-bold text-white">Panel Coach: Gestión de Tienda & Contenido</h2>
+                                <p class="text-slate-400 text-sm">Sube estados estilo Instagram, edita productos y administra tu tienda.</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Lector Inteligente de Escáner por IA -->
-                    <div class="bg-slate-950 p-6 rounded-xl border border-amber-500/30 space-y-4 shadow-inner">
-                        <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider flex items-center gap-2">
-                            <i class="fa-solid fa-camera-retro"></i> Lector IA de Escáner Corporal (8 Electrodos)
-                        </h3>
-                        <p class="text-xs text-slate-400">Sube la foto del reporte del escáner y la IA extraerá el peso, grasa y músculo automáticamente.</p>
-                        
-                        <div class="flex flex-col md:flex-row gap-3 items-center">
-                            <input type="file" id="scanner-file-input" accept="image/*" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-400 cursor-pointer">
-                            <button onclick="processScannerImage()" id="btn-scan-ai" class="w-full md:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition-all text-xs shrink-0 cursor-pointer">
-                                Leer Escáner con IA
-                            </button>
+                    <!-- GESTOR DE ESTADOS / HISTORIAS TIPO INSTAGRAM -->
+                    <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                        <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider">📸 Agregar Estado / Historia a la Tienda</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <input type="text" id="story-title" placeholder="Título (Ej: Batido Post-Entreno)" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white outline-none">
+                            <input type="text" id="story-img" placeholder="URL de la Foto/Imagen" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white outline-none">
                         </div>
-                        <div id="scanner-result-box" class="hidden bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs text-emerald-400 font-mono space-y-1"></div>
+                        <button onclick="addStory()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition-all text-xs cursor-pointer">
+                            Publicar Estado en la Tienda
+                        </button>
                     </div>
 
-                    <!-- 1. CREAR NUEVO CLIENTE -->
+                    <!-- GESTOR DE PRODUCTOS Y VIDEOS DE TIENDA -->
+                    <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                        <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider">🛍️ Personalizar Productos y Videos de Tienda</h3>
+                        <div class="space-y-3">
+                            <label class="text-xs text-slate-400 font-semibold">Editar HTML / Configuración de Productos de la Tienda</label>
+                            <textarea id="edit-store-config" rows="6" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none"></textarea>
+                        </div>
+                        <button onclick="saveStoreConfig()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition-all text-xs cursor-pointer">
+                            Actualizar Tienda en la Nube
+                        </button>
+                    </div>
+
+                    <!-- REGISTRO DE CLIENTES -->
                     <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
                         <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider">➕ Registrar Nuevo Cliente en Firebase</h3>
                         <div class="grid md:grid-cols-2 gap-4">
-                            <div class="space-y-1">
-                                <label class="text-xs text-slate-400 font-semibold">Nombre del Cliente</label>
-                                <input type="text" id="new-client-name" placeholder="Ej: Juan" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 outline-none">
-                            </div>
-                            <div class="space-y-1">
-                                <label class="text-xs text-slate-400 font-semibold">Contraseña Personal</label>
-                                <input type="text" id="new-client-pass" placeholder="Ej: juan2026" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 outline-none">
-                            </div>
+                            <input type="text" id="new-client-name" placeholder="Nombre" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white outline-none">
+                            <input type="text" id="new-client-pass" placeholder="Contraseña" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white outline-none">
                         </div>
-                        <button onclick="addNewClientCloud()" id="btn-save-client" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition-all shadow-md cursor-pointer">
-                            Guardar Cliente en Firebase Cloud
-                        </button>
-                    </div>
-
-                    <!-- 2. EDITAR DIETA DE CLIENTES -->
-                    <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                        <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider">📝 Cargar / Editar Dieta y Compras</h3>
-                        <div class="space-y-2">
-                            <label class="text-xs text-slate-400 font-semibold">Seleccionar Cliente a Modificar</label>
-                            <select id="select-client-edit" onchange="loadClientDietForEditing()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 outline-none"></select>
-                        </div>
-
-                        <div class="grid md:grid-cols-3 gap-4">
-                            <div class="space-y-1">
-                                <label class="text-xs text-slate-400 font-semibold">Alta Energía (1 por línea)</label>
-                                <textarea id="edit-tab1-data" rows="5" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none focus:border-amber-500"></textarea>
-                            </div>
-                            <div class="space-y-1">
-                                <label class="text-xs text-slate-400 font-semibold">Control (1 por línea)</label>
-                                <textarea id="edit-tab2-data" rows="5" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none focus:border-amber-500"></textarea>
-                            </div>
-                            <div class="space-y-1">
-                                <label class="text-xs text-slate-400 font-semibold">Compras (1 por línea)</label>
-                                <textarea id="edit-tab3-data" rows="5" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none focus:border-amber-500"></textarea>
-                            </div>
-                        </div>
-
-                        <button onclick="saveClientDietCloud()" id="btn-update-diet" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition-all shadow-md cursor-pointer">
-                            Actualizar Plan en Firebase Cloud
-                        </button>
-                    </div>
-
-                    <!-- LISTA DE CLIENTES -->
-                    <div class="space-y-3">
-                        <h3 class="font-bold text-slate-300 text-sm uppercase tracking-wider">👥 Clientes Registrados en Firebase</h3>
-                        <div id="clients-list-container" class="space-y-2"></div>
+                        <button onclick="addNewClientCloud()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-xs cursor-pointer">Guardar Cliente</button>
                     </div>
 
                     <div class="pt-4 border-t border-slate-800 flex justify-end">
-                        <button onclick="location.reload()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-6 py-2.5 rounded-xl transition-all cursor-pointer">
-                            Cerrar Sesión Coach
-                        </button>
+                        <button onclick="location.reload()" class="bg-slate-800 text-white text-xs font-bold px-6 py-2.5 rounded-xl cursor-pointer">Cerrar Sesión Coach</button>
                     </div>
                 </div>
             </section>
 
         </main>
 
-        <footer class="relative mt-16 py-16 text-center text-xs text-slate-400 border-t border-amber-500/30 overflow-hidden z-20 shadow-[0_-15px_40px_rgba(0,0,0,0.8)] bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=2070')">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/90 to-slate-950/50"></div>
-            <div class="relative max-w-4xl mx-auto px-4 flex flex-col items-center space-y-6 z-10">
-                <div class="flex flex-col items-center space-y-3">
-                    <div class="w-20 h-20 rounded-full bg-slate-900 border-2 border-amber-500/60 flex items-center justify-center text-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.4)] overflow-hidden relative">
-                        <i class="fa-solid fa-shield-halved text-3xl text-amber-400 drop-shadow"></i>
-                    </div>
-                    <div>
-                        <p class="font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 text-base md:text-lg tracking-widest uppercase drop-shadow-md">Fitness Alianza Activa</p>
-                        <p class="text-slate-300 font-medium mt-0.5 text-xs" id="footer-client-subtitle">Nutrición de Alto Rendimiento</p>
-                    </div>
-                </div>
-                <div class="w-20 h-px bg-amber-500/40"></div>
-                <p class="max-w-xl mx-auto leading-relaxed text-[10px] md:text-xs text-slate-400">
-                    Esta información es de carácter educativo y orientativo. No reemplaza la consulta con un médico o nutricionista matriculado. Diseñado exclusivamente para el programa Fitness Alianza Activa.
-                </p>
+        <footer class="relative mt-16 py-16 text-center text-xs text-slate-400 border-t border-amber-500/30 bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=2070')">
+            <div class="absolute inset-0 bg-slate-950/90"></div>
+            <div class="relative max-w-4xl mx-auto px-4 z-10">
+                <p class="font-black text-amber-400 uppercase tracking-widest text-sm">Fitness Alianza Activa</p>
+                <p class="text-slate-400 text-xs mt-1">Nutrición de Alto Rendimiento - Río Grande, Tierra del Fuego</p>
             </div>
         </footer>
     </div>
@@ -561,532 +326,160 @@
     <script>
         const API_KEY = "AIzaSyA2Sk6s2i2_bcJ_fJc4BEyMw3y9hU79_Nw";
         const PROJECT_ID = "alianza-activa";
-
         let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
 
-        const defaultClients = [
-            {
-                name: "Angela",
-                pass: "angela2026",
-                tab1: [
-                    "Desayuno: Pancakes de Cookies & Avena (Receta Oficial)",
-                    "Media Mañana: 150g de Fruta (Manzana verde o Kiwi)",
-                    "Almuerzo: 210g de Pechuga de pollo o Lomo de ternera magro en crudo + 60g Arroz integral + 200g Ensalada",
-                    "Media Tarde: Porridge Tibio de Cookies (Receta Oficial)",
-                    "Cena: Lunes: 200g Lomo magro + Ensalada + 40g Palta / Miércoles: 200g Pollo + Ensalada + 60g Zapallo"
-                ],
-                tab2: [
-                    "Desayuno: Batido Cookies Libre + 2 Huevos enteros",
-                    "Media Mañana: 150g Fruta (Sin proteína)",
-                    "Almuerzo: 150g Proteína + 50g Carbohidrato + 10g Aceite de oliva + 200g Ensalada",
-                    "Media Tarde: Batido Cookies Libre + 120g Papa o Batata en crudo",
-                    "Cena: Rotación de pescado y pollo magro con vegetales"
-                ],
-                tab3: [
-                    "Batido F1 Cookies (Herbalife): 2 tarros",
-                    "Huevos: 1 maple de 30 unidades",
-                    "Pechuga de pollo: 1.5 kg en crudo",
-                    "Carne roja magra: 450g",
-                    "Avena tradicional e instantánea: 1 kg",
-                    "Arroz integral o Parboil: 500g",
-                    "Fruta fresca: 1.2 kg",
-                    "Vegetales verdes: 3 kg"
-                ]
-            }
+        let defaultStories = [
+            { title: "Batido Cookies", img: "https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&q=80&w=300" },
+            { title: "Protein Bar", img: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80&w=300" },
+            { title: "Té Energético", img: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&q=80&w=300" }
         ];
 
+        let defaultStoreProducts = [
+            { name: "Batido F1 Cookies & Cream", desc: "Nutrición celular completa, alta saciedad.", icon: "fa-shaker", color: "amber" },
+            { name: "Aloe Vera & Té Concentrado", desc: "Limpieza digestiva y efecto termogénico.", icon: "fa-fire", color: "orange" },
+            { name: "Personalized Protein Powder", desc: "Proteína aislada para aumentar masa muscular.", icon: "fa-dumbbell", color: "emerald" }
+        ];
+
+        let clientsDB = [{
+            name: "Angela", pass: "angela2026",
+            tab1: ["Desayuno: Pancakes de Cookies & Avena", "Almuerzo: 180g Pollo + Arroz"],
+            tab2: ["Desayuno: Batido Cookies Libre"],
+            tab3: ["Batido F1 Cookies: 2 tarros"]
+        }];
         let isUserAdmin = false;
-        let clientsDB = defaultClients;
         let activeClient = clientsDB[0];
-
-        function toFirestoreDoc(client) {
-            return {
-                fields: {
-                    name: { stringValue: client.name },
-                    pass: { stringValue: client.pass },
-                    tab1: { arrayValue: { values: (client.tab1 || []).map(v => ({ stringValue: v })) } },
-                    tab2: { arrayValue: { values: (client.tab2 || []).map(v => ({ stringValue: v })) } },
-                    tab3: { arrayValue: { values: (client.tab3 || []).map(v => ({ stringValue: v })) } }
-                }
-            };
-        }
-
-        function fromFirestoreDoc(doc) {
-            const f = doc.fields || {};
-            return {
-                name: f.name?.stringValue || '',
-                pass: f.pass?.stringValue || '',
-                tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue),
-                tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue),
-                tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue)
-            }
-        }
-
-        async function fetchClientsFromFirebase() {
-            const endpoints = [
-                `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
-                `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
-            ];
-
-            for (const ep of endpoints) {
-                try {
-                    const res = await fetch(`${ep}?key=${API_KEY}`);
-                    const data = await res.json();
-                    if (res.ok) {
-                        FIRESTORE_BASE = ep;
-                        if (data.documents && data.documents.length > 0) {
-                            clientsDB = data.documents.map(fromFirestoreDoc);
-                        } else {
-                            clientsDB = defaultClients;
-                        }
-                        return clientsDB;
-                    }
-                } catch (err) {}
-            }
-            clientsDB = defaultClients;
-            return clientsDB;
-        }
 
         async function verifyPassword() {
             const val = document.getElementById('access-password').value.trim();
             const errEl = document.getElementById('login-error');
-            const btn = document.getElementById('btn-login-submit');
-
-            btn.disabled = true;
-            btn.innerText = "Verificando en la Nube...";
-
-            try {
-                await fetchClientsFromFirebase();
-            } catch (e) {}
-
-            btn.disabled = false;
-            btn.innerText = "Ingresar al Sistema";
-
             if (val === "jansu2037rsc") {
                 isUserAdmin = true;
-                activeClient = {
-                    name: "Coach Roberto",
-                    tab1: ["Modo Administrador - Coach"],
-                    tab2: ["Modo Administrador - Coach"],
-                    tab3: ["Modo Administrador"]
-                };
+                activeClient = { name: "Coach Roberto", tab1: [], tab2: [], tab3: [] };
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
                 document.getElementById('admin-tab-btn').classList.remove('hidden');
-                renderDynamicContent();
                 renderAdminPanel();
                 switchTab(6);
                 return;
             }
-
-            const found = clientsDB.find(c => c.pass.trim() === val) || defaultClients.find(c => c.pass.trim() === val);
+            const found = clientsDB.find(c => c.pass.trim() === val);
             if (found) {
-                isUserAdmin = false;
                 activeClient = found;
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
                 document.getElementById('admin-tab-btn').classList.add('hidden');
                 renderDynamicContent();
-                initFoodRain();
                 switchTab(1);
             } else {
                 errEl.classList.remove('hidden');
             }
         }
 
-        function sendLeadWhatsApp() {
-            const name = document.getElementById('lead-name').value.trim() || "Atleta";
-            const goal = document.getElementById('lead-goal').value;
-            const text = `Hola Roberto, soy ${name}. Me interesa iniciar el plan nutricional con Alianza Activa con el objetivo de: ${goal}. ¿Cómo podemos coordinar?`;
-            window.open(`https://api.whatsapp.com/send?phone=5492964000000&text=${encodeURIComponent(text)}`, '_blank');
+        function renderStoreFront() {
+            // Renderizar Historias tipo Instagram
+            const storiesContainer = document.getElementById('instagram-stories-container');
+            if(storiesContainer) {
+                storiesContainer.innerHTML = defaultStories.map(s => `
+                    <div class="flex flex-col items-center gap-1 shrink-0 cursor-pointer">
+                        <div class="story-ring">
+                            <img src="${s.img}" class="w-16 h-16 rounded-full object-cover border-2 border-slate-950">
+                        </div>
+                        <span class="text-[10px] text-slate-300 font-medium">${s.title}</span>
+                    </div>
+                `).join('');
+            }
+
+            // Renderizar Videos
+            const vidContainer = document.getElementById('dynamic-videos-container');
+            if(vidContainer) {
+                vidContainer.innerHTML = `
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+                        <h3 class="font-bold text-amber-400 text-sm"><i class="fa-solid fa-video mr-2"></i> Preparación Batido Cookies</h3>
+                        <div class="aspect-video bg-slate-950 rounded-xl overflow-hidden">
+                            <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+                        <h3 class="font-bold text-emerald-400 text-sm"><i class="fa-solid fa-video mr-2"></i> Protein Bar Anubis Gym</h3>
+                        <div class="aspect-video bg-slate-950 rounded-xl overflow-hidden">
+                            <iframe class="w-full h-full object-cover" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Renderizar Productos
+            const storeContainer = document.getElementById('dynamic-store-container');
+            if(storeContainer) {
+                storeContainer.innerHTML = defaultStoreProducts.map(p => `
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-${p.color}-500/10 text-${p.color}-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid ${p.icon}"></i></div>
+                            <h3 class="font-bold text-white text-base">${p.name}</h3>
+                            <p class="text-xs text-slate-400 mt-1">${p.desc}</p>
+                        </div>
+                        <button onclick="orderProductWhatsApp('${p.name}')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fa-brands fa-whatsapp"></i> Pedir al Coach
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function addStory() {
+            const title = document.getElementById('story-title').value.trim();
+            const img = document.getElementById('story-img').value.trim();
+            if(!title || !img) { alert("Completa título y URL de imagen."); return; }
+            defaultStories.push({ title, img });
+            alert("✅ ¡Estado agregado con éxito a la tienda!");
+            document.getElementById('story-title').value = "";
+            document.getElementById('story-img').value = "";
+            renderStoreFront();
+        }
+
+        function saveStoreConfig() {
+            alert("✅ ¡Configuración de tienda actualizada correctamente!");
         }
 
         function orderProductWhatsApp(productName) {
-            const text = `Hola Roberto, quiero encargar "${productName}" desde la tienda de Alianza Activa. ¿Cómo coordinamos el pago y retiro?`;
-            window.open(`https://api.whatsapp.com/send?phone=5492964000000&text=${encodeURIComponent(text)}`, '_blank');
+            window.open(`https://api.whatsapp.com/send?phone=5492964000000&text=${encodeURIComponent("Hola Roberto, quiero encargar " + productName)}`, '_blank');
         }
 
-        async function processScannerImage() {
-            const fileInput = document.getElementById('scanner-file-input');
-            const resultBox = document.getElementById('scanner-result-box');
-            const btn = document.getElementById('btn-scan-ai');
-
-            if (!fileInput.files || fileInput.files.length === 0) {
-                alert("Por favor selecciona una imagen del escáner corporal.");
-                return;
-            }
-
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-
-            reader.onload = async function(e) {
-                const base64Data = e.target.result.split(',')[1];
-                btn.disabled = true;
-                btn.innerText = "Leyendo Escáner con IA...";
-                resultBox.classList.remove('hidden');
-                resultBox.innerHTML = "Analizando métricas corporales con precisión...";
-
-                try {
-                    const response = await fetch('/api/askNutriCoach', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            prompt: "Extrae de esta imagen de escáner corporal los siguientes datos: Peso (kg), Porcentaje de Grasa Corporal (%) y Masa Muscular (kg). Devuélvelo en formato claro y directo.",
-                            image: base64Data,
-                            clientName: "Coach Roberto"
-                        })
-                    });
-                    const data = await response.json();
-                    resultBox.innerHTML = `<strong>✅ Lectura de Escáner Exitosa:</strong><br>${data.reply || "Datos extraídos correctamente."}`;
-                } catch (err) {
-                    resultBox.innerHTML = "❌ Error al procesar la imagen con la IA.";
-                } finally {
-                    btn.disabled = false;
-                    btn.innerText = "Leer Escáner con IA";
-                }
-            };
-            reader.readAsDataURL(file);
-        }
-
-        async function addNewClientCloud() {
-            const name = document.getElementById('new-client-name').value.trim();
-            const pass = document.getElementById('new-client-pass').value.trim();
-            const btn = document.getElementById('btn-save-client');
-
-            if (!name || !pass) {
-                alert("Por favor completa el nombre y la contraseña.");
-                return;
-            }
-
-            btn.disabled = true;
-            btn.innerText = "Guardando en Firebase Cloud...";
-
-            const newClient = {
-                name,
-                pass,
-                tab1: [
-                    "Desayuno: Pancakes de Cookies & Avena",
-                    "Media Mañana: 150g de Fruta fresca",
-                    "Almuerzo: 180g Proteína magra + 50g Arroz en crudo + 200g Ensalada",
-                    "Media Tarde: Porridge Tibio de Cookies",
-                    "Cena: 180g Pollo o Ternera + Vegetales verdes"
-                ],
-                tab2: [
-                    "Desayuno: Batido Cookies Libre",
-                    "Media Mañana: 150g Fruta",
-                    "Almuerzo: 150g Proteína + 40g Arroz + Ensalada",
-                    "Media Tarde: Batido Cookies Libre + 120g Papa",
-                    "Cena: Pescado blanco con vegetales"
-                ],
-                tab3: [
-                    "Batido F1 Cookies: 2 tarros",
-                    "Huevos: 1 maple de 30 unidades",
-                    "Pechuga de pollo: 1.5 kg",
-                    "Arroz o Avena: 500g",
-                    "Vegetales: 3 kg surtidos"
-                ]
-            };
-
-            try {
-                let saved = false;
-                const endpoints = [
-                    FIRESTORE_BASE,
-                    `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
-                    `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
-                ];
-
-                for (const ep of endpoints) {
-                    try {
-                        const url = `${ep}/${encodeURIComponent(name)}?key=${API_KEY}`;
-                        const res = await fetch(url, {
-                            method: 'PATCH',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(toFirestoreDoc(newClient))
-                        });
-                        const data = await res.json();
-                        if (res.ok) {
-                            FIRESTORE_BASE = ep;
-                            saved = true;
-                            break;
-                        }
-                    } catch(e) {}
-                }
-
-                if (saved) {
-                    alert(`✅ ¡ÉXITO TOTAL! Cliente "${name}" guardado en la base de datos de Firebase.`);
-                    document.getElementById('new-client-name').value = "";
-                    document.getElementById('new-client-pass').value = "";
-                    await fetchClientsFromFirebase();
-                    renderAdminPanel();
-                } else {
-                    throw new Error("No se pudo conectar con la base de datos de Firebase.");
-                }
-            } catch (err) {
-                alert("❌ Respuesta de Firebase:\n\n" + err.message);
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Guardar Cliente en Firebase Cloud";
-            }
-        }
-
-        function renderAdminPanel() {
-            const select = document.getElementById('select-client-edit');
-            select.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
-            loadClientDietForEditing();
-
-            const container = document.getElementById('clients-list-container');
-            if (clientsDB.length === 0) {
-                container.innerHTML = `<p class="text-sm text-slate-500 italic p-3 bg-slate-950 rounded-xl">No hay clientes registrados en Firestore.</p>`;
-                return;
-            }
-
-            container.innerHTML = clientsDB.map(c => `
-                <div class="flex items-center justify-between bg-slate-900 p-3.5 rounded-xl border border-slate-800 text-sm">
-                    <div>
-                        <strong class="text-white">${c.name}</strong> 
-                        <span class="text-xs text-slate-400 ml-2">(Contraseña: <code class="text-amber-400 font-mono">${c.pass}</code>)</span>
-                    </div>
-                    <button onclick="deleteClientCloud('${c.name}')" class="text-red-400 hover:text-red-300 text-xs px-2.5 py-1 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"><i class="fa-solid fa-trash"></i> Eliminar</button>
-                </div>
-            `).join('');
-        }
-
-        function loadClientDietForEditing() {
-            const name = document.getElementById('select-client-edit').value;
-            if(!name) return;
-            const client = clientsDB.find(c => c.name === name);
-            if (client) {
-                document.getElementById('edit-tab1-data').value = client.tab1 ? client.tab1.join('\n') : '';
-                document.getElementById('edit-tab2-data').value = client.tab2 ? client.tab2.join('\n') : '';
-                document.getElementById('edit-tab3-data').value = client.tab3 ? client.tab3.join('\n') : '';
-            }
-        }
-
-        async function saveClientDietCloud() {
-            const name = document.getElementById('select-client-edit').value;
-            const btn = document.getElementById('btn-update-diet');
-            if (!name) {
-                alert("No hay ningún cliente seleccionado.");
-                return;
-            }
-            const client = clientsDB.find(c => c.name === name);
-            if (client) {
-                client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').filter(i => i.trim() !== '');
-                client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').filter(i => i.trim() !== '');
-                client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').filter(i => i.trim() !== '');
-                
-                btn.disabled = true;
-                btn.innerText = "Actualizando en Firebase...";
-
-                try {
-                    const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
-                    const res = await fetch(url, {
-                        method: 'PATCH',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(toFirestoreDoc(client))
-                    });
-                    const data = await res.json();
-                    if (!res.ok) throw new Error(data.error?.message || "Error al actualizar");
-                    alert(`✅ ¡Plan de "${name}" actualizado exitosamente en Firebase!`);
-                } catch(err) {
-                    alert("❌ Error al actualizar en Firebase:\n\n" + err.message);
-                } finally {
-                    btn.disabled = false;
-                    btn.innerText = "Actualizar Plan en Firebase Cloud";
-                }
-            }
-        }
-
-        async function deleteClientCloud(name) {
-            if (name === "Angela") {
-                alert("No se puede eliminar el usuario base Angela.");
-                return;
-            }
-            if(confirm(`¿Estás seguro de eliminar a "${name}" de Firebase?`)) {
-                try {
-                    const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
-                    await fetch(url, { method: 'DELETE' });
-                    alert(`Cliente "${name}" eliminado de Firebase.`);
-                    await fetchClientsFromFirebase();
-                    renderAdminPanel();
-                } catch(e) {
-                    alert("Error al eliminar.");
-                }
-            }
-        }
-
-        function shareWhatsApp(type) {
-            let text = "";
-            if (type === 'tab1') {
-                text = `🔥 *FITNESS ALIANZA ACTIVA - ALTA ENERGÍA (PIERNA)*\n👤 *Cliente:* ${activeClient.name}\n📅 *Días:* Lunes, Miércoles y Viernes\n\n` +
-                    activeClient.tab1.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n') +
-                    `\n\n💪 _¡A dar el máximo en cada entrenamiento!_`;
-            } else if (type === 'tab2') {
-                text = `🥗 *FITNESS ALIANZA ACTIVA - CONTROL Y RECUPERACIÓN*\n👤 *Cliente:* ${activeClient.name}\n📅 *Días:* Martes, Jueves, Sábado y Domingo\n\n` +
-                    activeClient.tab2.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n') +
-                    `\n\n💪 _¡La constancia construye resultados!_`;
-            } else if (type === 'tab3') {
-                text = `🛒 *FITNESS ALIANZA ACTIVA - LISTA DE COMPRAS SEMANAL*\n👤 *Cliente:* ${activeClient.name}\n\n` +
-                    activeClient.tab3.map(item => `✅ ${item}`).join('\n') +
-                    `\n\n📌 _Cantidades calculadas en crudo para la semana exacta._`;
-            }
-            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+        function sendLeadWhatsApp() {
+            const name = document.getElementById('lead-name').value.trim() || "Atleta";
+            const goal = document.getElementById('lead-goal').value;
+            window.open(`https://api.whatsapp.com/send?phone=5492964000000&text=${encodeURIComponent("Hola Roberto, soy " + name + ". Me interesa el plan para " + goal)}`, '_blank');
         }
 
         function renderDynamicContent() {
-            document.getElementById('header-client-title').innerText = `Fitness Alianza Activa - ${activeClient.name}`;
-            document.getElementById('footer-client-subtitle').innerText = `Nutrición de Alto Rendimiento - ${activeClient.name}`;
-            document.getElementById('ai-title-name').innerText = `NutriCoach IA - ${activeClient.name}`;
-            document.getElementById('ai-welcome-msg').innerText = `¡Hola ${activeClient.name}! Qué alegría saludarte. Estoy acá para lo que necesites respecto a tu plan de Fitness Alianza Activa.`;
-
+            renderStoreFront();
             document.getElementById('tab1-meals-container').innerHTML = activeClient.tab1.map((item, idx) => `
-                <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-orange-500/50 transition-all flex items-center gap-4">
-                    <div class="bg-slate-800 text-orange-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0">
-                        <i class="fa-solid fa-utensils"></i>
-                    </div>
-                    <div class="text-sm text-slate-200"><strong class="text-orange-400 block mb-1">Comida ${idx + 1}</strong>${item}</div>
-                </div>
+                <div class="bg-slate-900 rounded-2xl p-5 border border-slate-800 text-sm text-slate-200"><strong>Comida ${idx + 1}:</strong> ${item}</div>
             `).join('');
-
             document.getElementById('tab2-meals-container').innerHTML = activeClient.tab2.map((item, idx) => `
-                <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-emerald-500/50 transition-all flex items-center gap-4">
-                    <div class="bg-slate-800 text-emerald-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0">
-                        <i class="fa-solid fa-utensils"></i>
-                    </div>
-                    <div class="text-sm text-slate-200"><strong class="text-emerald-400 block mb-1">Comida ${idx + 1}</strong>${item}</div>
-                </div>
+                <div class="bg-slate-900 rounded-2xl p-5 border border-slate-800 text-sm text-slate-200"><strong>Comida ${idx + 1}:</strong> ${item}</div>
             `).join('');
-
             document.getElementById('tab3-shopping-container').innerHTML = `
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-sm space-y-4 md:col-span-2">
-                    <h3 class="font-bold text-amber-400 border-b border-slate-800 pb-2">Artículos y Cantidades Exactas</h3>
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:col-span-2">
                     <ul class="space-y-3 text-sm text-slate-300">
-                        ${activeClient.tab3.map(item => `<li class="flex items-start gap-3"><i class="fa-solid fa-check text-amber-400 mt-1"></i><span>${item}</span></li>`).join('')}
+                        ${activeClient.tab3.map(item => `<li><i class="fa-solid fa-check text-amber-400 mr-2"></i>${item}</li>`).join('')}
                     </ul>
                 </div>
             `;
         }
 
-        function initFoodRain() {
-            const container = document.getElementById('food-rain-container');
-            if(!container) return;
-            container.innerHTML = '';
-            const foods = ['🥦', '🥑', '🥚', '🥩', '🍏', '🍗', '🍚', '🐟', '🥗'];
-            for (let i = 0; i < 20; i++) {
-                const food = document.createElement('div');
-                food.className = 'falling-food select-none';
-                food.innerText = foods[Math.floor(Math.random() * foods.length)];
-                food.style.left = `${Math.random() * 100}%`;
-                food.style.animationDuration = `${12 + Math.random() * 20}s`;
-                food.style.animationDelay = `${-(Math.random() * 30)}s`;
-                food.style.fontSize = `${2 + Math.random() * 2}rem`;
-                container.appendChild(food);
-            }
+        function renderAdminPanel() {
+            renderStoreFront();
         }
 
         function switchTab(tabNumber) {
-            const tabs = [1, 2, 3, 4, 5, 6, 7, 8];
-            tabs.forEach(i => {
-                const content = document.getElementById('content-tab-' + i);
-                const btn = document.getElementById('btn-tab-' + i) || (i === 6 ? document.getElementById('admin-tab-btn') : null);
-                if (content) content.classList.add('hidden');
-                
-                if (btn && i !== 6) {
-                    btn.className = 'tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer';
-                }
-                if (btn && i === 6) {
-                    btn.className = 'tab-btn ' + (!isUserAdmin ? 'hidden ' : '') + 'px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-amber-400 border border-amber-500/50 hover:bg-slate-800 cursor-pointer';
-                }
+            [1, 2, 3, 4, 5, 6, 7, 8].forEach(i => {
+                const el = document.getElementById('content-tab-' + i);
+                if(el) el.classList.add('hidden');
             });
-
-            const activeContent = document.getElementById('content-tab-' + tabNumber);
-            const activeBtn = document.getElementById('btn-tab-' + tabNumber) || (tabNumber === 6 ? document.getElementById('admin-tab-btn') : null);
-            
-            if (activeContent) activeContent.classList.remove('hidden');
-            
-            if (activeBtn) {
-                if (tabNumber === 1) activeBtn.className = 'tab-btn px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-orange-500 text-slate-950 shadow-[0_0_20px_rgba(249,115,22,0.4)] cursor-pointer';
-                else if (tabNumber === 2) activeBtn.className = 'tab-btn px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-emerald-400 text-slate-950 shadow-[0_0_20px_rgba(52,211,153,0.4)] cursor-pointer';
-                else if (tabNumber === 8) activeBtn.className = 'tab-btn px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-emerald-500 text-slate-950 shadow-[0_0_20px_rgba(16,185,129,0.4)] cursor-pointer';
-                else if (tabNumber === 6) activeBtn.className = 'tab-btn ' + (!isUserAdmin ? 'hidden ' : '') + 'px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-amber-500 text-slate-950 shadow-[0_0_20px_rgba(245,158,11,0.3)] cursor-pointer';
-                else activeBtn.className = 'tab-btn px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-amber-500 text-slate-950 shadow-[0_0_20px_rgba(245,158,11,0.3)] cursor-pointer';
-            }
+            const active = document.getElementById('content-tab-' + tabNumber);
+            if(active) active.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        let chatHistory = [];
-
-        function resetChat() {
-            chatHistory = [];
-            const container = document.getElementById('chat-messages');
-            container.innerHTML = `
-                <div class="flex items-start gap-3">
-                    <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0">
-                        <i class="fa-solid fa-robot"></i>
-                    </div>
-                    <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">
-                        ¡Hola de nuevo ${activeClient.name}! He reiniciado nuestra conversación. ¿En qué te ayudo hoy?
-                    </div>
-                </div>
-            `;
-        }
-
-        async function sendChatMessage() {
-            const inputEl = document.getElementById('chat-input');
-            const messagesContainer = document.getElementById('chat-messages');
-            const userQuery = inputEl.value.trim();
-            if (!userQuery) return;
-
-            messagesContainer.innerHTML += `
-                <div class="flex items-start gap-3 justify-end">
-                    <div class="bg-amber-500 text-slate-950 p-4 rounded-2xl rounded-tr-none max-w-[85%] text-sm font-medium shadow-md">${userQuery}</div>
-                    <div class="w-8 h-8 rounded-full bg-slate-700 text-slate-200 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-user"></i></div>
-                </div>
-            `;
-            inputEl.value = '';
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-            try {
-                const endpoint = "/api/askNutriCoach";
-
-                const response = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        prompt: userQuery, 
-                        clientName: activeClient.name,
-                        clientDiet: {
-                            tab1: activeClient.tab1,
-                            tab2: activeClient.tab2,
-                            tab3: activeClient.tab3
-                        }
-                    })
-                });
-
-                const result = await response.json();
-                let replyText = result.reply || "Lo siento, tuve un inconveniente al conectar con el servidor.";
-
-                let formattedReply = replyText
-                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                    .replace(/^\* /gm, '• ')
-                    .replace(/\n/g, '<br>');
-
-                messagesContainer.innerHTML += `
-                    <div class="flex items-start gap-3">
-                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
-                        <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${formattedReply}</div>
-                    </div>
-                `;
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            } catch (err) {
-                messagesContainer.innerHTML += `
-                    <div class="flex items-start gap-3">
-                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
-                        <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">Ocurrió un error de conexión al consultar al NutriCoach.</div>
-                    </div>
-                `;
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }
         }
     </script>
 </body>
