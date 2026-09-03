@@ -604,9 +604,8 @@
                 { title: "Fuego Rojo HBL", desc: "Aporte energético superior con frutos rojos y batido nutricional.", image: "https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&q=80&w=800" }
             ],
             shorts: [
-                { title: "🔥 ¡Nuevo Récord en Día de Pierna!", desc: "Excelente entrega y técnica impecable en Anubis Gym. Mantén tus macros al 0% de error.", type: "image", url: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hoy" },
-                { title: "🥤 Protein Bar en Anubis Gym", desc: "Nuevos batidos y tés cargados listos para recibir a los atletas post-entrenamiento.", type: "image", url: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800", date: "Ayer" },
-                { title: "💪 Sentadillas Pesadas", desc: "Demostración de fuerza y técnica estricta.", type: "image", url: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800", date: "Hace 2 días" }
+                { title: "🔥 ¡Nuevo Récord!", desc: "Excelente técnica en Anubis Gym.", type: "image", url: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hoy" },
+                { title: "🥤 Protein Bar", desc: "Batidos y tés listos post-entreno.", type: "image", url: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800", date: "Ayer" }
             ],
             recipes: [
                 { title: "Pancakes de Cookies & Avena", text: "30g Batido Cookies, 40g Avena instantánea, 1 Huevo (50g), 50ml Agua. Licuar y cocinar en sartén a fuego medio.", image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&q=80&w=800" },
@@ -656,6 +655,41 @@
         let clientsDB = defaultClients;
         let activeClient = clientsDB[0];
 
+        // --- CONEXIÓN ROBUSTA A FIREBASE ---
+        async function fetchClientsFromFirebase() {
+            const endpoints = [
+                `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
+                `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
+            ];
+            for (const ep of endpoints) {
+                try {
+                    const res = await fetch(`${ep}?key=${API_KEY}`);
+                    const data = await res.json();
+                    if (res.ok && data.documents) {
+                        FIRESTORE_BASE = ep;
+                        clientsDB = data.documents.map(doc => {
+                            const f = doc.fields || {};
+                            return {
+                                name: f.name?.stringValue || '',
+                                pass: f.pass?.stringValue || '',
+                                tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue || ''),
+                                tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue || ''),
+                                tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue || '')
+                            };
+                        });
+                        return clientsDB;
+                    }
+                } catch (err) {}
+            }
+            return clientsDB;
+        }
+
+        // Cargar clientes automáticamente al iniciar la página
+        window.addEventListener('DOMContentLoaded', async () => {
+            await fetchClientsFromFirebase();
+            renderGlobalContent();
+        });
+
         // --- MOTOR DE CÁLCULO DE DIETAS (0% ERROR) ---
         function calculateDietEngine() {
             const name = document.getElementById('calc-name').value.trim() || "Atleta Nuevo";
@@ -665,8 +699,7 @@
             const method = document.getElementById('calc-method').value;
             const goal = document.getElementById('calc-goal').value;
 
-            // Cálculo matemático exacto de proteínas y macros en crudo
-            const proteinGrams = Math.round(weight * 2.2); // 2.2g por kg de peso
+            const proteinGrams = Math.round(weight * 2.2);
             const carbGrams = goal === 'pierna' ? Math.round(weight * 3.5) : Math.round(weight * 2.2);
             const fatGrams = Math.round(weight * 0.8);
             const totalCalories = Math.round((proteinGrams * 4) + (carbGrams * 4) + (fatGrams * 9));
@@ -721,7 +754,6 @@
         }
 
         function renderGlobalContent() {
-            // Render Batidos (Tienda Exclusiva sin Shorts)
             const batidoContainer = document.getElementById('dynamic-batidos-container');
             if (batidoContainer) {
                 batidoContainer.innerHTML = globalData.batidos.map(b => `
@@ -745,7 +777,6 @@
                 `).join('');
             }
 
-            // Render Instagram Stories (Shorts Bar Superior - Imagen y Video)
             const storiesBar = document.getElementById('instagram-stories-bar');
             if (storiesBar) {
                 storiesBar.innerHTML = globalData.shorts.map((s, idx) => `
@@ -759,7 +790,6 @@
                 `).join('');
             }
 
-            // Render 10 Recetas Oficiales
             const recContainer = document.getElementById('dynamic-recipes-container');
             if (recContainer) {
                 recContainer.innerHTML = globalData.recipes.map((r, idx) => `
@@ -816,27 +846,6 @@
             } else {
                 alert("Selecciona un archivo multimedia.");
             }
-        }
-
-        // Funciones auxiliares de carga y Firebase
-        async function fetchClientsFromFirebase() {
-            try {
-                const res = await fetch(`${FIRESTORE_BASE}?key=${API_KEY}`);
-                const data = await res.json();
-                if (res.ok && data.documents) {
-                    clientsDB = data.documents.map(doc => {
-                        const f = doc.fields || {};
-                        return {
-                            name: f.name?.stringValue || '',
-                            pass: f.pass?.stringValue || '',
-                            tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue || ''),
-                            tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue || ''),
-                            tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue || '')
-                        };
-                    });
-                }
-            } catch (err) {}
-            return clientsDB;
         }
 
         async function verifyPassword() {
