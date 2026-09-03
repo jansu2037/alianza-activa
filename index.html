@@ -1025,7 +1025,7 @@
                 addLog(`Atleta ${found.name} inició sesión.`, "success");
             } else {
                 errEl.innerText = "Contraseña incorrecta.";
-                errEl.classList.add('hidden');
+                errEl.classList.remove('hidden');
                 addLog("Intento de acceso fallido.", "error");
             }
         }
@@ -1116,9 +1116,9 @@
                     <div onclick="openStoryModal(${idx})" class="flex flex-col items-center gap-1.5 cursor-pointer shrink-0 group">
                         <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-amber-500 to-orange-500 group-hover:scale-105 transition-transform relative overflow-hidden flex items-center justify-center bg-slate-950">
                             ${s.type === 'video' 
-                                ? \`<video src="${s.image}" class="w-full h-full rounded-full object-cover border-2 border-slate-950" muted playsinline loop></video>
-                                   <span class="absolute bottom-0 right-0 bg-black text-amber-400 text-[9px] px-1 rounded-full z-10 shadow"><i class="fa-solid fa-play"></i></span>\` 
-                                : \`<img src="${s.image}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950">\`
+                                ? `<video src="${s.image}" class="w-full h-full rounded-full object-cover border-2 border-slate-950" muted playsinline loop></video>
+                                   <span class="absolute bottom-0 right-0 bg-black text-amber-400 text-[9px] px-1 rounded-full z-10 shadow"><i class="fa-solid fa-play"></i></span>` 
+                                : `<img src="${s.image}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950">`
                             }
                         </div>
                         <span class="text-[10px] text-slate-300 font-medium max-w-[64px] truncate text-center">${s.title}</span>
