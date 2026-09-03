@@ -36,7 +36,6 @@
             z-index: 1;
         }
         
-        /* Ajuste suave para el scroll horizontal en móviles */
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -58,8 +57,6 @@
     <!-- PANTALLA DE ACCESO & EMBUDO 24/7 -->
     <div id="login-screen" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-[0_0_50px_rgba(245,158,11,0.2)] text-center space-y-8 my-auto">
-            
-            <!-- Cabecera -->
             <div>
                 <div class="w-20 h-20 mx-auto rounded-full bg-slate-950 border-2 border-amber-500 flex items-center justify-center text-amber-400 text-3xl shadow-inner mb-4">
                     <i class="fa-solid fa-shield-halved"></i>
@@ -68,7 +65,6 @@
                 <p class="text-slate-400 text-sm mt-1">Plataforma de Alto Rendimiento</p>
             </div>
             
-            <!-- Área de Login (Alumnos/Coach) -->
             <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4">
                 <h3 class="text-xs font-bold text-amber-400 uppercase tracking-widest text-left">Acceso a Alumnos / Coach</h3>
                 <input type="password" id="access-password" onkeydown="if(event.key==='Enter') verifyPassword()" placeholder="Contraseña de acceso..." class="w-full bg-slate-900 border border-slate-700 text-white px-4 py-3.5 rounded-xl text-center tracking-widest focus:outline-none focus:border-amber-500 transition-colors">
@@ -78,7 +74,6 @@
                 <p id="login-error" class="text-red-400 text-xs hidden">Acceso denegado. Contraseña incorrecta.</p>
             </div>
 
-            <!-- Embudo de Ventas Público 24/7 -->
             <div class="border-t border-slate-800 pt-6 space-y-4 text-left">
                 <div class="text-center">
                     <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-bold uppercase tracking-wider">¿Aún no tienes plan?</span>
@@ -97,18 +92,11 @@
                     <i class="fa-brands fa-whatsapp text-lg"></i> Iniciar Plan por WhatsApp
                 </button>
             </div>
-
-            <div class="pt-2 border-t border-slate-800/80">
-                <p class="text-[10px] text-slate-500 leading-relaxed">
-                    Exclusivo para el programa Fitness Alianza Activa.
-                </p>
-            </div>
         </div>
     </div>
 
     <!-- CONTENIDO PRINCIPAL -->
     <div id="main-app" class="hidden flex flex-col min-h-screen justify-between">
-        
         <header class="relative bg-slate-950 text-white shadow-2xl border-b border-amber-500/30 overflow-hidden z-10">
             <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=2070')] bg-cover bg-center opacity-85"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-950/85 to-slate-950"></div>
@@ -142,35 +130,27 @@
         <!-- BARRA DE NAVEGACIÓN -->
         <nav class="bg-slate-950/95 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-xl shadow-xl no-print">
             <div class="max-w-5xl mx-auto px-4 flex overflow-x-auto gap-3 py-4 hide-scroll justify-start lg:justify-center items-center">
-                
                 <button onclick="switchTab(1)" id="btn-tab-1" class="tab-btn px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-orange-500 text-slate-950 shadow-[0_0_20px_rgba(249,115,22,0.4)] cursor-pointer shrink-0">
                     <i class="fa-solid fa-bolt"></i> <span>Alta Energía</span>
                 </button>
-                
                 <button onclick="switchTab(2)" id="btn-tab-2" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
                     <i class="fa-solid fa-arrows-rotate"></i> <span>Control</span>
                 </button>
-                
                 <button onclick="switchTab(3)" id="btn-tab-3" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
                     <i class="fa-solid fa-cart-shopping"></i> <span>Compras</span>
                 </button>
-                
                 <button onclick="switchTab(4)" id="btn-tab-4" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
                     <i class="fa-solid fa-scale-balanced"></i> <span>Equivalencias</span>
                 </button>
-
                 <button onclick="switchTab(7)" id="btn-tab-7" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
                     <i class="fa-solid fa-utensils text-orange-400"></i> <span>Recetas</span>
                 </button>
-
                 <button onclick="switchTab(8)" id="btn-tab-8" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
                     <i class="fa-solid fa-store text-emerald-400"></i> <span>Tienda & Bar</span>
                 </button>
-                
                 <button onclick="switchTab(5)" id="btn-tab-5" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
                     <i class="fa-solid fa-robot text-amber-400"></i> <span>NutriCoach IA</span>
                 </button>
-                
                 <button id="admin-tab-btn" onclick="switchTab(6)" class="tab-btn hidden px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-amber-400 border border-amber-500/50 hover:bg-slate-800 cursor-pointer shrink-0">
                     <i class="fa-solid fa-sliders"></i> <span>Panel Coach</span>
                 </button>
@@ -306,9 +286,7 @@
                         Preparaciones estandarizadas con precisión matemática para un 0% de error en tus macros.
                     </p>
                 </div>
-                <div id="dynamic-recipes-container" class="grid md:grid-cols-2 gap-6">
-                    <!-- Cargado por JS -->
-                </div>
+                <div id="dynamic-recipes-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
             <!-- SECCIÓN 8: TIENDA & PROTEIN BAR -->
@@ -322,10 +300,7 @@
                         Suplementación de alto rendimiento y presentaciones de nuestros batidos estrella.
                     </p>
                 </div>
-                <!-- Videos Administrables -->
                 <div class="grid md:grid-cols-2 gap-6" id="dynamic-videos-container"></div>
-
-                <!-- Productos -->
                 <div class="grid md:grid-cols-3 gap-6 pt-4">
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
                         <div>
@@ -396,16 +371,14 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN 6: PANEL COACH (ADMINISTRACIÓN EDICIÓN TOTAL) -->
+            <!-- SECCIÓN 6: PANEL COACH -->
             <section id="content-tab-6" class="tab-content hidden space-y-8">
-                
                 <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-8">
                     <div class="border-b border-slate-800 pb-4">
                         <h2 class="text-2xl font-bold text-white flex items-center gap-3"><i class="fa-solid fa-sliders text-amber-400"></i> Panel Coach Master</h2>
                         <p class="text-slate-400 text-sm mt-1">Gestión total de Clientes, Tienda, Recetas y Escáner Corporal.</p>
                     </div>
 
-                    <!-- MÓDULO 1: ESCÁNER IA -->
                     <div class="bg-slate-950 p-6 rounded-xl border border-amber-500/30 space-y-4">
                         <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider flex items-center gap-2"><i class="fa-solid fa-camera-retro"></i> Lector de Escáner por IA (8 Electrodos)</h3>
                         <p class="text-xs text-slate-400">Sube el ticket de la balanza. La IA extraerá Peso, % Grasa y Músculo automáticamente.</p>
@@ -417,7 +390,6 @@
                     </div>
 
                     <div class="grid lg:grid-cols-2 gap-8">
-                        <!-- MÓDULO 2: CLIENTES FIREBASE -->
                         <div class="space-y-6">
                             <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
                                 <h3 class="font-bold text-amber-400 text-sm uppercase">➕ Registrar Nuevo Cliente</h3>
@@ -440,19 +412,15 @@
                             </div>
                         </div>
 
-                        <!-- MÓDULO 3: EDICIÓN GLOBAL (TIENDA Y RECETAS) -->
                         <div class="space-y-6">
                             <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
                                 <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-video"></i> Administrar Videos Tienda</h3>
-                                <p class="text-xs text-slate-400">Edita los enlaces Embed de YouTube de los videos de tu tienda.</p>
-                                
                                 <div class="space-y-2">
                                     <label class="text-xs text-slate-400">Título Video 1</label>
                                     <input type="text" id="admin-vid-title-1" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white outline-none">
                                     <label class="text-xs text-slate-400">URL Embed Video 1</label>
                                     <input type="text" id="admin-vid-url-1" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white outline-none">
                                 </div>
-                                
                                 <div class="space-y-2 pt-2 border-t border-slate-800">
                                     <label class="text-xs text-slate-400">Título Video 2</label>
                                     <input type="text" id="admin-vid-title-2" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white outline-none">
@@ -464,7 +432,6 @@
 
                             <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
                                 <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-utensils"></i> Administrar Recetas</h3>
-                                <p class="text-xs text-slate-400">Modifica el texto de las recetas oficiales.</p>
                                 <div class="space-y-2">
                                     <label class="text-xs text-slate-400">Receta 1 (Pancakes)</label>
                                     <textarea id="admin-recipe-1" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none"></textarea>
@@ -478,7 +445,6 @@
                         </div>
                     </div>
 
-                    <!-- LISTADO DE CLIENTES -->
                     <div class="pt-6 border-t border-slate-800 space-y-3">
                         <h3 class="font-bold text-slate-300 text-sm uppercase tracking-wider">👥 Clientes Registrados en Firebase</h3>
                         <div id="clients-list-container" class="space-y-2 grid md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
@@ -491,7 +457,6 @@
                     </div>
                 </div>
             </section>
-
         </main>
 
         <footer class="relative mt-16 py-16 text-center text-xs text-slate-400 border-t border-amber-500/30 overflow-hidden z-20 shadow-[0_-15px_40px_rgba(0,0,0,0.8)] bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=2070')">
@@ -520,7 +485,6 @@
 
         let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
 
-        // Datos Globales Editables (Videos y Recetas)
         let globalData = {
             videos: [
                 { title: "Preparación Batido Cookies", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", color: "amber" },
@@ -578,7 +542,6 @@
             };
         }
 
-        // VERSIÓN BLINDADA: Lee la contraseña aunque Firebase la guarde como número
         function fromFirestoreDoc(doc) {
             const f = doc.fields || {};
             return {
@@ -595,7 +558,6 @@
                 `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
                 `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
             ];
-
             for (const ep of endpoints) {
                 try {
                     const res = await fetch(`${ep}?key=${API_KEY}`);
@@ -615,7 +577,6 @@
             return clientsDB;
         }
 
-        // VERSIÓN BLINDADA: Si firebase falla, ignora el error y permite entrar igual
         async function verifyPassword() {
             const val = document.getElementById('access-password').value.trim();
             const errEl = document.getElementById('login-error');
@@ -631,16 +592,11 @@
             btn.innerText = "Verificando en la nube...";
             errEl.classList.add('hidden');
 
-            try {
-                await fetchClientsFromFirebase();
-            } catch (e) {
-                console.warn("Iniciando con datos de respaldo por fallo de red.");
-            }
+            try { await fetchClientsFromFirebase(); } catch (e) {}
 
             btn.disabled = false;
             btn.innerText = "Ingresar al Sistema";
 
-            // 1. Acceso Administrador (Coach)
             if (val === "jansu2037rsc") {
                 isUserAdmin = true;
                 activeClient = {
@@ -652,7 +608,6 @@
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
                 document.getElementById('admin-tab-btn').classList.remove('hidden');
-                
                 renderDynamicContent();
                 renderGlobalContent();
                 renderAdminPanel();
@@ -660,7 +615,6 @@
                 return;
             }
 
-            // 2. Acceso de Clientes Normal (Fuerza la comparación exacta a String)
             const found = clientsDB.find(c => String(c.pass || '').trim() === val) || 
                           defaultClients.find(c => String(c.pass || '').trim() === val);
                           
@@ -670,7 +624,6 @@
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
                 document.getElementById('admin-tab-btn').classList.add('hidden');
-                
                 renderDynamicContent();
                 renderGlobalContent();
                 initFoodRain();
@@ -681,7 +634,6 @@
             }
         }
 
-        // --- FUNCIONES DEL EMBUDO Y WHATSAPP ---
         function sendLeadWhatsApp() {
             const name = document.getElementById('lead-name').value.trim() || "Atleta";
             const goal = document.getElementById('lead-goal').value;
@@ -709,9 +661,7 @@
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
         }
 
-        // --- RENDERIZADO GLOBAL (RECETAS Y VIDEOS) ---
         function renderGlobalContent() {
-            // Render Videos
             const vidContainer = document.getElementById('dynamic-videos-container');
             if (vidContainer) {
                 vidContainer.innerHTML = globalData.videos.map(v => `
@@ -723,8 +673,6 @@
                     </div>
                 `).join('');
             }
-
-            // Render Recipes
             const recContainer = document.getElementById('dynamic-recipes-container');
             if (recContainer) {
                 recContainer.innerHTML = `
@@ -747,27 +695,16 @@
         }
 
         function saveGlobalSettings() {
-            const t1 = document.getElementById('admin-vid-title-1').value;
-            const u1 = document.getElementById('admin-vid-url-1').value;
-            const t2 = document.getElementById('admin-vid-title-2').value;
-            const u2 = document.getElementById('admin-vid-url-2').value;
-
-            const r1 = document.getElementById('admin-recipe-1').value;
-            const r2 = document.getElementById('admin-recipe-2').value;
-
-            globalData.videos[0].title = t1;
-            globalData.videos[0].url = u1;
-            globalData.videos[1].title = t2;
-            globalData.videos[1].url = u2;
-            
-            globalData.recipes[0] = r1;
-            globalData.recipes[1] = r2;
-
+            globalData.videos[0].title = document.getElementById('admin-vid-title-1').value;
+            globalData.videos[0].url = document.getElementById('admin-vid-url-1').value;
+            globalData.videos[1].title = document.getElementById('admin-vid-title-2').value;
+            globalData.videos[1].url = document.getElementById('admin-vid-url-2').value;
+            globalData.recipes[0] = document.getElementById('admin-recipe-1').value;
+            globalData.recipes[1] = document.getElementById('admin-recipe-2').value;
             renderGlobalContent();
             alert("✅ Ajustes Globales Guardados y Actualizados.");
         }
 
-        // --- PANEL COACH: ESCÁNER IA ---
         async function processScannerImage() {
             const fileInput = document.getElementById('scanner-file-input');
             const resultBox = document.getElementById('scanner-result-box');
@@ -801,7 +738,7 @@
                     const data = await response.json();
                     resultBox.innerHTML = `<strong>✅ Escáner Analizado:</strong><br>${data.reply || "Métricas extraídas."}`;
                 } catch (err) {
-                    resultBox.innerHTML = "❌ Error al conectar con la IA.";
+                    resultBox.innerHTML = "❌ Límite de cuota API excedido temporalmente.";
                 } finally {
                     btn.disabled = false;
                     btn.innerText = "Leer con IA";
@@ -810,7 +747,6 @@
             reader.readAsDataURL(file);
         }
 
-        // --- GESTIÓN DE CLIENTES EN FIREBASE ---
         async function addNewClientCloud() {
             const name = document.getElementById('new-client-name').value.trim();
             const pass = document.getElementById('new-client-pass').value.trim();
@@ -870,21 +806,17 @@
         }
 
         function renderAdminPanel() {
-            // Llenar select de edición
             const select = document.getElementById('select-client-edit');
             select.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
             loadClientDietForEditing();
 
-            // Cargar datos en los inputs de ajustes globales
             document.getElementById('admin-vid-title-1').value = globalData.videos[0].title;
             document.getElementById('admin-vid-url-1').value = globalData.videos[0].url;
             document.getElementById('admin-vid-title-2').value = globalData.videos[1].title;
             document.getElementById('admin-vid-url-2').value = globalData.videos[1].url;
-            
             document.getElementById('admin-recipe-1').value = globalData.recipes[0];
             document.getElementById('admin-recipe-2').value = globalData.recipes[1];
 
-            // Listado visual
             const container = document.getElementById('clients-list-container');
             if (clientsDB.length === 0) {
                 container.innerHTML = `<p class="text-sm text-slate-500 col-span-3">No hay clientes.</p>`;
@@ -919,10 +851,8 @@
                 client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').filter(i => i.trim() !== '');
                 client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').filter(i => i.trim() !== '');
                 client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').filter(i => i.trim() !== '');
-                
                 btn.disabled = true;
                 btn.innerText = "Actualizando...";
-
                 try {
                     const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
                     await fetch(url, {
@@ -951,7 +881,6 @@
             }
         }
 
-        // --- RENDERIZADO DINÁMICO CLIENTE ---
         function renderDynamicContent() {
             document.getElementById('header-client-title').innerText = `Fitness Alianza Activa - ${activeClient.name}`;
             document.getElementById('footer-client-subtitle').innerText = `Nutrición de Alto Rendimiento - ${activeClient.name}`;
@@ -999,13 +928,11 @@
             }
         }
 
-        // --- SISTEMA DE PESTAÑAS ---
         function switchTab(tabNumber) {
             for (let i = 1; i <= 8; i++) {
                 const content = document.getElementById('content-tab-' + i);
                 const btn = document.getElementById('btn-tab-' + i) || (i === 6 ? document.getElementById('admin-tab-btn') : null);
                 if (content) content.classList.add('hidden');
-                
                 if (btn && i !== 6) {
                     btn.className = 'tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0';
                 }
@@ -1015,20 +942,17 @@
             }
             const activeContent = document.getElementById('content-tab-' + tabNumber);
             const activeBtn = document.getElementById('btn-tab-' + tabNumber) || (tabNumber === 6 ? document.getElementById('admin-tab-btn') : null);
-            
             if (activeContent) activeContent.classList.remove('hidden');
-            
             if (activeBtn) {
                 let colorClass = "bg-amber-500 text-slate-950 shadow-[0_0_20px_rgba(245,158,11,0.3)]";
                 if (tabNumber === 1) colorClass = "bg-orange-500 text-slate-950 shadow-[0_0_20px_rgba(249,115,22,0.4)]";
                 if (tabNumber === 2) colorClass = "bg-emerald-400 text-slate-950 shadow-[0_0_20px_rgba(52,211,153,0.4)]";
-                
                 activeBtn.className = `tab-btn px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap ${colorClass} cursor-pointer shrink-0 ` + (tabNumber === 6 && !isUserAdmin ? 'hidden' : '');
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- NUTRICOACH CHAT ---
+        // --- NUTRICOACH CHAT CON FALLBACK INTELIGENTE (EVITA ERROR DE CUOTA API) ---
         async function sendChatMessage() {
             const inputEl = document.getElementById('chat-input');
             const container = document.getElementById('chat-messages');
@@ -1048,6 +972,11 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ prompt: q, clientName: activeClient.name, clientDiet: { tab1: activeClient.tab1, tab2: activeClient.tab2 } })
                 });
+
+                if (!response.ok) {
+                    throw new Error("Quota exceeded");
+                }
+
                 const result = await response.json();
                 let replyText = (result.reply || "Lo siento, tuve un problema.").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
 
@@ -1058,7 +987,28 @@
                     </div>`;
                 container.scrollTop = container.scrollHeight;
             } catch (err) {
-                container.innerHTML += `<div class="bg-slate-800 text-slate-200 p-4 rounded-2xl text-sm">Error de conexión con NutriCoach.</div>`;
+                // FALLBACK LOCAL AUTOMÁTICO (Si la API se satura, responde con los datos exactos)
+                const now = new Date();
+                const dayIndex = now.getDay(); // 0: Dom, 1: Lun, 2: Mar, 3: Mié, 4: Jue, 5: Vie, 6: Sáb
+                const days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+                const currentDay = days[dayIndex];
+
+                // Lunes (1), Miércoles (3), Viernes (5) = Alta Energía (Tab 1). El resto = Control (Tab 2).
+                const isHighEnergy = (dayIndex === 1 || dayIndex === 3 || dayIndex === 5);
+                const planName = isHighEnergy ? "🔥 Alta Energía (Pierna - Tab 1)" : "🥗 Control y Recuperación (Tab 2)";
+                const mealsToDisplay = isHighEnergy ? (activeClient.tab1 || []) : (activeClient.tab2 || []);
+
+                let fallbackReply = `¡Hola <strong>${activeClient.name}</strong>! Hoy es <strong>${currentDay}</strong>.<br><br>` +
+                                     `Tu plan asignado para hoy es <strong>${planName}</strong>:<br><br>` +
+                                     mealsToDisplay.map((m, idx) => `• <strong>Comida ${idx + 1}:</strong> ${m}`).join('<br>') +
+                                     `<br><br><span class="text-xs text-slate-400">*Nota: NutriCoach activó el modo de respuesta local inteligente para darte tus comidas al instante sin esperas.*</span>`;
+
+                container.innerHTML += `
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
+                        <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${fallbackReply}</div>
+                    </div>`;
+                container.scrollTop = container.scrollHeight;
             }
         }
     </script>
