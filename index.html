@@ -55,9 +55,11 @@
 
     <div id="food-rain-container" class="fixed inset-0 pointer-events-none z-1 overflow-hidden"></div>
 
+    <!-- PANTALLA DE ACCESO & EMBUDO 24/7 -->
     <div id="login-screen" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-[0_0_50px_rgba(245,158,11,0.2)] text-center space-y-8 my-auto">
             
+            <!-- Cabecera -->
             <div>
                 <div class="w-20 h-20 mx-auto rounded-full bg-slate-950 border-2 border-amber-500 flex items-center justify-center text-amber-400 text-3xl shadow-inner mb-4">
                     <i class="fa-solid fa-shield-halved"></i>
@@ -66,6 +68,7 @@
                 <p class="text-slate-400 text-sm mt-1">Plataforma de Alto Rendimiento</p>
             </div>
             
+            <!-- Área de Login (Alumnos/Coach) -->
             <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4">
                 <h3 class="text-xs font-bold text-amber-400 uppercase tracking-widest text-left">Acceso a Alumnos / Coach</h3>
                 <input type="password" id="access-password" onkeydown="if(event.key==='Enter') verifyPassword()" placeholder="Contraseña de acceso..." class="w-full bg-slate-900 border border-slate-700 text-white px-4 py-3.5 rounded-xl text-center tracking-widest focus:outline-none focus:border-amber-500 transition-colors">
@@ -75,6 +78,7 @@
                 <p id="login-error" class="text-red-400 text-xs hidden">Acceso denegado. Contraseña incorrecta.</p>
             </div>
 
+            <!-- Embudo de Ventas Público 24/7 -->
             <div class="border-t border-slate-800 pt-6 space-y-4 text-left">
                 <div class="text-center">
                     <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-bold uppercase tracking-wider">¿Aún no tienes plan?</span>
@@ -102,6 +106,7 @@
         </div>
     </div>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <div id="main-app" class="hidden flex flex-col min-h-screen justify-between">
         
         <header class="relative bg-slate-950 text-white shadow-2xl border-b border-amber-500/30 overflow-hidden z-10">
@@ -134,6 +139,7 @@
             </div>
         </header>
 
+        <!-- BARRA DE NAVEGACIÓN -->
         <nav class="bg-slate-950/95 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-xl shadow-xl no-print">
             <div class="max-w-5xl mx-auto px-4 flex overflow-x-auto gap-3 py-4 hide-scroll justify-start lg:justify-center items-center">
                 
@@ -173,6 +179,7 @@
 
         <main class="relative z-10 max-w-4xl mx-auto px-4 py-10 flex-grow w-full space-y-8">
 
+            <!-- SECCIÓN 1: ALTA ENERGÍA -->
             <section id="content-tab-1" class="tab-content space-y-6">
                 <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden relative">
                     <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center opacity-30"></div>
@@ -194,6 +201,7 @@
                 <div id="tab1-meals-container" class="space-y-4"></div>
             </section>
 
+            <!-- SECCIÓN 2: CONTROL Y RECUPERACIÓN -->
             <section id="content-tab-2" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden relative">
                     <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center opacity-30"></div>
@@ -215,6 +223,7 @@
                 <div id="tab2-meals-container" class="space-y-4"></div>
             </section>
 
+            <!-- SECCIÓN 3: LISTA DE COMPRAS -->
             <section id="content-tab-3" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
@@ -233,6 +242,7 @@
                 <div id="tab3-shopping-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
+            <!-- SECCIÓN 4: GUÍA DE EQUIVALENCIAS -->
             <section id="content-tab-4" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
                     <div class="flex items-center gap-3 mb-2 text-amber-400">
@@ -285,6 +295,7 @@
                 </div>
             </section>
 
+            <!-- SECCIÓN 7: RECETAS OFICIALES -->
             <section id="content-tab-7" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
                     <div class="flex items-center gap-3 mb-2 text-orange-400">
@@ -296,9 +307,11 @@
                     </p>
                 </div>
                 <div id="dynamic-recipes-container" class="grid md:grid-cols-2 gap-6">
-                    </div>
+                    <!-- Cargado por JS -->
+                </div>
             </section>
 
+            <!-- SECCIÓN 8: TIENDA & PROTEIN BAR -->
             <section id="content-tab-8" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
                     <div class="flex items-center gap-3 mb-2 text-emerald-400">
@@ -309,8 +322,10 @@
                         Suplementación de alto rendimiento y presentaciones de nuestros batidos estrella.
                     </p>
                 </div>
+                <!-- Videos Administrables -->
                 <div class="grid md:grid-cols-2 gap-6" id="dynamic-videos-container"></div>
 
+                <!-- Productos -->
                 <div class="grid md:grid-cols-3 gap-6 pt-4">
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
                         <div>
@@ -345,6 +360,7 @@
                 </div>
             </section>
 
+            <!-- SECCIÓN 5: NUTRICOACH IA -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
                     <div>
@@ -380,6 +396,7 @@
                 </div>
             </section>
 
+            <!-- SECCIÓN 6: PANEL COACH (ADMINISTRACIÓN EDICIÓN TOTAL) -->
             <section id="content-tab-6" class="tab-content hidden space-y-8">
                 
                 <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-8">
@@ -388,6 +405,7 @@
                         <p class="text-slate-400 text-sm mt-1">Gestión total de Clientes, Tienda, Recetas y Escáner Corporal.</p>
                     </div>
 
+                    <!-- MÓDULO 1: ESCÁNER IA -->
                     <div class="bg-slate-950 p-6 rounded-xl border border-amber-500/30 space-y-4">
                         <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider flex items-center gap-2"><i class="fa-solid fa-camera-retro"></i> Lector de Escáner por IA (8 Electrodos)</h3>
                         <p class="text-xs text-slate-400">Sube el ticket de la balanza. La IA extraerá Peso, % Grasa y Músculo automáticamente.</p>
@@ -399,6 +417,7 @@
                     </div>
 
                     <div class="grid lg:grid-cols-2 gap-8">
+                        <!-- MÓDULO 2: CLIENTES FIREBASE -->
                         <div class="space-y-6">
                             <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
                                 <h3 class="font-bold text-amber-400 text-sm uppercase">➕ Registrar Nuevo Cliente</h3>
@@ -421,6 +440,7 @@
                             </div>
                         </div>
 
+                        <!-- MÓDULO 3: EDICIÓN GLOBAL (TIENDA Y RECETAS) -->
                         <div class="space-y-6">
                             <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
                                 <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-video"></i> Administrar Videos Tienda</h3>
@@ -458,6 +478,7 @@
                         </div>
                     </div>
 
+                    <!-- LISTADO DE CLIENTES -->
                     <div class="pt-6 border-t border-slate-800 space-y-3">
                         <h3 class="font-bold text-slate-300 text-sm uppercase tracking-wider">👥 Clientes Registrados en Firebase</h3>
                         <div id="clients-list-container" class="space-y-2 grid md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
@@ -557,14 +578,15 @@
             };
         }
 
+        // VERSIÓN BLINDADA: Lee la contraseña aunque Firebase la guarde como número
         function fromFirestoreDoc(doc) {
             const f = doc.fields || {};
             return {
                 name: f.name?.stringValue || '',
-                pass: f.pass?.stringValue || '',
-                tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue),
-                tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue),
-                tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue)
+                pass: f.pass?.stringValue || f.pass?.integerValue || '',
+                tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue || ''),
+                tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue || ''),
+                tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue || '')
             }
         }
 
@@ -593,21 +615,32 @@
             return clientsDB;
         }
 
+        // VERSIÓN BLINDADA: Si firebase falla, ignora el error y permite entrar igual
         async function verifyPassword() {
             const val = document.getElementById('access-password').value.trim();
             const errEl = document.getElementById('login-error');
             const btn = document.getElementById('btn-login-submit');
 
+            if (!val) {
+                errEl.innerText = "Por favor, ingresa una contraseña.";
+                errEl.classList.remove('hidden');
+                return;
+            }
+
             btn.disabled = true;
-            btn.innerText = "Verificando...";
+            btn.innerText = "Verificando en la nube...";
+            errEl.classList.add('hidden');
 
             try {
                 await fetchClientsFromFirebase();
-            } catch (e) {}
+            } catch (e) {
+                console.warn("Iniciando con datos de respaldo por fallo de red.");
+            }
 
             btn.disabled = false;
             btn.innerText = "Ingresar al Sistema";
 
+            // 1. Acceso Administrador (Coach)
             if (val === "jansu2037rsc") {
                 isUserAdmin = true;
                 activeClient = {
@@ -627,7 +660,10 @@
                 return;
             }
 
-            const found = clientsDB.find(c => c.pass.trim() === val) || defaultClients.find(c => c.pass.trim() === val);
+            // 2. Acceso de Clientes Normal (Fuerza la comparación exacta a String)
+            const found = clientsDB.find(c => String(c.pass || '').trim() === val) || 
+                          defaultClients.find(c => String(c.pass || '').trim() === val);
+                          
             if (found) {
                 isUserAdmin = false;
                 activeClient = found;
@@ -640,6 +676,7 @@
                 initFoodRain();
                 switchTab(1);
             } else {
+                errEl.innerText = "Acceso denegado. Contraseña incorrecta.";
                 errEl.classList.remove('hidden');
             }
         }
@@ -977,4 +1014,53 @@
                 }
             }
             const activeContent = document.getElementById('content-tab-' + tabNumber);
-            const activeBtn = document.getElementById
+            const activeBtn = document.getElementById('btn-tab-' + tabNumber) || (tabNumber === 6 ? document.getElementById('admin-tab-btn') : null);
+            
+            if (activeContent) activeContent.classList.remove('hidden');
+            
+            if (activeBtn) {
+                let colorClass = "bg-amber-500 text-slate-950 shadow-[0_0_20px_rgba(245,158,11,0.3)]";
+                if (tabNumber === 1) colorClass = "bg-orange-500 text-slate-950 shadow-[0_0_20px_rgba(249,115,22,0.4)]";
+                if (tabNumber === 2) colorClass = "bg-emerald-400 text-slate-950 shadow-[0_0_20px_rgba(52,211,153,0.4)]";
+                
+                activeBtn.className = `tab-btn px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap ${colorClass} cursor-pointer shrink-0 ` + (tabNumber === 6 && !isUserAdmin ? 'hidden' : '');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- NUTRICOACH CHAT ---
+        async function sendChatMessage() {
+            const inputEl = document.getElementById('chat-input');
+            const container = document.getElementById('chat-messages');
+            const q = inputEl.value.trim();
+            if (!q) return;
+
+            container.innerHTML += `
+                <div class="flex items-start gap-3 justify-end">
+                    <div class="bg-amber-500 text-slate-950 p-4 rounded-2xl rounded-tr-none max-w-[85%] text-sm font-medium shadow-md">${q}</div>
+                </div>`;
+            inputEl.value = '';
+            container.scrollTop = container.scrollHeight;
+
+            try {
+                const response = await fetch("/api/askNutriCoach", {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: q, clientName: activeClient.name, clientDiet: { tab1: activeClient.tab1, tab2: activeClient.tab2 } })
+                });
+                const result = await response.json();
+                let replyText = (result.reply || "Lo siento, tuve un problema.").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+
+                container.innerHTML += `
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
+                        <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${replyText}</div>
+                    </div>`;
+                container.scrollTop = container.scrollHeight;
+            } catch (err) {
+                container.innerHTML += `<div class="bg-slate-800 text-slate-200 p-4 rounded-2xl text-sm">Error de conexión con NutriCoach.</div>`;
+            }
+        }
+    </script>
+</body>
+</html>
