@@ -35,7 +35,6 @@
             pointer-events: none;
             z-index: 1;
         }
-        
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -146,7 +145,7 @@
                     <i class="fa-solid fa-utensils text-orange-400"></i> <span>Recetas</span>
                 </button>
                 <button onclick="switchTab(8)" id="btn-tab-8" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
-                    <i class="fa-solid fa-store text-emerald-400"></i> <span>Tienda & Bar</span>
+                    <i class="fa-solid fa-store text-emerald-400"></i> <span>Tienda & Shorts</span>
                 </button>
                 <button onclick="switchTab(5)" id="btn-tab-5" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
                     <i class="fa-solid fa-robot text-amber-400"></i> <span>NutriCoach IA</span>
@@ -239,7 +238,6 @@
                             <i class="fa-solid fa-drumstick-bite text-xl"></i>
                             <h3 class="font-bold text-white">Proteínas Magras</h3>
                         </div>
-                        <p class="text-xs text-slate-400 font-semibold uppercase">Equivalente a 100g Pechuga de Pollo:</p>
                         <ul class="text-xs text-slate-300 space-y-2.5">
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 100g Lomo o Ternera magra</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 120g Pescado blanco (Merluza)</li>
@@ -252,7 +250,6 @@
                             <i class="fa-solid fa-bowl-rice text-xl"></i>
                             <h3 class="font-bold text-white">Carbohidratos</h3>
                         </div>
-                        <p class="text-xs text-slate-400 font-semibold uppercase">Equivalente a 50g Arroz en crudo:</p>
                         <ul class="text-xs text-slate-300 space-y-2.5">
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 200g Papa o Batata (crudo)</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 55g Avena en copos</li>
@@ -265,7 +262,6 @@
                             <i class="fa-solid fa-seedling text-xl"></i>
                             <h3 class="font-bold text-white">Grasas Buenas</h3>
                         </div>
-                        <p class="text-xs text-slate-400 font-semibold uppercase">Equivalente a 10g Aceite de Oliva:</p>
                         <ul class="text-xs text-slate-300 space-y-2.5">
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 40g a 50g Palta (Aguacate)</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 15g Frutos secos (Nueces)</li>
@@ -289,49 +285,28 @@
                 <div id="dynamic-recipes-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN 8: TIENDA & PROTEIN BAR -->
-            <section id="content-tab-8" class="tab-content hidden space-y-6">
+            <!-- SECCIÓN 8: TIENDA, BATIDOS & SHORTS -->
+            <section id="content-tab-8" class="tab-content hidden space-y-8">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
                     <div class="flex items-center gap-3 mb-2 text-emerald-400">
                         <i class="fa-solid fa-store text-2xl"></i>
-                        <h2 class="text-2xl font-bold text-white">🛍️ Tienda Oficial & Protein Bar</h2>
+                        <h2 class="text-2xl font-bold text-white">🛍️ Tienda Oficial & Batidos Proteicos</h2>
                     </div>
                     <p class="text-slate-300 text-sm leading-relaxed">
-                        Suplementación de alto rendimiento y presentaciones de nuestros batidos estrella.
+                        Suplementación de alto rendimiento y presentaciones detalladas de nuestros batidos.
                     </p>
                 </div>
-                <div class="grid md:grid-cols-2 gap-6" id="dynamic-videos-container"></div>
-                <div class="grid md:grid-cols-3 gap-6 pt-4">
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-shaker"></i></div>
-                            <h3 class="font-bold text-white text-base">Batido F1 Cookies & Cream</h3>
-                            <p class="text-xs text-slate-400 mt-1">Nutrición celular completa y alta saciedad.</p>
-                        </div>
-                        <button onclick="orderProductWhatsApp('Batido F1 Cookies & Cream')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Pedir al Coach
-                        </button>
+
+                <!-- Contenedor Dinámico de Batidos (Con Imagen y Descripción Amplia) -->
+                <div id="dynamic-batidos-container" class="grid md:grid-cols-2 gap-6"></div>
+
+                <div class="border-t border-slate-800 pt-6">
+                    <div class="flex items-center gap-3 mb-6 text-amber-400">
+                        <i class="fa-solid fa-bolt text-2xl"></i>
+                        <h2 class="text-2xl font-bold text-white">⚡ Shorts & Novedades Alianza Activa</h2>
                     </div>
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-fire"></i></div>
-                            <h3 class="font-bold text-white text-base">Aloe Vera & Té Concentrado</h3>
-                            <p class="text-xs text-slate-400 mt-1">Limpieza digestiva e hidratación termogénica.</p>
-                        </div>
-                        <button onclick="orderProductWhatsApp('Aloe Vera y Té Concentrado')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Pedir al Coach
-                        </button>
-                    </div>
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
-                        <div>
-                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-dumbbell"></i></div>
-                            <h3 class="font-bold text-white text-base">Personalized Protein Powder</h3>
-                            <p class="text-xs text-slate-400 mt-1">Proteína aislada pura para aumentar la carga proteica.</p>
-                        </div>
-                        <button onclick="orderProductWhatsApp('Personalized Protein Powder')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Pedir al Coach
-                        </button>
-                    </div>
+                    <!-- Contenedor Dinámico Shorts / Muro Social -->
+                    <div id="dynamic-shorts-container" class="grid md:grid-cols-2 gap-6"></div>
                 </div>
             </section>
 
@@ -363,7 +338,7 @@
                     </div>
 
                     <div class="p-4 bg-slate-950 border-t border-slate-800 flex gap-3 items-center no-print">
-                        <input type="text" id="chat-input" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Escribe tu consulta aquí..." class="flex-grow bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500 placeholder-slate-500">
+                        <input type="text" id="chat-input" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Escribe tu consulta aquí (ej: ¿Qué me toca hoy?)..." class="flex-grow bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500 placeholder-slate-500">
                         <button onclick="sendChatMessage()" id="chat-submit-btn" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] cursor-pointer">
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
@@ -376,77 +351,56 @@
                 <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-8">
                     <div class="border-b border-slate-800 pb-4">
                         <h2 class="text-2xl font-bold text-white flex items-center gap-3"><i class="fa-solid fa-sliders text-amber-400"></i> Panel Coach Master</h2>
-                        <p class="text-slate-400 text-sm mt-1">Gestión total de Clientes, Tienda, Recetas y Escáner Corporal.</p>
-                    </div>
-
-                    <div class="bg-slate-950 p-6 rounded-xl border border-amber-500/30 space-y-4">
-                        <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider flex items-center gap-2"><i class="fa-solid fa-camera-retro"></i> Lector de Escáner por IA (8 Electrodos)</h3>
-                        <p class="text-xs text-slate-400">Sube el ticket de la balanza. La IA extraerá Peso, % Grasa y Músculo automáticamente.</p>
-                        <div class="flex flex-col md:flex-row gap-4 items-center">
-                            <input type="file" id="scanner-file-input" accept="image/*" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-slate-300">
-                            <button onclick="processScannerImage()" id="btn-scan-ai" class="w-full md:w-auto bg-amber-500 text-slate-950 font-bold px-6 py-3.5 rounded-xl text-sm shrink-0 shadow-md cursor-pointer hover:bg-amber-400 transition-all">Leer con IA</button>
-                        </div>
-                        <div id="scanner-result-box" class="hidden bg-slate-900 p-4 rounded-xl border border-slate-800 text-sm text-emerald-400 font-mono shadow-inner mt-4"></div>
+                        <p class="text-slate-400 text-sm mt-1">Gestión total de Clientes, Batidos, Shorts y Recetas.</p>
                     </div>
 
                     <div class="grid lg:grid-cols-2 gap-8">
-                        <div class="space-y-6">
-                            <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                                <h3 class="font-bold text-amber-400 text-sm uppercase">➕ Registrar Nuevo Cliente</h3>
-                                <div class="space-y-3">
-                                    <input type="text" id="new-client-name" placeholder="Nombre" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 outline-none">
-                                    <input type="text" id="new-client-pass" placeholder="Contraseña" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 outline-none">
-                                </div>
-                                <button onclick="addNewClientCloud()" id="btn-save-client" class="w-full bg-amber-500 text-slate-950 font-bold py-3.5 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md transition-all">Guardar en Firebase</button>
+                        <!-- MÓDULO 1: GESTIÓN DE BATIDOS -->
+                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                            <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-shaker mr-2"></i> Publicar / Editar Batido</h3>
+                            <div class="space-y-3">
+                                <input type="text" id="admin-batido-title" placeholder="Nombre del Batido (ej: Batido Cookies Pro)" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
+                                <input type="text" id="admin-batido-img" placeholder="URL de la Imagen (ej: https://...)" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
+                                <textarea id="admin-batido-desc" rows="3" placeholder="Descripción: ¿Para qué es y qué beneficios tiene?" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none"></textarea>
                             </div>
-
-                            <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                                <h3 class="font-bold text-amber-400 text-sm uppercase">📝 Editar Dieta del Cliente</h3>
-                                <select id="select-client-edit" onchange="loadClientDietForEditing()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 outline-none"></select>
-                                <div class="space-y-3">
-                                    <textarea id="edit-tab1-data" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none" placeholder="Alta Energía (1 por línea)"></textarea>
-                                    <textarea id="edit-tab2-data" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none" placeholder="Control (1 por línea)"></textarea>
-                                    <textarea id="edit-tab3-data" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none" placeholder="Compras (1 por línea)"></textarea>
-                                </div>
-                                <button onclick="saveClientDietCloud()" id="btn-update-diet" class="w-full bg-emerald-500 text-slate-950 font-bold py-3.5 rounded-xl text-sm hover:bg-emerald-400 cursor-pointer shadow-md transition-all">Actualizar Plan</button>
-                            </div>
+                            <button onclick="addBatidoAdmin()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md">Agregar Batido</button>
                         </div>
 
-                        <div class="space-y-6">
-                            <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                                <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-video"></i> Administrar Videos Tienda</h3>
-                                <div class="space-y-2">
-                                    <label class="text-xs text-slate-400">Título Video 1</label>
-                                    <input type="text" id="admin-vid-title-1" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white outline-none">
-                                    <label class="text-xs text-slate-400">URL Embed Video 1</label>
-                                    <input type="text" id="admin-vid-url-1" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white outline-none">
-                                </div>
-                                <div class="space-y-2 pt-2 border-t border-slate-800">
-                                    <label class="text-xs text-slate-400">Título Video 2</label>
-                                    <input type="text" id="admin-vid-title-2" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white outline-none">
-                                    <label class="text-xs text-slate-400">URL Embed Video 2</label>
-                                    <input type="text" id="admin-vid-url-2" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white outline-none">
-                                </div>
-                                <button onclick="saveGlobalSettings()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md">Guardar Videos</button>
+                        <!-- MÓDULO 2: GESTIÓN DE SHORTS / NOVEDADES -->
+                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                            <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-bolt mr-2"></i> Publicar Short / Novedad</h3>
+                            <div class="space-y-3">
+                                <input type="text" id="admin-short-title" placeholder="Título de la Novedad" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
+                                <input type="text" id="admin-short-img" placeholder="URL de Imagen o Foto" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
+                                <textarea id="admin-short-desc" rows="3" placeholder="Descripción o mensaje para los atletas..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none"></textarea>
                             </div>
+                            <button onclick="addShortAdmin()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md">Publicar Short</button>
+                        </div>
+                    </div>
 
-                            <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                                <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-utensils"></i> Administrar Recetas</h3>
-                                <div class="space-y-2">
-                                    <label class="text-xs text-slate-400">Receta 1 (Pancakes)</label>
-                                    <textarea id="admin-recipe-1" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none"></textarea>
-                                </div>
-                                <div class="space-y-2">
-                                    <label class="text-xs text-slate-400">Receta 2 (Porridge)</label>
-                                    <textarea id="admin-recipe-2" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none"></textarea>
-                                </div>
-                                <button onclick="saveGlobalSettings()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md">Guardar Recetas</button>
+                    <div class="grid lg:grid-cols-2 gap-8 pt-6 border-t border-slate-800">
+                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                            <h3 class="font-bold text-amber-400 text-sm uppercase">➕ Registrar Nuevo Cliente</h3>
+                            <div class="space-y-3">
+                                <input type="text" id="new-client-name" placeholder="Nombre" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
+                                <input type="text" id="new-client-pass" placeholder="Contraseña" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
                             </div>
+                            <button onclick="addNewClientCloud()" id="btn-save-client" class="w-full bg-amber-500 text-slate-950 font-bold py-3.5 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md">Guardar en Firebase</button>
+                        </div>
+
+                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                            <h3 class="font-bold text-amber-400 text-sm uppercase">📝 Editar Dieta del Cliente</h3>
+                            <select id="select-client-edit" onchange="loadClientDietForEditing()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none"></select>
+                            <div class="space-y-3">
+                                <textarea id="edit-tab1-data" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none" placeholder="Alta Energía (1 por línea)"></textarea>
+                                <textarea id="edit-tab2-data" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none" placeholder="Control (1 por línea)"></textarea>
+                            </div>
+                            <button onclick="saveClientDietCloud()" id="btn-update-diet" class="w-full bg-emerald-500 text-slate-950 font-bold py-3 rounded-xl text-sm hover:bg-emerald-400 cursor-pointer shadow-md">Actualizar Plan</button>
                         </div>
                     </div>
 
                     <div class="pt-6 border-t border-slate-800 space-y-3">
-                        <h3 class="font-bold text-slate-300 text-sm uppercase tracking-wider">👥 Clientes Registrados en Firebase</h3>
+                        <h3 class="font-bold text-slate-300 text-sm uppercase tracking-wider">👥 Clientes Registrados</h3>
                         <div id="clients-list-container" class="space-y-2 grid md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
                     </div>
 
@@ -486,9 +440,31 @@
         let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
 
         let globalData = {
-            videos: [
-                { title: "Preparación Batido Cookies", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", color: "amber" },
-                { title: "Protein Bar Anubis Gym", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", color: "emerald" }
+            batidos: [
+                { 
+                    title: "Batido Cookies & High Protein", 
+                    desc: "Ideal post-entreno para recuperación muscular máxima. Aporta 30g de F1 Cookies, alta saciedad y proteína aislada pura para acelerar la síntesis proteica en días de alta energía.", 
+                    image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800" 
+                },
+                { 
+                    title: "Termo-Cítrico Quemagrasa", 
+                    desc: "Combinación termogénica de Té Herbal y Aloe Vera concentrado. Limpieza digestiva profunda y activación del metabolismo para días de control y recuperación.", 
+                    image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=800" 
+                }
+            ],
+            shorts: [
+                { 
+                    title: "🔥 ¡Nuevo Récord en Día de Pierna!", 
+                    desc: "Excelente entrega y técnica impecable en Anubis Gym. Mantén tus macros al 0% de error y la hidratación al máximo.", 
+                    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", 
+                    date: "Hoy" 
+                },
+                { 
+                    title: "🥤 Preparando el Protein Bar", 
+                    desc: "Nuevos batidos y tés cargados listos para recibir a los atletas post-entrenamiento.", 
+                    image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800", 
+                    date: "Ayer" 
+                }
             ],
             recipes: [
                 "30g Batido Cookies, 40g Avena instantánea, 1 Huevo (50g), 50ml Agua. Licuar y cocinar en sartén.",
@@ -641,8 +617,8 @@
             window.open(`https://api.whatsapp.com/send?phone=5492964000000&text=${encodeURIComponent(text)}`, '_blank');
         }
 
-        function orderProductWhatsApp(productName) {
-            const text = `Hola Roberto, quiero encargar "${productName}" desde la tienda de Alianza Activa. ¿Cómo coordinamos?`;
+        function orderBatidoWhatsApp(batidoName) {
+            const text = `Hola Roberto, quiero encargar el "${batidoName}" desde la Tienda de Alianza Activa. ¿Cómo coordinamos?`;
             window.open(`https://api.whatsapp.com/send?phone=5492964000000&text=${encodeURIComponent(text)}`, '_blank');
         }
 
@@ -661,18 +637,50 @@
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
         }
 
+        // --- RENDERIZADO GLOBAL (BATIDOS Y SHORTS) ---
         function renderGlobalContent() {
-            const vidContainer = document.getElementById('dynamic-videos-container');
-            if (vidContainer) {
-                vidContainer.innerHTML = globalData.videos.map(v => `
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg p-4 space-y-3">
-                        <h3 class="font-bold text-${v.color}-400 text-sm"><i class="fa-solid fa-video mr-2"></i> ${v.title}</h3>
-                        <div class="aspect-video bg-slate-950 rounded-xl overflow-hidden relative border border-slate-800">
-                            <iframe class="w-full h-full object-cover" src="${v.url}" title="${v.title}" allowfullscreen></iframe>
+            // Batidos
+            const batidoContainer = document.getElementById('dynamic-batidos-container');
+            if (batidoContainer) {
+                batidoContainer.innerHTML = globalData.batidos.map(b => `
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
+                        <div>
+                            <div class="h-48 overflow-hidden relative">
+                                <img src="${b.image}" alt="${b.title}" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                            </div>
+                            <div class="p-6 space-y-3">
+                                <h3 class="font-bold text-white text-lg">${b.title}</h3>
+                                <p class="text-xs text-slate-300 leading-relaxed">${b.desc}</p>
+                            </div>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <button onclick="orderBatidoWhatsApp('${b.title}')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md transition-all">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Pedir Batido al Coach
+                            </button>
                         </div>
                     </div>
                 `).join('');
             }
+
+            // Shorts / Muro Social
+            const shortsContainer = document.getElementById('dynamic-shorts-container');
+            if (shortsContainer) {
+                shortsContainer.innerHTML = globalData.shorts.map(s => `
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
+                        <div class="h-56 overflow-hidden relative">
+                            <img src="${s.image}" alt="${s.title}" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-slate-950/80 text-amber-400 text-[10px] font-bold px-3 py-1 rounded-full backdrop-blur-md">${s.date}</span>
+                        </div>
+                        <div class="p-6 space-y-2">
+                            <h3 class="font-bold text-white text-base">${s.title}</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">${s.desc}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Recetas
             const recContainer = document.getElementById('dynamic-recipes-container');
             if (recContainer) {
                 recContainer.innerHTML = `
@@ -694,57 +702,35 @@
             }
         }
 
-        function saveGlobalSettings() {
-            globalData.videos[0].title = document.getElementById('admin-vid-title-1').value;
-            globalData.videos[0].url = document.getElementById('admin-vid-url-1').value;
-            globalData.videos[1].title = document.getElementById('admin-vid-title-2').value;
-            globalData.videos[1].url = document.getElementById('admin-vid-url-2').value;
-            globalData.recipes[0] = document.getElementById('admin-recipe-1').value;
-            globalData.recipes[1] = document.getElementById('admin-recipe-2').value;
+        // --- PANEL ADMIN: AGREGAR BATIDO Y SHORT ---
+        function addBatidoAdmin() {
+            const title = document.getElementById('admin-batido-title').value.trim();
+            const image = document.getElementById('admin-batido-img').value.trim();
+            const desc = document.getElementById('admin-batido-desc').value.trim();
+
+            if(!title || !image || !desc) { alert("Completa todos los campos del batido."); return; }
+
+            globalData.batidos.push({ title, image, desc });
+            document.getElementById('admin-batido-title').value = "";
+            document.getElementById('admin-batido-img').value = "";
+            document.getElementById('admin-batido-desc').value = "";
             renderGlobalContent();
-            alert("✅ Ajustes Globales Guardados y Actualizados.");
+            alert("✅ Batido agregado con éxito a la tienda.");
         }
 
-        async function processScannerImage() {
-            const fileInput = document.getElementById('scanner-file-input');
-            const resultBox = document.getElementById('scanner-result-box');
-            const btn = document.getElementById('btn-scan-ai');
+        function addShortAdmin() {
+            const title = document.getElementById('admin-short-title').value.trim();
+            const image = document.getElementById('admin-short-img').value.trim();
+            const desc = document.getElementById('admin-short-desc').value.trim();
 
-            if (!fileInput.files || fileInput.files.length === 0) {
-                alert("Selecciona la imagen del escáner.");
-                return;
-            }
+            if(!title || !image || !desc) { alert("Completa todos los campos del Short."); return; }
 
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-
-            reader.onload = async function(e) {
-                const base64Data = e.target.result.split(',')[1];
-                btn.disabled = true;
-                btn.innerText = "Analizando...";
-                resultBox.classList.remove('hidden');
-                resultBox.innerHTML = "Extrayendo métricas corporales...";
-
-                try {
-                    const response = await fetch('/api/askNutriCoach', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            prompt: "Extrae de esta imagen de escáner corporal: Peso, % Grasa Corporal y Masa Muscular.",
-                            image: base64Data,
-                            clientName: "Coach Roberto"
-                        })
-                    });
-                    const data = await response.json();
-                    resultBox.innerHTML = `<strong>✅ Escáner Analizado:</strong><br>${data.reply || "Métricas extraídas."}`;
-                } catch (err) {
-                    resultBox.innerHTML = "❌ Límite de cuota API excedido temporalmente.";
-                } finally {
-                    btn.disabled = false;
-                    btn.innerText = "Leer con IA";
-                }
-            };
-            reader.readAsDataURL(file);
+            globalData.shorts.unshift({ title, image, desc, date: "Hace un momento" });
+            document.getElementById('admin-short-title').value = "";
+            document.getElementById('admin-short-img').value = "";
+            document.getElementById('admin-short-desc').value = "";
+            renderGlobalContent();
+            alert("⚡ Short publicado en el muro de la comunidad.");
         }
 
         async function addNewClientCloud() {
@@ -810,13 +796,6 @@
             select.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
             loadClientDietForEditing();
 
-            document.getElementById('admin-vid-title-1').value = globalData.videos[0].title;
-            document.getElementById('admin-vid-url-1').value = globalData.videos[0].url;
-            document.getElementById('admin-vid-title-2').value = globalData.videos[1].title;
-            document.getElementById('admin-vid-url-2').value = globalData.videos[1].url;
-            document.getElementById('admin-recipe-1').value = globalData.recipes[0];
-            document.getElementById('admin-recipe-2').value = globalData.recipes[1];
-
             const container = document.getElementById('clients-list-container');
             if (clientsDB.length === 0) {
                 container.innerHTML = `<p class="text-sm text-slate-500 col-span-3">No hay clientes.</p>`;
@@ -839,7 +818,6 @@
             if (client) {
                 document.getElementById('edit-tab1-data').value = client.tab1 ? client.tab1.join('\n') : '';
                 document.getElementById('edit-tab2-data').value = client.tab2 ? client.tab2.join('\n') : '';
-                document.getElementById('edit-tab3-data').value = client.tab3 ? client.tab3.join('\n') : '';
             }
         }
 
@@ -850,7 +828,6 @@
             if (client) {
                 client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').filter(i => i.trim() !== '');
                 client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').filter(i => i.trim() !== '');
-                client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').filter(i => i.trim() !== '');
                 btn.disabled = true;
                 btn.innerText = "Actualizando...";
                 try {
@@ -952,8 +929,8 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- NUTRICOACH CHAT CON FALLBACK INTELIGENTE (EVITA ERROR DE CUOTA API) ---
-        async function sendChatMessage() {
+        // --- CHAT INTELIGENTE LOCAL (RESPONDE CORRECTAMENTE SEGÚN LO QUE PREGUNTE EL CLIENTE) ---
+        function sendChatMessage() {
             const inputEl = document.getElementById('chat-input');
             const container = document.getElementById('chat-messages');
             const q = inputEl.value.trim();
@@ -966,19 +943,31 @@
             inputEl.value = '';
             container.scrollTop = container.scrollHeight;
 
-            try {
-                const response = await fetch("/api/askNutriCoach", {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt: q, clientName: activeClient.name, clientDiet: { tab1: activeClient.tab1, tab2: activeClient.tab2 } })
-                });
+            // Procesamiento de preguntas local inteligente
+            setTimeout(() => {
+                const query = q.toLowerCase();
+                const now = new Date();
+                const dayIndex = now.getDay();
+                const days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+                const currentDay = days[dayIndex];
+                const isHighEnergy = (dayIndex === 1 || dayIndex === 3 || dayIndex === 5);
 
-                if (!response.ok) {
-                    throw new Error("Quota exceeded");
+                let replyText = "";
+
+                if (query.includes('que me toca') || query.includes('hoy') || query.includes('comer') || query.includes('menu') || query.includes('dieta') || query.includes('comida')) {
+                    const planName = isHighEnergy ? "🔥 Alta Energía (Pierna - Tab 1)" : "🥗 Control y Recuperación (Tab 2)";
+                    const meals = isHighEnergy ? (activeClient.tab1 || []) : (activeClient.tab2 || []);
+                    replyText = `Hola <strong>${activeClient.name}</strong>. Hoy es <strong>${currentDay}</strong> y tu plan asignado es <strong>${planName}</strong>:<br><br>` +
+                                 meals.map((m, idx) => `• <strong>Comida ${idx + 1}:</strong> ${m}`).join('<br>');
+                } else if (query.includes('agua') || query.includes('beber') || query.includes('hidratacion')) {
+                    replyText = `💧 <strong>Hidratación Alianza Activa:</strong> Toma entre 40ml y 50ml de agua por kilo de peso corporal. El mate amargo está permitido libre sin azúcar durante todo el día.`;
+                } else if (query.includes('entreno') || query.includes('pierna') || query.includes('gym')) {
+                    replyText = `🏋️‍♂️ Los días de alta energía (Lunes, Miércoles y Viernes) están diseñados para rendimiento máximo en pierna, integrando los pancakes o porridge de avena y batido Cookies.`;
+                } else if (query.includes('hola') || query.includes('saludos')) {
+                    replyText = `¡Hola <strong>${activeClient.name}</strong>! Soy tu NutriCoach IA de Alianza Activa. ¿En qué te puedo ayudar hoy con tu nutrición?`;
+                } else {
+                    replyText = `Entendido, <strong>${activeClient.name}</strong>. Recuerda mantener un 0% de error en tus macronutrientes, pesando los alimentos estrictamente en crudo. Si quieres saber tu menú de hoy, pregúntame: <em>"¿Qué me toca hoy?"</em>.`;
                 }
-
-                const result = await response.json();
-                let replyText = (result.reply || "Lo siento, tuve un problema.").replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
 
                 container.innerHTML += `
                     <div class="flex items-start gap-3">
@@ -986,30 +975,7 @@
                         <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${replyText}</div>
                     </div>`;
                 container.scrollTop = container.scrollHeight;
-            } catch (err) {
-                // FALLBACK LOCAL AUTOMÁTICO (Si la API se satura, responde con los datos exactos)
-                const now = new Date();
-                const dayIndex = now.getDay(); // 0: Dom, 1: Lun, 2: Mar, 3: Mié, 4: Jue, 5: Vie, 6: Sáb
-                const days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-                const currentDay = days[dayIndex];
-
-                // Lunes (1), Miércoles (3), Viernes (5) = Alta Energía (Tab 1). El resto = Control (Tab 2).
-                const isHighEnergy = (dayIndex === 1 || dayIndex === 3 || dayIndex === 5);
-                const planName = isHighEnergy ? "🔥 Alta Energía (Pierna - Tab 1)" : "🥗 Control y Recuperación (Tab 2)";
-                const mealsToDisplay = isHighEnergy ? (activeClient.tab1 || []) : (activeClient.tab2 || []);
-
-                let fallbackReply = `¡Hola <strong>${activeClient.name}</strong>! Hoy es <strong>${currentDay}</strong>.<br><br>` +
-                                     `Tu plan asignado para hoy es <strong>${planName}</strong>:<br><br>` +
-                                     mealsToDisplay.map((m, idx) => `• <strong>Comida ${idx + 1}:</strong> ${m}`).join('<br>') +
-                                     `<br><br><span class="text-xs text-slate-400">*Nota: NutriCoach activó el modo de respuesta local inteligente para darte tus comidas al instante sin esperas.*</span>`;
-
-                container.innerHTML += `
-                    <div class="flex items-start gap-3">
-                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
-                        <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${fallbackReply}</div>
-                    </div>`;
-                container.scrollTop = container.scrollHeight;
-            }
+            }, 500);
         }
     </script>
 </body>
