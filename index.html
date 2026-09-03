@@ -139,14 +139,14 @@
             </div>
         </header>
 
-        <!-- BARRA DE HISTORIAS / SHORTS (ESTILO INSTAGRAM - 10 ITEMS CON SOPORTE DE VIDEOS) -->
+        <!-- BARRA DE HISTORIAS / SHORTS (ESTILO INSTAGRAM - VISIBLE PARA TODOS) -->
         <div class="bg-slate-950 border-b border-slate-900 py-3 px-4 overflow-x-auto hide-scroll no-print">
             <div class="max-w-4xl mx-auto flex items-center gap-4" id="instagram-stories-bar">
-                <!-- Se llena dinámicamente con 10 items -->
+                <!-- Se llena dinámicamente con los shorts -->
             </div>
         </div>
 
-        <!-- BARRA DE NAVEGACIÓN COMPACTA (MENÚ PRINCIPAL LIMPIO) -->
+        <!-- BARRA DE NAVEGACIÓN COMPACTA -->
         <nav class="bg-slate-950/95 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-xl shadow-xl no-print">
             <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
                 <div class="flex items-center gap-2">
@@ -159,7 +159,7 @@
             </div>
         </nav>
 
-        <!-- MODAL / MENÚ DESPLEGABLE DE MÓDULOS (CUADRITOS / GRID) -->
+        <!-- MODAL / MENÚ DESPLEGABLE DE MÓDULOS -->
         <div id="nav-drawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
             <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 max-w-2xl w-full shadow-2xl space-y-6 relative">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-4">
@@ -250,7 +250,7 @@
                 <div id="tab2-meals-container" class="space-y-4"></div>
             </section>
 
-            <!-- SECCIÓN 3: LISTA DE COMPRAS & AUDITORÍA FOTOGRÁFICA -->
+            <!-- SECCIÓN 3: LISTA DE COMPRAS -->
             <section id="content-tab-3" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
@@ -267,31 +267,6 @@
                     </button>
                 </div>
                 <div id="tab3-shopping-container" class="grid md:grid-cols-2 gap-6"></div>
-
-                <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-4">
-                    <div class="flex items-center gap-3 text-emerald-400">
-                        <i class="fa-solid fa-camera-retro text-2xl"></i>
-                        <h3 class="text-xl font-bold text-white">📸 Auditoría Fotográfica de Comidas</h3>
-                    </div>
-                    <p class="text-xs text-slate-300">Sube la foto de tu plato y selecciona la comida correspondiente para enviarla al coach y verificar tus macros en crudo.</p>
-                    <div class="grid md:grid-cols-3 gap-3">
-                        <select id="audit-meal-type" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
-                            <option value="Desayuno">Desayuno</option>
-                            <option value="Media Mañana">Media Mañana</option>
-                            <option value="Almuerzo">Almuerzo</option>
-                            <option value="Merienda">Merienda</option>
-                            <option value="Cena">Cena</option>
-                        </select>
-                        <input type="file" id="audit-meal-file" accept="image/*" onchange="previewAuditImage(event)" class="bg-slate-950 border border-slate-700 rounded-xl p-2 text-xs text-slate-300 col-span-2 md:col-span-1">
-                        <button onclick="sendFoodAuditWhatsApp()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Foto al Coach
-                        </button>
-                    </div>
-                    <div id="audit-preview-container" class="hidden mt-3 p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center gap-4">
-                        <img id="audit-img-preview" src="" alt="Vista previa" class="w-16 h-16 object-cover rounded-lg border border-slate-700">
-                        <span class="text-xs text-emerald-400 font-mono">Foto cargada correctamente y lista para auditoría.</span>
-                    </div>
-                </div>
             </section>
 
             <!-- SECCIÓN 4: GUÍA DE EQUIVALENCIAS -->
@@ -408,7 +383,7 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN 6: PANEL COACH MASTER & CONSOLA DE CÁLCULO PROFESIONAL -->
+            <!-- SECCIÓN 6: PANEL COACH MASTER -->
             <section id="content-tab-6" class="tab-content hidden space-y-8">
                 <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 shadow-2xl space-y-8">
                     <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -536,7 +511,7 @@
                         </div>
                     </div>
 
-                    <!-- EDITOR DE LOS 10 SHORTS / HISTORIAS (NUEVO) -->
+                    <!-- EDITOR DE LOS 10 SHORTS / HISTORIAS -->
                     <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                         <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-photo-film"></i> 📱 Editor de Shorts / Historias (1 a 10)</h3>
                         <p class="text-xs text-slate-300">Selecciona el short (1 a 10), sube imagen o video en MP4 y edita su contenido para los estados de los clientes estilo Instagram.</p>
@@ -569,7 +544,7 @@
                         </div>
                     </div>
 
-                    <!-- EDITOR DE TIENDA OFICIAL (NUEVO) -->
+                    <!-- EDITOR DE TIENDA OFICIAL -->
                     <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                         <h3 class="font-bold text-emerald-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-store"></i> 🛍️ Editor de Tienda Oficial (1 a 15)</h3>
                         <div class="grid md:grid-cols-3 gap-3">
@@ -599,7 +574,7 @@
                         </div>
                     </div>
 
-                    <!-- EDITOR DE LAS 10 RECETAS (ACTUALIZADO - AHORA SE EDITA EL TÍTULO) -->
+                    <!-- EDITOR DE LAS 10 RECETAS -->
                     <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                         <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-utensils"></i> 🍳 Editor de Recetas Oficiales (1 a 10)</h3>
                         <div class="grid md:grid-cols-3 gap-3">
@@ -785,7 +760,6 @@
         let activeClient = clientsDB[0];
         let lastCalculatedPlan = null;
 
-        // NUEVO: Funciones para Sincronizar Datos Globales (Shorts, Tienda, Recetas)
         async function fetchGlobalDataFromCloud() {
             try {
                 const res = await fetch(`${FIRESTORE_BASE}/_GLOBAL_DATA_?key=${API_KEY}`);
@@ -1090,7 +1064,7 @@
             }
 
             const found = clientsDB.find(c => String(c.pass || '').trim() === val) || 
-                          defaultClients.find(c => String(c.pass || '').trim() === val);
+                        defaultClients.find(c => String(c.pass || '').trim() === val);
                         
             if (found) {
                 isUserAdmin = false;
@@ -1131,24 +1105,6 @@
             setTimeout(() => {
                 window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent(text)}`, '_blank');
             }, 800);
-        }
-
-        function previewAuditImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('audit-img-preview').src = e.target.result;
-                    document.getElementById('audit-preview-container').classList.remove('hidden');
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function sendFoodAuditWhatsApp() {
-            const meal = document.getElementById('audit-meal-type').value;
-            const text = `Hola Roberto, aquí te comparto la auditoría de mi *${meal}* para verificar cumplimiento de macros en crudo en Alianza Activa. 👤 Atleta: ${activeClient.name}`;
-            window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent(text)}`, '_blank');
         }
 
         function orderBatidoWhatsApp(batidoName) {
@@ -1251,7 +1207,6 @@
             document.getElementById('story-media-container').innerHTML = '';
         }
 
-        // --- EDITORES DE COACH ---
         function loadShortForEditing() {
             const idx = document.getElementById('edit-short-index').value;
             const shortItem = globalData.shorts[idx];
@@ -1564,7 +1519,6 @@
             alert("📲 Para instalar la app en tu celular:\n\n1. Abre el menú de tu navegador (Chrome o Safari).\n2. Selecciona 'Agregar a la pantalla de inicio'.");
         }
 
-        // --- NUTRICOACH IA AVANZADA & ESTABILIZADA ---
         function sendChatMessage() {
             const inputEl = document.getElementById('chat-input');
             const container = document.getElementById('chat-messages');
