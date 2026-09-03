@@ -139,10 +139,10 @@
             </div>
         </header>
 
-        <!-- BARRA DE HISTORIAS / SHORTS (ESTILO INSTAGRAM - 8 ITEMS) -->
+        <!-- BARRA DE HISTORIAS / SHORTS (ESTILO INSTAGRAM - 10 ITEMS CON SOPORTE DE VIDEOS) -->
         <div class="bg-slate-950 border-b border-slate-900 py-3 px-4 overflow-x-auto hide-scroll no-print">
             <div class="max-w-4xl mx-auto flex items-center gap-4" id="instagram-stories-bar">
-                <!-- Se llena dinámicamente con 8 items -->
+                <!-- Se llena dinámicamente con 10 items -->
             </div>
         </div>
 
@@ -190,7 +190,7 @@
                     </button>
                     <button onclick="switchTab(8); toggleNavDrawer();" class="bg-slate-950 hover:bg-emerald-500/20 border border-slate-800 hover:border-emerald-500/60 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
                         <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-store"></i></div>
-                        <span class="text-xs font-bold text-white">Tienda Oficial</span>
+                        <span class="text-xs font-bold text-white">Tienda (15 Prod)</span>
                     </button>
                     <button onclick="switchTab(5); toggleNavDrawer();" class="bg-slate-950 hover:bg-purple-500/20 border border-slate-800 hover:border-purple-500/60 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
                         <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-robot"></i></div>
@@ -358,15 +358,15 @@
                 <div id="dynamic-recipes-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN 8: TIENDA OFICIAL -->
+            <!-- SECCIÓN 8: TIENDA OFICIAL (15 PRODUCTOS) -->
             <section id="content-tab-8" class="tab-content hidden space-y-8">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
                     <div class="flex items-center gap-3 mb-2 text-emerald-400">
                         <i class="fa-solid fa-store text-2xl"></i>
-                        <h2 class="text-2xl font-bold text-white">🛍️ Tienda Oficial & Batidos Proteicos</h2>
+                        <h2 class="text-2xl font-bold text-white">🛍️ Tienda Oficial & Batidos (15 Productos)</h2>
                     </div>
                     <p class="text-slate-300 text-sm leading-relaxed">
-                        Suplementación de alto rendimiento y presentaciones detalladas de nuestros batidos.
+                        Suplementación de alto rendimiento y presentaciones detalladas de nuestros 15 productos exclusivos.
                     </p>
                 </div>
                 <div id="dynamic-batidos-container" class="grid md:grid-cols-2 gap-6"></div>
@@ -414,7 +414,7 @@
                     <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
                             <h2 class="text-2xl md:text-3xl font-black text-white flex items-center gap-3"><i class="fa-solid fa-sliders text-amber-400"></i> Panel Coach Master & Consola</h2>
-                            <p class="text-slate-400 text-xs md:text-sm mt-1">Generador de Dietas Biométricas (0% Error), Escáner 32 Métricas, Terminal CLI y Gestión de Alumnos.</p>
+                            <p class="text-slate-400 text-xs md:text-sm mt-1">Generador de Dietas Biométricas (0% Error), Escáner 32 Métricas, Editor de Shorts, Terminal CLI y Gestión de Alumnos.</p>
                         </div>
                         <span class="bg-amber-500/20 text-amber-400 px-4 py-2 rounded-2xl text-xs font-bold border border-amber-500/40 w-fit">Modo Master</span>
                     </div>
@@ -536,6 +536,37 @@
                         </div>
                     </div>
 
+                    <!-- EDITOR DE LOS 10 SHORTS / HISTORIAS (NUEVO) -->
+                    <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
+                        <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-photo-film"></i> 📱 Editor de Shorts / Historias (1 a 10)</h3>
+                        <p class="text-xs text-slate-300">Selecciona el short (1 a 10), sube imagen o video en MP4 y edita su contenido para los estados de los clientes estilo Instagram.</p>
+                        <div class="grid md:grid-cols-3 gap-3">
+                            <select id="edit-short-index" onchange="loadShortForEditing()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                                <option value="0">Short 1: ¡Nuevo Récord!</option>
+                                <option value="1">Short 2: Protein Bar</option>
+                                <option value="2">Short 3: Clases Funcional</option>
+                                <option value="3">Short 4: Nutrición Fit</option>
+                                <option value="4">Short 5: Alta Energía</option>
+                                <option value="5">Short 6: Batido Cookies</option>
+                                <option value="6">Short 7: Comunidad</option>
+                                <option value="7">Short 8: Resultados</option>
+                                <option value="8">Short 9: Motivación</option>
+                                <option value="9">Short 10: Reto 21 Días</option>
+                            </select>
+                            <select id="edit-short-type" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                                <option value="image">Imagen</option>
+                                <option value="video">Video (MP4)</option>
+                            </select>
+                            <input type="file" id="edit-short-file" accept="image/*,video/mp4" class="bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-300">
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-3">
+                            <input type="text" id="edit-short-title" placeholder="Título del short..." class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                            <input type="text" id="edit-short-date" placeholder="Fecha / Tiempo (ej: Hoy)..." class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                        </div>
+                        <textarea id="edit-short-desc" rows="2" placeholder="Descripción del short..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none font-mono"></textarea>
+                        <button onclick="saveShortEdit()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 px-6 rounded-xl text-xs cursor-pointer shadow-md">Guardar Short / Historia</button>
+                    </div>
+
                     <!-- EDITOR DE LAS 10 RECETAS -->
                     <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                         <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-utensils"></i> 🍳 Editor de Recetas Oficiales (1 a 10)</h3>
@@ -642,7 +673,18 @@
                 { title: "Batido Cookies & High Protein", desc: "Ideal post-entreno para recuperación muscular máxima. Aporta 30g de F1 Cookies y alta saciedad.", image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800" },
                 { title: "Termo-Cítrico Quemagrasa", desc: "Combinación termogénica de Té Herbal y Aloe Vera concentrado para limpieza digestiva.", image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=800" },
                 { title: "Energía Austral Pre-Entreno", desc: "Fórmula magistral con té concentrado, guaraná y aloe para activar el sistema.", image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" },
-                { title: "Fuego Rojo HBL", desc: "Aporte energético superior con frutos rojos y batido nutricional.", image: "https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&q=80&w=800" }
+                { title: "Fuego Rojo HBL", desc: "Aporte energético superior con frutos rojos y batido nutricional.", image: "https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&q=80&w=800" },
+                { title: "Fórmula 1 Sabor Frutilla Silvestre", desc: "Nutrición equilibrada con proteínas, vitaminas y minerales esenciales.", image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800" },
+                { title: "Fórmula 1 Sabor Chocolate Delicia", desc: "Batido nutricional rico en cacao para saciar antojos con excelente perfil proteico.", image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=800" },
+                { title: "Té Herbal Concentrado Original (50g)", desc: "Bebida instantánea con té verde y negro para acelerar el metabolismo y quemar grasa.", image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=800" },
+                { title: "Aloe Vera Concentrado Sabor Mango", desc: "Favorece la hidratación y apoya la salud digestiva con extracto de aloe vera puro.", image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" },
+                { title: "Protein Drink Mix (PDM)", desc: "Bebida en polvo con alta proteína para preparar con agua o combinar con tu F1 favorito.", image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800" },
+                { title: "Bebida Herbal N-R-G Guaraná", desc: "Tabletas o polvo con semilla de guaraná para mantener la energía y concentración mental.", image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" },
+                { title: "Fiber Bond (Fibra Activa)", desc: "Mezcla de fibras que ayuda a absorber parte de las grasas de las comidas.", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800" },
+                { title: "Herbalifeline Omega 3", desc: "Ácidos grasos marinos de alta calidad para apoyar la salud cardiovascular y articular.", image: "https://images.unsplash.com/photo-1584776296944-ab6fb5763f55?auto=format&fit=crop&q=80&w=800" },
+                { title: "Complejo Multivitamínico F2", desc: "Vitaminas y minerales diarios para respaldar el funcionamiento óptimo del organismo.", image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=800" },
+                { title: "Cell-U-Loss", desc: "Suplemento con hierbas y minerales para apoyar el equilibrio de líquidos corporales.", image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=800" },
+                { title: "Prolessa Duo", desc: "Modulador del apetito y reductor de grasa visceral para resultados avanzados.", image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800" }
             ],
             shorts: [
                 { title: "🔥 ¡Nuevo Récord!", desc: "Excelente técnica en Anubis Gym.", type: "image", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hoy" },
@@ -652,7 +694,9 @@
                 { title: "⚡ Alta Energía", desc: "Días de pierna con 0% error en macros.", type: "image", image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800", date: "Hace 4 días" },
                 { title: "🥤 Batido Cookies", desc: "El favorito de todos los atletas.", type: "image", image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800", date: "Hace 5 días" },
                 { title: "🏆 Comunidad", desc: "Creciendo juntos hacia la meta TAB.", type: "image", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hace 6 días" },
-                { title: "🎯 Resultados", desc: "Escáner corporal y mediciones exactas.", type: "image", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800", date: "Hace 1 semana" }
+                { title: "🎯 Resultados", desc: "Escáner corporal y mediciones exactas.", type: "image", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800", date: "Hace 1 semana" },
+                { title: "🚀 Motivación", desc: "Constancia y disciplina diaria.", type: "image", image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800", date: "Hace 1 semana" },
+                { title: "💥 Reto 21 Días", desc: "Transformación total Alianza Activa.", type: "image", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hace 1 semana" }
             ],
             recipes: [
                 { title: "Pancakes de Cookies & Avena", text: "30g Batido Cookies, 40g Avena instantánea, 1 Huevo (50g), 50ml Agua. Licuar y cocinar en sartén a fuego medio.", image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&q=80&w=800" },
@@ -970,13 +1014,14 @@
                 renderGlobalContent();
                 renderAdminPanel();
                 switchTab(6);
+                loadShortForEditing();
                 addLog("Acceso de Administrador concedido.", "success");
                 return;
             }
 
             const found = clientsDB.find(c => String(c.pass || '').trim() === val) || 
                           defaultClients.find(c => String(c.pass || '').trim() === val);
-                          
+                        
             if (found) {
                 isUserAdmin = false;
                 activeClient = found;
@@ -1077,7 +1122,7 @@
                         </div>
                         <div class="p-6 pt-0">
                             <button onclick="orderBatidoWhatsApp('${b.title}')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md transition-all">
-                                <i class="fa-brands fa-whatsapp text-sm"></i> Pedir Batido al Coach
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Pedir Producto al Coach
                             </button>
                         </div>
                     </div>
@@ -1089,7 +1134,7 @@
                 storiesBar.innerHTML = globalData.shorts.map((s, idx) => `
                     <div onclick="openStoryModal(${idx})" class="flex flex-col items-center gap-1.5 cursor-pointer shrink-0 group">
                         <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-amber-500 to-orange-500 group-hover:scale-105 transition-transform relative">
-                            ${s.type === 'video' ? '<span class="absolute bottom-0 right-0 bg-black text-amber-400 text-[9px] px-1 rounded-full"><i class="fa-solid fa-play"></i></span>' : ''}
+                            ${s.type === 'video' ? '<span class="absolute bottom-0 right-0 bg-black text-amber-400 text-[9px] px-1 rounded-full z-10"><i class="fa-solid fa-play"></i></span>' : ''}
                             <img src="${s.image}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950">
                         </div>
                         <span class="text-[10px] text-slate-300 font-medium max-w-[64px] truncate text-center">${s.title}</span>
@@ -1131,6 +1176,46 @@
         function closeStoryModal() {
             document.getElementById('story-modal').classList.add('hidden');
             document.getElementById('story-media-container').innerHTML = '';
+        }
+
+        function loadShortForEditing() {
+            const idx = document.getElementById('edit-short-index').value;
+            const shortItem = globalData.shorts[idx];
+            document.getElementById('edit-short-title').value = shortItem.title;
+            document.getElementById('edit-short-desc').value = shortItem.desc;
+            document.getElementById('edit-short-date').value = shortItem.date || 'Hoy';
+            document.getElementById('edit-short-type').value = shortItem.type || 'image';
+        }
+
+        function saveShortEdit() {
+            const idx = document.getElementById('edit-short-index').value;
+            const fileInput = document.getElementById('edit-short-file');
+            const newTitle = document.getElementById('edit-short-title').value.trim();
+            const newDesc = document.getElementById('edit-short-desc').value.trim();
+            const newDate = document.getElementById('edit-short-date').value.trim();
+            const newType = document.getElementById('edit-short-type').value;
+
+            if(!newTitle) { alert("El título del short no puede estar vacío."); return; }
+            globalData.shorts[idx].title = newTitle;
+            globalData.shorts[idx].desc = newDesc;
+            globalData.shorts[idx].date = newDate;
+            globalData.shorts[idx].type = newType;
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    globalData.shorts[idx].image = e.target.result;
+                    fileInput.value = "";
+                    renderGlobalContent();
+                    alert(`✅ Short ${Number(idx)+1} actualizado con éxito.`);
+                    addLog(`Short ${Number(idx)+1} editado correctamente.`, "success");
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                renderGlobalContent();
+                alert(`✅ Short ${Number(idx)+1} actualizado con éxito.`);
+                addLog(`Short ${Number(idx)+1} editado correctamente.`, "success");
+            }
         }
 
         function loadRecipeForEditing() {
@@ -1216,6 +1301,7 @@
             const select = document.getElementById('select-client-edit');
             if (select) select.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
             loadClientDietForEditing();
+            loadShortForEditing();
             updateSystemMonitor("Conectado (Firebase)");
 
             const container = document.getElementById('clients-list-container');
@@ -1254,8 +1340,8 @@
             const client = clientsDB.find(c => c.name === name);
             if (client) {
                 client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').filter(i => i.trim() !== '');
-                client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').filter(filterEmpty = i => i.trim() !== '');
-                client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').filter(filterEmpty = i => i.trim() !== '');
+                client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').filter(i => i.trim() !== '');
+                client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').filter(i => i.trim() !== '');
                 btn.disabled = true;
                 btn.innerText = "Actualizando...";
                 try {
