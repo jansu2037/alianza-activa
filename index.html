@@ -139,7 +139,7 @@
             </div>
         </header>
 
-        <!-- BARRA DE HISTORIAS / SHORTS (ESTILO INSTAGRAM - IMAGEN & VIDEO) -->
+        <!-- BARRA DE HISTORIAS / SHORTS (ESTILO INSTAGRAM - SOPORTA IMAGEN Y VIDEO) -->
         <div class="bg-slate-950 border-b border-slate-900 py-3 px-4 overflow-x-auto hide-scroll no-print">
             <div class="max-w-4xl mx-auto flex items-center gap-4" id="instagram-stories-bar">
                 <!-- Se llena dinámicamente -->
@@ -379,10 +379,10 @@
                 <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-8">
                     <div class="border-b border-slate-800 pb-4">
                         <h2 class="text-2xl font-bold text-white flex items-center gap-3"><i class="fa-solid fa-sliders text-amber-400"></i> Panel Coach Master & Consola de Cálculo</h2>
-                        <p class="text-slate-400 text-sm mt-1">Generador de Dietas (0% Error), Escáner vs Cinta/Fotos, Editor de Recetas y Gestión de Alumnos.</p>
+                        <p class="text-slate-400 text-sm mt-1">Generador de Dietas (0% Error), Escáner vs Cinta/Fotos, Terminal CLI, Logs en Vivo, Editor de Recetas y Gestión de Alumnos.</p>
                     </div>
 
-                    <!-- NUEVA: CONSOLA DE CÁLCULO DE DIETAS CON 0% ERROR -->
+                    <!-- CONSOLA DE CÁLCULO DE DIETAS CON 0% ERROR -->
                     <div class="bg-slate-950 p-6 rounded-2xl border border-amber-500/40 space-y-6">
                         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                             <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-calculator"></i> 🧮 Motor de Cálculo de Dieta (0% Error)</h3>
@@ -434,7 +434,7 @@
                         </div>
                     </div>
 
-                    <!-- CENTRO DE MONITOREO -->
+                    <!-- CENTRO DE MONITOREO & TERMINAL -->
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex items-center gap-4">
                             <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-xl">
@@ -461,6 +461,28 @@
                             <div>
                                 <span class="text-[10px] text-slate-400 uppercase tracking-widest block">Última Sincronización</span>
                                 <strong id="monitor-last-sync" class="text-slate-200 text-xs font-mono">Recién sincronizado</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TERMINAL CLI & LOGS EN VIVO -->
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                            <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-terminal"></i> Terminal de Comandos (CLI)</h3>
+                            <p class="text-[11px] text-slate-400">Escribe atajos rápidos. Escribe <code class="text-amber-400">help</code> para ver comandos.</p>
+                            <div class="flex gap-2">
+                                <input type="text" id="cli-input" onkeydown="if(event.key==='Enter') executeCliCommand()" placeholder="ej: help, sync, count..." class="flex-grow bg-slate-900 border border-slate-700 text-emerald-400 font-mono px-4 py-2.5 rounded-xl text-xs outline-none focus:border-amber-500">
+                                <button onclick="executeCliCommand()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs cursor-pointer shadow-md">Ejecutar</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-emerald-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-wave-square"></i> Logs en Vivo</h3>
+                                <button onclick="clearLogs()" class="text-[10px] text-slate-400 hover:text-white bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-800 cursor-pointer">Limpiar</button>
+                            </div>
+                            <div id="live-logs-box" class="bg-slate-900 border border-slate-800 rounded-xl p-3 h-32 overflow-y-auto font-mono text-[11px] text-slate-300 space-y-1">
+                                <div class="text-emerald-400">[SYSTEM] Consola de Alianza Activa inicializada correctamente.</div>
                             </div>
                         </div>
                     </div>
@@ -655,8 +677,89 @@
         let clientsDB = defaultClients;
         let activeClient = clientsDB[0];
 
-        // --- CONEXIÓN ROBUSTA A FIREBASE ---
+        // --- LOGS EN VIVO & MONITOREO ---
+        function addLog(msg, type = 'info') {
+            const box = document.getElementById('live-logs-box');
+            if (!box) return;
+            const time = new Date().toLocaleTimeString();
+            let color = "text-slate-300";
+            if (type === 'success') color = "text-emerald-400";
+            if (type === 'error') color = "text-red-400";
+            if (type === 'warn') color = "text-amber-400";
+            box.innerHTML += `<div class="${color}">[${time}] ${msg}</div>`;
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function clearLogs() {
+            const box = document.getElementById('live-logs-box');
+            if (box) box.innerHTML = `<div class="text-emerald-400">[SYSTEM] Logs reiniciados.</div>`;
+        }
+
+        function updateSystemMonitor(statusText, isError = false) {
+            const dbStatus = document.getElementById('monitor-db-status');
+            const clientCount = document.getElementById('monitor-client-count');
+            const lastSync = document.getElementById('monitor-last-sync');
+
+            if (dbStatus) {
+                dbStatus.innerText = statusText;
+                dbStatus.className = isError ? "text-red-400 text-sm font-bold" : "text-emerald-400 text-sm font-bold";
+            }
+            if (clientCount) clientCount.innerText = `${clientsDB.length} Activos`;
+            if (lastSync) lastSync.innerText = new Date().toLocaleTimeString();
+        }
+
+        // --- TERMINAL CLI ---
+        function executeCliCommand() {
+            const inputEl = document.getElementById('cli-input');
+            const cmd = inputEl.value.trim();
+            if (!cmd) return;
+            addLog(`CLI Executed: "${cmd}"`, 'warn');
+            inputEl.value = '';
+
+            const parts = cmd.split(' ');
+            const action = parts[0].toLowerCase();
+
+            if (action === 'help') {
+                addLog("--- COMANDOS VÁLIDOS ---", "success");
+                addLog("1. sync -> Sincroniza con Firebase", "info");
+                addLog("2. count -> Muestra número de clientes", "info");
+                addLog("3. clear -> Limpia logs", "info");
+            } else if (action === 'sync') {
+                fetchClientsFromFirebase().then(() => addLog("Sincronización completada.", "success"));
+            } else if (action === 'count') {
+                addLog(`Total atletas: ${clientsDB.length}`, "success");
+            } else if (action === 'clear') {
+                clearLogs();
+            } else {
+                addLog(`Comando desconocido: "${action}"`, "error");
+            }
+        }
+
+        function toFirestoreDoc(client) {
+            return {
+                fields: {
+                    name: { stringValue: client.name },
+                    pass: { stringValue: client.pass },
+                    tab1: { arrayValue: { values: (client.tab1 || []).map(v => ({ stringValue: v })) } },
+                    tab2: { arrayValue: { values: (client.tab2 || []).map(v => ({ stringValue: v })) } },
+                    tab3: { arrayValue: { values: (client.tab3 || []).map(v => ({ stringValue: v })) } }
+                }
+            };
+        }
+
+        function fromFirestoreDoc(doc) {
+            const f = doc.fields || {};
+            return {
+                name: f.name?.stringValue || '',
+                pass: f.pass?.stringValue || f.pass?.integerValue || '',
+                tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue || ''),
+                tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue || ''),
+                tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue || '')
+            };
+        }
+
         async function fetchClientsFromFirebase() {
+            addLog("Conectando a Firebase Firestore...", "info");
             const endpoints = [
                 `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
                 `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
@@ -665,32 +768,33 @@
                 try {
                     const res = await fetch(`${ep}?key=${API_KEY}`);
                     const data = await res.json();
-                    if (res.ok && data.documents) {
+                    if (res.ok) {
                         FIRESTORE_BASE = ep;
-                        clientsDB = data.documents.map(doc => {
-                            const f = doc.fields || {};
-                            return {
-                                name: f.name?.stringValue || '',
-                                pass: f.pass?.stringValue || '',
-                                tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue || ''),
-                                tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue || ''),
-                                tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue || '')
-                            };
-                        });
+                        if (data.documents && data.documents.length > 0) {
+                            clientsDB = data.documents.map(fromFirestoreDoc);
+                        } else {
+                            clientsDB = defaultClients;
+                        }
+                        addLog(`Conexión exitosa. ${clientsDB.length} clientes cargados.`, "success");
+                        updateSystemMonitor("Conectado (Firebase)");
                         return clientsDB;
                     }
-                } catch (err) {}
+                } catch (err) {
+                    addLog(`Error al conectar con endpoint: ${err.message}`, "error");
+                }
             }
+            clientsDB = defaultClients;
+            addLog("Usando datos locales por defecto.", "warn");
+            updateSystemMonitor("Modo Local", true);
             return clientsDB;
         }
 
-        // Cargar clientes automáticamente al iniciar la página
         window.addEventListener('DOMContentLoaded', async () => {
             await fetchClientsFromFirebase();
             renderGlobalContent();
         });
 
-        // --- MOTOR DE CÁLCULO DE DIETAS (0% ERROR) ---
+        // --- CONSOLA DE CÁLCULO DE DIETAS (0% ERROR) ---
         function calculateDietEngine() {
             const name = document.getElementById('calc-name').value.trim() || "Atleta Nuevo";
             const weight = parseFloat(document.getElementById('calc-weight').value) || 70;
@@ -718,6 +822,7 @@
                     </button>
                 </div>
             `;
+            addLog(`Cálculo 0% error generado para ${name}.`, "success");
         }
 
         function applyCalculatedDietToClient(name, p, c, f) {
@@ -751,9 +856,120 @@
             clientsDB.push(newClient);
             renderAdminPanel();
             alert(`✅ Atleta "${name}" creado y plan calculado con 0% de error asignado con éxito.`);
+            addLog(`Atleta ${name} añadido mediante Consola de Cálculo.`, "success");
+        }
+
+        async function verifyPassword() {
+            const val = document.getElementById('access-password').value.trim();
+            const errEl = document.getElementById('login-error');
+            const btn = document.getElementById('btn-login-submit');
+
+            if (!val) {
+                errEl.innerText = "Ingresa contraseña.";
+                errEl.classList.remove('hidden');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = "Verificando...";
+            errEl.classList.add('hidden');
+
+            try { await fetchClientsFromFirebase(); } catch (e) {}
+
+            btn.disabled = false;
+            btn.innerText = "Ingresar al Sistema";
+
+            if (val === "jansu2037rsc") {
+                isUserAdmin = true;
+                activeClient = {
+                    name: "Coach Roberto",
+                    tab1: ["Modo Administrador - Coach"],
+                    tab2: ["Modo Administrador - Coach"],
+                    tab3: ["Modo Administrador"]
+                };
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('main-app').classList.remove('hidden');
+                document.getElementById('admin-tab-btn').classList.remove('hidden');
+                renderDynamicContent();
+                renderGlobalContent();
+                renderAdminPanel();
+                switchTab(6);
+                addLog("Acceso de Administrador concedido.", "success");
+                return;
+            }
+
+            const found = clientsDB.find(c => String(c.pass || '').trim() === val) || 
+                          defaultClients.find(c => String(c.pass || '').trim() === val);
+                          
+            if (found) {
+                isUserAdmin = false;
+                activeClient = found;
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('main-app').classList.remove('hidden');
+                document.getElementById('admin-tab-btn').classList.add('hidden');
+                renderDynamicContent();
+                renderGlobalContent();
+                initFoodRain();
+                switchTab(1);
+                addLog(`Atleta ${found.name} inició sesión.`, "success");
+            } else {
+                errEl.innerText = "Contraseña incorrecta.";
+                errEl.classList.remove('hidden');
+                addLog("Intento de acceso fallido.", "error");
+            }
+        }
+
+        function submitMembershipForm() {
+            const name = document.getElementById('mem-name').value.trim();
+            const age = document.getElementById('mem-age').value.trim();
+            const weight = document.getElementById('mem-weight').value.trim();
+            const height = document.getElementById('mem-height').value.trim();
+            const nat = document.getElementById('mem-nat').value.trim();
+            const gender = document.getElementById('mem-gender').value;
+            const goal = document.getElementById('mem-goal').value.trim();
+            const phone = document.getElementById('mem-phone').value.trim();
+
+            if(!name || !weight || !phone) {
+                alert("Por favor completa al menos tu Nombre, Peso y Celular.");
+                return;
+            }
+
+            const text = `Hola Roberto, quiero solicitar mi plan en Alianza Activa:\n\n👤 *Nombre:* ${name}\n🎂 *Edad:* ${age}\n⚖️ *Peso:* ${weight}kg\n📏 *Estatura:* ${height}cm\n🌍 *Nacionalidad:* ${nat}\n⚧ *Género:* ${gender}\n🎯 *Objetivo:* ${goal}\n📱 *Celular:* ${phone}`;
+            
+            document.getElementById('membership-alert').classList.remove('hidden');
+            setTimeout(() => {
+                window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent(text)}`, '_blank');
+            }, 800);
+        }
+
+        function sendFoodAuditWhatsApp() {
+            const meal = document.getElementById('audit-meal-type').value;
+            const text = `Hola Roberto, aquí te comparto la foto de mi *${meal}* para auditar cumplimiento en Alianza Activa. 👤 Atleta: ${activeClient.name}`;
+            window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function orderBatidoWhatsApp(batidoName) {
+            const text = `Hola Roberto, quiero encargar el "${batidoName}" desde la Tienda de Alianza Activa. ¿Cómo coordinamos?`;
+            window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function shareWhatsApp(type) {
+            let text = "";
+            if (type === 'tab1') {
+                text = `🔥 *ALTA ENERGÍA (PIERNA)*\n👤 *Cliente:* ${activeClient.name}\n\n` +
+                    activeClient.tab1.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
+            } else if (type === 'tab2') {
+                text = `🥗 *CONTROL Y RECUPERACIÓN*\n👤 *Cliente:* ${activeClient.name}\n\n` +
+                    activeClient.tab2.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
+            } else if (type === 'tab3') {
+                text = `🛒 *COMPRAS SEMANAL*\n👤 *Cliente:* ${activeClient.name}\n\n` +
+                    activeClient.tab3.map(item => `✅ ${item}`).join('\n');
+            }
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
         }
 
         function renderGlobalContent() {
+            // Render Batidos (Tienda Exclusiva sin Shorts)
             const batidoContainer = document.getElementById('dynamic-batidos-container');
             if (batidoContainer) {
                 batidoContainer.innerHTML = globalData.batidos.map(b => `
@@ -770,26 +986,28 @@
                         </div>
                         <div class="p-6 pt-0">
                             <button onclick="orderBatidoWhatsApp('${b.title}')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md transition-all">
-                                <i class="fa-brands fa-whatsapp text-sm"></i> Pedir al Coach
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Pedir Batido al Coach
                             </button>
                         </div>
                     </div>
                 `).join('');
             }
 
+            // Render Instagram Stories (Shorts Bar Superior - Imagen & Video)
             const storiesBar = document.getElementById('instagram-stories-bar');
             if (storiesBar) {
                 storiesBar.innerHTML = globalData.shorts.map((s, idx) => `
                     <div onclick="openStoryModal(${idx})" class="flex flex-col items-center gap-1.5 cursor-pointer shrink-0 group">
                         <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-amber-500 to-orange-500 group-hover:scale-105 transition-transform relative">
                             ${s.type === 'video' ? '<span class="absolute bottom-0 right-0 bg-black text-amber-400 text-[9px] px-1 rounded-full"><i class="fa-solid fa-play"></i></span>' : ''}
-                            <img src="${s.type === 'video' ? 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=200' : s.url}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950">
+                            <img src="${s.type === 'video' ? 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=200' : s.image}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950">
                         </div>
                         <span class="text-[10px] text-slate-300 font-medium max-w-[64px] truncate text-center">${s.title}</span>
                     </div>
                 `).join('');
             }
 
+            // Render 10 Recetas Oficiales
             const recContainer = document.getElementById('dynamic-recipes-container');
             if (recContainer) {
                 recContainer.innerHTML = globalData.recipes.map((r, idx) => `
@@ -811,9 +1029,9 @@
             const s = globalData.shorts[idx];
             const container = document.getElementById('story-media-container');
             if (s.type === 'video') {
-                container.innerHTML = `<video src="${s.url}" autoplay controls class="w-full h-full object-cover"></video>`;
+                container.innerHTML = `<video src="${s.image}" autoplay controls class="w-full h-full object-cover"></video>`;
             } else {
-                container.innerHTML = `<img src="${s.url}" alt="${s.title}" class="w-full h-full object-cover">`;
+                container.innerHTML = `<img src="${s.image}" alt="${s.title}" class="w-full h-full object-cover">`;
             }
             document.getElementById('modal-story-title').innerText = s.title;
             document.getElementById('modal-story-desc').innerText = s.desc;
@@ -826,6 +1044,60 @@
             document.getElementById('story-media-container').innerHTML = '';
         }
 
+        function loadRecipeForEditing() {
+            const idx = document.getElementById('edit-recipe-index').value;
+            const receta = globalData.recipes[idx];
+            document.getElementById('edit-recipe-desc').value = receta.text;
+        }
+
+        function saveRecipeEdit() {
+            const idx = document.getElementById('edit-recipe-index').value;
+            const fileInput = document.getElementById('edit-recipe-file');
+            const newText = document.getElementById('edit-recipe-desc').value.trim();
+
+            if(!newText) { alert("La receta no puede estar vacía."); return; }
+            globalData.recipes[idx].text = newText;
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    globalData.recipes[idx].image = e.target.result;
+                    fileInput.value = "";
+                    renderGlobalContent();
+                    alert(`✅ Receta ${Number(idx)+1} actualizada con éxito.`);
+                    addLog(`Receta ${Number(idx)+1} editada correctamente.`, "success");
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                renderGlobalContent();
+                alert(`✅ Receta ${Number(idx)+1} actualizada con éxito.`);
+                addLog(`Receta ${Number(idx)+1} editada correctamente.`, "success");
+            }
+        }
+
+        function addBatidoAdmin() {
+            const title = document.getElementById('admin-batido-title').value.trim();
+            const fileInput = document.getElementById('admin-batido-file');
+            const desc = document.getElementById('admin-batido-desc').value.trim();
+            if(!title || !desc) { alert("Completa título y descripción."); return; }
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    globalData.batidos.push({ title, image: e.target.result, desc });
+                    document.getElementById('admin-batido-title').value = "";
+                    fileInput.value = "";
+                    document.getElementById('admin-batido-desc').value = "";
+                    renderGlobalContent();
+                    addLog(`Batido "${title}" agregado.`, "success");
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                globalData.batidos.push({ title, image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800", desc });
+                renderGlobalContent();
+                addLog(`Batido "${title}" agregado.`, "success");
+            }
+        }
+
         function addShortAdmin() {
             const title = document.getElementById('admin-short-title').value.trim();
             const type = document.getElementById('admin-short-type').value;
@@ -835,70 +1107,182 @@
             if (fileInput.files && fileInput.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    globalData.shorts.unshift({ title, type, url: e.target.result, desc, date: "Hace un momento" });
+                    globalData.shorts.unshift({ title, type, image: e.target.result, desc, date: "Hace un momento" });
                     document.getElementById('admin-short-title').value = "";
                     fileInput.value = "";
                     document.getElementById('admin-short-desc').value = "";
                     renderGlobalContent();
-                    alert("✅ Short / Historia publicado con éxito.");
+                    addLog(`Short "${title}" publicado.`, "success");
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
-                alert("Selecciona un archivo multimedia.");
+                globalData.shorts.unshift({ title, type, image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", desc, date: "Hace un momento" });
+                renderGlobalContent();
+                addLog(`Short "${title}" publicado.`, "success");
             }
         }
 
-        async function verifyPassword() {
-            const val = document.getElementById('access-password').value.trim();
-            const errEl = document.getElementById('login-error');
-            if (val === "jansu2037rsc") {
-                isUserAdmin = true;
-                activeClient = { name: "Coach Roberto", tab1: [], tab2: [], tab3: [] };
-                document.getElementById('login-screen').classList.add('hidden');
-                document.getElementById('main-app').classList.remove('hidden');
-                document.getElementById('admin-tab-btn').classList.remove('hidden');
-                renderGlobalContent();
-                renderAdminPanel();
-                switchTab(6);
+        async function addNewClientCloud() {
+            const name = document.getElementById('new-client-name').value.trim();
+            const pass = document.getElementById('new-client-pass').value.trim();
+            const btn = document.getElementById('btn-save-client');
+            if (!name || !pass) { alert("Nombre y contraseña obligatorios."); return; }
+            btn.disabled = true;
+            btn.innerText = "Guardando...";
+            const newClient = {
+                name, pass,
+                tab1: ["Desayuno: Ejemplo", "Almuerzo: Ejemplo"],
+                tab2: ["Desayuno: Ejemplo"],
+                tab3: ["Lista de compras"]
+            };
+            try {
+                let saved = false;
+                const endpoints = [
+                    FIRESTORE_BASE,
+                    `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
+                    `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
+                ];
+                for (const ep of endpoints) {
+                    try {
+                        const url = `${ep}/${encodeURIComponent(name)}?key=${API_KEY}`;
+                        const res = await fetch(url, {
+                            method: 'PATCH',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(toFirestoreDoc(newClient))
+                        });
+                        if (res.ok) { FIRESTORE_BASE = ep; saved = true; break; }
+                    } catch(e) {}
+                }
+                if (saved) {
+                    addLog(`Cliente "${name}" guardado en Firebase.`, "success");
+                    document.getElementById('new-client-name').value = "";
+                    document.getElementById('new-client-pass').value = "";
+                    await fetchClientsFromFirebase();
+                    renderAdminPanel();
+                } else { throw new Error("No se pudo conectar a Firebase."); }
+            } catch (err) {
+                addLog(`Error: ${err.message}`, "error");
+                alert("❌ Error: " + err.message);
+            }
+            finally { btn.disabled = false; btn.innerText = "Guardar en Firebase"; }
+        }
+
+        function renderAdminPanel() {
+            const select = document.getElementById('select-client-edit');
+            select.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+            loadClientDietForEditing();
+            updateSystemMonitor("Conectado (Firebase)");
+
+            const container = document.getElementById('clients-list-container');
+            if (clientsDB.length === 0) {
+                container.innerHTML = `<p class="text-sm text-slate-500 col-span-3">No hay clientes.</p>`;
                 return;
             }
-            await fetchClientsFromFirebase();
-            const found = clientsDB.find(c => String(c.pass || '').trim() === val);
-            if (found) {
-                isUserAdmin = false;
-                activeClient = found;
-                document.getElementById('login-screen').classList.add('hidden');
-                document.getElementById('main-app').classList.remove('hidden');
-                document.getElementById('admin-tab-btn').classList.add('hidden');
-                renderGlobalContent();
-                switchTab(1);
-            } else {
-                errEl.classList.remove('hidden');
+            container.innerHTML = clientsDB.map(c => `
+                <div class="flex items-center justify-between bg-slate-900 p-3 rounded-xl border border-slate-800 text-sm">
+                    <div>
+                        <strong class="text-white block">${c.name}</strong> 
+                        <span class="text-[10px] text-slate-400">Pass: <code class="text-amber-400 font-mono">${c.pass}</code></span>
+                    </div>
+                    <button onclick="deleteClientCloud('${c.name}')" class="text-red-400 hover:text-red-300 text-xs px-2.5 py-1 rounded-lg bg-slate-800 transition-colors cursor-pointer"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function loadClientDietForEditing() {
+            const name = document.getElementById('select-client-edit').value;
+            const client = clientsDB.find(c => c.name === name);
+            if (client) {
+                document.getElementById('edit-tab1-data').value = client.tab1 ? client.tab1.join('\n') : '';
+                document.getElementById('edit-tab2-data').value = client.tab2 ? client.tab2.join('\n') : '';
+                document.getElementById('edit-tab3-data').value = client.tab3 ? client.tab3.join('\n') : '';
             }
         }
 
-        function submitMembershipForm() {
-            const name = document.getElementById('mem-name').value.trim();
-            const weight = document.getElementById('mem-weight').value.trim();
-            const phone = document.getElementById('mem-phone').value.trim();
-            if(!name || !weight || !phone) { alert("Completa Nombre, Peso y Celular."); return; }
-            const text = `Hola Roberto, quiero mi plan en Alianza Activa:\n👤 *Nombre:* ${name}\n⚖️ *Peso:* ${weight}kg\n📱 *Celular:* ${phone}`;
-            document.getElementById('membership-alert').classList.remove('hidden');
-            setTimeout(() => { window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent(text)}`, '_blank'); }, 800);
+        async function saveClientDietCloud() {
+            const name = document.getElementById('select-client-edit').value;
+            const btn = document.getElementById('btn-update-diet');
+            const client = clientsDB.find(c => c.name === name);
+            if (client) {
+                client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').filter(i => i.trim() !== '');
+                client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').filter(i => i.trim() !== '');
+                client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').filter(i => i.trim() !== '');
+                btn.disabled = true;
+                btn.innerText = "Actualizando...";
+                try {
+                    const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
+                    await fetch(url, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(toFirestoreDoc(client))
+                    });
+                    addLog(`Plan de "${name}" actualizado.`, "success");
+                    alert(`✅ Plan y Compras de "${name}" actualizados.`);
+                } catch(err) {
+                    addLog(`Error al actualizar: ${err.message}`, "error");
+                    alert("❌ Error: " + err.message);
+                }
+                finally { btn.disabled = false; btn.innerText = "Actualizar Plan"; }
+            }
         }
 
-        function sendFoodAuditWhatsApp() {
-            const meal = document.getElementById('audit-meal-type').value;
-            window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent('Hola Roberto, te comparto la foto de mi ' + meal + ' para auditoría en Alianza Activa.')}`, '_blank');
+        async function deleteClientCloud(name) {
+            if (name === "Angela") { alert("No se puede eliminar la cuenta base."); return; }
+            if(confirm(`¿Eliminar a "${name}" de Firebase?`)) {
+                try {
+                    await fetch(`${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`, { method: 'DELETE' });
+                    addLog(`Cliente "${name}" eliminado.`, "warn");
+                    await fetchClientsFromFirebase();
+                    renderAdminPanel();
+                } catch(e) { alert("Error al eliminar."); }
+            }
         }
 
-        function orderBatidoWhatsApp(name) {
-            window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent('Hola Roberto, quiero encargar ' + name + ' en Alianza Activa.')}`, '_blank');
+        function renderDynamicContent() {
+            document.getElementById('header-client-title').innerText = `Fitness Alianza Activa - ${activeClient.name}`;
+            document.getElementById('footer-client-subtitle').innerText = `Nutrición de Alto Rendimiento - ${activeClient.name}`;
+            document.getElementById('ai-title-name').innerText = `NutriCoach IA - ${activeClient.name}`;
+            document.getElementById('ai-welcome-msg').innerText = `¡Hola ${activeClient.name}! Qué alegría saludarte. Estoy acá para lo que necesites.`;
+
+            document.getElementById('tab1-meals-container').innerHTML = activeClient.tab1.map((item, idx) => `
+                <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-orange-500/50 transition-all flex items-center gap-4">
+                    <div class="bg-slate-800 text-orange-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-utensils"></i></div>
+                    <div class="text-sm text-slate-200"><strong class="text-orange-400 block mb-1">Comida ${idx + 1}</strong>${item}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('tab2-meals-container').innerHTML = activeClient.tab2.map((item, idx) => `
+                <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-emerald-500/50 transition-all flex items-center gap-4">
+                    <div class="bg-slate-800 text-emerald-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-utensils"></i></div>
+                    <div class="text-sm text-slate-200"><strong class="text-emerald-400 block mb-1">Comida ${idx + 1}</strong>${item}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('tab3-shopping-container').innerHTML = `
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-sm space-y-4 md:col-span-2">
+                    <h3 class="font-bold text-amber-400 border-b border-slate-800 pb-2">Artículos a Comprar</h3>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        ${activeClient.tab3.map(item => `<li class="flex items-start gap-3"><i class="fa-solid fa-check text-amber-400 mt-1"></i><span>${item}</span></li>`).join('')}
+                    </ul>
+                </div>
+            `;
         }
 
-        function shareWhatsApp(type) {
-            let text = type === 'tab1' ? "Alta Energía" : "Control";
-            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('Plan Alianza Activa - ' + text)}`, '_blank');
+        function initFoodRain() {
+            const container = document.getElementById('food-rain-container');
+            if(!container) return;
+            container.innerHTML = '';
+            const foods = ['🥦', '🥑', '🥚', '🥩', '🍏', '🍗', '🍚', '🐟', '🥗'];
+            for (let i = 0; i < 20; i++) {
+                const food = document.createElement('div');
+                food.className = 'falling-food select-none';
+                food.innerText = foods[Math.floor(Math.random() * foods.length)];
+                food.style.left = `${Math.random() * 100}%`;
+                food.style.animationDuration = `${12 + Math.random() * 20}s`;
+                food.style.animationDelay = `${-(Math.random() * 30)}s`;
+                food.style.fontSize = `${2 + Math.random() * 2}rem`;
+                container.appendChild(food);
+            }
         }
 
         function switchTab(tabNumber) {
@@ -906,40 +1290,74 @@
                 const content = document.getElementById('content-tab-' + i);
                 const btn = document.getElementById('btn-tab-' + i) || (i === 6 ? document.getElementById('admin-tab-btn') : null);
                 if (content) content.classList.add('hidden');
-                if (btn && i !== 6) btn.className = 'tab-btn px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer';
-                if (btn && i === 6) btn.className = 'tab-btn ' + (!isUserAdmin ? 'hidden ' : '') + 'px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-amber-400 border border-amber-500/50 hover:bg-slate-800 cursor-pointer';
+                if (btn && i !== 6) {
+                    btn.className = 'tab-btn px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer';
+                }
+                if (btn && i === 6) {
+                    btn.className = 'tab-btn ' + (!isUserAdmin ? 'hidden ' : '') + 'px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-amber-400 border border-amber-500/50 hover:bg-slate-800 cursor-pointer';
+                }
             }
-            document.getElementById('content-tab-' + tabNumber).classList.remove('hidden');
-            const activeBtn = document.getElementById('btn-tab-' + tabNumber) || document.getElementById('admin-tab-btn');
-            if (activeBtn) activeBtn.className = 'tab-btn px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center space-x-2 bg-amber-500 text-slate-950 shadow-md cursor-pointer';
+            const activeContent = document.getElementById('content-tab-' + tabNumber);
+            const activeBtn = document.getElementById('btn-tab-' + tabNumber) || (tabNumber === 6 ? document.getElementById('admin-tab-btn') : null);
+            if (activeContent) activeContent.classList.remove('hidden');
+            if (activeBtn) {
+                let colorClass = "bg-amber-500 text-slate-950 shadow-md";
+                if (tabNumber === 1) colorClass = "bg-orange-500 text-slate-950 shadow-md";
+                if (tabNumber === 2) colorClass = "bg-emerald-400 text-slate-950 shadow-md";
+                activeBtn.className = `tab-btn px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center space-x-2 ${colorClass} cursor-pointer ` + (tabNumber === 6 && !isUserAdmin ? 'hidden' : '');
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function renderAdminPanel() {
-            const select = document.getElementById('select-client-edit');
-            select.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
-            document.getElementById('monitor-client-count').innerText = `${clientsDB.length} Activos`;
-            document.getElementById('clients-list-container').innerHTML = clientsDB.map(c => `
-                <div class="flex items-center justify-between bg-slate-900 p-3 rounded-xl border border-slate-800 text-sm">
-                    <div><strong class="text-white block">${c.name}</strong><span class="text-[10px] text-slate-400">Pass: ${c.pass}</span></div>
-                </div>
-            `).join('');
-        }
-
         function installPWAApp() {
-            alert("📲 Para instalar la app en tu celular:\n\n1. Abre el menú de tu navegador.\n2. Selecciona 'Agregar a la pantalla de inicio'.");
+            alert("📲 Para instalar la app en tu celular:\n\n1. Abre el menú de tu navegador (Chrome o Safari).\n2. Selecciona 'Agregar a la pantalla de inicio' o 'Instalar aplicación'.\n\n¡Listo! Tendrás el escudo de Alianza Activa en tu celular.");
         }
 
         function sendChatMessage() {
-            const input = document.getElementById('chat-input');
+            const inputEl = document.getElementById('chat-input');
             const container = document.getElementById('chat-messages');
-            if(!input.value.trim()) return;
-            container.innerHTML += `<div class="flex justify-end"><div class="bg-amber-500 text-slate-950 p-3 rounded-xl text-sm">${input.value}</div></div>`;
-            input.value = "";
+            const q = inputEl.value.trim();
+            if (!q) return;
+
+            container.innerHTML += `
+                <div class="flex items-start gap-3 justify-end">
+                    <div class="bg-amber-500 text-slate-950 p-4 rounded-2xl rounded-tr-none max-w-[85%] text-sm font-medium shadow-md">${q}</div>
+                </div>`;
+            inputEl.value = '';
+            container.scrollTop = container.scrollHeight;
+
             setTimeout(() => {
-                container.innerHTML += `<div class="flex gap-3"><div class="bg-slate-800 text-slate-200 p-3 rounded-xl text-sm">Hola, recuerda mantener un 0% de error en tus macros pesando en crudo.</div></div>`;
+                const query = q.toLowerCase();
+                const now = new Date();
+                const dayIndex = now.getDay();
+                const days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+                const currentDay = days[dayIndex];
+                const isHighEnergy = (dayIndex === 1 || dayIndex === 3 || dayIndex === 5);
+
+                let replyText = "";
+
+                if (query.includes('que me toca') || query.includes('hoy') || query.includes('comer') || query.includes('menu') || query.includes('dieta') || query.includes('comida')) {
+                    const planName = isHighEnergy ? "🔥 Alta Energía (Pierna - Tab 1)" : "🥗 Control y Recuperación (Tab 2)";
+                    const meals = isHighEnergy ? (activeClient.tab1 || []) : (activeClient.tab2 || []);
+                    replyText = `Hola <strong>${activeClient.name}</strong>. Hoy es <strong>${currentDay}</strong> y tu plan asignado es <strong>${planName}</strong>:<br><br>` +
+                                 meals.map((m, idx) => `• <strong>Comida ${idx + 1}:</strong> ${m}`).join('<br>');
+                } else if (query.includes('agua') || query.includes('beber') || query.includes('hidratacion')) {
+                    replyText = `💧 <strong>Hidratación Alianza Activa:</strong> Toma entre 40ml y 50ml de agua por kilo de peso corporal. El mate amargo está permitido libre sin azúcar.`;
+                } else if (query.includes('entreno') || query.includes('pierna') || query.includes('gym')) {
+                    replyText = `🏋️‍♂️ Los días de alta energía (Lunes, Miércoles y Viernes) están diseñados para rendimiento máximo en pierna, integrando los pancakes o porridge de avena y batido Cookies.`;
+                } else if (query.includes('hola') || query.includes('saludos')) {
+                    replyText = `¡Hola <strong>${activeClient.name}</strong>! Soy tu NutriCoach IA de Alianza Activa. ¿En qué te puedo ayudar hoy con tu nutrición?`;
+                } else {
+                    replyText = `Entendido, <strong>${activeClient.name}</strong>. Recuerda mantener un 0% de error en tus macronutrientes, pesando los alimentos estrictamente en crudo. Si quieres saber tu menú de hoy, pregúntame: <em>"¿Qué me toca hoy?"</em>.`;
+                }
+
+                container.innerHTML += `
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
+                        <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${replyText}</div>
+                    </div>`;
                 container.scrollTop = container.scrollHeight;
-            }, 400);
+            }, 500);
         }
     </script>
 </body>
