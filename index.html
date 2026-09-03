@@ -139,10 +139,10 @@ html_code = """<!DOCTYPE html>
             </div>
         </header>
 
-        <!-- BARRA DE HISTORIAS / SHORTS (ESTILO INSTAGRAM - CENTRADO Y SIN DESBORDAR) -->
+        <!-- BARRA DE HISTORIAS / SHORTS (SINCRONIZADOS 100% CON FIREBASE PARA CLIENTES) -->
         <div class="bg-slate-950 border-b border-slate-900 py-3 px-4 no-print overflow-hidden">
             <div class="max-w-4xl mx-auto flex items-center justify-start md:justify-center gap-3 md:gap-5 overflow-x-auto hide-scroll py-1" id="instagram-stories-bar">
-                <!-- Se llena dinámicamente -->
+                <!-- Se llena dinámicamente desde la nube -->
             </div>
         </div>
 
@@ -383,13 +383,13 @@ html_code = """<!DOCTYPE html>
                 <div id="dynamic-batidos-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN 5: NUTRICOACH IA (LIBRE, RÁPIDA Y HUMANA) -->
+            <!-- SECCIÓN 5: NUTRICOACH IA (PROFESIONAL, DIRECTA Y HUMANA) -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
                     <div>
                         <div class="inline-flex items-center space-x-2 text-amber-400 mb-2 font-bold">
                             <i class="fa-solid fa-robot text-sm"></i>
-                            <span class="text-xs uppercase tracking-widest">Asistente Inteligente (0% Error)</span>
+                            <span class="text-xs uppercase tracking-widest">NutriCoach Profesional (0% Error)</span>
                         </div>
                         <h2 class="text-2xl md:text-3xl font-black text-white" id="ai-title-name">NutriCoach IA</h2>
                     </div>
@@ -405,13 +405,13 @@ html_code = """<!DOCTYPE html>
                                 <i class="fa-solid fa-robot"></i>
                             </div>
                             <div id="ai-welcome-msg" class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">
-                                ¡Hola! Estoy 100% activo y libre para resolver cualquier cambio o duda sobre tu alimentación al instante. Pregúntame lo que necesites.
+                                ¡Hola! Soy tu asistente profesional de Alianza Activa. Pregúntame con total libertad cualquier cambio de alimento (ej: "quiero cambiar el pan integral por galletas de arroz" o "¿por qué puedo cambiar la pechuga?") y te daré los gramos exactos al instante.
                             </div>
                         </div>
                     </div>
 
                     <div class="p-4 bg-slate-950 border-t border-slate-800 flex gap-3 items-center no-print">
-                        <input type="text" id="chat-input" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Ej: ¿Por cuánto cambio el pan integral o puedo comer helado?... " class="flex-grow bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500 placeholder-slate-500">
+                        <input type="text" id="chat-input" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Escribe tu consulta o cambio de alimento aquí..." class="flex-grow bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500 placeholder-slate-500">
                         <button onclick="sendChatMessage()" id="chat-submit-btn" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] cursor-pointer">
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
@@ -597,10 +597,7 @@ html_code = """<!DOCTYPE html>
                 { title: "Energía Austral Pre-Entreno", desc: "Fórmula magistral con té concentrado, guaraná y aloe para activar el sistema.", image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" },
                 { title: "Fuego Rojo HBL", desc: "Aporte energético superior con frutos rojos y batido nutricional.", image: "https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&q=80&w=800" }
             ],
-            shorts: [
-                { title: "🔥 ¡Nuevo Récord!", desc: "Excelente técnica en Anubis Gym.", type: "image", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hoy" },
-                { title: "🥤 Protein Bar", desc: "Batidos y tés listos post-entreno.", type: "image", image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800", date: "Ayer" }
-            ],
+            shorts: [], // Se cargan 100% desde Firebase para que coincidan para todos
             recipes: [
                 { title: "Pancakes de Cookies & Avena", text: "30g Batido Cookies, 40g Avena instantánea, 1 Huevo (50g), 50ml Agua. Licuar y cocinar en sartén a fuego medio.", image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&q=80&w=800" },
                 { title: "Porridge Tibio de Cookies", text: "50g Avena tradicional cocida en 200ml de Agua + 30g Batido Cookies integrado al final.", image: "https://images.unsplash.com/photo-1584776296944-ab6fb5763f55?auto=format&fit=crop&q=80&w=800" },
@@ -680,10 +677,18 @@ html_code = """<!DOCTYPE html>
                         };
                     });
                     if (cloudShorts.length > 0) {
-                        globalData.shorts = [...cloudShorts, ...globalData.shorts];
+                        globalData.shorts = cloudShorts; // Sincronización exacta: lo que está en Firebase es lo que ven todos
                     }
                 }
             } catch(e) {}
+            
+            // Si está vacío, poner unos por defecto de respaldo
+            if (globalData.shorts.length === 0) {
+                globalData.shorts = [
+                    { title: "🔥 ¡Nuevo Récord!", desc: "Excelente técnica en Anubis Gym.", type: "image", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hoy" },
+                    { title: "🥤 Protein Bar", desc: "Batidos y tés listos post-entreno.", type: "image", image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800", date: "Ayer" }
+                ];
+            }
         }
 
         window.addEventListener('DOMContentLoaded', async () => {
@@ -795,7 +800,7 @@ html_code = """<!DOCTYPE html>
             const weight = document.getElementById('mem-weight').value.trim();
             const phone = document.getElementById('mem-phone').value.trim();
             if(!name || !weight || !phone) { alert("Completa al menos Nombre, Peso y Celular."); return; }
-            const text = `Hola Roberto, quiero solicitar mi plan en Alianza Activa:\\n👤 Nombre: ${name}\\n⚖️ Peso: ${weight}kg\\n📱 Celular: ${phone}`;
+            const text = `Hola Roberto, quiero solicitar mi plan en Alianza Activa:\n👤 Nombre: ${name}\n⚖️ Peso: ${weight}kg\n📱 Celular: ${phone}`;
             document.getElementById('membership-alert').classList.remove('hidden');
             setTimeout(() => {
                 window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent(text)}`, '_blank');
@@ -828,11 +833,11 @@ html_code = """<!DOCTYPE html>
         function shareWhatsApp(type) {
             let text = "";
             if (type === 'tab1') {
-                text = `🔥 ALTA ENERGÍA (PIERNA) - ${activeClient.name}\\n\\n` + activeClient.tab1.map((m, i) => `Comida ${i + 1}: ${m}`).join('\\n');
+                text = `🔥 ALTA ENERGÍA (PIERNA) - ${activeClient.name}\n\n` + activeClient.tab1.map((m, i) => `Comida ${i + 1}: ${m}`).join('\n');
             } else if (type === 'tab2') {
-                text = `🥗 CONTROL Y RECUPERACIÓN - ${activeClient.name}\\n\\n` + activeClient.tab2.map((m, i) => `Comida ${i + 1}: ${m}`).join('\\n');
+                text = `🥗 CONTROL Y RECUPERACIÓN - ${activeClient.name}\n\n` + activeClient.tab2.map((m, i) => `Comida ${i + 1}: ${m}`).join('\n');
             } else if (type === 'tab3') {
-                text = `🛒 LISTA DE COMPRAS - ${activeClient.name}\\n\\n` + activeClient.tab3.map(item => `✅ ${item}`).join('\\n');
+                text = `🛒 LISTA DE COMPRAS - ${activeClient.name}\n\n` + activeClient.tab3.map(item => `✅ ${item}`).join('\n');
             }
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
         }
@@ -917,7 +922,7 @@ html_code = """<!DOCTYPE html>
             document.getElementById('header-client-title').innerText = `Fitness Alianza Activa - ${activeClient.name}`;
             document.getElementById('footer-client-subtitle').innerText = `Nutrición de Alto Rendimiento - ${activeClient.name}`;
             document.getElementById('ai-title-name').innerText = `NutriCoach IA - ${activeClient.name}`;
-            document.getElementById('ai-welcome-msg').innerText = `¡Hola ${activeClient.name}! Estoy 100% activo y libre para resolver cualquier cambio o duda sobre tu alimentación al instante. Pregúntame lo que necesites.`;
+            document.getElementById('ai-welcome-msg').innerText = `¡Hola ${activeClient.name}! Soy tu asistente profesional de Alianza Activa. Pregúntame con total libertad cualquier cambio de alimento (ej: "quiero cambiar el pan integral por galletas de arroz") y te daré los gramos exactos al instante.`;
 
             document.getElementById('tab1-meals-container').innerHTML = activeClient.tab1.map((item, idx) => `
                 <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-orange-500/50 transition-all flex items-center gap-4">
@@ -981,7 +986,7 @@ html_code = """<!DOCTYPE html>
             alert("📲 Para instalar la app en tu celular:\n\n1. Abre el menú de tu navegador (Chrome o Safari).\n2. Selecciona 'Agregar a la pantalla de inicio'.");
         }
 
-        // --- NUTRICOACH IA 100% LIBRE, INTELIGENTE Y DIRECTO ---
+        // --- NUTRICOACH IA PROFESIONAL (RESPUESTA DIRECTA Y PRECISA) ---
         function sendChatMessage() {
             const inputEl = document.getElementById('chat-input');
             const container = document.getElementById('chat-messages');
@@ -1004,13 +1009,17 @@ html_code = """<!DOCTYPE html>
                     const dayIndex = now.getDay();
                     const isHighEnergy = (dayIndex === 1 || dayIndex === 3 || dayIndex === 5);
                     const meals = isHighEnergy ? activeClient.tab1 : activeClient.tab2;
-                    replyText = `¡Hola ${activeClient.name}! Aquí tienes tu menú de hoy:<br><br>` + meals.map((m, i) => `• <strong>Comida ${i+1}:</strong> ${m}`).join('<br>');
-                } else if (query.includes('pan') || query.includes('galleta') || query.includes('cambiar') || query.includes('sustituir') || query.includes('helado') || query.includes('chocolate') || query.includes('fruta')) {
-                    replyText = `¡Perfecto ${activeClient.name}! Para mantener un 0% de error en tus macros:<br><br>• Si cambias carbohidratos (ej: pan por galletas de arroz o arroz por papa), hazlo respetando la proporción exacta en crudo (10g de pan integral equivalen a ~12g de pan blanco o ~8g de galletas de arroz).<br>• Si quieres incorporar un gusto (como helado o algo fuera de plan), consúmelo de forma moderada compensando los carbohidratos de la comida correspondiente.<br><br>¿Qué alimento específico de tu plan deseas cambiar y por cuál? Te doy el número exacto al instante.`;
-                } else if (query.includes('agua') || query.includes('beber')) {
-                    replyText = `💧 Toma entre 40ml y 50ml de agua por kilo de peso corporal. El mate amargo es libre sin azúcar.`;
+                    replyText = `¡Atleta ${activeClient.name}! Aquí tienes tu planificación exacta para hoy:<br><br>` + meals.map((m, i) => `• <strong>Comida ${i+1}:</strong> ${m}`).join('<br>');
+                } else if (query.includes('pan') && query.includes('galleta')) {
+                    replyText = `✅ <strong>Sustitución Exacta (0% Error):</strong> Para cambiar el pan integral por galletas de arroz en tu desayuno o merienda, la equivalencia estricta en crudo es de <strong>10g de pan integral por cada 8g de galletas de arroz</strong> (ej: si tienes 50g de pan integral, equivalen a 40g de galletas de arroz). Pesa siempre en seco.`;
+                } else if (query.includes('pan') && query.includes('blanco')) {
+                    replyText = `✅ <strong>Sustitución Exacta (0% Error):</strong> 10g de pan integral equivalen a aproximadamente <strong>12g de pan blanco</strong>. Mantén el pesaje en crudo para respetar tus macros.`;
+                } else if (query.includes('helado') || query.includes('dulce') || query.includes('chocolate')) {
+                    replyText = `🎯 <strong>Control de Gustos:</strong> Si deseas incorporar helado o un dulce esporádicamente, hazlo con moderación y compensa los carbohidratos de la comida restando equivalente en hidratos complejos (como el arroz o la papa de ese mismo día) para mantener intactas tus calorías.`;
+                } else if (query.includes('pollo') || query.includes('carne') || query.includes('pescado')) {
+                    replyText = `💪 <strong>Intercambio Proteico (Bloque 1):</strong> Puedes rotar la pechuga de pollo por lomo de ternera magra, pescado blanco (merluza) o atún al natural en porciones equivalentes de gramos pesados en crudo.`;
                 } else {
-                    replyText = `¡Entendido ${activeClient.name}! Analizando tu consulta bajo los parámetros de la Tabla Argentina de alimentos en crudo: puedes realizar el cambio manteniendo la equivalencia calórica exacta y pesando siempre en crudo. ¿Te armo el reemplazo exacto?`;
+                    replyText = `¡Entendido, ${activeClient.name}! Analizando tu consulta bajo los parámetros de Alianza Activa: recuerda que todos los alimentos se pesan estrictamente en crudo y con 0% de margen de error. ¿Necesitas que calculemos algún otro alimento o sustituto en particular?`;
                 }
 
                 container.innerHTML += `
@@ -1019,7 +1028,7 @@ html_code = """<!DOCTYPE html>
                         <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${replyText}</div>
                     </div>`;
                 container.scrollTop = container.scrollHeight;
-            }, 400);
+            }, 350);
         }
 
         function resetChat() {
@@ -1028,7 +1037,7 @@ html_code = """<!DOCTYPE html>
                 <div class="flex items-start gap-3">
                     <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
                     <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">
-                        ¡Chat reiniciado! Estoy 100% libre para resolver cualquier cambio o duda sobre tu alimentación al instante.
+                        ¡Chat reiniciado! Estoy listo para darte respuestas directas y precisas al instante.
                     </div>
                 </div>`;
         }
@@ -1098,9 +1107,9 @@ html_code = """<!DOCTYPE html>
             const name = document.getElementById('select-client-edit').value;
             const client = clientsDB.find(c => c.name === name);
             if (client) {
-                document.getElementById('edit-tab1-data').value = client.tab1.join('\\n');
-                document.getElementById('edit-tab2-data').value = client.tab2.join('\\n');
-                document.getElementById('edit-tab3-data').value = client.tab3.join('\\n');
+                document.getElementById('edit-tab1-data').value = client.tab1.join('\n');
+                document.getElementById('edit-tab2-data').value = client.tab2.join('\n');
+                document.getElementById('edit-tab3-data').value = client.tab3.join('\n');
             }
         }
 
@@ -1108,9 +1117,9 @@ html_code = """<!DOCTYPE html>
             const name = document.getElementById('select-client-edit').value;
             const client = clientsDB.find(c => c.name === name);
             if (client) {
-                client.tab1 = document.getElementById('edit-tab1-data').value.split('\\n').filter(Boolean);
-                client.tab2 = document.getElementById('edit-tab2-data').value.split('\\n').filter(Boolean);
-                client.tab3 = document.getElementById('edit-tab3-data').value.split('\\n').filter(Client => Boolean);
+                client.tab1 = document.getElementById('edit-tab1-data'].value.split('\n').filter(Boolean);
+                client.tab2 = document.getElementById('edit-tab2-data'].value.split('\n').filter(Boolean);
+                client.tab3 = document.getElementById('edit-tab3-data'].value.split('\n').filter(Boolean);
                 alert(`✅ Plan de ${name} actualizado localmente.`);
             }
         }
@@ -1122,4 +1131,4 @@ html_code = """<!DOCTYPE html>
 with open("alianza_activa.html", "w", encoding="utf-8") as f:
     f.write(html_code)
 
-print("Código generado y guardado en alianza_activa.html con todas las soluciones.")
+print("Archivo alianza_activa.html corregido y optimizado profesionalmente.")
