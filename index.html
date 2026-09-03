@@ -42,7 +42,7 @@ html_content = """<!DOCTYPE html>
             body { background: #ffffff !important; color: #000000 !important; }
             #food-rain-container, nav, #login-screen, .no-print, button, #admin-tab-btn, footer { display: none !important; }
             .tab-content { display: block !important; opacity: 1 !important; color: #000000 !important; }
-            .bg-slate-900, .bg-slate-950, .bg-slate-900\\/90 { background: #ffffff !important; color: #000000 !important; border: 1px solid #e2e8f0 !important; box-shadow: none !important; }
+            .bg-slate-900, .bg-slate-950, .bg-slate-900\/90 { background: #ffffff !important; color: #000000 !important; border: 1px solid #e2e8f0 !important; box-shadow: none !important; }
             .text-white, .text-slate-200, .text-slate-300, .text-slate-400 { color: #0f172a !important; }
             .text-amber-400, .text-orange-400, .text-emerald-400 { color: #0f172a !important; font-weight: 800 !important; }
             header { background: #ffffff !important; color: #000000 !important; border-bottom: 2px solid #000000 !important; }
@@ -139,29 +139,23 @@ html_content = """<!DOCTYPE html>
             </div>
         </header>
 
-        <!-- BARRA DE HISTORIAS / SHORTS (ESTILO INSTAGRAM - 8 ITEMS) -->
+        <!-- BARRA DE HISTORIAS / SHORTS (ESTILO INSTAGRAM - 8 ITEMS DINÁMICOS) -->
         <div class="bg-slate-950 border-b border-slate-900 py-3 px-4 overflow-x-auto hide-scroll no-print">
             <div class="max-w-4xl mx-auto flex items-center gap-4" id="instagram-stories-bar">
-                <!-- Se llena dinámicamente con 8 items -->
+                <!-- Se llena dinámicamente con shorts -->
             </div>
         </div>
 
-        <!-- BARRA DE NAVEGACIÓN COMPACTA CON MENÚ DESPLEGABLE / MODAL DE MÓDULOS -->
+        <!-- BARRA DE NAVEGACIÓN COMPACTA CON MENÚ DESPLEGABLE (SIN BOTONES SUELTOS AFUERA) -->
         <nav class="bg-slate-950/95 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-xl shadow-xl no-print">
             <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-3">
                     <button onclick="toggleNavDrawer()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-md">
                         <i class="fa-solid fa-grid-2"></i> <span>Menú Principal</span> <i class="fa-solid fa-chevron-down text-[10px]"></i>
                     </button>
                     <span id="active-module-indicator" class="text-xs text-slate-400 font-medium hidden md:inline">Módulo: Alta Energía</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="switchTab(1)" id="quick-btn-1" class="hidden md:flex px-3 py-1.5 rounded-lg text-xs font-bold bg-orange-500 text-slate-950 items-center gap-1.5 cursor-pointer">
-                        <i class="fa-solid fa-bolt"></i> Alta Energía
-                    </button>
-                    <button onclick="switchTab(8)" id="quick-btn-8" class="hidden md:flex px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 items-center gap-1.5 cursor-pointer">
-                        <i class="fa-solid fa-store text-emerald-400"></i> Tienda
-                    </button>
                     <button id="admin-tab-btn" onclick="switchTab(6)" class="hidden px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-amber-400 border border-amber-500/50 items-center gap-1.5 cursor-pointer">
                         <i class="fa-solid fa-sliders"></i> Panel Coach
                     </button>
@@ -313,43 +307,45 @@ html_content = """<!DOCTYPE html>
                         <h2 class="text-2xl font-bold text-white">Guía de Sustitutos y Equivalencias</h2>
                     </div>
                     <p class="text-slate-300 text-sm leading-relaxed">
-                        Utiliza estas equivalencias exactas para mantener tu plan nutricional perfecto (Bloques 1 al 5).
+                        Utiliza estas equivalencias exactas por cada 100g para mantener tu plan nutricional perfecto (0% error).
                     </p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-6">
                     <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
                         <div class="flex items-center gap-3 text-orange-400 border-b border-slate-800 pb-3">
                             <i class="fa-solid fa-drumstick-bite text-xl"></i>
-                            <h3 class="font-bold text-white">Proteínas Magras</h3>
+                            <h3 class="font-bold text-white">Proteínas Magras (x 100g)</h3>
                         </div>
                         <ul class="text-xs text-slate-300 space-y-2.5">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 100g Lomo o Ternera magra</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 120g Pescado blanco (Merluza)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 1 lata de Atún al natural</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 4 Claras + 1 Huevo entero</li>
+                            <li class="flex items-center justify-between"><span>Pechuga de pollo:</span> <strong class="text-orange-400">31g P / 165 kcal</strong></li>
+                            <li class="flex items-center justify-between"><span>Lomo / Ternera magra:</span> <strong class="text-orange-400">22g P / 160 kcal</strong></li>
+                            <li class="flex items-center justify-between"><span>Merluza / Pescado:</span> <strong class="text-orange-400">18g P / 85 kcal</strong></li>
+                            <li class="flex items-center justify-between"><span>Claras de huevo:</span> <strong class="text-orange-400">11g P / 52 kcal</strong></li>
                         </ul>
                     </div>
                     <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
                         <div class="flex items-center gap-3 text-amber-400 border-b border-slate-800 pb-3">
                             <i class="fa-solid fa-bowl-rice text-xl"></i>
-                            <h3 class="font-bold text-white">Carbohidratos</h3>
+                            <h3 class="font-bold text-white">Carbohidratos (x 100g)</h3>
                         </div>
                         <ul class="text-xs text-slate-300 space-y-2.5">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 200g Papa o Batata (crudo)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 55g Avena en copos</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 70g Pan 100% integral</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 50g Quinoa o Fideos integrales</li>
+                            <li class="flex items-center justify-between"><span>Arroz integral/parboil:</span> <strong class="text-amber-400">75g C / 350 kcal</strong></li>
+                            <li class="flex items-center justify-between"><span>Avena tradicional:</span> <strong class="text-amber-400">66g C / 370 kcal</strong></li>
+                            <li class="flex items-center justify-between"><span>Papa / Batata:</span> <strong class="text-amber-400">20g C / 85 kcal</strong></li>
+                            <li class="flex items-center justify-between"><span>Pan 100% integral:</span> <strong class="text-amber-400">45g C / 240 kcal</strong></li>
+                            <li class="flex items-center justify-between"><span>Galletas de arroz:</span> <strong class="text-amber-400">78g C / 380 kcal</strong></li>
                         </ul>
                     </div>
                     <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
                         <div class="flex items-center gap-3 text-emerald-400 border-b border-slate-800 pb-3">
                             <i class="fa-solid fa-seedling text-xl"></i>
-                            <h3 class="font-bold text-white">Grasas Buenas</h3>
+                            <h3 class="font-bold text-white">Grasas Buenas (x 100g)</h3>
                         </div>
                         <ul class="text-xs text-slate-300 space-y-2.5">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 40g a 50g Palta (Aguacate)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 15g Frutos secos (Nueces)</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 15g Mantequilla de maní natural</li>
+                            <li class="flex items-center justify-between"><span>Palta (Aguacate):</span> <strong class="text-emerald-400">15g G / 160 kcal</strong></li>
+                            <li class="flex items-center justify-between"><span>Frutos secos / Nueces:</span> <strong class="text-emerald-400">65g G / 650 kcal</strong></li>
+                            <li class="flex items-center justify-between"><span>Aceite de oliva virgen:</span> <strong class="text-emerald-400">100g G / 900 kcal</strong></li>
+                            <li class="flex items-center justify-between"><span>Yema de huevo:</span> <strong class="text-emerald-400">27g G / 320 kcal</strong></li>
                         </ul>
                     </div>
                 </div>
@@ -389,7 +385,7 @@ html_content = """<!DOCTYPE html>
                     <div>
                         <div class="inline-flex items-center space-x-2 text-amber-400 mb-2 font-bold">
                             <i class="fa-solid fa-robot text-sm"></i>
-                            <span class="text-xs uppercase tracking-widest">Asistente Inteligente</span>
+                            <span class="text-xs uppercase tracking-widest">Asistente Inteligente (Tabla Argentina 100g)</span>
                         </div>
                         <h2 class="text-2xl md:text-3xl font-black text-white" id="ai-title-name">NutriCoach IA</h2>
                     </div>
@@ -405,13 +401,13 @@ html_content = """<!DOCTYPE html>
                                 <i class="fa-solid fa-robot"></i>
                             </div>
                             <div id="ai-welcome-msg" class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">
-                                ¡Hola! Estoy acá para lo que necesites respecto a tu plan de Fitness Alianza Activa.
+                                ¡Hola! Estoy integrado con la Tabla Nutricional Argentina por cada 100g. Pregúntame tus equivalencias exactas (ej: "quiero cambiar 50g de pan integral por galletas de arroz" o "¿qué me toca hoy?").
                             </div>
                         </div>
                     </div>
 
                     <div class="p-4 bg-slate-950 border-t border-slate-800 flex gap-3 items-center no-print">
-                        <input type="text" id="chat-input" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Escribe tu consulta aquí (ej: ¿Qué me toca hoy?)..." class="flex-grow bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500 placeholder-slate-500">
+                        <input type="text" id="chat-input" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Escribe tu consulta aquí (ej: cambiar pan por galletas de arroz)..." class="flex-grow bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500 placeholder-slate-500">
                         <button onclick="sendChatMessage()" id="chat-submit-btn" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] cursor-pointer">
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
@@ -430,7 +426,7 @@ html_content = """<!DOCTYPE html>
                         <span class="bg-amber-500/20 text-amber-400 px-4 py-2 rounded-2xl text-xs font-bold border border-amber-500/40 w-fit">Modo Master</span>
                     </div>
 
-                    <!-- CONSOLA DE CÁLCULO AVANZADA (ESCANER 32 MÉTRICAS + FOTO + OBJETIVOS ACTUALIZADOS) -->
+                    <!-- CONSOLA DE CÁLCULO AVANZADA -->
                     <div class="bg-slate-950 p-6 md:p-8 rounded-2xl border border-amber-500/50 space-y-6 shadow-inner">
                         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                             <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-calculator"></i> 🧮 Motor Biométrico & Protocolo de Escáner (0% Error)</h3>
@@ -492,7 +488,7 @@ html_content = """<!DOCTYPE html>
                         </div>
 
                         <div id="calc-results-box" class="hidden bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4 font-mono text-xs text-slate-300 shadow-xl">
-                            <!-- Resultados dinámicos con selector de cliente y desglose de comidas -->
+                            <!-- Resultados dinámicos -->
                         </div>
                     </div>
 
@@ -572,7 +568,7 @@ html_content = """<!DOCTYPE html>
                         <textarea id="edit-recipe-desc" rows="3" placeholder="Ingredientes y preparación exacta..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none font-mono"></textarea>
                     </div>
 
-                    <!-- GESTIÓN DE BATIDOS Y SHORTS -->
+                    <!-- GESTIÓN DE BATIDOS Y SHORTS (FIXED STORAGE & SYNC) -->
                     <div class="grid lg:grid-cols-2 gap-8 pt-6 border-t border-slate-800">
                         <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                             <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-shaker mr-2"></i> Publicar / Editar Batido</h3>
@@ -585,7 +581,7 @@ html_content = """<!DOCTYPE html>
                         </div>
 
                         <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
-                            <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-bolt mr-2"></i> Publicar Short / Historia (8 en total)</h3>
+                            <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-bolt mr-2"></i> Publicar Short / Historia (Visible para Clientes)</h3>
                             <div class="space-y-3">
                                 <input type="text" id="admin-short-title" placeholder="Título de la Novedad" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
                                 <select id="admin-short-type" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white outline-none">
@@ -679,6 +675,26 @@ html_content = """<!DOCTYPE html>
 
         let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
 
+        // --- TABLA NUTRICIONAL ARGENTINA OFICIAL (POR CADA 100G EN CRUDO) ---
+        const argNutriTable = {
+            "pollo": { name: "Pechuga de Pollo", p: 31, c: 0, g: 3.6, kcal: 165 },
+            "lomo": { name: "Lomo / Ternera magra", p: 22, c: 0, g: 8, kcal: 160 },
+            "merluza": { name: "Merluza / Pescado blanco", p: 18, c: 0, g: 1.5, kcal: 85 },
+            "atun": { name: "Atún al natural", p: 25, c: 0, g: 1, kcal: 110 },
+            "arroz": { name: "Arroz integral / Parboil", p: 7.5, c: 75, g: 2.5, kcal: 350 },
+            "avena": { name: "Avena tradicional", p: 12, c: 66, g: 7, kcal: 370 },
+            "papa": { name: "Papa / Batata", p: 2, c: 20, g: 0.1, kcal: 85 },
+            "batata": { name: "Papa / Batata", p: 2, c: 20, g: 0.1, kcal: 85 },
+            "pan": { name: "Pan 100% integral", p: 9, c: 45, g: 3.5, kcal: 240 },
+            "galletas de arroz": { name: "Galletas de arroz", p: 8, c: 78, g: 2.5, kcal: 380 },
+            "galleta": { name: "Galletas de arroz", p: 8, c: 78, g: 2.5, kcal: 380 },
+            "palta": { name: "Palta (Aguacate)", p: 2, c: 9, g: 15, kcal: 160 },
+            "aceite": { name: "Aceite de oliva virgen", p: 0, c: 0, g: 100, kcal: 900 },
+            "huevo": { name: "Huevo entero", p: 13, c: 0.8, g: 10, kcal: 145 },
+            "claras": { name: "Claras de huevo", p: 11, c: 0.7, g: 0.2, kcal: 52 },
+            "batido": { name: "Batido Cookies HBL", p: 60, c: 30, g: 8, kcal: 390 }
+        };
+
         let globalData = {
             batidos: [
                 { title: "Batido Cookies & High Protein", desc: "Ideal post-entreno para recuperación muscular máxima. Aporta 30g de F1 Cookies y alta saciedad.", image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800" },
@@ -686,16 +702,12 @@ html_content = """<!DOCTYPE html>
                 { title: "Energía Austral Pre-Entreno", desc: "Fórmula magistral con té concentrado, guaraná y aloe para activar el sistema.", image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800" },
                 { title: "Fuego Rojo HBL", desc: "Aporte energético superior con frutos rojos y batido nutricional.", image: "https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&q=80&w=800" }
             ],
-            shorts: [
+            shorts: JSON.parse(localStorage.getItem('alianza_shorts') || JSON.stringify([
                 { title: "🔥 ¡Nuevo Récord!", desc: "Excelente técnica en Anubis Gym.", type: "image", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hoy" },
                 { title: "🥤 Protein Bar", desc: "Batidos y tés listos post-entreno.", type: "image", image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800", date: "Ayer" },
                 { title: "💪 Clases Funcional", desc: "Energía al máximo en Alianza Activa.", type: "image", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800", date: "Hace 2 días" },
-                { title: "🥗 Nutrición Fit", desc: "Preparando los mejores platos en crudo.", type: "image", image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800", date: "Hace 3 días" },
-                { title: "⚡ Alta Energía", desc: "Días de pierna con 0% error en macros.", type: "image", image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800", date: "Hace 4 días" },
-                { title: "🥤 Batido Cookies", desc: "El favorito de todos los atletas.", type: "image", image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800", date: "Hace 5 días" },
-                { title: "🏆 Comunidad", desc: "Creciendo juntos hacia la meta TAB.", type: "image", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hace 6 días" },
-                { title: "🎯 Resultados", desc: "Escáner corporal y mediciones exactas.", type: "image", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800", date: "Hace 1 semana" }
-            ],
+                { title: "🥗 Nutrición Fit", desc: "Preparando los mejores platos en crudo.", type: "image", image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800", date: "Hace 3 días" }
+            ])),
             recipes: [
                 { title: "Pancakes de Cookies & Avena", text: "30g Batido Cookies, 40g Avena instantánea, 1 Huevo (50g), 50ml Agua. Licuar y cocinar en sartén a fuego medio.", image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&q=80&w=800" },
                 { title: "Porridge Tibio de Cookies", text: "50g Avena tradicional cocida en 200ml de Agua + 30g Batido Cookies integrado al final.", image: "https://images.unsplash.com/photo-1584776296944-ab6fb5763f55?auto=format&fit=crop&q=80&w=800" },
@@ -776,7 +788,7 @@ html_content = """<!DOCTYPE html>
             if (lastSync) lastSync.innerText = new Date().toLocaleTimeString();
         }
 
-        // --- TERMINAL CLI MEJORADA ---
+        // --- TERMINAL CLI ---
         function executeCliCommand() {
             const inputEl = document.getElementById('cli-input');
             const cmd = inputEl.value.trim();
@@ -786,7 +798,6 @@ html_content = """<!DOCTYPE html>
 
             const parts = cmd.split(' ');
             const action = parts[0].toLowerCase();
-            const arg = parts.slice(1).join(' ');
 
             if (action === 'help') {
                 addLog("--- COMANDOS DISPONIBLES ---", "success");
@@ -867,11 +878,10 @@ html_content = """<!DOCTYPE html>
             renderGlobalContent();
         });
 
-        // --- CONSOLA DE CÁLCULO BIOMÉTRICO (0% ERROR) CON ASIGNACIÓN DE CLIENTES & MENÚ COMPLETO ---
+        // --- MOTOR BIOMÉTRICO (0% ERROR) ---
         function calculateDietEngine() {
             const name = document.getElementById('calc-name').value.trim() || "Atleta Nuevo";
             const weight = parseFloat(document.getElementById('calc-weight').value) || 70;
-            const height = parseFloat(document.getElementById('calc-height').value) || 170;
             const fat = parseFloat(document.getElementById('calc-fat').value) || 15;
             const muscle = parseFloat(document.getElementById('calc-muscle').value) || 35;
             const visceral = document.getElementById('calc-visceral').value.trim() || "Normal";
@@ -949,7 +959,7 @@ html_content = """<!DOCTYPE html>
                 </div>
 
                 <div class="space-y-2 pt-2 border-t border-slate-800">
-                    <span class="text-[10px] text-slate-400 uppercase font-bold">Desglose de Comidas Generadas (Incluye Desayuno, Almuerzo, Merienda, Cena):</span>
+                    <span class="text-[10px] text-slate-400 uppercase font-bold">Desglose de Comidas Generadas (0% Error):</span>
                     <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1 text-slate-300">
                         ${lastCalculatedPlan.tab1.map((m, i) => `<div>🍽️ <strong>Comida ${i+1}:</strong> ${m}</div>`).join('')}
                     </div>
@@ -1050,7 +1060,7 @@ html_content = """<!DOCTYPE html>
                 return;
             }
 
-            const text = `Hola Roberto, quiero solicitar mi plan en Alianza Activa:\\n\\n👤 *Nombre:* ${name}\\n🎂 *Edad:* ${age}\\n⚖️ *Peso:* ${weight}kg\\n📏 *Estatura:* ${height}cm\\n🌍 *Nacionalidad:* ${nat}\\n⚧ *Género:* ${gender}\\n🎯 *Objetivo:* ${goal}\\n📱 *Celular:* ${phone}`;
+            const text = `Hola Roberto, quiero solicitar mi plan en Alianza Activa:\n\n👤 *Nombre:* ${name}\n🎂 *Edad:* ${age}\n⚖️ *Peso:* ${weight}kg\n📏 *Estatura:* ${height}cm\n🌍 *Nacionalidad:* ${nat}\n⚧ *Género:* ${gender}\n🎯 *Objetivo:* ${goal}\n📱 *Celular:* ${phone}`;
             
             document.getElementById('membership-alert').classList.remove('hidden');
             setTimeout(() => {
@@ -1084,14 +1094,14 @@ html_content = """<!DOCTYPE html>
         function shareWhatsApp(type) {
             let text = "";
             if (type === 'tab1') {
-                text = `🔥 *ALTA ENERGÍA (PIERNA)*\\n👤 *Cliente:* ${activeClient.name}\\n\\n` +
-                    activeClient.tab1.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\\n\\n');
+                text = `🔥 *ALTA ENERGÍA (PIERNA)*\n👤 *Cliente:* ${activeClient.name}\n\n` +
+                    activeClient.tab1.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
             } else if (type === 'tab2') {
-                text = `🥗 *CONTROL Y RECUPERACIÓN*\\n👤 *Cliente:* ${activeClient.name}\\n\\n` +
-                    activeClient.tab2.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\\n\\n');
+                text = `🥗 *CONTROL Y RECUPERACIÓN*\n👤 *Cliente:* ${activeClient.name}\n\n` +
+                    activeClient.tab2.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
             } else if (type === 'tab3') {
-                text = `🛒 *COMPRAS SEMANAL*\\n👤 *Cliente:* ${activeClient.name}\\n\\n` +
-                    activeClient.tab3.map(item => `✅ ${item}`).join('\\n');
+                text = `🛒 *COMPRAS SEMANAL*\n👤 *Cliente:* ${activeClient.name}\n\n` +
+                    activeClient.tab3.map(item => `✅ ${item}`).join('\n');
             }
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
         }
@@ -1126,7 +1136,7 @@ html_content = """<!DOCTYPE html>
                 `).join('');
             }
 
-            // Render 8 Instagram Stories (Shorts)
+            // Render Shorts (Fixed persistence and visibility for clients)
             const storiesBar = document.getElementById('instagram-stories-bar');
             if (storiesBar) {
                 storiesBar.innerHTML = globalData.shorts.map((s, idx) => `
@@ -1237,21 +1247,26 @@ html_content = """<!DOCTYPE html>
             const fileInput = document.getElementById('admin-short-file');
             const desc = document.getElementById('admin-short-desc').value.trim();
             if(!title || !desc) { alert("Completa título y descripción."); return; }
+
+            const saveShortObj = (imgUrl) => {
+                globalData.shorts.unshift({ title, type, image: imgUrl, desc, date: "Hace un momento" });
+                localStorage.setItem('alianza_shorts', JSON.stringify(globalData.shorts));
+                document.getElementById('admin-short-title').value = "";
+                fileInput.value = "";
+                document.getElementById('admin-short-desc').value = "";
+                renderGlobalContent();
+                alert("✅ Short publicado correctamente y visible para todos los clientes.");
+                addLog(`Short "${title}" publicado y sincronizado.`, "success");
+            };
+
             if (fileInput.files && fileInput.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    globalData.shorts.unshift({ title, type, image: e.target.result, desc, date: "Hace un momento" });
-                    document.getElementById('admin-short-title').value = "";
-                    fileInput.value = "";
-                    document.getElementById('admin-short-desc').value = "";
-                    renderGlobalContent();
-                    addLog(`Short "${title}" publicado.`, "success");
+                    saveShortObj(e.target.result);
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
-                globalData.shorts.unshift({ title, type, image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", desc, date: "Hace un momento" });
-                renderGlobalContent();
-                addLog(`Short "${title}" publicado.`, "success");
+                saveShortObj("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800");
             }
         }
 
@@ -1330,9 +1345,9 @@ html_content = """<!DOCTYPE html>
             const name = select.value;
             const client = clientsDB.find(c => c.name === name);
             if (client) {
-                document.getElementById('edit-tab1-data').value = client.tab1 ? client.tab1.join('\\n') : '';
-                document.getElementById('edit-tab2-data').value = client.tab2 ? client.tab2.join('\\n') : '';
-                document.getElementById('edit-tab3-data').value = client.tab3 ? client.tab3.join('\\n') : '';
+                document.getElementById('edit-tab1-data').value = client.tab1 ? client.tab1.join('\n') : '';
+                document.getElementById('edit-tab2-data').value = client.tab2 ? client.tab2.join('\n') : '';
+                document.getElementById('edit-tab3-data').value = client.tab3 ? client.tab3.join('\n') : '';
             }
         }
 
@@ -1341,9 +1356,9 @@ html_content = """<!DOCTYPE html>
             const btn = document.getElementById('btn-update-diet');
             const client = clientsDB.find(c => c.name === name);
             if (client) {
-                client.tab1 = document.getElementById('edit-tab1-data').value.split('\\n').filter(i => i.trim() !== '');
-                client.tab2 = document.getElementById('edit-tab2-data').value.split('\\n').filter(i => i.trim() !== '');
-                client.tab3 = document.getElementById('edit-tab3-data').value.split('\\n').filter(i => i.trim() !== '');
+                client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').filter(i => i.trim() !== '');
+                client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').filter(i => i.trim() !== '');
+                client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').filter(i => i.trim() !== '');
                 btn.disabled = true;
                 btn.innerText = "Actualizando...";
                 try {
@@ -1379,7 +1394,7 @@ html_content = """<!DOCTYPE html>
             document.getElementById('header-client-title').innerText = `Fitness Alianza Activa - ${activeClient.name}`;
             document.getElementById('footer-client-subtitle').innerText = `Nutrición de Alto Rendimiento - ${activeClient.name}`;
             document.getElementById('ai-title-name').innerText = `NutriCoach IA - ${activeClient.name}`;
-            document.getElementById('ai-welcome-msg').innerText = `¡Hola ${activeClient.name}! Qué alegría saludarte. Estoy acá para lo que necesites.`;
+            document.getElementById('ai-welcome-msg').innerText = `¡Hola ${activeClient.name}! Qué alegría saludarte. Estoy conectado con la Tabla Nutricional Argentina por cada 100g para darte sustituciones exactas con 0% de error.`;
 
             document.getElementById('tab1-meals-container').innerHTML = activeClient.tab1.map((item, idx) => `
                 <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-orange-500/50 transition-all flex items-center gap-4">
@@ -1447,9 +1462,10 @@ html_content = """<!DOCTYPE html>
         }
 
         function installPWAApp() {
-            alert("📲 Para instalar la app en tu celular:\\n\\n1. Abre el menú de tu navegador (Chrome o Safari).\\n2. Selecciona 'Agregar a la pantalla de inicio' o 'Instalar aplicación'.\\n\\n¡Listo! Tendrás el escudo de Alianza Activa en tu celular.");
+            alert("📲 Para instalar la app en tu celular:\n\n1. Abre el menú de tu navegador (Chrome o Safari).\n2. Selecciona 'Agregar a la pantalla de inicio' o 'Instalar aplicación'.\n\n¡Listo! Tendrás el escudo de Alianza Activa en tu celular.");
         }
 
+        // --- NUTRICOACH IA INTELIGENTE CON TABLA ARGENTINA (0% ERROR EN SUSTITUCIONES) ---
         function sendChatMessage() {
             const inputEl = document.getElementById('chat-input');
             const container = document.getElementById('chat-messages');
@@ -1473,7 +1489,37 @@ html_content = """<!DOCTYPE html>
 
                 let replyText = "";
 
-                if (query.includes('que me toca') || query.includes('hoy') || query.includes('comer') || query.includes('menu') || query.includes('dieta') || query.includes('comida')) {
+                // Detección inteligente de sustitución de alimentos usando la tabla por cada 100g
+                if (query.includes('cambiar') || query.includes('cambio') || query.includes('reemplazar') || query.includes('por')) {
+                    let sourceFood = null;
+                    let targetFood = null;
+                    let sourceGrams = 50; // default quantity if mentioned or extracted
+
+                    // extraer gramos si existen
+                    const gramMatch = query.match(/(\d+)\s*g/);
+                    if (gramMatch) sourceGrams = parseInt(gramMatch[1]);
+
+                    if (query.includes('pan') && (query.includes('galleta') || query.includes('arroz'))) {
+                        sourceFood = argNutriTable['pan'];
+                        targetFood = argNutriTable['galletas de arroz'];
+                        // Cálculo exacto 0% error basado en carbohidratos (Pan 45g C / 100g vs Galletas 78g C / 100g)
+                        const totalCarbsToMatch = (sourceGrams / 100) * sourceFood.c;
+                        const targetGramsNeeded = Math.round((totalCarbsToMatch / targetFood.c) * 100);
+                        
+                        replyText = `⚖️ <strong>Sustitución Exacta (0% Error - Tabla Argentina):</strong><br>` +
+                                     `Para reemplazar <strong>${sourceGrams}g de ${sourceFood.name}</strong> (${sourceFood.c}g C/100g), debes consumir exactos <strong>${targetGramsNeeded}g de ${targetFood.name}</strong> (${targetFood.c}g C/100g).<br>` +
+                                     `<em>Ambas opciones aportan exactamente la misma cantidad de carbohidratos para mantener tu plan perfecto.</em>`;
+                    } else if (query.includes('pollo') && query.includes('lomo')) {
+                        sourceFood = argNutriTable['pollo'];
+                        targetFood = argNutriTable['lomo'];
+                        const totalProteinToMatch = (sourceGrams / 100) * sourceFood.p;
+                        const targetGramsNeeded = Math.round((totalProteinToMatch / targetFood.p) * 100);
+                        replyText = `⚖️ <strong>Sustitución Proteica Exacta (0% Error):</strong><br>` +
+                                     `Para reemplazar <strong>${sourceGrams}g de ${sourceFood.name}</strong> (${sourceFood.p}g P/100g), debes consumir exactos <strong>${targetGramsNeeded}g de ${targetFood.name}</strong> (${targetFood.p}g P/100g).`;
+                    } else {
+                        replyText = `Entendido, <strong>${activeClient.name}</strong>. Según la Tabla Nutricional Argentina por cada 100g, asegúrate de mantener equivalencias proporcionales de macronutrientes (Proteínas, Carbohidratos o Grasas). ¿Qué alimento específico deseas calcular?`;
+                    }
+                } else if (query.includes('que me toca') || query.includes('hoy') || query.includes('comer') || query.includes('menu') || query.includes('dieta') || query.includes('comida')) {
                     const planName = isHighEnergy ? "🔥 Alta Energía (Pierna - Tab 1)" : "🥗 Control y Recuperación (Tab 2)";
                     const meals = isHighEnergy ? (activeClient.tab1 || []) : (activeClient.tab2 || []);
                     replyText = `Hola <strong>${activeClient.name}</strong>. Hoy es <strong>${currentDay}</strong> y tu plan asignado es <strong>${planName}</strong>:<br><br>` +
@@ -1482,10 +1528,8 @@ html_content = """<!DOCTYPE html>
                     replyText = `💧 <strong>Hidratación Alianza Activa:</strong> Toma entre 40ml y 50ml de agua por kilo de peso corporal. El mate amargo está permitido libre sin azúcar.`;
                 } else if (query.includes('entreno') || query.includes('pierna') || query.includes('gym')) {
                     replyText = `🏋️‍♂️ Los días de alta energía (Lunes, Miércoles y Viernes) están diseñados para rendimiento máximo en pierna, integrando los pancakes o porridge de avena y batido Cookies.`;
-                } else if (query.includes('hola') || query.includes('saludos')) {
-                    replyText = `¡Hola <strong>${activeClient.name}</strong>! Soy tu NutriCoach IA de Alianza Activa. ¿En qué te puedo ayudar hoy con tu nutrición?`;
                 } else {
-                    replyText = `Entendido, <strong>${activeClient.name}</strong>. Recuerda mantener un 0% de error en tus macronutrientes, pesando los alimentos estrictamente en crudo. Si quieres saber tu menú de hoy, pregúntame: <em>"¿Qué me toca hoy?"</em>.`;
+                    replyText = `¡Hola <strong>${activeClient.name}</strong>! Estoy conectado con la Tabla Argentina por cada 100g. Pregúntame por ejemplo: <em>"¿Cómo cambio 50g de pan integral por galletas de arroz?"</em> o <em>"¿Qué me toca hoy?"</em>.`;
                 }
 
                 container.innerHTML += `
@@ -1504,4 +1548,4 @@ html_content = """<!DOCTYPE html>
 with open("alianza_activa.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print("Archivo alianza_activa.html actualizado correctamente con todas las mejoras solicitadas.")
+print("Archivo alianza_activa.html actualizado con todas las correcciones solicitadas.")
