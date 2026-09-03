@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Alianza Activa - Plataforma de Alto Rendimiento</title>
+    <title>Plan Nutricional - Fitness Alianza Activa</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -35,6 +35,11 @@
             pointer-events: none;
             z-index: 1;
         }
+        
+        /* Ajuste suave para el scroll horizontal en móviles */
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
         @media print {
             body { background: #ffffff !important; color: #000000 !important; }
             #food-rain-container, nav, #login-screen, .no-print, button, #admin-tab-btn, footer { display: none !important; }
@@ -50,21 +55,21 @@
 
     <div id="food-rain-container" class="fixed inset-0 pointer-events-none z-1 overflow-hidden"></div>
 
-    <!-- PANTALLA DE ACCESO / LOGIN & EMBUDO PÚBLICO -->
     <div id="login-screen" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-8 max-w-xl w-full shadow-[0_0_50px_rgba(245,158,11,0.2)] text-center space-y-6 my-auto">
-            <div class="w-20 h-20 mx-auto rounded-full bg-slate-950 border-2 border-amber-500 flex items-center justify-center text-amber-400 text-3xl shadow-inner">
-                <i class="fa-solid fa-shield-halved"></i>
-            </div>
+        <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-[0_0_50px_rgba(245,158,11,0.2)] text-center space-y-8 my-auto">
+            
             <div>
+                <div class="w-20 h-20 mx-auto rounded-full bg-slate-950 border-2 border-amber-500 flex items-center justify-center text-amber-400 text-3xl shadow-inner mb-4">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
                 <h2 class="text-2xl font-black text-white">Fitness Alianza Activa</h2>
-                <p class="text-slate-400 text-sm mt-1">Plataforma de Alto Rendimiento & Nutrición</p>
+                <p class="text-slate-400 text-sm mt-1">Plataforma de Alto Rendimiento</p>
             </div>
             
-            <div class="space-y-4 bg-slate-950 p-6 rounded-2xl border border-slate-800">
-                <h3 class="text-xs font-bold text-amber-400 uppercase tracking-widest">Acceso a Alumnos / Coach</h3>
-                <input type="password" id="access-password" onkeydown="if(event.key==='Enter') verifyPassword()" placeholder="Contraseña de acceso..." class="w-full bg-slate-900 border border-slate-700 text-white px-4 py-3 rounded-xl text-center tracking-widest focus:outline-none focus:border-amber-500 transition-colors text-sm">
-                <button onclick="verifyPassword()" id="btn-login-submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)] cursor-pointer text-sm">
+            <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4">
+                <h3 class="text-xs font-bold text-amber-400 uppercase tracking-widest text-left">Acceso a Alumnos / Coach</h3>
+                <input type="password" id="access-password" onkeydown="if(event.key==='Enter') verifyPassword()" placeholder="Contraseña de acceso..." class="w-full bg-slate-900 border border-slate-700 text-white px-4 py-3.5 rounded-xl text-center tracking-widest focus:outline-none focus:border-amber-500 transition-colors">
+                <button onclick="verifyPassword()" id="btn-login-submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3.5 rounded-xl transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] cursor-pointer">
                     Ingresar al Sistema
                 </button>
                 <p id="login-error" class="text-red-400 text-xs hidden">Acceso denegado. Contraseña incorrecta.</p>
@@ -72,31 +77,36 @@
 
             <div class="border-t border-slate-800 pt-6 space-y-4 text-left">
                 <div class="text-center">
-                    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-bold uppercase tracking-wider">¿No tienes plan todavía?</span>
-                    <h3 class="text-lg font-bold text-white mt-2">Obtuve tu Diagnóstico con IA 24/7</h3>
-                    <p class="text-xs text-slate-400 mt-1">Calcula tu objetivo nutricional con Roberto (Alianza Activa).</p>
+                    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-bold uppercase tracking-wider">¿Aún no tienes plan?</span>
+                    <h3 class="text-lg font-bold text-white mt-2">Obtén tu Diagnóstico con IA 24/7</h3>
+                    <p class="text-xs text-slate-400 mt-1">Calcula tu objetivo nutricional con Roberto.</p>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
-                    <input type="text" id="lead-name" placeholder="Tu Nombre" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:border-amber-500 outline-none">
-                    <select id="lead-goal" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:border-amber-500 outline-none">
-                        <option value="Hipertrofia / Pierna">Hipertrofia / Pierna</option>
-                        <option value="Definición / Control">Definición / Control</option>
+                    <input type="text" id="lead-name" placeholder="Tu Nombre" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-3 text-sm text-white focus:border-amber-500 outline-none">
+                    <select id="lead-goal" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-3 text-sm text-white focus:border-amber-500 outline-none">
+                        <option value="Hipertrofia / Pierna">Hipertrofia (Pierna)</option>
+                        <option value="Definición / Control">Definición (Control)</option>
                         <option value="Bienestar y Energía">Bienestar y Energía</option>
                     </select>
                 </div>
-                <button onclick="sendLeadWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition-all text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg">
-                    <i class="fa-brands fa-whatsapp text-base"></i> Consultar Plan con el Coach por WhatsApp
+                <button onclick="sendLeadWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-all text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Iniciar Plan por WhatsApp
                 </button>
+            </div>
+
+            <div class="pt-2 border-t border-slate-800/80">
+                <p class="text-[10px] text-slate-500 leading-relaxed">
+                    Exclusivo para el programa Fitness Alianza Activa.
+                </p>
             </div>
         </div>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <div id="main-app" class="hidden flex flex-col min-h-screen justify-between">
+        
         <header class="relative bg-slate-950 text-white shadow-2xl border-b border-amber-500/30 overflow-hidden z-10">
             <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=2070')] bg-cover bg-center opacity-85"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-950/85 to-slate-950"></div>
-            
             <div class="relative max-w-4xl mx-auto px-4 py-12 md:py-16 flex flex-col items-center justify-center text-center gap-6">
                 <div class="w-32 h-32 md:w-40 md:h-40 relative group z-10 mb-2 flex items-center justify-center bg-slate-900 rounded-full border-2 border-amber-500/60 shadow-[0_0_35px_rgba(245,158,11,0.4)] overflow-hidden">
                     <div class="absolute inset-0 bg-amber-500 rounded-full blur-[40px] opacity-30 transition-opacity duration-700 group-hover:opacity-60"></div>
@@ -105,7 +115,6 @@
                         <span class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-amber-200">Alianza Activa</span>
                     </div>
                 </div>
-                
                 <div class="space-y-3 z-10 flex flex-col items-center">
                     <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/40 text-amber-400 text-xs font-bold uppercase tracking-[0.2em] shadow-lg backdrop-blur-md">
                         <i class="fa-solid fa-book-open"></i> Guía de Alimentación Oficial
@@ -114,7 +123,7 @@
                         Fitness Alianza Activa
                     </h1>
                     <p class="text-slate-300 font-medium text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-                        Plan nutricional personalizado de 7 días para rendimiento máximo y composición corporal óptima.
+                        Plan nutricional personalizado de 7 días para rendimiento máximo.
                     </p>
                     <div class="pt-2 no-print flex flex-wrap gap-3 justify-center">
                         <button onclick="window.print()" class="bg-slate-900/90 hover:bg-slate-800 border border-amber-500/50 text-amber-400 text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2 shadow-md cursor-pointer">
@@ -125,262 +134,416 @@
             </div>
         </header>
 
-        <!-- BARRA DE NAVEGACIÓN -->
         <nav class="bg-slate-950/95 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-xl shadow-xl no-print">
-            <div class="max-w-4xl mx-auto px-4 flex overflow-x-auto gap-2 py-3 scrollbar-none justify-start md:justify-center">
-                <button onclick="switchTab(1)" id="btn-tab-1" class="tab-btn px-4 py-2 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-orange-500 text-slate-950 shadow-[0_0_20px_rgba(249,115,22,0.4)] cursor-pointer">
-                    <i class="fa-solid fa-bolt"></i><span>Alta Energía</span>
+            <div class="max-w-5xl mx-auto px-4 flex overflow-x-auto gap-3 py-4 hide-scroll justify-start lg:justify-center items-center">
+                
+                <button onclick="switchTab(1)" id="btn-tab-1" class="tab-btn px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-orange-500 text-slate-950 shadow-[0_0_20px_rgba(249,115,22,0.4)] cursor-pointer shrink-0">
+                    <i class="fa-solid fa-bolt"></i> <span>Alta Energía</span>
                 </button>
-                <button onclick="switchTab(2)" id="btn-tab-2" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-arrows-rotate"></i><span>Control</span>
+                
+                <button onclick="switchTab(2)" id="btn-tab-2" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
+                    <i class="fa-solid fa-arrows-rotate"></i> <span>Control</span>
                 </button>
-                <button onclick="switchTab(3)" id="btn-tab-3" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-cart-shopping"></i><span>Compras</span>
+                
+                <button onclick="switchTab(3)" id="btn-tab-3" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
+                    <i class="fa-solid fa-cart-shopping"></i> <span>Compras</span>
                 </button>
-                <button onclick="switchTab(4)" id="btn-tab-4" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-scale-balanced"></i><span>Equivalencias</span>
+                
+                <button onclick="switchTab(4)" id="btn-tab-4" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
+                    <i class="fa-solid fa-scale-balanced"></i> <span>Equivalencias</span>
                 </button>
-                <button onclick="switchTab(7)" id="btn-tab-7" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-utensils text-orange-400"></i><span>Recetas</span>
+
+                <button onclick="switchTab(7)" id="btn-tab-7" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
+                    <i class="fa-solid fa-utensils text-orange-400"></i> <span>Recetas</span>
                 </button>
-                <button onclick="switchTab(8)" id="btn-tab-8" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-store text-emerald-400"></i><span>Tienda & Protein Bar</span>
+
+                <button onclick="switchTab(8)" id="btn-tab-8" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
+                    <i class="fa-solid fa-store text-emerald-400"></i> <span>Tienda & Bar</span>
                 </button>
-                <button onclick="switchTab(5)" id="btn-tab-5" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-robot text-amber-400"></i><span>NutriCoach IA</span>
+                
+                <button onclick="switchTab(5)" id="btn-tab-5" class="tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0">
+                    <i class="fa-solid fa-robot text-amber-400"></i> <span>NutriCoach IA</span>
                 </button>
-                <button id="admin-tab-btn" onclick="switchTab(6)" class="tab-btn hidden px-4 py-2 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-amber-400 border border-amber-500/50 hover:bg-slate-800 cursor-pointer">
-                    <i class="fa-solid fa-sliders"></i><span>Panel Coach</span>
+                
+                <button id="admin-tab-btn" onclick="switchTab(6)" class="tab-btn hidden px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-amber-400 border border-amber-500/50 hover:bg-slate-800 cursor-pointer shrink-0">
+                    <i class="fa-solid fa-sliders"></i> <span>Panel Coach</span>
                 </button>
             </div>
         </nav>
 
-        <main class="relative z-10 max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+        <main class="relative z-10 max-w-4xl mx-auto px-4 py-10 flex-grow w-full space-y-8">
 
-            <!-- SECCIÓN 1: ALTA ENERGÍA -->
             <section id="content-tab-1" class="tab-content space-y-6">
                 <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden relative">
                     <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center opacity-30"></div>
                     <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-orange-950/60"></div>
-                    <div class="relative p-6 md:p-8 border-b border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="relative p-6 md:p-8 border-b border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div>
                             <div class="inline-flex items-center space-x-2 text-orange-400 mb-2 font-bold">
                                 <i class="fa-solid fa-calendar-days text-sm"></i>
                                 <span class="text-xs uppercase tracking-widest">Lunes, Miércoles y Viernes</span>
                             </div>
                             <h2 class="text-2xl md:text-3xl font-black text-white">Alta Energía (Pierna)</h2>
+                            <p class="text-slate-300 text-sm mt-1">Enfoque en rendimiento máximo, cargas altas de glucógeno e hipertrofia.</p>
                         </div>
-                        <button onclick="shareWhatsApp('tab1')" class="no-print bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer">
-                            <i class="fa-brands fa-whatsapp text-base"></i> Compartir Día
+                        <button onclick="shareWhatsApp('tab1')" class="no-print shrink-0 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold px-5 py-3 rounded-xl transition-all flex items-center gap-2 shadow-lg cursor-pointer">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Compartir Día
                         </button>
                     </div>
                 </div>
                 <div id="tab1-meals-container" class="space-y-4"></div>
             </section>
 
-            <!-- SECCIÓN 2: CONTROL Y RECUPERACIÓN -->
             <section id="content-tab-2" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden relative">
                     <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center opacity-30"></div>
                     <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/95 to-emerald-950/60"></div>
-                    <div class="relative p-6 md:p-8 border-b border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="relative p-6 md:p-8 border-b border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div>
                             <div class="inline-flex items-center space-x-2 text-emerald-400 mb-2 font-bold">
                                 <i class="fa-solid fa-calendar-days text-sm"></i>
                                 <span class="text-xs uppercase tracking-widest">Martes, Jueves, Sábado y Domingo</span>
                             </div>
                             <h2 class="text-2xl md:text-3xl font-black text-white">Control y Recuperación</h2>
+                            <p class="text-slate-300 text-sm mt-1">Carbohidratos moderados, huevos enteros y rotación proteica.</p>
                         </div>
-                        <button onclick="shareWhatsApp('tab2')" class="no-print bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer">
-                            <i class="fa-brands fa-whatsapp text-base"></i> Compartir Día
+                        <button onclick="shareWhatsApp('tab2')" class="no-print shrink-0 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold px-5 py-3 rounded-xl transition-all flex items-center gap-2 shadow-lg cursor-pointer">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Compartir Día
                         </button>
                     </div>
                 </div>
                 <div id="tab2-meals-container" class="space-y-4"></div>
             </section>
 
-            <!-- SECCIÓN 3: LISTA DE COMPRAS -->
             <section id="content-tab-3" class="tab-content hidden space-y-6">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
-                        <h2 class="text-2xl font-bold text-white mb-2">🛒 Lista de Compras Semanal</h2>
-                        <p class="text-slate-300 text-sm">Cantidades calculadas en crudo para la semana exacta.</p>
+                        <div class="flex items-center gap-3 mb-2 text-amber-400">
+                            <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                            <h2 class="text-2xl font-bold text-white">🛒 Lista de Compras</h2>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Cantidades calculadas con precisión matemática para cubrir la semana exacta en crudo.
+                        </p>
                     </div>
-                    <button onclick="shareWhatsApp('tab3')" class="no-print bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer">
-                        <i class="fa-brands fa-whatsapp text-base"></i> Mandar Súper por WhatsApp
+                    <button onclick="shareWhatsApp('tab3')" class="no-print shrink-0 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold px-5 py-3 rounded-xl transition-all flex items-center gap-2 shadow-lg cursor-pointer">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Enviar Súper
                     </button>
                 </div>
                 <div id="tab3-shopping-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN 4: EQUIVALENCIAS -->
             <section id="content-tab-4" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
-                    <h2 class="text-2xl font-bold text-white mb-2">Guía de Sustitutos y Equivalencias</h2>
-                    <p class="text-slate-300 text-sm">Intercambios directos oficiales para mantener tu plan intacto.</p>
+                    <div class="flex items-center gap-3 mb-2 text-amber-400">
+                        <i class="fa-solid fa-scale-balanced text-2xl"></i>
+                        <h2 class="text-2xl font-bold text-white">Guía de Sustitutos y Equivalencias</h2>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Utiliza estas equivalencias exactas para mantener tu plan nutricional perfecto (Bloques 1 al 5).
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center gap-3 text-orange-400 border-b border-slate-800 pb-3">
+                            <i class="fa-solid fa-drumstick-bite text-xl"></i>
+                            <h3 class="font-bold text-white">Proteínas Magras</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 font-semibold uppercase">Equivalente a 100g Pechuga de Pollo:</p>
+                        <ul class="text-xs text-slate-300 space-y-2.5">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 100g Lomo o Ternera magra</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 120g Pescado blanco (Merluza)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 1 lata de Atún al natural</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-orange-400"></i> 4 Claras + 1 Huevo entero</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center gap-3 text-amber-400 border-b border-slate-800 pb-3">
+                            <i class="fa-solid fa-bowl-rice text-xl"></i>
+                            <h3 class="font-bold text-white">Carbohidratos</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 font-semibold uppercase">Equivalente a 50g Arroz en crudo:</p>
+                        <ul class="text-xs text-slate-300 space-y-2.5">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 200g Papa o Batata (crudo)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 55g Avena en copos</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 70g Pan 100% integral</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> 50g Quinoa o Fideos integrales</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center gap-3 text-emerald-400 border-b border-slate-800 pb-3">
+                            <i class="fa-solid fa-seedling text-xl"></i>
+                            <h3 class="font-bold text-white">Grasas Buenas</h3>
+                        </div>
+                        <p class="text-xs text-slate-400 font-semibold uppercase">Equivalente a 10g Aceite de Oliva:</p>
+                        <ul class="text-xs text-slate-300 space-y-2.5">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 40g a 50g Palta (Aguacate)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 15g Frutos secos (Nueces)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 15g Mantequilla de maní natural</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
-            <!-- SECCIÓN 7: RECETAS -->
             <section id="content-tab-7" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
-                    <h2 class="text-2xl font-bold text-white mb-2">🍳 Recetas Oficiales Alianza Activa</h2>
-                    <p class="text-slate-300 text-sm">Pancakes, Porridge y Batido Cookies.</p>
+                    <div class="flex items-center gap-3 mb-2 text-orange-400">
+                        <i class="fa-solid fa-utensils text-2xl"></i>
+                        <h2 class="text-2xl font-bold text-white">🍳 Recetas Oficiales Alianza Activa</h2>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Preparaciones estandarizadas con precisión matemática para un 0% de error en tus macros.
+                    </p>
                 </div>
+                <div id="dynamic-recipes-container" class="grid md:grid-cols-2 gap-6">
+                    </div>
             </section>
 
-            <!-- SECCIÓN 8: TIENDA & PROTEIN BAR (CON VIDEOS DINÁMICOS) -->
             <section id="content-tab-8" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
-                    <h2 class="text-2xl font-bold text-white mb-2">🛍️ Tienda Oficial & Protein Bar Anubis</h2>
-                    <p class="text-slate-300 text-sm">Videos demostrativos y suplementación de alto rendimiento.</p>
+                    <div class="flex items-center gap-3 mb-2 text-emerald-400">
+                        <i class="fa-solid fa-store text-2xl"></i>
+                        <h2 class="text-2xl font-bold text-white">🛍️ Tienda Oficial & Protein Bar</h2>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Suplementación de alto rendimiento y presentaciones de nuestros batidos estrella.
+                    </p>
                 </div>
-
-                <!-- Contenedor dinámico de videos administrables -->
                 <div class="grid md:grid-cols-2 gap-6" id="dynamic-videos-container"></div>
 
-                <div class="grid md:grid-cols-3 gap-6 pt-4" id="dynamic-store-container">
+                <div class="grid md:grid-cols-3 gap-6 pt-4">
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
                         <div>
                             <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-shaker"></i></div>
                             <h3 class="font-bold text-white text-base">Batido F1 Cookies & Cream</h3>
-                            <p class="text-xs text-slate-400 mt-1">Nutrición celular completa, alta saciedad.</p>
+                            <p class="text-xs text-slate-400 mt-1">Nutrición celular completa y alta saciedad.</p>
                         </div>
-                        <button onclick="orderProductWhatsApp('Batido F1 Cookies & Cream')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer">
-                            <i class="fa-brands fa-whatsapp"></i> Pedir al Coach
+                        <button onclick="orderProductWhatsApp('Batido F1 Cookies & Cream')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Pedir al Coach
+                        </button>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-fire"></i></div>
+                            <h3 class="font-bold text-white text-base">Aloe Vera & Té Concentrado</h3>
+                            <p class="text-xs text-slate-400 mt-1">Limpieza digestiva e hidratación termogénica.</p>
+                        </div>
+                        <button onclick="orderProductWhatsApp('Aloe Vera y Té Concentrado')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Pedir al Coach
+                        </button>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3 flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-dumbbell"></i></div>
+                            <h3 class="font-bold text-white text-base">Personalized Protein Powder</h3>
+                            <p class="text-xs text-slate-400 mt-1">Proteína aislada pura para aumentar la carga proteica.</p>
+                        </div>
+                        <button onclick="orderProductWhatsApp('Personalized Protein Powder')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Pedir al Coach
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- SECCIÓN 5: NUTRICOACH IA -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex justify-between items-center">
-                    <h2 class="text-2xl font-bold text-white" id="ai-title-name">NutriCoach IA</h2>
-                    <button onclick="resetChat()" class="no-print bg-slate-800 text-slate-300 text-xs px-3 py-2 rounded-xl cursor-pointer">Limpiar</button>
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div>
+                        <div class="inline-flex items-center space-x-2 text-amber-400 mb-2 font-bold">
+                            <i class="fa-solid fa-robot text-sm"></i>
+                            <span class="text-xs uppercase tracking-widest">Asistente Inteligente</span>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-black text-white" id="ai-title-name">NutriCoach IA</h2>
+                    </div>
+                    <button onclick="resetChat()" title="Reiniciar chat" class="no-print bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-4 py-3 rounded-xl border border-slate-700 transition-all flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-rotate-left"></i> Limpiar Chat
+                    </button>
                 </div>
+
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[520px]">
                     <div id="chat-messages" class="flex-grow p-6 overflow-y-auto space-y-4">
                         <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm">AI</div>
-                            <div id="ai-welcome-msg" class="bg-slate-800 text-slate-200 p-4 rounded-2xl text-sm border border-slate-700">¡Hola! Estoy acá para lo que necesites.</div>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-slate-950 border-t border-slate-800 flex gap-3 items-center">
-                        <input type="text" id="chat-input" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Escribe tu consulta..." class="flex-grow bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-xl px-4 py-3 outline-none">
-                        <button onclick="sendChatMessage()" class="bg-amber-500 text-slate-950 font-bold px-6 py-3 rounded-xl cursor-pointer"><i class="fa-solid fa-paper-plane"></i></button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECCIÓN 6: PANEL COACH (CON GESTOR DE VIDEOS) -->
-            <section id="content-tab-6" class="tab-content hidden space-y-6">
-                <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-6">
-                    <div class="border-b border-slate-800 pb-4">
-                        <h2 class="text-2xl font-bold text-white">Panel Coach: Gestión en la Nube</h2>
-                        <p class="text-slate-400 text-sm">Administra clientes, dietas, escáneres y videos de la tienda.</p>
-                    </div>
-
-                    <!-- GESTOR DE VIDEOS DE LA TIENDA -->
-                    <div class="bg-slate-950 p-6 rounded-xl border border-amber-500/30 space-y-4">
-                        <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider"><i class="fa-solid fa-video"></i> Administrar Videos de la Tienda</h3>
-                        <p class="text-xs text-slate-400">Agrega o edita los títulos y enlaces de YouTube para los videos de la tienda.</p>
-                        
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div class="space-y-1">
-                                <label class="text-xs text-slate-400 font-semibold">Título Video 1</label>
-                                <input type="text" id="admin-vid-title-1" value="Preparación Batido Cookies" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white outline-none">
+                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0">
+                                <i class="fa-solid fa-robot"></i>
                             </div>
-                            <div class="space-y-1">
-                                <label class="text-xs text-slate-400 font-semibold">URL Embed YouTube Video 1</label>
-                                <input type="text" id="admin-vid-url-1" value="https://www.youtube.com/embed/dQw4w9WgXcQ" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white outline-none">
+                            <div id="ai-welcome-msg" class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">
+                                ¡Hola! Estoy acá para lo que necesites respecto a tu plan de Fitness Alianza Activa.
                             </div>
                         </div>
+                    </div>
 
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div class="space-y-1">
-                                <label class="text-xs text-slate-400 font-semibold">Título Video 2</label>
-                                <input type="text" id="admin-vid-title-2" value="Protein Bar Anubis Gym" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white outline-none">
-                            </div>
-                            <div class="space-y-1">
-                                <label class="text-xs text-slate-400 font-semibold">URL Embed YouTube Video 2</label>
-                                <input type="text" id="admin-vid-url-2" value="https://www.youtube.com/embed/dQw4w9WgXcQ" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white outline-none">
-                            </div>
-                        </div>
-
-                        <button onclick="saveStoreVideos()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl text-xs cursor-pointer">
-                            Guardar y Actualizar Videos en la Tienda
+                    <div class="p-4 bg-slate-950 border-t border-slate-800 flex gap-3 items-center no-print">
+                        <input type="text" id="chat-input" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Escribe tu consulta aquí..." class="flex-grow bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-amber-500 placeholder-slate-500">
+                        <button onclick="sendChatMessage()" id="chat-submit-btn" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] cursor-pointer">
+                            <i class="fa-solid fa-paper-plane"></i>
                         </button>
                     </div>
+                </div>
+            </section>
 
-                    <!-- Lector IA Escáner -->
-                    <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                        <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-camera-retro"></i> Lector IA de Escáner Corporal</h3>
-                        <div class="flex flex-col md:flex-row gap-3 items-center">
-                            <input type="file" id="scanner-file-input" accept="image/*" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-300">
-                            <button onclick="processScannerImage()" id="btn-scan-ai" class="w-full md:w-auto bg-amber-500 text-slate-950 font-bold px-6 py-3 rounded-xl text-xs cursor-pointer">Leer con IA</button>
-                        </div>
-                        <div id="scanner-result-box" class="hidden bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs text-emerald-400 font-mono"></div>
+            <section id="content-tab-6" class="tab-content hidden space-y-8">
+                
+                <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-8">
+                    <div class="border-b border-slate-800 pb-4">
+                        <h2 class="text-2xl font-bold text-white flex items-center gap-3"><i class="fa-solid fa-sliders text-amber-400"></i> Panel Coach Master</h2>
+                        <p class="text-slate-400 text-sm mt-1">Gestión total de Clientes, Tienda, Recetas y Escáner Corporal.</p>
                     </div>
 
-                    <!-- Registrar Cliente -->
-                    <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                        <h3 class="font-bold text-amber-400 text-sm uppercase">➕ Registrar Nuevo Cliente en Firebase</h3>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <input type="text" id="new-client-name" placeholder="Nombre" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white outline-none">
-                            <input type="text" id="new-client-pass" placeholder="Contraseña" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white outline-none">
+                    <div class="bg-slate-950 p-6 rounded-xl border border-amber-500/30 space-y-4">
+                        <h3 class="font-bold text-amber-400 text-sm uppercase tracking-wider flex items-center gap-2"><i class="fa-solid fa-camera-retro"></i> Lector de Escáner por IA (8 Electrodos)</h3>
+                        <p class="text-xs text-slate-400">Sube el ticket de la balanza. La IA extraerá Peso, % Grasa y Músculo automáticamente.</p>
+                        <div class="flex flex-col md:flex-row gap-4 items-center">
+                            <input type="file" id="scanner-file-input" accept="image/*" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-slate-300">
+                            <button onclick="processScannerImage()" id="btn-scan-ai" class="w-full md:w-auto bg-amber-500 text-slate-950 font-bold px-6 py-3.5 rounded-xl text-sm shrink-0 shadow-md cursor-pointer hover:bg-amber-400 transition-all">Leer con IA</button>
                         </div>
-                        <button onclick="addNewClientCloud()" id="btn-save-client" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-xs cursor-pointer">Guardar Cliente</button>
+                        <div id="scanner-result-box" class="hidden bg-slate-900 p-4 rounded-xl border border-slate-800 text-sm text-emerald-400 font-mono shadow-inner mt-4"></div>
                     </div>
 
-                    <!-- Editar Dieta -->
-                    <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                        <h3 class="font-bold text-amber-400 text-sm uppercase">📝 Editar Dieta de Clientes</h3>
-                        <select id="select-client-edit" onchange="loadClientDietForEditing()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white outline-none"></select>
-                        <div class="grid md:grid-cols-3 gap-4">
-                            <textarea id="edit-tab1-data" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none" placeholder="Alta Energía"></textarea>
-                            <textarea id="edit-tab2-data" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none" placeholder="Control"></textarea>
-                            <textarea id="edit-tab3-data" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none" placeholder="Compras"></textarea>
+                    <div class="grid lg:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                                <h3 class="font-bold text-amber-400 text-sm uppercase">➕ Registrar Nuevo Cliente</h3>
+                                <div class="space-y-3">
+                                    <input type="text" id="new-client-name" placeholder="Nombre" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 outline-none">
+                                    <input type="text" id="new-client-pass" placeholder="Contraseña" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 outline-none">
+                                </div>
+                                <button onclick="addNewClientCloud()" id="btn-save-client" class="w-full bg-amber-500 text-slate-950 font-bold py-3.5 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md transition-all">Guardar en Firebase</button>
+                            </div>
+
+                            <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                                <h3 class="font-bold text-amber-400 text-sm uppercase">📝 Editar Dieta del Cliente</h3>
+                                <select id="select-client-edit" onchange="loadClientDietForEditing()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:border-amber-500 outline-none"></select>
+                                <div class="space-y-3">
+                                    <textarea id="edit-tab1-data" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none" placeholder="Alta Energía (1 por línea)"></textarea>
+                                    <textarea id="edit-tab2-data" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none" placeholder="Control (1 por línea)"></textarea>
+                                    <textarea id="edit-tab3-data" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 font-mono outline-none" placeholder="Compras (1 por línea)"></textarea>
+                                </div>
+                                <button onclick="saveClientDietCloud()" id="btn-update-diet" class="w-full bg-emerald-500 text-slate-950 font-bold py-3.5 rounded-xl text-sm hover:bg-emerald-400 cursor-pointer shadow-md transition-all">Actualizar Plan</button>
+                            </div>
                         </div>
-                        <button onclick="saveClientDietCloud()" id="btn-update-diet" class="w-full bg-emerald-500 text-slate-950 font-bold py-3 rounded-xl text-xs cursor-pointer">Actualizar Plan</button>
+
+                        <div class="space-y-6">
+                            <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                                <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-video"></i> Administrar Videos Tienda</h3>
+                                <p class="text-xs text-slate-400">Edita los enlaces Embed de YouTube de los videos de tu tienda.</p>
+                                
+                                <div class="space-y-2">
+                                    <label class="text-xs text-slate-400">Título Video 1</label>
+                                    <input type="text" id="admin-vid-title-1" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white outline-none">
+                                    <label class="text-xs text-slate-400">URL Embed Video 1</label>
+                                    <input type="text" id="admin-vid-url-1" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white outline-none">
+                                </div>
+                                
+                                <div class="space-y-2 pt-2 border-t border-slate-800">
+                                    <label class="text-xs text-slate-400">Título Video 2</label>
+                                    <input type="text" id="admin-vid-title-2" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white outline-none">
+                                    <label class="text-xs text-slate-400">URL Embed Video 2</label>
+                                    <input type="text" id="admin-vid-url-2" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white outline-none">
+                                </div>
+                                <button onclick="saveGlobalSettings()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md">Guardar Videos</button>
+                            </div>
+
+                            <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                                <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-utensils"></i> Administrar Recetas</h3>
+                                <p class="text-xs text-slate-400">Modifica el texto de las recetas oficiales.</p>
+                                <div class="space-y-2">
+                                    <label class="text-xs text-slate-400">Receta 1 (Pancakes)</label>
+                                    <textarea id="admin-recipe-1" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none"></textarea>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs text-slate-400">Receta 2 (Porridge)</label>
+                                    <textarea id="admin-recipe-2" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none"></textarea>
+                                </div>
+                                <button onclick="saveGlobalSettings()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md">Guardar Recetas</button>
+                            </div>
+                        </div>
                     </div>
 
-                    <div id="clients-list-container" class="space-y-2"></div>
+                    <div class="pt-6 border-t border-slate-800 space-y-3">
+                        <h3 class="font-bold text-slate-300 text-sm uppercase tracking-wider">👥 Clientes Registrados en Firebase</h3>
+                        <div id="clients-list-container" class="space-y-2 grid md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                    </div>
 
-                    <div class="pt-4 border-t border-slate-800 flex justify-end">
-                        <button onclick="location.reload()" class="bg-slate-800 text-white text-xs font-bold px-6 py-2.5 rounded-xl cursor-pointer">Cerrar Sesión Coach</button>
+                    <div class="pt-8 flex justify-end">
+                        <button onclick="location.reload()" class="bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold px-8 py-3 rounded-xl transition-all cursor-pointer">
+                            Cerrar Sesión Coach
+                        </button>
                     </div>
                 </div>
             </section>
+
         </main>
 
-        <footer class="relative mt-16 py-16 text-center text-xs text-slate-400 border-t border-amber-500/30 bg-slate-950">
-            <p class="font-black text-amber-400 uppercase tracking-widest text-sm">Fitness Alianza Activa</p>
-            <p class="text-slate-400 text-xs mt-1">Río Grande, Tierra del Fuego</p>
+        <footer class="relative mt-16 py-16 text-center text-xs text-slate-400 border-t border-amber-500/30 overflow-hidden z-20 shadow-[0_-15px_40px_rgba(0,0,0,0.8)] bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=2070')">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/90 to-slate-950/50"></div>
+            <div class="relative max-w-4xl mx-auto px-4 flex flex-col items-center space-y-6 z-10">
+                <div class="flex flex-col items-center space-y-3">
+                    <div class="w-20 h-20 rounded-full bg-slate-900 border-2 border-amber-500/60 flex items-center justify-center text-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.4)] overflow-hidden relative">
+                        <i class="fa-solid fa-shield-halved text-3xl text-amber-400 drop-shadow"></i>
+                    </div>
+                    <div>
+                        <p class="font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 text-base md:text-lg tracking-widest uppercase drop-shadow-md">Fitness Alianza Activa</p>
+                        <p class="text-slate-300 font-medium mt-0.5 text-xs" id="footer-client-subtitle">Nutrición de Alto Rendimiento</p>
+                    </div>
+                </div>
+                <div class="w-20 h-px bg-amber-500/40"></div>
+                <p class="max-w-xl mx-auto leading-relaxed text-[10px] md:text-xs text-slate-400">
+                    Diseñado exclusivamente para el programa Fitness Alianza Activa.
+                </p>
+            </div>
         </footer>
     </div>
 
     <script>
         const API_KEY = "AIzaSyA2Sk6s2i2_bcJ_fJc4BEyMw3y9hU79_Nw";
         const PROJECT_ID = "alianza-activa";
+
         let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
 
-        let storeVideos = [
-            { title: "Preparación Batido Cookies", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", color: "amber" },
-            { title: "Protein Bar Anubis Gym", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", color: "emerald" }
-        ];
+        // Datos Globales Editables (Videos y Recetas)
+        let globalData = {
+            videos: [
+                { title: "Preparación Batido Cookies", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", color: "amber" },
+                { title: "Protein Bar Anubis Gym", url: "https://www.youtube.com/embed/dQw4w9WgXcQ", color: "emerald" }
+            ],
+            recipes: [
+                "30g Batido Cookies, 40g Avena instantánea, 1 Huevo (50g), 50ml Agua. Licuar y cocinar en sartén.",
+                "50g Avena tradicional en crudo, 200ml Agua, 30g Batido F1 Cookies. Cocinar avena, integrar batido al final."
+            ]
+        };
 
-        const defaultClients = [{
-            name: "Angela",
-            pass: "angela2026",
-            tab1: ["Desayuno: Pancakes de Cookies & Avena", "Almuerzo: 180g Pollo + Arroz"],
-            tab2: ["Desayuno: Batido Cookies Libre"],
-            tab3: ["Batido F1 Cookies: 2 tarros"]
-        }];
+        const defaultClients = [
+            {
+                name: "Angela",
+                pass: "angela2026",
+                tab1: [
+                    "Desayuno: 2 Huevos enteros cocidos a gusto + 40g de Pan integral",
+                    "Media Mañana: 150g de Fruta (Manzana verde o Kiwi)",
+                    "Almuerzo: 210g de Pechuga de pollo en crudo + 60g Arroz integral + 200g Ensalada",
+                    "Media Tarde: 2 Huevos enteros + 60g Pan integral",
+                    "Cena: Lunes: 200g Lomo magro + Ensalada + 40g Palta"
+                ],
+                tab2: [
+                    "Desayuno: 2 Huevos enteros + 40g Pan integral",
+                    "Media Mañana: 150g Fruta (Sin proteína)",
+                    "Almuerzo: 150g Proteína + 50g Carbohidrato + 10g Aceite de oliva + 200g Ensalada",
+                    "Media Tarde: 2 Huevos enteros + 120g Papa o Batata en crudo",
+                    "Cena: Rotación de pescado y pollo magro con vegetales"
+                ],
+                tab3: [
+                    "Huevos: 1 maple de 30 unidades",
+                    "Pechuga de pollo: 1.5 kg en crudo",
+                    "Carne roja magra: 450g",
+                    "Pan integral: 1 paquete (460g)",
+                    "Arroz integral o Parboil: 500g",
+                    "Fruta fresca: 1.2 kg",
+                    "Vegetales verdes: 3 kg"
+                ]
+            }
+        ];
 
         let isUserAdmin = false;
         let clientsDB = defaultClients;
-        let activeClient = defaultClients[0];
+        let activeClient = clientsDB[0];
 
         function toFirestoreDoc(client) {
             return {
@@ -406,27 +569,59 @@
         }
 
         async function fetchClientsFromFirebase() {
-            try {
-                const res = await fetch(`${FIRESTORE_BASE}?key=${API_KEY}`);
-                const data = await res.json();
-                if (res.ok && data.documents) {
-                    clientsDB = data.documents.map(fromFirestoreDoc);
-                }
-            } catch (e) {}
+            const endpoints = [
+                `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
+                `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
+            ];
+
+            for (const ep of endpoints) {
+                try {
+                    const res = await fetch(`${ep}?key=${API_KEY}`);
+                    const data = await res.json();
+                    if (res.ok) {
+                        FIRESTORE_BASE = ep;
+                        if (data.documents && data.documents.length > 0) {
+                            clientsDB = data.documents.map(fromFirestoreDoc);
+                        } else {
+                            clientsDB = defaultClients;
+                        }
+                        return clientsDB;
+                    }
+                } catch (err) {}
+            }
+            clientsDB = defaultClients;
+            return clientsDB;
         }
 
         async function verifyPassword() {
             const val = document.getElementById('access-password').value.trim();
             const errEl = document.getElementById('login-error');
-            await fetchClientsFromFirebase();
+            const btn = document.getElementById('btn-login-submit');
+
+            btn.disabled = true;
+            btn.innerText = "Verificando...";
+
+            try {
+                await fetchClientsFromFirebase();
+            } catch (e) {}
+
+            btn.disabled = false;
+            btn.innerText = "Ingresar al Sistema";
 
             if (val === "jansu2037rsc") {
                 isUserAdmin = true;
-                activeClient = { name: "Coach Roberto", tab1: [], tab2: [], tab3: [] };
+                activeClient = {
+                    name: "Coach Roberto",
+                    tab1: ["Modo Administrador - Coach"],
+                    tab2: ["Modo Administrador - Coach"],
+                    tab3: ["Modo Administrador"]
+                };
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
                 document.getElementById('admin-tab-btn').classList.remove('hidden');
-                renderStoreVideos();
+                
+                renderDynamicContent();
+                renderGlobalContent();
                 renderAdminPanel();
                 switchTab(6);
                 return;
@@ -439,8 +634,9 @@
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
                 document.getElementById('admin-tab-btn').classList.add('hidden');
+                
                 renderDynamicContent();
-                renderStoreVideos();
+                renderGlobalContent();
                 initFoodRain();
                 switchTab(1);
             } else {
@@ -448,98 +644,222 @@
             }
         }
 
-        function renderStoreVideos() {
-            const container = document.getElementById('dynamic-videos-container');
-            if(!container) return;
-            container.innerHTML = storeVideos.map(v => `
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg p-4 space-y-3">
-                    <h3 class="font-bold text-${v.color}-400 text-sm"><i class="fa-solid fa-video mr-2"></i> ${v.title}</h3>
-                    <div class="aspect-video bg-slate-950 rounded-xl overflow-hidden relative border border-slate-800">
-                        <iframe class="w-full h-full object-cover" src="${v.url}" title="${v.title}" allowfullscreen></iframe>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function saveStoreVideos() {
-            const t1 = document.getElementById('admin-vid-title-1').value.trim();
-            const u1 = document.getElementById('admin-vid-url-1').value.trim();
-            const t2 = document.getElementById('admin-vid-title-2').value.trim();
-            const u2 = document.getElementById('admin-vid-url-2').value.trim();
-
-            storeVideos = [
-                { title: t1, url: u1, color: "amber" },
-                { title: t2, url: u2, color: "emerald" }
-            ];
-
-            renderStoreVideos();
-            alert("✅ ¡Videos de la tienda actualizados correctamente!");
-        }
-
-        function orderProductWhatsApp(productName) {
-            window.open(`https://api.whatsapp.com/send?phone=5492964000000&text=${encodeURIComponent("Hola Roberto, quiero encargar " + productName)}`, '_blank');
-        }
-
+        // --- FUNCIONES DEL EMBUDO Y WHATSAPP ---
         function sendLeadWhatsApp() {
             const name = document.getElementById('lead-name').value.trim() || "Atleta";
             const goal = document.getElementById('lead-goal').value;
-            window.open(`https://api.whatsapp.com/send?phone=5492964000000&text=${encodeURIComponent("Hola Roberto, soy " + name + ". Me interesa el plan para " + goal)}`, '_blank');
+            const text = `Hola Roberto, soy ${name}. Me interesa iniciar el plan nutricional con Alianza Activa con el objetivo de: ${goal}. ¿Cómo podemos coordinar?`;
+            window.open(`https://api.whatsapp.com/send?phone=5492964000000&text=${encodeURIComponent(text)}`, '_blank');
         }
 
+        function orderProductWhatsApp(productName) {
+            const text = `Hola Roberto, quiero encargar "${productName}" desde la tienda de Alianza Activa. ¿Cómo coordinamos?`;
+            window.open(`https://api.whatsapp.com/send?phone=5492964000000&text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function shareWhatsApp(type) {
+            let text = "";
+            if (type === 'tab1') {
+                text = `🔥 *ALTA ENERGÍA (PIERNA)*\n👤 *Cliente:* ${activeClient.name}\n\n` +
+                    activeClient.tab1.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
+            } else if (type === 'tab2') {
+                text = `🥗 *CONTROL Y RECUPERACIÓN*\n👤 *Cliente:* ${activeClient.name}\n\n` +
+                    activeClient.tab2.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
+            } else if (type === 'tab3') {
+                text = `🛒 *COMPRAS SEMANAL*\n👤 *Cliente:* ${activeClient.name}\n\n` +
+                    activeClient.tab3.map(item => `✅ ${item}`).join('\n');
+            }
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        // --- RENDERIZADO GLOBAL (RECETAS Y VIDEOS) ---
+        function renderGlobalContent() {
+            // Render Videos
+            const vidContainer = document.getElementById('dynamic-videos-container');
+            if (vidContainer) {
+                vidContainer.innerHTML = globalData.videos.map(v => `
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg p-4 space-y-3">
+                        <h3 class="font-bold text-${v.color}-400 text-sm"><i class="fa-solid fa-video mr-2"></i> ${v.title}</h3>
+                        <div class="aspect-video bg-slate-950 rounded-xl overflow-hidden relative border border-slate-800">
+                            <iframe class="w-full h-full object-cover" src="${v.url}" title="${v.title}" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Render Recipes
+            const recContainer = document.getElementById('dynamic-recipes-container');
+            if (recContainer) {
+                recContainer.innerHTML = `
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center gap-3 text-amber-400 border-b border-slate-800 pb-3">
+                            <i class="fa-solid fa-cookie-bite text-xl"></i>
+                            <h3 class="font-bold text-white">Pancakes de Cookies & Avena</h3>
+                        </div>
+                        <p class="text-xs text-slate-300">${globalData.recipes[0]}</p>
+                    </div>
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center gap-3 text-orange-400 border-b border-slate-800 pb-3">
+                            <i class="fa-solid fa-mug-hot text-xl"></i>
+                            <h3 class="font-bold text-white">Porridge Tibio de Cookies</h3>
+                        </div>
+                        <p class="text-xs text-slate-300">${globalData.recipes[1]}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function saveGlobalSettings() {
+            const t1 = document.getElementById('admin-vid-title-1').value;
+            const u1 = document.getElementById('admin-vid-url-1').value;
+            const t2 = document.getElementById('admin-vid-title-2').value;
+            const u2 = document.getElementById('admin-vid-url-2').value;
+
+            const r1 = document.getElementById('admin-recipe-1').value;
+            const r2 = document.getElementById('admin-recipe-2').value;
+
+            globalData.videos[0].title = t1;
+            globalData.videos[0].url = u1;
+            globalData.videos[1].title = t2;
+            globalData.videos[1].url = u2;
+            
+            globalData.recipes[0] = r1;
+            globalData.recipes[1] = r2;
+
+            renderGlobalContent();
+            alert("✅ Ajustes Globales Guardados y Actualizados.");
+        }
+
+        // --- PANEL COACH: ESCÁNER IA ---
         async function processScannerImage() {
             const fileInput = document.getElementById('scanner-file-input');
             const resultBox = document.getElementById('scanner-result-box');
-            if (!fileInput.files || fileInput.files.length === 0) { alert("Selecciona una imagen."); return; }
+            const btn = document.getElementById('btn-scan-ai');
+
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert("Selecciona la imagen del escáner.");
+                return;
+            }
+
+            const file = fileInput.files[0];
             const reader = new FileReader();
+
             reader.onload = async function(e) {
                 const base64Data = e.target.result.split(',')[1];
+                btn.disabled = true;
+                btn.innerText = "Analizando...";
                 resultBox.classList.remove('hidden');
-                resultBox.innerHTML = "Analizando escáner...";
+                resultBox.innerHTML = "Extrayendo métricas corporales...";
+
                 try {
-                    const res = await fetch('/api/askNutriCoach', {
+                    const response = await fetch('/api/askNutriCoach', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ prompt: "Extrae Peso, % Grasa y Masa Muscular del escáner.", image: base64Data, clientName: "Coach" })
+                        body: JSON.stringify({
+                            prompt: "Extrae de esta imagen de escáner corporal: Peso, % Grasa Corporal y Masa Muscular.",
+                            image: base64Data,
+                            clientName: "Coach Roberto"
+                        })
                     });
-                    const data = await res.json();
-                    resultBox.innerHTML = `<strong>✅ Lectura Exitosa:</strong><br>${data.reply || "Datos extraídos."}`;
-                } catch(e) {
-                    resultBox.innerHTML = "❌ Error al procesar imagen.";
+                    const data = await response.json();
+                    resultBox.innerHTML = `<strong>✅ Escáner Analizado:</strong><br>${data.reply || "Métricas extraídas."}`;
+                } catch (err) {
+                    resultBox.innerHTML = "❌ Error al conectar con la IA.";
+                } finally {
+                    btn.disabled = false;
+                    btn.innerText = "Leer con IA";
                 }
             };
-            reader.readAsDataURL(fileInput.files[0]);
+            reader.readAsDataURL(file);
         }
 
+        // --- GESTIÓN DE CLIENTES EN FIREBASE ---
         async function addNewClientCloud() {
             const name = document.getElementById('new-client-name').value.trim();
             const pass = document.getElementById('new-client-pass').value.trim();
-            if(!name || !pass) { alert("Completa nombre y contraseña."); return; }
+            const btn = document.getElementById('btn-save-client');
+
+            if (!name || !pass) { alert("Nombre y contraseña obligatorios."); return; }
+
+            btn.disabled = true;
+            btn.innerText = "Guardando...";
+
             const newClient = {
                 name, pass,
-                tab1: ["Desayuno: Pancakes de Cookies", "Almuerzo: Pollo + Arroz"],
-                tab2: ["Desayuno: Batido Cookies"],
-                tab3: ["Batido F1 Cookies"]
+                tab1: ["Desayuno: Ejemplo", "Almuerzo: Ejemplo"],
+                tab2: ["Desayuno: Ejemplo"],
+                tab3: ["Lista de compras"]
             };
+
             try {
-                await fetch(`${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(toFirestoreDoc(newClient))
-                });
-                alert(`✅ Cliente "${name}" guardado.`);
-                await fetchClientsFromFirebase();
-                renderAdminPanel();
-            } catch(e) { alert("Error al guardar."); }
+                let saved = false;
+                const endpoints = [
+                    FIRESTORE_BASE,
+                    `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
+                    `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
+                ];
+
+                for (const ep of endpoints) {
+                    try {
+                        const url = `${ep}/${encodeURIComponent(name)}?key=${API_KEY}`;
+                        const res = await fetch(url, {
+                            method: 'PATCH',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(toFirestoreDoc(newClient))
+                        });
+                        if (res.ok) {
+                            FIRESTORE_BASE = ep;
+                            saved = true;
+                            break;
+                        }
+                    } catch(e) {}
+                }
+
+                if (saved) {
+                    alert(`✅ Cliente "${name}" guardado.`);
+                    document.getElementById('new-client-name').value = "";
+                    document.getElementById('new-client-pass').value = "";
+                    await fetchClientsFromFirebase();
+                    renderAdminPanel();
+                } else {
+                    throw new Error("No se pudo conectar a Firebase.");
+                }
+            } catch (err) {
+                alert("❌ Error: " + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Guardar en Firebase";
+            }
         }
 
         function renderAdminPanel() {
+            // Llenar select de edición
             const select = document.getElementById('select-client-edit');
             select.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
             loadClientDietForEditing();
-            document.getElementById('clients-list-container').innerHTML = clientsDB.map(c => `
-                <div class="flex items-center justify-between bg-slate-900 p-3 rounded-xl border border-slate-800 text-xs text-white">
-                    <span><strong>${c.name}</strong> (Pass: ${c.pass})</span>
-                    <button onclick="deleteClientCloud('${c.name}')" class="text-red-400 cursor-pointer">Eliminar</button>
+
+            // Cargar datos en los inputs de ajustes globales
+            document.getElementById('admin-vid-title-1').value = globalData.videos[0].title;
+            document.getElementById('admin-vid-url-1').value = globalData.videos[0].url;
+            document.getElementById('admin-vid-title-2').value = globalData.videos[1].title;
+            document.getElementById('admin-vid-url-2').value = globalData.videos[1].url;
+            
+            document.getElementById('admin-recipe-1').value = globalData.recipes[0];
+            document.getElementById('admin-recipe-2').value = globalData.recipes[1];
+
+            // Listado visual
+            const container = document.getElementById('clients-list-container');
+            if (clientsDB.length === 0) {
+                container.innerHTML = `<p class="text-sm text-slate-500 col-span-3">No hay clientes.</p>`;
+                return;
+            }
+            container.innerHTML = clientsDB.map(c => `
+                <div class="flex items-center justify-between bg-slate-900 p-3 rounded-xl border border-slate-800 text-sm">
+                    <div>
+                        <strong class="text-white block">${c.name}</strong> 
+                        <span class="text-[10px] text-slate-400">Pass: <code class="text-amber-400 font-mono">${c.pass}</code></span>
+                    </div>
+                    <button onclick="deleteClientCloud('${c.name}')" class="text-red-400 hover:text-red-300 text-xs px-2.5 py-1 rounded-lg bg-slate-800 transition-colors cursor-pointer"><i class="fa-solid fa-trash"></i></button>
                 </div>
             `).join('');
         }
@@ -548,54 +868,78 @@
             const name = document.getElementById('select-client-edit').value;
             const client = clientsDB.find(c => c.name === name);
             if (client) {
-                document.getElementById('edit-tab1-data').value = client.tab1.join('\n');
-                document.getElementById('edit-tab2-data').value = client.tab2.join('\n');
-                document.getElementById('edit-tab3-data').value = client.tab3.join('\n');
+                document.getElementById('edit-tab1-data').value = client.tab1 ? client.tab1.join('\n') : '';
+                document.getElementById('edit-tab2-data').value = client.tab2 ? client.tab2.join('\n') : '';
+                document.getElementById('edit-tab3-data').value = client.tab3 ? client.tab3.join('\n') : '';
             }
         }
 
         async function saveClientDietCloud() {
             const name = document.getElementById('select-client-edit').value;
+            const btn = document.getElementById('btn-update-diet');
             const client = clientsDB.find(c => c.name === name);
             if (client) {
                 client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').filter(i => i.trim() !== '');
                 client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').filter(i => i.trim() !== '');
                 client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').filter(i => i.trim() !== '');
-                await fetch(`${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(toFirestoreDoc(client))
-                });
-                alert(`✅ Plan actualizado.`);
+                
+                btn.disabled = true;
+                btn.innerText = "Actualizando...";
+
+                try {
+                    const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
+                    await fetch(url, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(toFirestoreDoc(client))
+                    });
+                    alert(`✅ Plan de "${name}" actualizado.`);
+                } catch(err) {
+                    alert("❌ Error: " + err.message);
+                } finally {
+                    btn.disabled = false;
+                    btn.innerText = "Actualizar Plan";
+                }
             }
         }
 
         async function deleteClientCloud(name) {
-            if(name === "Angela") { alert("No se puede eliminar"); return; }
-            if(confirm(`¿Eliminar a ${name}?`)) {
-                await fetch(`${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`, { method: 'DELETE' });
-                await fetchClientsFromFirebase();
-                renderAdminPanel();
+            if (name === "Angela") { alert("No se puede eliminar la cuenta base."); return; }
+            if(confirm(`¿Eliminar a "${name}" de Firebase?`)) {
+                try {
+                    await fetch(`${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`, { method: 'DELETE' });
+                    await fetchClientsFromFirebase();
+                    renderAdminPanel();
+                } catch(e) { alert("Error al eliminar."); }
             }
         }
 
-        function shareWhatsApp(type) {
-            let text = type === 'tab1' ? `Alta Energía: ${activeClient.tab1.join(', ')}` : `Control: ${activeClient.tab2.join(', ')}`;
-            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
-        }
-
+        // --- RENDERIZADO DINÁMICO CLIENTE ---
         function renderDynamicContent() {
             document.getElementById('header-client-title').innerText = `Fitness Alianza Activa - ${activeClient.name}`;
+            document.getElementById('footer-client-subtitle').innerText = `Nutrición de Alto Rendimiento - ${activeClient.name}`;
+            document.getElementById('ai-title-name').innerText = `NutriCoach IA - ${activeClient.name}`;
+            document.getElementById('ai-welcome-msg').innerText = `¡Hola ${activeClient.name}! Qué alegría saludarte. Estoy acá para lo que necesites.`;
+
             document.getElementById('tab1-meals-container').innerHTML = activeClient.tab1.map((item, idx) => `
-                <div class="bg-slate-900 rounded-2xl p-5 border border-slate-800 text-sm text-slate-200"><strong>Comida ${idx + 1}:</strong> ${item}</div>
+                <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-orange-500/50 transition-all flex items-center gap-4">
+                    <div class="bg-slate-800 text-orange-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-utensils"></i></div>
+                    <div class="text-sm text-slate-200"><strong class="text-orange-400 block mb-1">Comida ${idx + 1}</strong>${item}</div>
+                </div>
             `).join('');
+
             document.getElementById('tab2-meals-container').innerHTML = activeClient.tab2.map((item, idx) => `
-                <div class="bg-slate-900 rounded-2xl p-5 border border-slate-800 text-sm text-slate-200"><strong>Comida ${idx + 1}:</strong> ${item}</div>
+                <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-emerald-500/50 transition-all flex items-center gap-4">
+                    <div class="bg-slate-800 text-emerald-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-utensils"></i></div>
+                    <div class="text-sm text-slate-200"><strong class="text-emerald-400 block mb-1">Comida ${idx + 1}</strong>${item}</div>
+                </div>
             `).join('');
+
             document.getElementById('tab3-shopping-container').innerHTML = `
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:col-span-2">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-sm space-y-4 md:col-span-2">
+                    <h3 class="font-bold text-amber-400 border-b border-slate-800 pb-2">Artículos a Comprar</h3>
                     <ul class="space-y-3 text-sm text-slate-300">
-                        ${activeClient.tab3.map(item => `<li><i class="fa-solid fa-check text-amber-400 mr-2"></i>${item}</li>`).join('')}
+                        ${activeClient.tab3.map(item => `<li class="flex items-start gap-3"><i class="fa-solid fa-check text-amber-400 mt-1"></i><span>${item}</span></li>`).join('')}
                     </ul>
                 </div>
             `;
@@ -606,7 +950,7 @@
             if(!container) return;
             container.innerHTML = '';
             const foods = ['🥦', '🥑', '🥚', '🥩', '🍏', '🍗', '🍚', '🐟', '🥗'];
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 20; i++) {
                 const food = document.createElement('div');
                 food.className = 'falling-food select-none';
                 food.innerText = foods[Math.floor(Math.random() * foods.length)];
@@ -618,40 +962,19 @@
             }
         }
 
+        // --- SISTEMA DE PESTAÑAS ---
         function switchTab(tabNumber) {
-            [1, 2, 3, 4, 5, 6, 7, 8].forEach(i => {
-                const el = document.getElementById('content-tab-' + i);
-                if(el) el.classList.add('hidden');
-            });
-            const active = document.getElementById('content-tab-' + tabNumber);
-            if(active) active.classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        async function sendChatMessage() {
-            const input = document.getElementById('chat-input');
-            const container = document.getElementById('chat-messages');
-            const q = input.value.trim();
-            if(!q) return;
-            container.innerHTML += `<div class="text-right text-sm bg-amber-500 text-slate-950 p-3 rounded-xl ml-auto max-w-[80%]">${q}</div>`;
-            input.value = "";
-            try {
-                const res = await fetch('/api/askNutriCoach', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt: q, clientName: activeClient.name })
-                });
-                const data = await res.json();
-                container.innerHTML += `<div class="text-left text-sm bg-slate-800 text-slate-200 p-3 rounded-xl mr-auto max-w-[80%]">${data.reply || "Entendido."}</div>`;
-            } catch(e) {
-                container.innerHTML += `<div class="text-left text-sm bg-slate-800 text-slate-200 p-3 rounded-xl mr-auto max-w-[80%]">Error de conexión.</div>`;
+            for (let i = 1; i <= 8; i++) {
+                const content = document.getElementById('content-tab-' + i);
+                const btn = document.getElementById('btn-tab-' + i) || (i === 6 ? document.getElementById('admin-tab-btn') : null);
+                if (content) content.classList.add('hidden');
+                
+                if (btn && i !== 6) {
+                    btn.className = 'tab-btn px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer shrink-0';
+                }
+                if (btn && i === 6) {
+                    btn.className = 'tab-btn ' + (!isUserAdmin ? 'hidden ' : '') + 'px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-900 text-amber-400 border border-amber-500/50 hover:bg-slate-800 cursor-pointer shrink-0';
+                }
             }
-            container.scrollTop = container.scrollHeight;
-        }
-
-        function resetChat() {
-            document.getElementById('chat-messages').innerHTML = `<div class="bg-slate-800 text-slate-200 p-4 rounded-2xl text-sm">Chat reiniciado.</div>`;
-        }
-    </script>
-</body>
-</html>
+            const activeContent = document.getElementById('content-tab-' + tabNumber);
+            const activeBtn = document.getElementById
