@@ -563,30 +563,65 @@
                             <input type="text" id="edit-short-title" placeholder="Título del short..." class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
                             <input type="text" id="edit-short-date" placeholder="Fecha / Tiempo (ej: Hoy)..." class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
                         </div>
-                        <textarea id="edit-short-desc" rows="2" placeholder="Descripción del short..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none font-mono"></textarea>
-                        <button onclick="saveShortEdit()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 px-6 rounded-xl text-xs cursor-pointer shadow-md">Guardar Short / Historia</button>
+                        <div class="flex flex-col md:flex-row gap-3">
+                            <textarea id="edit-short-desc" rows="2" placeholder="Descripción del short..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none font-mono"></textarea>
+                            <button onclick="saveShortEdit()" class="shrink-0 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 px-6 rounded-xl text-xs cursor-pointer shadow-md">Guardar Short / Historia</button>
+                        </div>
                     </div>
 
-                    <!-- EDITOR DE LAS 10 RECETAS -->
+                    <!-- EDITOR DE TIENDA OFICIAL (NUEVO) -->
+                    <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
+                        <h3 class="font-bold text-emerald-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-store"></i> 🛍️ Editor de Tienda Oficial (1 a 15)</h3>
+                        <div class="grid md:grid-cols-3 gap-3">
+                            <select id="edit-store-index" onchange="loadStoreForEditing()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                                <option value="0">Producto 1</option>
+                                <option value="1">Producto 2</option>
+                                <option value="2">Producto 3</option>
+                                <option value="3">Producto 4</option>
+                                <option value="4">Producto 5</option>
+                                <option value="5">Producto 6</option>
+                                <option value="6">Producto 7</option>
+                                <option value="7">Producto 8</option>
+                                <option value="8">Producto 9</option>
+                                <option value="9">Producto 10</option>
+                                <option value="10">Producto 11</option>
+                                <option value="11">Producto 12</option>
+                                <option value="12">Producto 13</option>
+                                <option value="13">Producto 14</option>
+                                <option value="14">Producto 15</option>
+                            </select>
+                            <input type="text" id="edit-store-title" placeholder="Nombre del producto..." class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                            <input type="file" id="edit-store-file" accept="image/*" class="bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-300">
+                        </div>
+                        <div class="flex flex-col md:flex-row gap-3">
+                            <textarea id="edit-store-desc" rows="2" placeholder="Descripción del producto..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none font-mono"></textarea>
+                            <button onclick="saveStoreEdit()" class="shrink-0 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2.5 px-6 rounded-xl text-xs cursor-pointer shadow-md">Guardar Producto</button>
+                        </div>
+                    </div>
+
+                    <!-- EDITOR DE LAS 10 RECETAS (ACTUALIZADO - AHORA SE EDITA EL TÍTULO) -->
                     <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                         <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-utensils"></i> 🍳 Editor de Recetas Oficiales (1 a 10)</h3>
                         <div class="grid md:grid-cols-3 gap-3">
                             <select id="edit-recipe-index" onchange="loadRecipeForEditing()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
-                                <option value="0">Receta 1: Pancakes de Cookies</option>
-                                <option value="1">Receta 2: Porridge Tibio</option>
-                                <option value="2">Receta 3: Bizcochuelo Microondas</option>
-                                <option value="3">Receta 4: Waffles Proteicos</option>
-                                <option value="4">Receta 5: Batido Fuego Rojo</option>
-                                <option value="5">Receta 6: Omelette Matutino</option>
-                                <option value="6">Receta 7: Budín de Batata</option>
-                                <option value="7">Receta 8: Ensalada Carga Aumentada</option>
-                                <option value="8">Receta 9: Crepes Salados</option>
-                                <option value="9">Receta 10: Postre Helado Fit</option>
+                                <option value="0">Receta 1</option>
+                                <option value="1">Receta 2</option>
+                                <option value="2">Receta 3</option>
+                                <option value="3">Receta 4</option>
+                                <option value="4">Receta 5</option>
+                                <option value="5">Receta 6</option>
+                                <option value="6">Receta 7</option>
+                                <option value="7">Receta 8</option>
+                                <option value="8">Receta 9</option>
+                                <option value="9">Receta 10</option>
                             </select>
+                            <input type="text" id="edit-recipe-title" placeholder="Título de la receta..." class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
                             <input type="file" id="edit-recipe-file" accept="image/*" class="bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-300">
-                            <button onclick="saveRecipeEdit()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-xl text-xs cursor-pointer shadow-md">Guardar Receta</button>
                         </div>
-                        <textarea id="edit-recipe-desc" rows="3" placeholder="Ingredientes y preparación exacta..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none font-mono"></textarea>
+                        <div class="flex flex-col md:flex-row gap-3">
+                            <textarea id="edit-recipe-desc" rows="3" placeholder="Ingredientes y preparación exacta..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none font-mono"></textarea>
+                            <button onclick="saveRecipeEdit()" class="shrink-0 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 px-6 rounded-xl text-xs cursor-pointer shadow-md">Guardar Receta</button>
+                        </div>
                     </div>
 
                     <!-- GESTIÓN CLIENTES -->
@@ -750,6 +785,33 @@
         let activeClient = clientsDB[0];
         let lastCalculatedPlan = null;
 
+        // NUEVO: Funciones para Sincronizar Datos Globales (Shorts, Tienda, Recetas)
+        async function fetchGlobalDataFromCloud() {
+            try {
+                const res = await fetch(`${FIRESTORE_BASE}/_GLOBAL_DATA_?key=${API_KEY}`);
+                if (res.ok) {
+                    const doc = await res.json();
+                    if (doc.fields && doc.fields.jsonData) {
+                        const parsed = JSON.parse(doc.fields.jsonData.stringValue);
+                        if (parsed.batidos) globalData.batidos = parsed.batidos;
+                        if (parsed.shorts) globalData.shorts = parsed.shorts;
+                        if (parsed.recipes) globalData.recipes = parsed.recipes;
+                    }
+                }
+            } catch(e) { console.log("Cargando globalData local por defecto."); }
+        }
+
+        async function saveGlobalDataToCloud() {
+            try {
+                const body = { fields: { jsonData: { stringValue: JSON.stringify(globalData) } } };
+                await fetch(`${FIRESTORE_BASE}/_GLOBAL_DATA_?key=${API_KEY}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+            } catch(e) { console.error("Error al guardar datos globales."); }
+        }
+
         function addLog(msg, type = 'info') {
             const box = document.getElementById('live-logs-box');
             if (!box) return;
@@ -852,7 +914,9 @@
                     if (res.ok) {
                         FIRESTORE_BASE = ep;
                         if (data.documents && data.documents.length > 0) {
-                            clientsDB = data.documents.map(fromFirestoreDoc);
+                            clientsDB = data.documents
+                                .filter(doc => !doc.name.includes('_GLOBAL_DATA_'))
+                                .map(fromFirestoreDoc);
                         } else {
                             clientsDB = defaultClients;
                         }
@@ -869,6 +933,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', async () => {
+            await fetchGlobalDataFromCloud();
             await fetchClientsFromFirebase();
             renderGlobalContent();
         });
@@ -990,7 +1055,10 @@
             btn.innerText = "Verificando...";
             errEl.classList.add('hidden');
 
-            try { await fetchClientsFromFirebase(); } catch (e) {}
+            try { 
+                await fetchGlobalDataFromCloud();
+                await fetchClientsFromFirebase(); 
+            } catch (e) {}
 
             btn.disabled = false;
             btn.innerText = "Ingresar al Sistema";
@@ -1015,6 +1083,8 @@
                 renderAdminPanel();
                 switchTab(6);
                 loadShortForEditing();
+                loadRecipeForEditing();
+                loadStoreForEditing();
                 addLog("Acceso de Administrador concedido.", "success");
                 return;
             }
@@ -1090,13 +1160,13 @@
             let text = "";
             if (type === 'tab1') {
                 text = `🔥 *ALTA ENERGÍA (PIERNA)*\n👤 *Cliente:* ${activeClient.name}\n\n` +
-                    activeClient.tab1.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
+                    (activeClient.tab1 || []).map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
             } else if (type === 'tab2') {
                 text = `🥗 *CONTROL Y RECUPERACIÓN*\n👤 *Cliente:* ${activeClient.name}\n\n` +
-                    activeClient.tab2.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
+                    (activeClient.tab2 || []).map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
             } else if (type === 'tab3') {
                 text = `🛒 *COMPRAS SEMANAL*\n👤 *Cliente:* ${activeClient.name}\n\n` +
-                    activeClient.tab3.map(item => `✅ ${item}`).join('\n');
+                    (activeClient.tab3 || []).map(item => `✅ ${item}`).join('\n');
             }
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
         }
@@ -1111,7 +1181,7 @@
                 batidoContainer.innerHTML = globalData.batidos.map(b => `
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
                         <div>
-                            <div class="h-48 overflow-hidden relative">
+                            <div class="h-48 overflow-hidden relative bg-black flex items-center justify-center">
                                 <img src="${b.image}" alt="${b.title}" class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
                             </div>
@@ -1133,9 +1203,12 @@
             if (storiesBar) {
                 storiesBar.innerHTML = globalData.shorts.map((s, idx) => `
                     <div onclick="openStoryModal(${idx})" class="flex flex-col items-center gap-1.5 cursor-pointer shrink-0 group">
-                        <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-amber-500 to-orange-500 group-hover:scale-105 transition-transform relative">
-                            ${s.type === 'video' ? '<span class="absolute bottom-0 right-0 bg-black text-amber-400 text-[9px] px-1 rounded-full z-10"><i class="fa-solid fa-play"></i></span>' : ''}
-                            <img src="${s.image}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950">
+                        <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-amber-500 to-orange-500 group-hover:scale-105 transition-transform relative overflow-hidden flex items-center justify-center bg-black">
+                            ${s.type === 'video' ? '<span class="absolute bottom-1 right-1 bg-black/80 text-amber-400 text-[8px] p-1 rounded-full z-10 leading-none"><i class="fa-solid fa-play"></i></span>' : ''}
+                            ${s.type === 'video' 
+                                ? `<video src="${s.image}#t=0.1" class="w-full h-full rounded-full object-cover border-2 border-slate-950" muted playsinline preload="metadata"></video>` 
+                                : `<img src="${s.image}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950">`
+                            }
                         </div>
                         <span class="text-[10px] text-slate-300 font-medium max-w-[64px] truncate text-center">${s.title}</span>
                     </div>
@@ -1146,7 +1219,7 @@
             if (recContainer) {
                 recContainer.innerHTML = globalData.recipes.map((r, idx) => `
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
-                        <div class="h-44 overflow-hidden relative">
+                        <div class="h-44 overflow-hidden relative bg-black flex items-center justify-center">
                             <img src="${r.image}" alt="${r.title}" class="w-full h-full object-cover">
                             <span class="absolute top-3 left-3 bg-slate-950/80 text-orange-400 text-[10px] font-bold px-3 py-1 rounded-full">Receta ${idx + 1}</span>
                         </div>
@@ -1178,6 +1251,7 @@
             document.getElementById('story-media-container').innerHTML = '';
         }
 
+        // --- EDITORES DE COACH ---
         function loadShortForEditing() {
             const idx = document.getElementById('edit-short-index').value;
             const shortItem = globalData.shorts[idx];
@@ -1187,7 +1261,7 @@
             document.getElementById('edit-short-type').value = shortItem.type || 'image';
         }
 
-        function saveShortEdit() {
+        async function saveShortEdit() {
             const idx = document.getElementById('edit-short-index').value;
             const fileInput = document.getElementById('edit-short-file');
             const newTitle = document.getElementById('edit-short-title').value.trim();
@@ -1203,16 +1277,18 @@
 
             if (fileInput.files && fileInput.files[0]) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = async function(e) {
                     globalData.shorts[idx].image = e.target.result;
                     fileInput.value = "";
                     renderGlobalContent();
+                    await saveGlobalDataToCloud();
                     alert(`✅ Short ${Number(idx)+1} actualizado con éxito.`);
                     addLog(`Short ${Number(idx)+1} editado correctamente.`, "success");
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
                 renderGlobalContent();
+                await saveGlobalDataToCloud();
                 alert(`✅ Short ${Number(idx)+1} actualizado con éxito.`);
                 addLog(`Short ${Number(idx)+1} editado correctamente.`, "success");
             }
@@ -1221,31 +1297,72 @@
         function loadRecipeForEditing() {
             const idx = document.getElementById('edit-recipe-index').value;
             const receta = globalData.recipes[idx];
+            document.getElementById('edit-recipe-title').value = receta.title;
             document.getElementById('edit-recipe-desc').value = receta.text;
         }
 
-        function saveRecipeEdit() {
+        async function saveRecipeEdit() {
             const idx = document.getElementById('edit-recipe-index').value;
             const fileInput = document.getElementById('edit-recipe-file');
+            const newTitle = document.getElementById('edit-recipe-title').value.trim();
             const newText = document.getElementById('edit-recipe-desc').value.trim();
 
-            if(!newText) { alert("La receta no puede estar vacía."); return; }
+            if(!newTitle || !newText) { alert("El título y la receta no pueden estar vacíos."); return; }
+            globalData.recipes[idx].title = newTitle;
             globalData.recipes[idx].text = newText;
 
             if (fileInput.files && fileInput.files[0]) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = async function(e) {
                     globalData.recipes[idx].image = e.target.result;
                     fileInput.value = "";
                     renderGlobalContent();
+                    await saveGlobalDataToCloud();
                     alert(`✅ Receta ${Number(idx)+1} actualizada con éxito.`);
                     addLog(`Receta ${Number(idx)+1} editada correctamente.`, "success");
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
                 renderGlobalContent();
+                await saveGlobalDataToCloud();
                 alert(`✅ Receta ${Number(idx)+1} actualizada con éxito.`);
                 addLog(`Receta ${Number(idx)+1} editada correctamente.`, "success");
+            }
+        }
+
+        function loadStoreForEditing() {
+            const idx = document.getElementById('edit-store-index').value;
+            const producto = globalData.batidos[idx];
+            document.getElementById('edit-store-title').value = producto.title;
+            document.getElementById('edit-store-desc').value = producto.desc;
+        }
+
+        async function saveStoreEdit() {
+            const idx = document.getElementById('edit-store-index').value;
+            const fileInput = document.getElementById('edit-store-file');
+            const newTitle = document.getElementById('edit-store-title').value.trim();
+            const newDesc = document.getElementById('edit-store-desc').value.trim();
+
+            if(!newTitle) { alert("El nombre del producto no puede estar vacío."); return; }
+            globalData.batidos[idx].title = newTitle;
+            globalData.batidos[idx].desc = newDesc;
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    globalData.batidos[idx].image = e.target.result;
+                    fileInput.value = "";
+                    renderGlobalContent();
+                    await saveGlobalDataToCloud();
+                    alert(`✅ Producto ${Number(idx)+1} actualizado en Tienda.`);
+                    addLog(`Producto Tienda ${Number(idx)+1} editado.`, "success");
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                renderGlobalContent();
+                await saveGlobalDataToCloud();
+                alert(`✅ Producto ${Number(idx)+1} actualizado en Tienda.`);
+                addLog(`Producto Tienda ${Number(idx)+1} editado.`, "success");
             }
         }
 
@@ -1301,7 +1418,6 @@
             const select = document.getElementById('select-client-edit');
             if (select) select.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
             loadClientDietForEditing();
-            loadShortForEditing();
             updateSystemMonitor("Conectado (Firebase)");
 
             const container = document.getElementById('clients-list-container');
@@ -1379,14 +1495,14 @@
             document.getElementById('ai-title-name').innerText = `NutriCoach IA - ${activeClient.name}`;
             document.getElementById('ai-welcome-msg').innerText = `¡Hola ${activeClient.name}! Qué alegría saludarte. Estoy acá para guiarte con tus macros y equivalencias exactas.`;
 
-            document.getElementById('tab1-meals-container').innerHTML = activeClient.tab1.map((item, idx) => `
+            document.getElementById('tab1-meals-container').innerHTML = (activeClient.tab1 || []).map((item, idx) => `
                 <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-orange-500/50 transition-all flex items-center gap-4">
                     <div class="bg-slate-800 text-orange-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-utensils"></i></div>
                     <div class="text-sm text-slate-200"><strong class="text-orange-400 block mb-1">Comida ${idx + 1}</strong>${item}</div>
                 </div>
             `).join('');
 
-            document.getElementById('tab2-meals-container').innerHTML = activeClient.tab2.map((item, idx) => `
+            document.getElementById('tab2-meals-container').innerHTML = (activeClient.tab2 || []).map((item, idx) => `
                 <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-emerald-500/50 transition-all flex items-center gap-4">
                     <div class="bg-slate-800 text-emerald-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-utensils"></i></div>
                     <div class="text-sm text-slate-200"><strong class="text-emerald-400 block mb-1">Comida ${idx + 1}</strong>${item}</div>
@@ -1397,7 +1513,7 @@
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-sm space-y-4 md:col-span-2">
                     <h3 class="font-bold text-amber-400 border-b border-slate-800 pb-2">Artículos a Comprar</h3>
                     <ul class="space-y-3 text-sm text-slate-300">
-                        ${activeClient.tab3.map(item => `<li class="flex items-start gap-3"><i class="fa-solid fa-check text-amber-400 mt-1"></i><span>${item}</span></li>`).join('')}
+                        ${(activeClient.tab3 || []).map(item => `<li class="flex items-start gap-3"><i class="fa-solid fa-check text-amber-400 mt-1"></i><span>${item}</span></li>`).join('')}
                     </ul>
                 </div>
             `;
@@ -1448,7 +1564,7 @@
             alert("📲 Para instalar la app en tu celular:\n\n1. Abre el menú de tu navegador (Chrome o Safari).\n2. Selecciona 'Agregar a la pantalla de inicio'.");
         }
 
-        // --- NUTRICOACH IA AVANZADA & INTELIGENTE (0% ERROR, BLOQUES Y EQUIVALENCIAS) ---
+        // --- NUTRICOACH IA AVANZADA & ESTABILIZADA ---
         function sendChatMessage() {
             const inputEl = document.getElementById('chat-input');
             const container = document.getElementById('chat-messages');
@@ -1463,62 +1579,75 @@
             container.scrollTop = container.scrollHeight;
 
             setTimeout(() => {
-                const query = q.toLowerCase();
-                const now = new Date();
-                const dayIndex = now.getDay();
-                const days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-                const currentDay = days[dayIndex];
-                const isHighEnergy = (dayIndex === 1 || dayIndex === 3 || dayIndex === 5);
+                try {
+                    const query = q.toLowerCase();
+                    const now = new Date();
+                    const dayIndex = now.getDay();
+                    const days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+                    const currentDay = days[dayIndex];
+                    const isHighEnergy = (dayIndex === 1 || dayIndex === 3 || dayIndex === 5);
 
-                let replyText = "";
-                const clientName = activeClient.name || "Atleta";
-                const pTarget = activeClient.macroP || 140;
-                const cTarget = activeClient.macroC || 180;
-                const fTarget = activeClient.macroF || 50;
+                    let replyText = "";
+                    const clientName = activeClient.name || "Atleta";
+                    const pTarget = activeClient.macroP || 140;
+                    const cTarget = activeClient.macroC || 180;
+                    const fTarget = activeClient.macroF || 50;
 
-                if (query.includes('que me toca') || query.includes('hoy') || query.includes('comer') || query.includes('menu') || query.includes('dieta') || query.includes('comida')) {
-                    const planName = isHighEnergy ? "🔥 Alta Energía (Pierna)" : "🥗 Control y Recuperación";
-                    const meals = isHighEnergy ? (activeClient.tab1 || []) : (activeClient.tab2 || []);
-                    replyText = `Hola <strong>${clientName}</strong>. Hoy es <strong>${currentDay}</strong>, por lo que corresponde el módulo <strong>${planName}</strong>:<br><br>` +
-                                 meals.map((m, idx) => `• <strong>Comida ${idx + 1}:</strong> ${m}`).join('<br>') +
-                                 `<br><br>💡 <em>Recuerda pesar todo estrictamente en crudo (g) y mantener un 0% de error en tus macros (${pTarget}g P / ${cTarget}g C / ${fTarget}g G).</em>`;
-                } else if (query.includes('cambiar') || query.includes('sustituir') || query.includes('en vez de') || query.includes('equivalencia') || query.includes('reemplazar') || query.includes('elegir')) {
-                    if (query.includes('pollo') || query.includes('carne') || query.includes('pescado') || query.includes('proteina')) {
-                        replyText = `🥩 <strong>Intercambio Proteico (Bloque 1):</strong> En Alianza Activa puedes sustituir 100g de pechuga de pollo en crudo por:<br>` +
-                                    `• 100g de lomo o ternera magra (en crudo)<br>` +
-                                    `• 120g de pescado blanco / merluza (en crudo)<br>` +
-                                    `• 1 lata de atún al natural<br>` +
-                                    `• 4 claras + 1 huevo entero (en unidades).<br><br>` +
-                                    `🔍 <em>Todo pesado estrictamente en crudo para respetar tus ${pTarget}g de proteína diaria sin pasarte.</em>`;
-                    } else if (query.includes('arroz') || query.includes('papa') || query.includes('batata') || query.includes('avena') || query.includes('pan') || query.includes('carbohidrato')) {
-                        replyText = `🥔 <strong>Intercambio de Carbohidratos (Bloque 2):</strong> Para mantener tus ${cTarget}g de carbohidratos intactos, las equivalencias exactas son:<br>` +
-                                    `• 50g de arroz integral o parboil en crudo equivalen a <strong>200g de papa o batata cruda</strong>.<br>` +
-                                    `• 50g de arroz equivalen a <strong>55g de avena tradicional</strong>.<br>` +
-                                    `• 50g de arroz equivalen a <strong>70g de pan 100% integral</strong>.<br><br>` +
-                                    `⚖️ <em>Pesa siempre en seco/crudo antes de cocinar para mantener un 0% de error en tus macros.</em>`;
+                    if (query.includes('que me toca') || query.includes('hoy') || query.includes('comer') || query.includes('menu') || query.includes('dieta') || query.includes('comida')) {
+                        const planName = isHighEnergy ? "🔥 Alta Energía (Pierna)" : "🥗 Control y Recuperación";
+                        const meals = isHighEnergy ? (activeClient.tab1 || []) : (activeClient.tab2 || []);
+                        if (meals.length > 0) {
+                            replyText = `Hola <strong>${clientName}</strong>. Hoy es <strong>${currentDay}</strong>, por lo que corresponde el módulo <strong>${planName}</strong>:<br><br>` +
+                                         meals.map((m, idx) => `• <strong>Comida ${idx + 1}:</strong> ${m}`).join('<br>') +
+                                         `<br><br>💡 <em>Recuerda pesar todo estrictamente en crudo (g) y mantener un 0% de error en tus macros (${pTarget}g P / ${cTarget}g C / ${fTarget}g G).</em>`;
+                        } else {
+                            replyText = `¡Hola <strong>${clientName}</strong>! Aún no tienes comidas cargadas en tu plan de hoy. Pídele al coach que configure tu módulo de ${planName}.`;
+                        }
+                    } else if (query.includes('cambiar') || query.includes('sustituir') || query.includes('en vez de') || query.includes('equivalencia') || query.includes('reemplazar') || query.includes('elegir')) {
+                        if (query.includes('pollo') || query.includes('carne') || query.includes('pescado') || query.includes('proteina')) {
+                            replyText = `🥩 <strong>Intercambio Proteico (Bloque 1):</strong> En Alianza Activa puedes sustituir 100g de pechuga de pollo en crudo por:<br>` +
+                                        `• 100g de lomo o ternera magra (en crudo)<br>` +
+                                        `• 120g de pescado blanco / merluza (en crudo)<br>` +
+                                        `• 1 lata de atún al natural<br>` +
+                                        `• 4 claras + 1 huevo entero (en unidades).<br><br>` +
+                                        `🔍 <em>Todo pesado estrictamente en crudo para respetar tus ${pTarget}g de proteína diaria sin pasarte.</em>`;
+                        } else if (query.includes('arroz') || query.includes('papa') || query.includes('batata') || query.includes('avena') || query.includes('pan') || query.includes('carbohidrato')) {
+                            replyText = `🥔 <strong>Intercambio de Carbohidratos (Bloque 2):</strong> Para mantener tus ${cTarget}g de carbohidratos intactos, las equivalencias exactas son:<br>` +
+                                        `• 50g de arroz integral o parboil en crudo equivalen a <strong>200g de papa o batata cruda</strong>.<br>` +
+                                        `• 50g de arroz equivalen a <strong>55g de avena tradicional</strong>.<br>` +
+                                        `• 50g de arroz equivalen a <strong>70g de pan 100% integral</strong>.<br><br>` +
+                                        `⚖️ <em>Pesa siempre en seco/crudo antes de cocinar para mantener un 0% de error en tus macros.</em>`;
+                        } else {
+                            replyText = `🔄 <strong>Sistema de Bloques Alianza Activa:</strong> Para elegir otra comida sin pasarte de tus macros (${pTarget}g P, ${cTarget}g C, ${fTarget}g G), asegúrate de intercambiar alimentos dentro de la misma categoría (Bloque 1 con Bloque 1, Bloque 2 con Bloque 2). Dime qué ingrediente específico quieres cambiar y te doy el gramaje exacto al instante.`;
+                        }
+                    } else if (query.includes('agua') || query.includes('beber') || query.includes('hidratacion')) {
+                        replyText = `💧 <strong>Hidratación Alianza Activa:</strong> Te sugerimos consumir entre 40ml y 50ml de agua por kilo de peso corporal. El mate amargo está permitido libre sin azúcar durante todo el día.`;
+                    } else if (query.includes('macro') || query.includes('caloria') || query.includes('proteina')) {
+                        replyText = `📊 <strong>Tus Metas Biométricas (${clientName}):</strong><br>` +
+                                    `• Proteínas: <strong>${pTarget}g</strong><br>` +
+                                    `• Carbohidratos: <strong>${cTarget}g</strong><br>` +
+                                    `• Grasas Buenas: <strong>${fTarget}g</strong><br><br>` +
+                                    `🎯 Trabajamos con un <strong>0% de margen de error</strong> y pesaje estricto en crudo.`;
+                    } else if (query.includes('hola') || query.includes('saludos') || query.includes('buenas')) {
+                        replyText = `¡Hola <strong>${clientName}</strong>! Soy tu NutriCoach IA de Alianza Activa. Estoy acá para guiarte paso a paso con razonamiento científico, equivalencias exactas y control de macros. ¿Qué consulta tienes hoy?`;
                     } else {
-                        replyText = `🔄 <strong>Sistema de Bloques Alianza Activa:</strong> Para elegir otra comida sin pasarte de tus macros (${pTarget}g P, ${cTarget}g C, ${fTarget}g G), asegúrate de intercambiar alimentos dentro de la misma categoría (Bloque 1 con Bloque 1, Bloque 2 con Bloque 2). Dime qué ingrediente específico quieres cambiar y te doy el gramaje exacto al instante.`;
+                        replyText = `Entendido, <strong>${clientName}</strong>. Analizando tu consulta bajo los parámetros de Alianza Activa (0% error, alimentos en crudo y sistema de bloques): para mantener tus macros de ${pTarget}g P / ${cTarget}g C / ${fTarget}g G, asegúrate de mantener las proporciones exactas de tu plan. Si necesitas cambiar algún alimento específico o calcular equivalencias sin pasarte, dímelo con confianza y te doy el gramaje exacto.`;
                     }
-                } else if (query.includes('agua') || query.includes('beber') || query.includes('hidratacion')) {
-                    replyText = `💧 <strong>Hidratación Alianza Activa:</strong> Te sugerimos consumir entre 40ml y 50ml de agua por kilo de peso corporal. El mate amargo está permitido libre sin azúcar durante todo el día.`;
-                } else if (query.includes('macro') || query.includes('caloria') || query.includes('proteina')) {
-                    replyText = `📊 <strong>Tus Metas Biométricas (${clientName}):</strong><br>` +
-                                `• Proteínas: <strong>${pTarget}g</strong><br>` +
-                                `• Carbohidratos: <strong>${cTarget}g</strong><br>` +
-                                `• Grasas Buenas: <strong>${fTarget}g</strong><br><br>` +
-                                `🎯 Trabajamos con un <strong>0% de margen de error</strong> y pesaje estricto en crudo.`;
-                } else if (query.includes('hola') || query.includes('saludos')) {
-                    replyText = `¡Hola <strong>${clientName}</strong>! Soy tu NutriCoach IA de Alianza Activa. Estoy acá para guiarte paso a paso con razonamiento científico, equivalencias exactas y control de macros. ¿Qué consulta tienes hoy?`;
-                } else {
-                    replyText = `Entendido, <strong>${clientName}</strong>. Analizando tu consulta bajo los parámetros de Alianza Activa (0% error, alimentos en crudo y sistema de bloques): para mantener tus macros de ${pTarget}g P / ${cTarget}g C / ${fTarget}g G, asegúrate de mantener las proporciones exactas de tu plan. Si necesitas cambiar algún alimento específico o calcular equivalencias sin pasarte, dímelo con confianza y te doy el gramaje exacto.`;
-                }
 
-                container.innerHTML += `
-                    <div class="flex items-start gap-3">
-                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
-                        <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${replyText}</div>
-                    </div>`;
-                container.scrollTop = container.scrollHeight;
+                    container.innerHTML += `
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
+                            <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${replyText}</div>
+                        </div>`;
+                    container.scrollTop = container.scrollHeight;
+                } catch(err) {
+                    container.innerHTML += `
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
+                            <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">Hubo un error al procesar tu solicitud. Por favor intenta de nuevo.</div>
+                        </div>`;
+                    container.scrollTop = container.scrollHeight;
+                }
             }, 500);
         }
 
