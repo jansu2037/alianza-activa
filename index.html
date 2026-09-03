@@ -53,9 +53,9 @@
 
     <div id="food-rain-container" class="fixed inset-0 pointer-events-none z-1 overflow-hidden"></div>
 
-    <!-- PANTALLA DE ACCESO & FORMULARIO DE MEMBRESÍA -->
+    <!-- PANTALLA DE ACCESO & FORMULARIO DE ADMISIÓN WHATSAPP -->
     <div id="login-screen" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 max-w-xl w-full shadow-[0_0_50px_rgba(245,158,11,0.2)] space-y-6 my-auto">
+        <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 max-w-2xl w-full shadow-[0_0_50px_rgba(245,158,11,0.2)] space-y-6 my-auto">
             <div class="text-center">
                 <div class="w-16 h-16 mx-auto rounded-full bg-slate-950 border-2 border-amber-500 flex items-center justify-center text-amber-400 text-2xl shadow-inner mb-3">
                     <i class="fa-solid fa-shield-halved"></i>
@@ -75,30 +75,30 @@
                     <p id="login-error" class="text-red-400 text-[10px] hidden text-center">Contraseña incorrecta.</p>
                 </div>
 
-                <!-- Columna 2: Compra de Membresía / Formulario Completo -->
+                <!-- Columna 2: Formulario de Admisión WhatsApp -->
                 <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2.5">
-                    <h3 class="text-[11px] font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-store mr-1"></i> Membresía & Admisión</h3>
+                    <h3 class="text-[11px] font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-brands fa-whatsapp mr-1"></i> Admisión & Membresía</h3>
                     <div class="space-y-2">
-                        <input type="text" id="mem-name" placeholder="Nombre y Apellido" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
+                        <input type="text" id="adm-name" placeholder="Nombre y Apellido" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
                         <div class="grid grid-cols-2 gap-2">
-                            <input type="number" id="mem-age" placeholder="Edad" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
-                            <input type="number" id="mem-weight" placeholder="Peso (kg)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
+                            <input type="number" id="adm-age" placeholder="Edad" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
+                            <input type="number" id="adm-weight" placeholder="Peso (kg)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
                         </div>
                         <div class="grid grid-cols-2 gap-2">
-                            <input type="number" id="mem-height" placeholder="Estatura (cm)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
-                            <input type="text" id="mem-nat" placeholder="Nacionalidad" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
+                            <input type="number" id="adm-height" placeholder="Estatura (cm)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
+                            <input type="text" id="adm-nat" placeholder="Nacionalidad" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
                         </div>
-                        <select id="mem-gender" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
+                        <select id="adm-gender" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
                             <option value="Femenino">Femenino</option>
                             <option value="Masculino">Masculino</option>
                         </select>
-                        <input type="text" id="mem-goal" placeholder="¿Qué busca / Objetivo?" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
-                        <input type="text" id="mem-phone" placeholder="Celular (ej: 2964...)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
+                        <input type="text" id="adm-goal" placeholder="Objetivo (ej: Hipertrofia / Pierna)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
+                        <input type="text" id="adm-phone" placeholder="Celular (ej: 2964...)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none">
                     </div>
-                    <button onclick="submitMembershipForm()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl transition-all text-xs flex items-center justify-center gap-1.5 cursor-pointer shadow-md">
+                    <button onclick="submitAdmissionWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl transition-all text-xs flex items-center justify-center gap-1.5 cursor-pointer shadow-md">
                         <i class="fa-brands fa-whatsapp text-sm"></i> Solicitar Plan por WhatsApp
                     </button>
-                    <p id="membership-alert" class="text-emerald-400 text-[10px] font-bold text-center hidden">¡Será contactado a la brevedad!</p>
+                    <p id="admission-alert" class="text-emerald-400 text-[10px] font-bold text-center hidden">¡Redirigiendo a WhatsApp...</p>
                 </div>
             </div>
         </div>
@@ -139,7 +139,7 @@
             </div>
         </header>
 
-        <!-- BARRA DE HISTORIAS / SHORTS (SINCRONIZADOS 100% CON FIREBASE) -->
+        <!-- SHORTS / HISTORIAS ESTILO INSTAGRAM -->
         <div class="bg-slate-950 border-b border-slate-900 py-3 px-4 no-print overflow-hidden">
             <div class="max-w-4xl mx-auto flex items-center justify-start md:justify-center gap-3 md:gap-5 overflow-x-auto hide-scroll py-1" id="instagram-stories-bar"></div>
         </div>
@@ -151,7 +151,7 @@
                     <button onclick="toggleNavDrawer()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-md">
                         <i class="fa-solid fa-grid-2"></i> <span>Menú Principal</span> <i class="fa-solid fa-chevron-down text-[10px]"></i>
                     </button>
-                    <span id="active-module-indicator" class="text-xs text-slate-400 font-medium hidden md:inline">Módulo: Alta Energía</span>
+                    <span id="active-module-indicator" class="text-xs text-slate-400 font-medium hidden md:inline">Módulo: Alto Rendimiento</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <button onclick="switchTab(1)" id="quick-btn-1" class="hidden md:flex px-3 py-1.5 rounded-lg text-xs font-bold bg-orange-500 text-slate-950 items-center gap-1.5 cursor-pointer">
@@ -167,7 +167,7 @@
             </div>
         </nav>
 
-        <!-- MODAL / MENÚ DESPLEGABLE DE MÓDULOS -->
+        <!-- MENÚ DESPLEGABLE DE MÓDULOS (DRAWER) -->
         <div id="nav-drawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
             <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 max-w-2xl w-full shadow-2xl space-y-6 relative">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-4">
@@ -202,6 +202,10 @@
                     <button onclick="switchTab(5); toggleNavDrawer();" class="bg-slate-950 hover:bg-purple-500/20 border border-slate-800 hover:border-purple-500/60 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
                         <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl"><i class="fa-solid fa-robot"></i></div>
                         <span class="text-xs font-bold text-white">NutriCoach IA</span>
+                    </button>
+                    <button onclick="switchTab(9); toggleNavDrawer();" class="bg-slate-950 hover:bg-cyan-500/20 border border-slate-800 hover:border-cyan-500/60 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl"><i class="fa-solid fa-ruler-combined"></i></div>
+                        <span class="text-xs font-bold text-white">Cinta y Fotos</span>
                     </button>
                     <button id="drawer-admin-btn" onclick="switchTab(6); toggleNavDrawer();" class="hidden bg-slate-950 hover:bg-amber-500/20 border border-amber-500/50 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
                         <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl"><i class="fa-solid fa-sliders"></i></div>
@@ -254,7 +258,7 @@
                 <div id="tab2-meals-container" class="space-y-4"></div>
             </section>
 
-            <!-- SECCIÓN 3: LISTA DE COMPRAS & AUDITORÍA FOTOGRÁFICA -->
+            <!-- SECCIÓN 3: LISTA DE COMPRAS -->
             <section id="content-tab-3" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
@@ -268,30 +272,6 @@
                     </button>
                 </div>
                 <div id="tab3-shopping-container" class="grid md:grid-cols-2 gap-6"></div>
-
-                <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-4">
-                    <div class="flex items-center gap-3 text-emerald-400">
-                        <i class="fa-solid fa-camera-retro text-2xl"></i>
-                        <h3 class="text-xl font-bold text-white">📸 Auditoría Fotográfica de Comidas</h3>
-                    </div>
-                    <div class="grid md:grid-cols-3 gap-3">
-                        <select id="audit-meal-type" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
-                            <option value="Desayuno">Desayuno</option>
-                            <option value="Media Mañana">Media Mañana</option>
-                            <option value="Almuerzo">Almuerzo</option>
-                            <option value="Merienda">Merienda</option>
-                            <option value="Cena">Cena</option>
-                        </select>
-                        <input type="file" id="audit-meal-file" accept="image/*" onchange="previewAuditImage(event)" class="bg-slate-950 border border-slate-700 rounded-xl p-2 text-xs text-slate-300 col-span-2 md:col-span-1">
-                        <button onclick="sendFoodAuditWhatsApp()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Foto al Coach
-                        </button>
-                    </div>
-                    <div id="audit-preview-container" class="hidden mt-3 p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center gap-4">
-                        <img id="audit-img-preview" src="" alt="Vista previa" class="w-16 h-16 object-cover rounded-lg border border-slate-700">
-                        <span class="text-xs text-emerald-400 font-mono">Foto cargada correctamente.</span>
-                    </div>
-                </div>
             </section>
 
             <!-- SECCIÓN 4: EQUIVALENCIAS -->
@@ -376,7 +356,7 @@
                                 <i class="fa-solid fa-robot"></i>
                             </div>
                             <div id="ai-welcome-msg" class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">
-                                ¡Hola! Soy tu asistente profesional de Alianza Activa. Pregúntame con total libertad cualquier cambio de alimento (ej: "quiero cambiar el pan integral por galletas de arroz") y te daré los gramos exactos al instante.
+                                ¡Hola! Soy tu asistente profesional de Alianza Activa. Pregúntame con total libertad cualquier cambio de alimento y te daré los gramos exactos al instante.
                             </div>
                         </div>
                     </div>
@@ -390,21 +370,58 @@
                 </div>
             </section>
 
+            <!-- SECCIÓN 9: PROTOCOLO CINTA Y FOTOS -->
+            <section id="content-tab-9" class="tab-content hidden space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl space-y-2">
+                    <div class="flex items-center gap-3 text-cyan-400">
+                        <i class="fa-solid fa-ruler-combined text-2xl"></i>
+                        <h2 class="text-2xl font-bold text-white">📏 Protocolo Cinta y Fotos (Sin Escáner)</h2>
+                    </div>
+                    <p class="text-xs text-slate-300">Registra tus perímetros corporales y adjunta tu foto de progreso para auditoría directa con el Coach.</p>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl space-y-4">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="text-[11px] text-slate-400 block mb-1">Cintura (cm)</label>
+                            <input type="number" id="tape-waist" placeholder="Ej: 75" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-slate-400 block mb-1">Cadera (cm)</label>
+                            <input type="number" id="tape-hip" placeholder="Ej: 98" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[11px] text-slate-400 block mb-1">Muslo (cm)</label>
+                            <input type="number" id="tape-thigh" placeholder="Ej: 56" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[11px] text-slate-400 block mb-1">Foto de Progreso (Frente / Perfil)</label>
+                            <input type="file" id="tape-photo-file" accept="image/*" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2 text-xs text-slate-300">
+                        </div>
+                        <div class="flex items-end">
+                            <button onclick="sendTapeAuditWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Protocolo al Coach
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- SECCIÓN 6: PANEL COACH MASTER -->
             <section id="content-tab-6" class="tab-content hidden space-y-8">
                 <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 shadow-2xl space-y-8">
                     <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
                             <h2 class="text-2xl md:text-3xl font-black text-white flex items-center gap-3"><i class="fa-solid fa-sliders text-amber-400"></i> Panel Coach Master & Consola</h2>
-                            <p class="text-slate-400 text-xs md:text-sm mt-1">Generador de Dietas Biométricas (0% Error), Escáner 32 Métricas y Publicación de Shorts.</p>
+                            <p class="text-slate-400 text-xs md:text-sm mt-1">Generador de Dietas Biométricas (0% Error), Control de Macros y Shorts.</p>
                         </div>
                         <span class="bg-amber-500/20 text-amber-400 px-4 py-2 rounded-2xl text-xs font-bold border border-amber-500/40 w-fit">Modo Master</span>
                     </div>
 
                     <!-- GESTIÓN DE SHORTS / HISTORIAS -->
                     <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
-                        <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-video"></i> Publicar Short / Historia (Visible para Todos los Clientes)</h3>
-                        <p class="text-[11px] text-slate-400">Sube fotos o videos cortos sincronizados en Firebase.</p>
+                        <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-video"></i> Publicar Short / Historia (Visible para Todos)</h3>
                         <div class="grid md:grid-cols-3 gap-3">
                             <input type="text" id="admin-short-title" placeholder="Título de la Historia" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white outline-none">
                             <select id="admin-short-type" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white outline-none">
@@ -417,24 +434,39 @@
                         <button onclick="addShortAdminCloud()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl text-xs cursor-pointer shadow-md w-full">Publicar Short en la Nube</button>
                     </div>
 
-                    <!-- EDICIÓN Y CLIENTES -->
+                    <!-- EDICIÓN, MACROS Y CLIENTES -->
                     <div class="grid lg:grid-cols-2 gap-8 pt-6 border-t border-slate-800">
                         <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
-                            <h3 class="font-bold text-amber-400 text-sm uppercase">📝 Editar Dieta del Cliente</h3>
+                            <h3 class="font-bold text-amber-400 text-sm uppercase">📝 Control de Macros & Dieta del Cliente</h3>
                             <select id="select-client-edit" onchange="loadClientDietForEditing()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none"></select>
+                            
+                            <!-- [NUEVO] Control Total de Macros P/C/G -->
+                            <div class="grid grid-cols-3 gap-2 bg-slate-900 p-3 rounded-xl border border-slate-800">
+                                <div>
+                                    <label class="text-[10px] text-orange-400 block font-bold">Proteína (g)</label>
+                                    <input type="number" id="edit-macro-p" placeholder="150" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
+                                </div>
+                                <div>
+                                    <label class="text-[10px] text-amber-400 block font-bold">Carbs (g)</label>
+                                    <input type="number" id="edit-macro-c" placeholder="200" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
+                                </div>
+                                <div>
+                                    <label class="text-[10px] text-emerald-400 block font-bold">Grasas (g)</label>
+                                    <input type="number" id="edit-macro-f" placeholder="55" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
+                                </div>
+                            </div>
+
                             <div class="space-y-2">
                                 <label class="text-[10px] text-slate-400">Alta Energía (1 por línea)</label>
                                 <textarea id="edit-tab1-data" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-200 font-mono outline-none"></textarea>
                                 <label class="text-[10px] text-slate-400">Control (1 por línea)</label>
                                 <textarea id="edit-tab2-data" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-200 font-mono outline-none"></textarea>
-                                <label class="text-[10px] text-slate-400">Lista de Compras (1 por línea)</label>
-                                <textarea id="edit-tab3-data" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-200 font-mono outline-none"></textarea>
                             </div>
-                            <button onclick="saveClientDietCloud()" class="w-full bg-emerald-500 text-slate-950 font-bold py-3 rounded-xl text-sm hover:bg-emerald-400 cursor-pointer shadow-md">Actualizar Plan</button>
+                            <button onclick="saveClientDietCloud()" class="w-full bg-emerald-500 text-slate-950 font-bold py-3 rounded-xl text-sm hover:bg-emerald-400 cursor-pointer shadow-md">Actualizar Plan y Macros</button>
                         </div>
                         <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                             <h3 class="font-bold text-amber-400 text-sm uppercase">👥 Clientes Registrados</h3>
-                            <div id="clients-list-container" class="space-y-2"></div>
+                            <div id="clients-list-container" class="space-y-2 max-h-72 overflow-y-auto"></div>
                         </div>
                     </div>
 
@@ -450,11 +482,15 @@
             <div class="relative max-w-4xl mx-auto px-4 flex flex-col items-center space-y-4 z-10">
                 <p class="font-black text-amber-400 uppercase tracking-widest text-sm">Fitness Alianza Activa</p>
                 <p class="text-slate-400 text-xs">Nutrición de Alto Rendimiento</p>
+                <!-- DESCARGO LEGAL CORTO -->
+                <p class="text-[10px] text-slate-500 max-w-lg leading-relaxed pt-2 border-t border-slate-800">
+                    Aviso legal: La información provista en esta plataforma tiene fines educativos y orientativos. Consulte con su profesional de la salud antes de iniciar cualquier plan nutricional o de entrenamiento.
+                </p>
             </div>
         </footer>
     </div>
 
-    <!-- MODAL HISTORIAS -->
+    <!-- MODAL HISTORIAS / SHORTS -->
     <div id="story-modal" class="fixed inset-0 z-50 bg-black/95 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full overflow-hidden relative shadow-2xl">
             <button onclick="closeStoryModal()" class="absolute top-4 right-4 z-20 bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
@@ -494,6 +530,9 @@
             {
                 name: "Angela",
                 pass: "angela2026",
+                macroP: 140,
+                macroC: 180,
+                macroF: 50,
                 tab1: [
                     "Desayuno: 2 Huevos enteros + 40g Pan integral",
                     "Media Mañana: 150g Fruta fresca",
@@ -526,6 +565,9 @@
                         return {
                             name: f.name?.stringValue || '',
                             pass: f.pass?.stringValue || f.pass?.integerValue || '',
+                            macroP: Number(f.macroP?.integerValue || f.macroP?.doubleValue || 140),
+                            macroC: Number(f.macroC?.integerValue || f.macroC?.doubleValue || 180),
+                            macroF: Number(f.macroF?.integerValue || f.macroF?.doubleValue || 50),
                             tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue || ''),
                             tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue || ''),
                             tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue || '')
@@ -663,33 +705,31 @@
             reader.readAsDataURL(fileInput.files[0]);
         }
 
-        function submitMembershipForm() {
-            const name = document.getElementById('mem-name').value.trim();
-            const weight = document.getElementById('mem-weight').value.trim();
-            const phone = document.getElementById('mem-phone').value.trim();
-            if(!name || !weight || !phone) { alert("Completa Nombre, Peso y Celular."); return; }
-            const text = `Hola Roberto, quiero solicitar mi plan en Alianza Activa:\n👤 Nombre: ${name}\n⚖️ Peso: ${weight}kg\n📱 Celular: ${phone}`;
-            document.getElementById('membership-alert').classList.remove('hidden');
+        function submitAdmissionWhatsApp() {
+            const name = document.getElementById('adm-name').value.trim();
+            const age = document.getElementById('adm-age').value.trim();
+            const weight = document.getElementById('adm-weight').value.trim();
+            const height = document.getElementById('adm-height').value.trim();
+            const nat = document.getElementById('adm-nat').value.trim();
+            const gender = document.getElementById('adm-gender').value;
+            const goal = document.getElementById('adm-goal').value.trim();
+            const phone = document.getElementById('adm-phone').value.trim();
+
+            if(!name || !weight || !phone) { alert("Por favor completa Nombre, Peso y Celular."); return; }
+
+            const text = `Hola Roberto, quiero solicitar mi ingreso a Alianza Activa:\n👤 Nombre: ${name}\n🎂 Edad: ${age}\n⚖️ Peso: ${weight}kg\n📏 Estatura: ${height}cm\n🌍 Nacionalidad: ${nat}\n⚧ Género: ${gender}\n🎯 Objetivo: ${goal}\n📱 Celular: ${phone}`;
+            
+            document.getElementById('admission-alert').classList.remove('hidden');
             setTimeout(() => {
                 window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent(text)}`, '_blank');
-            }, 800);
+            }, 600);
         }
 
-        function previewAuditImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('audit-img-preview').src = e.target.result;
-                    document.getElementById('audit-preview-container').classList.remove('hidden');
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function sendFoodAuditWhatsApp() {
-            const meal = document.getElementById('audit-meal-type').value;
-            const text = `Hola Roberto, aquí comparto la auditoría de mi ${meal}. Atleta: ${activeClient.name}`;
+        function sendTapeAuditWhatsApp() {
+            const waist = document.getElementById('tape-waist').value;
+            const hip = document.getElementById('tape-hip').value;
+            const thigh = document.getElementById('tape-thigh').value;
+            const text = `Hola Roberto, envío mi reporte de Protocolo Cinta y Fotos:\n👤 Atleta: ${activeClient.name}\n📏 Cintura: ${waist}cm\n📏 Cadera: ${hip}cm\n📏 Muslo: ${thigh}cm`;
             window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent(text)}`, '_blank');
         }
 
@@ -779,7 +819,6 @@
 
         function renderDynamicContent() {
             document.getElementById('header-client-title').innerText = `Fitness Alianza Activa - ${activeClient.name}`;
-            document.getElementById('footer-client-subtitle').innerText = `Nutrición - ${activeClient.name}`;
             document.getElementById('ai-title-name').innerText = `NutriCoach IA - ${activeClient.name}`;
             document.getElementById('ai-welcome-msg').innerText = `¡Hola ${activeClient.name}! Pregúntame con libertad cualquier cambio de alimento y te daré los gramos exactos al instante.`;
 
@@ -824,11 +863,12 @@
         }
 
         function switchTab(tabNumber) {
-            for (let i = 1; i <= 8; i++) {
+            for (let i = 1; i <= 9; i++) {
                 const content = document.getElementById('content-tab-' + i);
                 if (content) content.classList.add('hidden');
             }
-            document.getElementById('content-tab-' + tabNumber).classList.remove('hidden');
+            const target = document.getElementById('content-tab-' + tabNumber);
+            if (target) target.classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -836,7 +876,6 @@
             alert("📲 Para instalar la app:\n\n1. Abre el menú del navegador.\n2. Selecciona 'Agregar a la pantalla de inicio'.");
         }
 
-        // --- NUTRICOACH IA DIRECTO ---
         function sendChatMessage() {
             const inputEl = document.getElementById('chat-input');
             const container = document.getElementById('chat-messages');
@@ -853,10 +892,6 @@
 
                 if (query.includes('pan') && query.includes('galleta')) {
                     replyText = "✅ **Equivalencia (0% Error):** 10g de pan integral equivalen estrictamente a **8g de galletas de arroz** en seco.";
-                } else if (query.includes('pan') && query.includes('blanco')) {
-                    replyText = "✅ **Equivalencia (0% Error):** 10g de pan integral equivalen a **12g de pan blanco** pesados en crudo.";
-                } else if (query.includes('helado') || query.includes('dulce')) {
-                    replyText = "🎯 **Gestión de Gustos:** Consúmelo de forma moderada y resta el equivalente en carbohidratos complejos de esa misma comida para mantener tus macros intactos.";
                 } else if (query.includes('que me toca') || query.includes('hoy')) {
                     const isHigh = [1, 3, 5].includes(new Date().getDay());
                     const m = isHigh ? activeClient.tab1 : activeClient.tab2;
@@ -876,27 +911,31 @@
             const select = document.getElementById('select-client-edit');
             if (select) select.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
             loadClientDietForEditing();
-            document.getElementById('clients-list-container').innerHTML = clientsDB.map(c => `<div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-xs"><strong class="text-white">${c.name}</strong> - Pass: ${c.pass}</div>`).join('');
+            document.getElementById('clients-list-container').innerHTML = clientsDB.map(c => `<div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-xs flex justify-between items-center"><div><strong class="text-white">${c.name}</strong> - Pass: ${c.pass}<br><span class="text-amber-400">P:${c.macroP}g | C:${c.macroC}g | G:${c.macroF}g</span></div></div>`).join('');
         }
 
         function loadClientDietForEditing() {
             const name = document.getElementById('select-client-edit').value;
             const client = clientsDB.find(c => c.name === name);
             if (client) {
+                document.getElementById('edit-macro-p').value = client.macroP || 140;
+                document.getElementById('edit-macro-c').value = client.macroC || 180;
+                document.getElementById('edit-macro-f').value = client.macroF || 50;
                 document.getElementById('edit-tab1-data').value = client.tab1.join('\n');
                 document.getElementById('edit-tab2-data').value = client.tab2.join('\n');
-                document.getElementById('edit-tab3-data').value = client.tab3.join('\n');
             }
         }
 
-        function saveClientDietCloud() {
+        async function saveClientDietCloud() {
             const name = document.getElementById('select-client-edit').value;
             const client = clientsDB.find(c => c.name === name);
             if (client) {
+                client.macroP = Number(document.getElementById('edit-macro-p').value);
+                client.macroC = Number(document.getElementById('edit-macro-c').value);
+                client.macroF = Number(document.getElementById('edit-macro-f').value);
                 client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').filter(Boolean);
                 client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').filter(Boolean);
-                client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').filter(Boolean);
-                alert(`✅ Plan de ${name} actualizado.`);
+                alert(`✅ Plan y macros de ${name} actualizados con éxito.`);
             }
         }
     </script>
