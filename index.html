@@ -51,9 +51,9 @@
 
     <div id="food-rain-container" class="fixed inset-0 pointer-events-none z-1 overflow-hidden"></div>
 
-    <!-- PANTALLA DE ACCESO & EMBUDO 24/7 CON FORMAS DE PAGO -->
+    <!-- PANTALLA DE ACCESO & MEMBRESÍA -->
     <div id="login-screen" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-[0_0_50px_rgba(245,158,11,0.2)] text-center space-y-6 my-auto">
+        <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 max-w-lg w-full shadow-[0_0_50px_rgba(245,158,11,0.2)] text-center space-y-6 my-auto">
             <div>
                 <div class="w-16 h-16 mx-auto rounded-full bg-slate-950 border-2 border-amber-500 flex items-center justify-center text-amber-400 text-2xl shadow-inner mb-3">
                     <i class="fa-solid fa-shield-halved"></i>
@@ -62,40 +62,48 @@
                 <p class="text-slate-400 text-xs mt-1">Plataforma de Alto Rendimiento</p>
             </div>
             
-            <!-- Acceso alumnos -->
-            <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3 text-left">
-                <h3 class="text-[11px] font-bold text-amber-400 uppercase tracking-widest">Acceso a Alumnos / Coach</h3>
-                <input type="password" id="access-password" onkeydown="if(event.key==='Enter') verifyPassword()" placeholder="Contraseña de acceso..." class="w-full bg-slate-900 border border-slate-700 text-white px-4 py-3 rounded-xl text-sm tracking-widest focus:outline-none focus:border-amber-500 transition-colors">
-                <button onclick="verifyPassword()" id="btn-login-submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl transition-all shadow-[0_0_15px_rgba(245,158,11,0.3)] cursor-pointer text-sm">
-                    Ingresar al Sistema
-                </button>
-                <p id="login-error" class="text-red-400 text-xs hidden text-center">Acceso denegado. Contraseña incorrecta.</p>
+            <div class="grid md:grid-cols-2 gap-4 text-left">
+                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                    <h3 class="text-[11px] font-bold text-amber-400 uppercase tracking-widest"><i class="fa-solid fa-key mr-1"></i> Alumnos / Coach</h3>
+                    <input type="password" id="access-password" onkeydown="if(event.key==='Enter') verifyPassword()" placeholder="Contraseña..." class="w-full bg-slate-900 border border-slate-700 text-white px-3 py-2.5 rounded-xl text-xs tracking-widest focus:outline-none focus:border-amber-500">
+                    <button onclick="verifyPassword()" id="btn-login-submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-xl transition-all shadow-md cursor-pointer text-xs">
+                        Ingresar
+                    </button>
+                    <p id="login-error" class="text-red-400 text-[10px] hidden text-center">Contraseña incorrecta.</p>
+                </div>
+
+                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3">
+                    <h3 class="text-[11px] font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-store mr-1"></i> Comprar Membresía</h3>
+                    <select id="membership-type" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                        <option value="Membresía Mensual Completa">Membresía Mensual Completa</option>
+                        <option value="Plan Nutricional + Asesoría">Plan Nutricional + Asesoría</option>
+                        <option value="Pase Anubis Gym + Nutrición">Pase Anubis Gym + Nutrición</option>
+                    </select>
+                    <select id="membership-payment" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                        <option value="Mercado Pago / Tarjeta">Mercado Pago / Tarjeta</option>
+                        <option value="Transferencia Bancaria">Transferencia Bancaria</option>
+                        <option value="Efectivo">Efectivo</option>
+                    </select>
+                    <button onclick="buyMembershipWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl transition-all text-xs flex items-center justify-center gap-1.5 cursor-pointer shadow-md">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> Suscribirme Ahora
+                    </button>
+                </div>
             </div>
 
-            <!-- Embudo de Ventas con Formas de Pago -->
             <div class="border-t border-slate-800 pt-4 space-y-3 text-left">
                 <div class="text-center">
-                    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full font-bold uppercase tracking-wider">¿Nuevo Atleta?</span>
-                    <h3 class="text-base font-bold text-white mt-1">Obtén tu Dieta y Seguimiento</h3>
+                    <span class="text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-3 py-1 rounded-full font-bold uppercase tracking-wider">¿Dudas o Diagnóstico con IA?</span>
                 </div>
                 <div class="grid grid-cols-2 gap-2">
-                    <input type="text" id="lead-name" placeholder="Tu Nombre" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:border-amber-500 outline-none">
-                    <select id="lead-goal" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:border-amber-500 outline-none">
+                    <input type="text" id="lead-name" placeholder="Tu Nombre" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none">
+                    <select id="lead-goal" class="bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none">
                         <option value="Hipertrofia / Pierna">Hipertrofia (Pierna)</option>
                         <option value="Definición / Control">Definición (Control)</option>
                         <option value="Bienestar y Energía">Bienestar y Energía</option>
                     </select>
                 </div>
-                <div>
-                    <label class="text-[10px] text-slate-400 block mb-1">Forma de Pago Preferida:</label>
-                    <select id="lead-payment" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:border-amber-500 outline-none">
-                        <option value="Mercado Pago / Tarjeta">Mercado Pago / Tarjeta</option>
-                        <option value="Transferencia Bancaria">Transferencia Bancaria</option>
-                        <option value="Efectivo / Otro">Efectivo / Otro</option>
-                    </select>
-                </div>
-                <button onclick="sendLeadWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition-all text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg">
-                    <i class="fa-brands fa-whatsapp text-base"></i> Solicitar Plan por WhatsApp
+                <button onclick="sendLeadWhatsApp()" class="w-full bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/40 font-bold py-2.5 rounded-xl transition-all text-xs flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-brands fa-whatsapp text-base"></i> Consultar por Asesoría Personalizada
                 </button>
             </div>
         </div>
@@ -133,7 +141,7 @@
             </div>
         </header>
 
-        <!-- BARRA DE NAVEGACIÓN ORGANIZADA EN FILAS FLEXIBLES -->
+        <!-- BARRA DE NAVEGACIÓN EN FILAS -->
         <nav class="bg-slate-950/95 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-xl shadow-xl no-print">
             <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap justify-center items-center gap-2">
                 <button onclick="switchTab(1)" id="btn-tab-1" class="tab-btn px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center space-x-2 bg-orange-500 text-slate-950 shadow-md cursor-pointer">
@@ -149,7 +157,7 @@
                     <i class="fa-solid fa-scale-balanced"></i> <span>Equivalencias</span>
                 </button>
                 <button onclick="switchTab(7)" id="btn-tab-7" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-utensils text-orange-400"></i> <span>Recetas</span>
+                    <i class="fa-solid fa-utensils text-orange-400"></i> <span>Recetas (10)</span>
                 </button>
                 <button onclick="switchTab(8)" id="btn-tab-8" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
                     <i class="fa-solid fa-store text-emerald-400"></i> <span>Tienda & Shorts</span>
@@ -278,12 +286,12 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN 7: RECETAS OFICIALES -->
+            <!-- SECCIÓN 7: RECETAS OFICIALES (10 MÍNIMO) -->
             <section id="content-tab-7" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
                     <div class="flex items-center gap-3 mb-2 text-orange-400">
                         <i class="fa-solid fa-utensils text-2xl"></i>
-                        <h2 class="text-2xl font-bold text-white">🍳 Recetas Oficiales Alianza Activa</h2>
+                        <h2 class="text-2xl font-bold text-white">🍳 10 Recetas Oficiales Alianza Activa</h2>
                     </div>
                     <p class="text-slate-300 text-sm leading-relaxed">
                         Preparaciones estandarizadas con precisión matemática para un 0% de error en tus macros.
@@ -306,8 +314,8 @@
 
                 <div id="dynamic-batidos-container" class="grid md:grid-cols-2 gap-6"></div>
 
-                <div class="border-t border-slate-800 pt-6">
-                    <div class="flex items-center gap-3 mb-6 text-amber-400">
+                <div class="border-t border-slate-800 pt-6 space-y-6">
+                    <div class="flex items-center gap-3 text-amber-400">
                         <i class="fa-solid fa-bolt text-2xl"></i>
                         <h2 class="text-2xl font-bold text-white">⚡ Shorts & Novedades Alianza Activa</h2>
                     </div>
@@ -351,30 +359,91 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN 6: PANEL COACH (CON LISTA DE COMPRAS INCLUIDA) -->
+            <!-- SECCIÓN 6: PANEL COACH (CON MONITOREO, LOGS EN VIVO Y TERMINAL CLI) -->
             <section id="content-tab-6" class="tab-content hidden space-y-8">
                 <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-8">
                     <div class="border-b border-slate-800 pb-4">
-                        <h2 class="text-2xl font-bold text-white flex items-center gap-3"><i class="fa-solid fa-sliders text-amber-400"></i> Panel Coach Master</h2>
-                        <p class="text-slate-400 text-sm mt-1">Gestión total de Clientes (con Lista de Compras), Batidos, Shorts y Recetas.</p>
+                        <h2 class="text-2xl font-bold text-white flex items-center gap-3"><i class="fa-solid fa-sliders text-amber-400"></i> Panel Coach Master & Consola Avanzada</h2>
+                        <p class="text-slate-400 text-sm mt-1">Centro de Monitoreo, Terminal CLI, Logs en Vivo y Gestión de Alumnos.</p>
                     </div>
 
+                    <!-- 1. CENTRO DE MONITOREO DEL SISTEMA -->
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-database"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-widest block">Estado Base de Datos</span>
+                                <strong id="monitor-db-status" class="text-emerald-400 text-sm font-bold">Conectado (Firebase)</strong>
+                            </div>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/30 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-widest block">Atletas Registrados</span>
+                                <strong id="monitor-client-count" class="text-amber-400 text-sm font-bold">0 Activos</strong>
+                            </div>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-400 border border-orange-500/30 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-widest block">Última Sincronización</span>
+                                <strong id="monitor-last-sync" class="text-slate-200 text-xs font-mono">Recién sincronizado</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. TERMINAL CLI & LOGS EN VIVO -->
                     <div class="grid lg:grid-cols-2 gap-8">
+                        <!-- Terminal de Comandos Rápidos (CLI) -->
+                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                            <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-terminal"></i> Terminal de Comandos (CLI)</h3>
+                            <p class="text-[11px] text-slate-400">Escribe atajos rápidos. Escribe <code class="text-amber-400">help</code> para ver los comandos disponibles.</p>
+                            <div class="flex gap-2">
+                                <input type="text" id="cli-input" onkeydown="if(event.key==='Enter') executeCliCommand()" placeholder="ej: help, sync, count..." class="flex-grow bg-slate-900 border border-slate-700 text-emerald-400 font-mono px-4 py-2.5 rounded-xl text-xs outline-none focus:border-amber-500">
+                                <button onclick="executeCliCommand()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs cursor-pointer shadow-md">Ejecutar</button>
+                            </div>
+                            <div class="text-[10px] text-slate-500 space-y-1 pt-1">
+                                <div>• <code>help</code>: Muestra comandos válidos.</div>
+                                <div class="truncate">• <code>add [nombre] [pass]</code>: Crea un cliente rápido.</div>
+                                <div>• <code>sync</code>: Recarga datos de Firebase.</div>
+                            </div>
+                        </div>
+
+                        <!-- Consola de Logs en Vivo -->
+                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-bold text-emerald-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-wave-square"></i> Logs en Vivo</h3>
+                                <button onclick="clearLogs()" class="text-[10px] text-slate-400 hover:text-white bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-800 cursor-pointer">Limpiar</button>
+                            </div>
+                            <div id="live-logs-box" class="bg-slate-900 border border-slate-800 rounded-xl p-3 h-32 overflow-y-auto font-mono text-[11px] text-slate-300 space-y-1">
+                                <div class="text-emerald-400">[SYSTEM] Consola de Alianza Activa inicializada correctamente.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-8 pt-6 border-t border-slate-800">
                         <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
                             <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-shaker mr-2"></i> Publicar / Editar Batido</h3>
                             <div class="space-y-3">
                                 <input type="text" id="admin-batido-title" placeholder="Nombre del Batido" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
-                                <input type="text" id="admin-batido-img" placeholder="URL de la Imagen" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
+                                <input type="file" id="admin-batido-file" accept="image/*" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-300">
                                 <textarea id="admin-batido-desc" rows="3" placeholder="Descripción y beneficios..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none"></textarea>
                             </div>
                             <button onclick="addBatidoAdmin()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md">Agregar Batido</button>
                         </div>
 
                         <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                            <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-bolt mr-2"></i> Publicar Short / Novedad</h3>
+                            <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-bolt mr-2"></i> Publicar Short / Novedad (Subir Imagen)</h3>
                             <div class="space-y-3">
                                 <input type="text" id="admin-short-title" placeholder="Título de la Novedad" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
-                                <input type="text" id="admin-short-img" placeholder="URL de Imagen o Foto" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
+                                <label class="text-[10px] text-slate-400 block">Selecciona imagen de tu Celular o PC:</label>
+                                <input type="file" id="admin-short-file" accept="image/*" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-300">
                                 <textarea id="admin-short-desc" rows="3" placeholder="Descripción..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none"></textarea>
                             </div>
                             <button onclick="addShortAdmin()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md">Publicar Short</button>
@@ -391,7 +460,6 @@
                             <button onclick="addNewClientCloud()" id="btn-save-client" class="w-full bg-amber-500 text-slate-950 font-bold py-3.5 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md">Guardar en Firebase</button>
                         </div>
 
-                        <!-- EDITAR DIETA (INCLUYE LISTA DE COMPRAS - TAB 3) -->
                         <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
                             <h3 class="font-bold text-amber-400 text-sm uppercase">📝 Editar Dieta y Compras del Cliente</h3>
                             <select id="select-client-edit" onchange="loadClientDietForEditing()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none"></select>
@@ -449,28 +517,32 @@
 
         let globalData = {
             batidos: [
-                { 
-                    title: "Batido Cookies & High Protein", 
-                    desc: "Ideal post-entreno para recuperación muscular máxima. Aporta 30g de F1 Cookies, alta saciedad y proteína aislada pura.", 
-                    image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800" 
-                },
-                { 
-                    title: "Termo-Cítrico Quemagrasa", 
-                    desc: "Combinación termogénica de Té Herbal y Aloe Vera concentrado. Limpieza digestiva profunda y activación del metabolismo.", 
-                    image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=800" 
-                }
+                { title: "Batido Cookies & High Protein", desc: "Ideal post-entreno para recuperación muscular máxima. Aporta 30g de F1 Cookies y alta saciedad.", image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800" },
+                { title: "Termo-Cítrico Quemagrasa", desc: "Combinación termogénica de Té Herbal y Aloe Vera concentrado para limpieza digestiva.", image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=800" }
             ],
             shorts: [
-                { 
-                    title: "🔥 ¡Nuevo Récord en Día de Pierna!", 
-                    desc: "Excelente entrega y técnica impecable en Anubis Gym. Mantén tus macros al 0% de error.", 
-                    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", 
-                    date: "Hoy" 
-                }
+                { title: "🔥 ¡Nuevo Récord en Día de Pierna!", desc: "Excelente entrega y técnica impecable en Anubis Gym. Mantén tus macros al 0% de error.", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hoy" },
+                { title: "🥤 Protein Bar en Anubis Gym", desc: "Nuevos batidos y tés cargados listos para recibir a los atletas post-entrenamiento.", image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800", date: "Ayer" },
+                { title: "💪 Sentadillas Pesadas en Crudo", desc: "La disciplina supera cualquier excusa. Carga alta de glucógeno y enfoque total.", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800", date: "Hace 2 días" },
+                { title: "🥗 Meal Prep Semanal Alianza Activa", desc: "Alimentos pesados estrictamente en crudo para asegurar el 0% de error nutricional.", image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800", date: "Hace 3 días" },
+                { title: "⚡ Energía Austral Pre-Entreno", desc: "Fórmula magistral con té concentrado, guaraná y aloe para activar el sistema.", image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800", date: "Hace 4 días" },
+                { title: "🏆 Atleta Destacada de la Semana", desc: "Constancia absoluta en los entrenamientos de torso y control nutricional.", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=800", date: "Hace 5 días" },
+                { title: "🥚 Desayuno con Claras y Avena", desc: "La base perfecta para iniciar el día con energía limpia y proteína de alta calidad.", image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&q=80&w=800", date: "Hace 6 días" },
+                { title: "📊 Análisis con Escáner de 8 Electrodos", desc: "Evaluando masa muscular y porcentaje de grasa con precisión milimétrica.", image: "https://images.unsplash.com/photo-1576678927484-cc907957088c?auto=format&fit=crop&q=80&w=800", date: "Hace 1 semana" },
+                { title: "🌿 Hidratación y Mate Amargo Libre", desc: "Clave fundamental para mantener el metabolismo activo durante la jornada.", image: "https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&q=80&w=800", date: "Hace 1 semana" },
+                { title: "🎯 Sistema Híbrido Alianza Activa", desc: "Combinación perfecta entre entrenamiento de fuerza y nutrición celular avanzada.", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hace 1 semana" }
             ],
             recipes: [
-                "30g Batido Cookies, 40g Avena instantánea, 1 Huevo (50g), 50ml Agua. Licuar y cocinar en sartén.",
-                "50g Avena tradicional en crudo, 200ml Agua, 30g Batido F1 Cookies. Cocinar avena, integrar batido al final."
+                "1. Pancakes de Cookies & Avena: 30g Batido Cookies, 40g Avena instantánea, 1 Huevo (50g), 50ml Agua. Licuar y cocinar en sartén a fuego medio.",
+                "2. Porridge Tibio de Cookies: 50g Avena tradicional cocida en 200ml de Agua + 30g Batido Cookies integrado al final.",
+                "3. Bizcochuelo Express de Microondas: 30g Batido Cookies, 3 Claras de huevo, 30g Avena tradicional. Mezclar en taza y calentar 90 segundos.",
+                "4. Waffles Proteicos de Arroz: 50g Harina de arroz, 30g Batido Cookies, 1 Huevo entero, chorrito de leche vegetal. Cocinar en wafflera.",
+                "5. Batido Post-Entreno Fuego Rojo: 30g Batido Cookies, 1 medida de Protein Drink Mix, agua helada y cubos de hielo.",
+                "6. Omelette Proteico Matutino: 4 Claras de huevo, 1 Huevo entero, espinacas frescas picadas, 10g de Aceite de oliva virgen extra en la cocción.",
+                "7. Budín Fitness de Batata: 100g Batata hervida pisada, 30g Batido Cookies, 2 Claras de huevo, estevia pura. Hornear 20 minutos.",
+                "8. Ensalada Carga Aumentada: 200g Pechuga de pollo a la plancha, 60g Arroz parboil cocido, 10g Aceite de oliva, 200g Brócoli al vapor.",
+                "9. Crepes Salados de Avena: 40g Avena tradicional, 1 Huevo, 50ml agua (licuar para masa). Rellenar con 150g lomo magro desmenuzado.",
+                "10. Postre Helado Fit Cookies: 30g Batido Cookies, 50ml agua congelada, hielo picado. Procesar en licuadora hasta textura cremosa."
             ]
         };
 
@@ -508,6 +580,81 @@
         let clientsDB = defaultClients;
         let activeClient = clientsDB[0];
 
+        // --- SISTEMA DE LOGS EN VIVO Y MONITOREO ---
+        function addLog(msg, type = 'info') {
+            const box = document.getElementById('live-logs-box');
+            if (!box) return;
+            const time = new Date().toLocaleTimeString();
+            let color = "text-slate-300";
+            if (type === 'success') color = "text-emerald-400";
+            if (type === 'error') color = "text-red-400";
+            if (type === 'warn') color = "text-amber-400";
+
+            box.innerHTML += `<div class="${color}">[${time}] ${msg}</div>`;
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function clearLogs() {
+            const box = document.getElementById('live-logs-box');
+            if (box) box.innerHTML = `<div class="text-emerald-400">[SYSTEM] Logs reiniciados.</div>`;
+        }
+
+        function updateSystemMonitor(statusText, isError = false) {
+            const dbStatus = document.getElementById('monitor-db-status');
+            const clientCount = document.getElementById('monitor-client-count');
+            const lastSync = document.getElementById('monitor-last-sync');
+
+            if (dbStatus) {
+                dbStatus.innerText = statusText;
+                dbStatus.className = isError ? "text-red-400 text-sm font-bold" : "text-emerald-400 text-sm font-bold";
+            }
+            if (clientCount) {
+                clientCount.innerText = `${clientsDB.length} Atletas Activos`;
+            }
+            if (lastSync) {
+                lastSync.innerText = new Date().toLocaleTimeString();
+            }
+        }
+
+        // --- TERMINAL DE COMANDOS (CLI) ---
+        function executeCliCommand() {
+            const inputEl = document.getElementById('cli-input');
+            const cmd = inputEl.value.trim();
+            if (!cmd) return;
+
+            addLog(`CLI Executed: "${cmd}"`, 'warn');
+            inputEl.value = '';
+
+            const parts = cmd.split(' ');
+            const action = parts[0].toLowerCase();
+
+            if (action === 'help') {
+                addLog("--- COMANDOS DISPONIBLES ---", "success");
+                addLog("1. sync -> Sincroniza con Firebase Firestore", "info");
+                addLog("2. count -> Muestra número de clientes", "info");
+                addLog("3. clear -> Limpia la ventana de logs", "info");
+                addLog("4. add [nombre] [pass] -> Crea cliente rápido", "info");
+            } else if (action === 'sync') {
+                addLog("Iniciando sincronización manual...", "info");
+                fetchClientsFromFirebase().then(() => {
+                    addLog("Sincronización completada con éxito.", "success");
+                });
+            } else if (action === 'count') {
+                addLog(`Total de atletas en sistema: ${clientsDB.length}`, "success");
+            } else if (action === 'clear') {
+                clearLogs();
+            } else if (action === 'add' && parts.length >= 3) {
+                const name = parts[1];
+                const pass = parts[2];
+                document.getElementById('new-client-name').value = name;
+                document.getElementById('new-client-pass').value = pass;
+                addNewClientCloud();
+                addLog(`Comando add ejecutado para: ${name}`, "success");
+            } else {
+                addLog(`Comando desconocido: "${action}". Escribe "help" para ayuda.`, "error");
+            }
+        }
+
         function toFirestoreDoc(client) {
             return {
                 fields: {
@@ -532,6 +679,7 @@
         }
 
         async function fetchClientsFromFirebase() {
+            addLog("Conectando a Firebase Firestore...", "info");
             const endpoints = [
                 `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
                 `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
@@ -547,11 +695,17 @@
                         } else {
                             clientsDB = defaultClients;
                         }
+                        addLog(`Conexión exitosa. ${clientsDB.length} clientes cargados.`, "success");
+                        updateSystemMonitor("Conectado (Firebase)");
                         return clientsDB;
                     }
-                } catch (err) {}
+                } catch (err) {
+                    addLog(`Error al conectar con endpoint: ${err.message}`, "error");
+                }
             }
             clientsDB = defaultClients;
+            addLog("Usando datos locales por defecto (Fallback).", "warn");
+            updateSystemMonitor("Modo Local (Fallback)", true);
             return clientsDB;
         }
 
@@ -561,19 +715,19 @@
             const btn = document.getElementById('btn-login-submit');
 
             if (!val) {
-                errEl.innerText = "Por favor, ingresa una contraseña.";
+                errEl.innerText = "Ingresa contraseña.";
                 errEl.classList.remove('hidden');
                 return;
             }
 
             btn.disabled = true;
-            btn.innerText = "Verificando en la nube...";
+            btn.innerText = "Verificando...";
             errEl.classList.add('hidden');
 
             try { await fetchClientsFromFirebase(); } catch (e) {}
 
             btn.disabled = false;
-            btn.innerText = "Ingresar al Sistema";
+            btn.innerText = "Ingresar";
 
             if (val === "jansu2037rsc") {
                 isUserAdmin = true;
@@ -590,6 +744,7 @@
                 renderGlobalContent();
                 renderAdminPanel();
                 switchTab(6);
+                addLog("Acceso de Administrador (Coach) concedido.", "success");
                 return;
             }
 
@@ -606,17 +761,25 @@
                 renderGlobalContent();
                 initFoodRain();
                 switchTab(1);
+                addLog(`Atleta ${found.name} inició sesión con éxito.`, "success");
             } else {
-                errEl.innerText = "Acceso denegado. Contraseña incorrecta.";
+                errEl.innerText = "Contraseña incorrecta.";
                 errEl.classList.remove('hidden');
+                addLog("Intento de acceso fallido (Contraseña incorrecta).", "error");
             }
+        }
+
+        function buyMembershipWhatsApp() {
+            const plan = document.getElementById('membership-type').value;
+            const payment = document.getElementById('membership-payment').value;
+            const text = `Hola Roberto, quiero comprar / suscribirme a la "${plan}" de Alianza Activa. Prefiero abonar con: ${payment}. ¿Cómo procedemos?`;
+            window.open(`https://api.whatsapp.com/send?phone=5492964000000&text=${encodeURIComponent(text)}`, '_blank');
         }
 
         function sendLeadWhatsApp() {
             const name = document.getElementById('lead-name').value.trim() || "Atleta";
             const goal = document.getElementById('lead-goal').value;
-            const payment = document.getElementById('lead-payment').value;
-            const text = `Hola Roberto, soy ${name}. Me interesa iniciar el plan nutricional con Alianza Activa con el objetivo de: ${goal}. Prefiero abonar con: ${payment}. ¿Cómo coordinamos?`;
+            const text = `Hola Roberto, soy ${name}. Me interesa una asesoría personalizada con el objetivo de: ${goal}. ¿Cómo coordinamos?`;
             window.open(`https://api.whatsapp.com/send?phone=5492964000000&text=${encodeURIComponent(text)}`, '_blank');
         }
 
@@ -682,49 +845,62 @@
 
             const recContainer = document.getElementById('dynamic-recipes-container');
             if (recContainer) {
-                recContainer.innerHTML = `
-                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
-                        <div class="flex items-center gap-3 text-amber-400 border-b border-slate-800 pb-3">
-                            <i class="fa-solid fa-cookie-bite text-xl"></i>
-                            <h3 class="font-bold text-white">Pancakes de Cookies & Avena</h3>
+                recContainer.innerHTML = globalData.recipes.map((receta, idx) => `
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-3">
+                        <div class="flex items-center gap-3 text-orange-400 border-b border-slate-800 pb-2">
+                            <i class="fa-solid fa-utensils text-lg"></i>
+                            <h3 class="font-bold text-white text-sm">Receta ${idx + 1}</h3>
                         </div>
-                        <p class="text-xs text-slate-300">${globalData.recipes[0]}</p>
+                        <p class="text-xs text-slate-300 leading-relaxed">${receta}</p>
                     </div>
-                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-4">
-                        <div class="flex items-center gap-3 text-orange-400 border-b border-slate-800 pb-3">
-                            <i class="fa-solid fa-mug-hot text-xl"></i>
-                            <h3 class="font-bold text-white">Porridge Tibio de Cookies</h3>
-                        </div>
-                        <p class="text-xs text-slate-300">${globalData.recipes[1]}</p>
-                    </div>
-                `;
+                `).join('');
             }
         }
 
         function addBatidoAdmin() {
             const title = document.getElementById('admin-batido-title').value.trim();
-            const image = document.getElementById('admin-batido-img').value.trim();
+            const fileInput = document.getElementById('admin-batido-file');
             const desc = document.getElementById('admin-batido-desc').value.trim();
-            if(!title || !image || !desc) { alert("Completa todos los campos del batido."); return; }
-            globalData.batidos.push({ title, image, desc });
-            document.getElementById('admin-batido-title').value = "";
-            document.getElementById('admin-batido-img').value = "";
-            document.getElementById('admin-batido-desc').value = "";
-            renderGlobalContent();
-            alert("✅ Batido agregado con éxito.");
+            if(!title || !desc) { alert("Completa título y descripción."); return; }
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    globalData.batidos.push({ title, image: e.target.result, desc });
+                    document.getElementById('admin-batido-title').value = "";
+                    fileInput.value = "";
+                    document.getElementById('admin-batido-desc').value = "";
+                    renderGlobalContent();
+                    addLog(`Batido "${title}" agregado con imagen local.`, "success");
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                globalData.batidos.push({ title, image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800", desc });
+                renderGlobalContent();
+                addLog(`Batido "${title}" agregado con imagen por defecto.`, "success");
+            }
         }
 
         function addShortAdmin() {
             const title = document.getElementById('admin-short-title').value.trim();
-            const image = document.getElementById('admin-short-img').value.trim();
+            const fileInput = document.getElementById('admin-short-file');
             const desc = document.getElementById('admin-short-desc').value.trim();
-            if(!title || !image || !desc) { alert("Completa todos los campos del Short."); return; }
-            globalData.shorts.unshift({ title, image, desc, date: "Hace un momento" });
-            document.getElementById('admin-short-title').value = "";
-            document.getElementById('admin-short-img').value = "";
-            document.getElementById('admin-short-desc').value = "";
-            renderGlobalContent();
-            alert("⚡ Short publicado.");
+            if(!title || !desc) { alert("Completa título y descripción."); return; }
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    globalData.shorts.unshift({ title, image: e.target.result, desc, date: "Hace un momento" });
+                    document.getElementById('admin-short-title').value = "";
+                    fileInput.value = "";
+                    document.getElementById('admin-short-desc').value = "";
+                    renderGlobalContent();
+                    addLog(`Short "${title}" publicado con imagen local.`, "success");
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                globalData.shorts.unshift({ title, image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", desc, date: "Hace un momento" });
+                renderGlobalContent();
+                addLog(`Short "${title}" publicado.`, "success");
+            }
         }
 
         async function addNewClientCloud() {
@@ -759,13 +935,16 @@
                     } catch(e) {}
                 }
                 if (saved) {
-                    alert(`✅ Cliente "${name}" guardado.`);
+                    addLog(`Cliente "${name}" guardado exitosamente en Firebase.`, "success");
                     document.getElementById('new-client-name').value = "";
                     document.getElementById('new-client-pass').value = "";
                     await fetchClientsFromFirebase();
                     renderAdminPanel();
                 } else { throw new Error("No se pudo conectar a Firebase."); }
-            } catch (err) { alert("❌ Error: " + err.message); }
+            } catch (err) {
+                addLog(`Error guardando cliente: ${err.message}`, "error");
+                alert("❌ Error: " + err.message);
+            }
             finally { btn.disabled = false; btn.innerText = "Guardar en Firebase"; }
         }
 
@@ -773,6 +952,7 @@
             const select = document.getElementById('select-client-edit');
             select.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
             loadClientDietForEditing();
+            updateSystemMonitor("Conectado (Firebase)");
 
             const container = document.getElementById('clients-list-container');
             if (clientsDB.length === 0) {
@@ -817,8 +997,12 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(toFirestoreDoc(client))
                     });
+                    addLog(`Plan de "${name}" actualizado correctamente en Firebase.`, "success");
                     alert(`✅ Plan y Compras de "${name}" actualizados.`);
-                } catch(err) { alert("❌ Error: " + err.message); }
+                } catch(err) {
+                    addLog(`Error al actualizar plan: ${err.message}`, "error");
+                    alert("❌ Error: " + err.message);
+                }
                 finally { btn.disabled = false; btn.innerText = "Actualizar Plan"; }
             }
         }
@@ -828,9 +1012,13 @@
             if(confirm(`¿Eliminar a "${name}" de Firebase?`)) {
                 try {
                     await fetch(`${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`, { method: 'DELETE' });
+                    addLog(`Cliente "${name}" eliminado de Firebase.`, "warn");
                     await fetchClientsFromFirebase();
                     renderAdminPanel();
-                } catch(e) { alert("Error al eliminar."); }
+                } catch(e) {
+                    addLog(`Error al eliminar cliente: ${e.message}`, "error");
+                    alert("Error al eliminar.");
+                }
             }
         }
 
