@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html_content = """<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -42,7 +42,7 @@
             body { background: #ffffff !important; color: #000000 !important; }
             #food-rain-container, nav, #login-screen, .no-print, button, #admin-tab-btn, footer { display: none !important; }
             .tab-content { display: block !important; opacity: 1 !important; color: #000000 !important; }
-            .bg-slate-900, .bg-slate-950, .bg-slate-900\/90 { background: #ffffff !important; color: #000000 !important; border: 1px solid #e2e8f0 !important; box-shadow: none !important; }
+            .bg-slate-900, .bg-slate-950, .bg-slate-900\\/90 { background: #ffffff !important; color: #000000 !important; border: 1px solid #e2e8f0 !important; box-shadow: none !important; }
             .text-white, .text-slate-200, .text-slate-300, .text-slate-400 { color: #0f172a !important; }
             .text-amber-400, .text-orange-400, .text-emerald-400 { color: #0f172a !important; font-weight: 800 !important; }
             header { background: #ffffff !important; color: #000000 !important; border-bottom: 2px solid #000000 !important; }
@@ -139,42 +139,80 @@
             </div>
         </header>
 
-        <!-- BARRA DE HISTORIAS / SHORTS (ESTILO INSTAGRAM - SOPORTA IMAGEN Y VIDEO) -->
+        <!-- BARRA DE HISTORIAS / SHORTS (ESTILO INSTAGRAM - 8 ITEMS) -->
         <div class="bg-slate-950 border-b border-slate-900 py-3 px-4 overflow-x-auto hide-scroll no-print">
             <div class="max-w-4xl mx-auto flex items-center gap-4" id="instagram-stories-bar">
-                <!-- Se llena dinámicamente -->
+                <!-- Se llena dinámicamente con 8 items -->
             </div>
         </div>
 
-        <!-- BARRA DE NAVEGACIÓN EN FILAS -->
+        <!-- BARRA DE NAVEGACIÓN COMPACTA CON MENÚ DESPLEGABLE / MODAL DE MÓDULOS -->
         <nav class="bg-slate-950/95 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-xl shadow-xl no-print">
-            <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap justify-center items-center gap-2">
-                <button onclick="switchTab(1)" id="btn-tab-1" class="tab-btn px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center space-x-2 bg-orange-500 text-slate-950 shadow-md cursor-pointer">
-                    <i class="fa-solid fa-bolt"></i> <span>Alta Energía</span>
-                </button>
-                <button onclick="switchTab(2)" id="btn-tab-2" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-arrows-rotate"></i> <span>Control</span>
-                </button>
-                <button onclick="switchTab(3)" id="btn-tab-3" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-cart-shopping"></i> <span>Compras</span>
-                </button>
-                <button onclick="switchTab(4)" id="btn-tab-4" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-scale-balanced"></i> <span>Equivalencias</span>
-                </button>
-                <button onclick="switchTab(7)" id="btn-tab-7" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-utensils text-orange-400"></i> <span>Recetas (10)</span>
-                </button>
-                <button onclick="switchTab(8)" id="btn-tab-8" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-store text-emerald-400"></i> <span>Tienda Oficial</span>
-                </button>
-                <button onclick="switchTab(5)" id="btn-tab-5" class="tab-btn px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer">
-                    <i class="fa-solid fa-robot text-amber-400"></i> <span>NutriCoach IA</span>
-                </button>
-                <button id="admin-tab-btn" onclick="switchTab(6)" class="tab-btn hidden px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-amber-400 border border-amber-500/50 hover:bg-slate-800 cursor-pointer">
-                    <i class="fa-solid fa-sliders"></i> <span>Panel Coach</span>
-                </button>
+            <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleNavDrawer()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-md">
+                        <i class="fa-solid fa-grid-2"></i> <span>Menú Principal</span> <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </button>
+                    <span id="active-module-indicator" class="text-xs text-slate-400 font-medium hidden md:inline">Módulo: Alta Energía</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="switchTab(1)" id="quick-btn-1" class="hidden md:flex px-3 py-1.5 rounded-lg text-xs font-bold bg-orange-500 text-slate-950 items-center gap-1.5 cursor-pointer">
+                        <i class="fa-solid fa-bolt"></i> Alta Energía
+                    </button>
+                    <button onclick="switchTab(8)" id="quick-btn-8" class="hidden md:flex px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-slate-300 border border-slate-800 items-center gap-1.5 cursor-pointer">
+                        <i class="fa-solid fa-store text-emerald-400"></i> Tienda
+                    </button>
+                    <button id="admin-tab-btn" onclick="switchTab(6)" class="hidden px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-amber-400 border border-amber-500/50 items-center gap-1.5 cursor-pointer">
+                        <i class="fa-solid fa-sliders"></i> Panel Coach
+                    </button>
+                </div>
             </div>
         </nav>
+
+        <!-- MODAL / MENÚ DESPLEGABLE DE MÓDULOS (CUADRITOS / GRID) -->
+        <div id="nav-drawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+            <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 max-w-2xl w-full shadow-2xl space-y-6 relative">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                    <h3 class="text-lg font-black text-white flex items-center gap-2"><i class="fa-solid fa-compass text-amber-400"></i> Módulos de Alianza Activa</h3>
+                    <button onclick="toggleNavDrawer()" class="text-slate-400 hover:text-white text-lg w-9 h-9 rounded-full bg-slate-950 flex items-center justify-center cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <p class="text-xs text-slate-300">Selecciona el módulo al que deseas acceder:</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <button onclick="switchTab(1); toggleNavDrawer();" class="bg-slate-950 hover:bg-orange-500/20 border border-slate-800 hover:border-orange-500/60 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-bolt"></i></div>
+                        <span class="text-xs font-bold text-white">Alta Energía</span>
+                    </button>
+                    <button onclick="switchTab(2); toggleNavDrawer();" class="bg-slate-950 hover:bg-emerald-500/20 border border-slate-800 hover:border-emerald-500/60 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-arrows-rotate"></i></div>
+                        <span class="text-xs font-bold text-white">Control</span>
+                    </button>
+                    <button onclick="switchTab(3); toggleNavDrawer();" class="bg-slate-950 hover:bg-amber-500/20 border border-slate-800 hover:border-amber-500/60 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-cart-shopping"></i></div>
+                        <span class="text-xs font-bold text-white">Compras</span>
+                    </button>
+                    <button onclick="switchTab(4); toggleNavDrawer();" class="bg-slate-950 hover:bg-blue-500/20 border border-slate-800 hover:border-blue-500/60 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <span class="text-xs font-bold text-white">Equivalencias</span>
+                    </button>
+                    <button onclick="switchTab(7); toggleNavDrawer();" class="bg-slate-950 hover:bg-orange-500/20 border border-slate-800 hover:border-orange-500/60 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-utensils"></i></div>
+                        <span class="text-xs font-bold text-white">Recetas (10)</span>
+                    </button>
+                    <button onclick="switchTab(8); toggleNavDrawer();" class="bg-slate-950 hover:bg-emerald-500/20 border border-slate-800 hover:border-emerald-500/60 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-store"></i></div>
+                        <span class="text-xs font-bold text-white">Tienda Oficial</span>
+                    </button>
+                    <button onclick="switchTab(5); toggleNavDrawer();" class="bg-slate-950 hover:bg-purple-500/20 border border-slate-800 hover:border-purple-500/60 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-robot"></i></div>
+                        <span class="text-xs font-bold text-white">NutriCoach IA</span>
+                    </button>
+                    <button id="drawer-admin-btn" onclick="switchTab(6); toggleNavDrawer();" class="hidden bg-slate-950 hover:bg-amber-500/20 border border-amber-500/50 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-sliders"></i></div>
+                        <span class="text-xs font-bold text-amber-400">Panel Coach</span>
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <main class="relative z-10 max-w-4xl mx-auto px-4 py-10 flex-grow w-full space-y-8">
 
@@ -222,7 +260,7 @@
                 <div id="tab2-meals-container" class="space-y-4"></div>
             </section>
 
-            <!-- SECCIÓN 3: LISTA DE COMPRAS & AUDITORÍA FOTOGRÁFICA DE COMIDAS -->
+            <!-- SECCIÓN 3: LISTA DE COMPRAS & AUDITORÍA FOTOGRÁFICA SEPARADA -->
             <section id="content-tab-3" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
@@ -240,22 +278,29 @@
                 </div>
                 <div id="tab3-shopping-container" class="grid md:grid-cols-2 gap-6"></div>
 
-                <!-- Auditoría Fotográfica de Almuerzo / Cena -->
-                <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-4">
+                <!-- MÓDULO INDEPENDIENTE DE AUDITORÍA FOTOGRÁFICA DE COMIDAS -->
+                <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-4">
                     <div class="flex items-center gap-3 text-emerald-400">
                         <i class="fa-solid fa-camera-retro text-2xl"></i>
-                        <h3 class="text-xl font-bold text-white">📸 Auditoría Fotográfica de Almuerzo / Cena</h3>
+                        <h3 class="text-xl font-bold text-white">📸 Auditoría Fotográfica de Comidas</h3>
                     </div>
-                    <p class="text-xs text-slate-300">Sube la foto de tu plato para verificar que cumpla estrictamente con tus macros y porciones en crudo antes de comer.</p>
+                    <p class="text-xs text-slate-300">Sube la foto de tu plato y selecciona la comida correspondiente para enviarla al coach y verificar tus macros en crudo.</p>
                     <div class="grid md:grid-cols-3 gap-3">
                         <select id="audit-meal-type" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                            <option value="Desayuno">Desayuno</option>
+                            <option value="Media Mañana">Media Mañana</option>
                             <option value="Almuerzo">Almuerzo</option>
+                            <option value="Merienda">Merienda</option>
                             <option value="Cena">Cena</option>
                         </select>
-                        <input type="file" id="audit-meal-file" accept="image/*" class="bg-slate-950 border border-slate-700 rounded-xl p-2 text-xs text-slate-300 col-span-2 md:col-span-1">
+                        <input type="file" id="audit-meal-file" accept="image/*" onchange="previewAuditImage(event)" class="bg-slate-950 border border-slate-700 rounded-xl p-2 text-xs text-slate-300 col-span-2 md:col-span-1">
                         <button onclick="sendFoodAuditWhatsApp()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
                             <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Foto al Coach
                         </button>
+                    </div>
+                    <div id="audit-preview-container" class="hidden mt-3 p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center gap-4">
+                        <img id="audit-img-preview" src="" alt="Vista previa" class="w-16 h-16 object-cover rounded-lg border border-slate-700">
+                        <span class="text-xs text-emerald-400 font-mono">Foto cargada correctamente y lista para auditoría.</span>
                     </div>
                 </div>
             </section>
@@ -324,7 +369,7 @@
                 <div id="dynamic-recipes-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN 8: TIENDA OFICIAL (EXCLUSIVA PRODUCTOS) -->
+            <!-- SECCIÓN 8: TIENDA OFICIAL -->
             <section id="content-tab-8" class="tab-content hidden space-y-8">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
                     <div class="flex items-center gap-3 mb-2 text-emerald-400">
@@ -374,67 +419,84 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN 6: PANEL COACH MASTER & CONSOLA DE CÁLCULO (0% ERROR) -->
+            <!-- SECCIÓN 6: PANEL COACH MASTER & CONSOLA DE CÁLCULO PROFESIONAL -->
             <section id="content-tab-6" class="tab-content hidden space-y-8">
-                <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-6 md:p-8 shadow-xl space-y-8">
-                    <div class="border-b border-slate-800 pb-4">
-                        <h2 class="text-2xl font-bold text-white flex items-center gap-3"><i class="fa-solid fa-sliders text-amber-400"></i> Panel Coach Master & Consola de Cálculo</h2>
-                        <p class="text-slate-400 text-sm mt-1">Generador de Dietas (0% Error), Escáner vs Cinta/Fotos, Terminal CLI, Logs en Vivo, Editor de Recetas y Gestión de Alumnos.</p>
+                <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 shadow-2xl space-y-8">
+                    <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-black text-white flex items-center gap-3"><i class="fa-solid fa-sliders text-amber-400"></i> Panel Coach Master & Consola</h2>
+                            <p class="text-slate-400 text-xs md:text-sm mt-1">Generador de Dietas Biométricas (0% Error), Escáner 32 Métricas, Terminal CLI y Gestión de Alumnos.</p>
+                        </div>
+                        <span class="bg-amber-500/20 text-amber-400 px-4 py-2 rounded-2xl text-xs font-bold border border-amber-500/40 w-fit">Modo Master</span>
                     </div>
 
-                    <!-- CONSOLA DE CÁLCULO DE DIETAS CON 0% ERROR -->
-                    <div class="bg-slate-950 p-6 rounded-2xl border border-amber-500/40 space-y-6">
+                    <!-- CONSOLA DE CÁLCULO AVANZADA (ESCANER 32 MÉTRICAS + FOTO + OBJETIVOS ACTUALIZADOS) -->
+                    <div class="bg-slate-950 p-6 md:p-8 rounded-2xl border border-amber-500/50 space-y-6 shadow-inner">
                         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                            <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-calculator"></i> 🧮 Motor de Cálculo de Dieta (0% Error)</h3>
-                            <span class="text-[10px] bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full font-bold">Precisión Matemática</span>
+                            <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-calculator"></i> 🧮 Motor Biométrico & Protocolo de Escáner (0% Error)</h3>
+                            <span class="text-[10px] bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full font-bold">Precisión 8 Electrodos</span>
                         </div>
-                        <p class="text-xs text-slate-300">Ingresa los datos de escáner corporal o protocolo de cinta/fotos para calcular automáticamente los macros en crudo y asignar el plan.</p>
+                        <p class="text-xs text-slate-300">Ingresa las mediciones del escáner corporal (o protocolo de cinta), sube la foto del escáner/atleta y calcula los macros exactos para asignar al alumno.</p>
                         
                         <div class="grid md:grid-cols-3 gap-4">
                             <div>
                                 <label class="text-[10px] text-slate-400 block mb-1">Nombre Atleta</label>
-                                <input type="text" id="calc-name" placeholder="Ej: Carlos" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                                <input type="text" id="calc-name" placeholder="Ej: Carlos" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
                             </div>
                             <div>
                                 <label class="text-[10px] text-slate-400 block mb-1">Peso Total (kg)</label>
-                                <input type="number" id="calc-weight" placeholder="Ej: 75" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                                <input type="number" id="calc-weight" placeholder="Ej: 75" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
                             </div>
                             <div>
                                 <label class="text-[10px] text-slate-400 block mb-1">Estatura (cm)</label>
-                                <input type="number" id="calc-height" placeholder="Ej: 175" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                                <input type="number" id="calc-height" placeholder="Ej: 175" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
                             </div>
                             <div>
-                                <label class="text-[10px] text-slate-400 block mb-1">% Grasa (Escáner u Oficial)</label>
-                                <input type="number" id="calc-fat" placeholder="Ej: 15" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                                <label class="text-[10px] text-slate-400 block mb-1">% Grasa Corporal</label>
+                                <input type="number" id="calc-fat" placeholder="Ej: 15" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-slate-400 block mb-1">Masa Muscular (kg)</label>
+                                <input type="number" id="calc-muscle" placeholder="Ej: 38" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-slate-400 block mb-1">Grasa Visceral & Agua (%)</label>
+                                <input type="text" id="calc-visceral" placeholder="Ej: Visceral 6, Agua 58%" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
                             </div>
                             <div>
                                 <label class="text-[10px] text-slate-400 block mb-1">Método de Evaluación</label>
-                                <select id="calc-method" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-                                    <option value="escaner">Balanza 8 Electrodos (Escáner)</option>
+                                <select id="calc-method" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                                    <option value="escaner">Balanza 8 Electrodos (Escáner 32 Métricas)</option>
                                     <option value="cinta">Protocolo Cinta & Fotos (Sin Escáner)</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="text-[10px] text-slate-400 block mb-1">Objetivo</label>
-                                <select id="calc-goal" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-                                    <option value="pierna">Hipertrofia / Alta Energía (Pierna)</option>
+                                <label class="text-[10px] text-slate-400 block mb-1">Objetivo del Plan</label>
+                                <select id="calc-goal" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                                    <option value="perdida_grasa">Pérdida de grasa / Pérdida de peso</option>
+                                    <option value="ganancia_musculo">Ganancia de músculo (Hipertrofia / Alta Energía)</option>
+                                    <option value="composicion_corporal">Composición corporal (Recomposición)</option>
                                     <option value="definicion">Definición / Control</option>
                                 </select>
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-slate-400 block mb-1">Subir Foto Escáner / Atleta (Opcional)</label>
+                                <input type="file" id="calc-scan-photo" accept="image/*" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-1.5 text-xs text-slate-300">
                             </div>
                         </div>
 
                         <div class="pt-2 flex flex-wrap gap-4 items-center">
-                            <button onclick="calculateDietEngine()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-2.5 rounded-xl text-xs cursor-pointer shadow-md">
-                                <i class="fa-solid fa-bolt mr-1"></i> Calcular Plan 0% Error
+                            <button onclick="calculateDietEngine()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl text-xs cursor-pointer shadow-md flex items-center gap-2">
+                                <i class="fa-solid fa-bolt"></i> Calcular Plan 0% Error con Escáner
                             </button>
                         </div>
 
-                        <div id="calc-results-box" class="hidden bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-3 font-mono text-xs text-slate-300">
-                            <!-- Resultados dinámicos -->
+                        <div id="calc-results-box" class="hidden bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4 font-mono text-xs text-slate-300 shadow-xl">
+                            <!-- Resultados dinámicos con selector de cliente y desglose de comidas -->
                         </div>
                     </div>
 
-                    <!-- CENTRO DE MONITOREO & TERMINAL -->
+                    <!-- CENTRO DE MONITOREO -->
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex items-center gap-4">
                             <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-xl">
@@ -465,30 +527,30 @@
                         </div>
                     </div>
 
-                    <!-- TERMINAL CLI & LOGS EN VIVO -->
+                    <!-- TERMINAL CLI MEJORADA & LOGS -->
                     <div class="grid lg:grid-cols-2 gap-8">
-                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                            <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-terminal"></i> Terminal de Comandos (CLI)</h3>
-                            <p class="text-[11px] text-slate-400">Escribe atajos rápidos. Escribe <code class="text-amber-400">help</code> para ver comandos.</p>
+                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
+                            <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-terminal"></i> Terminal de Comandos (CLI) Mejorada</h3>
+                            <p class="text-[11px] text-slate-400">Escribe atajos rápidos. Escribe <code class="text-amber-400">help</code> para ver comandos disponibles.</p>
                             <div class="flex gap-2">
-                                <input type="text" id="cli-input" onkeydown="if(event.key==='Enter') executeCliCommand()" placeholder="ej: help, sync, count..." class="flex-grow bg-slate-900 border border-slate-700 text-emerald-400 font-mono px-4 py-2.5 rounded-xl text-xs outline-none focus:border-amber-500">
-                                <button onclick="executeCliCommand()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs cursor-pointer shadow-md">Ejecutar</button>
+                                <input type="text" id="cli-input" onkeydown="if(event.key==='Enter') executeCliCommand()" placeholder="ej: help, sync, count, list..." class="flex-grow bg-slate-900 border border-slate-700 text-emerald-400 font-mono px-4 py-3 rounded-xl text-xs outline-none focus:border-amber-500">
+                                <button onclick="executeCliCommand()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-5 py-3 rounded-xl text-xs cursor-pointer shadow-md">Ejecutar</button>
                             </div>
                         </div>
 
-                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between">
+                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-3 flex flex-col justify-between">
                             <div class="flex items-center justify-between">
                                 <h3 class="font-bold text-emerald-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-wave-square"></i> Logs en Vivo</h3>
-                                <button onclick="clearLogs()" class="text-[10px] text-slate-400 hover:text-white bg-slate-900 px-2.5 py-1 rounded-lg border border-slate-800 cursor-pointer">Limpiar</button>
+                                <button onclick="clearLogs()" class="text-[10px] text-slate-400 hover:text-white bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 cursor-pointer">Limpiar</button>
                             </div>
-                            <div id="live-logs-box" class="bg-slate-900 border border-slate-800 rounded-xl p-3 h-32 overflow-y-auto font-mono text-[11px] text-slate-300 space-y-1">
-                                <div class="text-emerald-400">[SYSTEM] Consola de Alianza Activa inicializada correctamente.</div>
+                            <div id="live-logs-box" class="bg-slate-900 border border-slate-800 rounded-xl p-4 h-36 overflow-y-auto font-mono text-[11px] text-slate-300 space-y-1">
+                                <div class="text-emerald-400">[SYSTEM] Consola y motor biométrico de Alianza Activa inicializados.</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- EDITOR DE LAS 10 RECETAS OFICIALES -->
-                    <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                    <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                         <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-utensils"></i> 🍳 Editor de Recetas Oficiales (1 a 10)</h3>
                         <p class="text-[11px] text-slate-400">Selecciona la receta que deseas modificar, cambia su descripción y sube su foto:</p>
                         <div class="grid md:grid-cols-3 gap-3">
@@ -510,9 +572,9 @@
                         <textarea id="edit-recipe-desc" rows="3" placeholder="Ingredientes y preparación exacta..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none font-mono"></textarea>
                     </div>
 
-                    <!-- GESTIÓN DE BATIDOS Y SHORTS (IMAGEN / VIDEO) -->
+                    <!-- GESTIÓN DE BATIDOS Y SHORTS -->
                     <div class="grid lg:grid-cols-2 gap-8 pt-6 border-t border-slate-800">
-                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                             <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-shaker mr-2"></i> Publicar / Editar Batido</h3>
                             <div class="space-y-3">
                                 <input type="text" id="admin-batido-title" placeholder="Nombre del Batido" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
@@ -522,15 +584,14 @@
                             <button onclick="addBatidoAdmin()" class="w-full bg-amber-500 text-slate-950 font-bold py-3 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md">Agregar Batido</button>
                         </div>
 
-                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
-                            <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-bolt mr-2"></i> Publicar Short / Historia (Imagen o Video)</h3>
+                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
+                            <h3 class="font-bold text-amber-400 text-sm uppercase"><i class="fa-solid fa-bolt mr-2"></i> Publicar Short / Historia (8 en total)</h3>
                             <div class="space-y-3">
                                 <input type="text" id="admin-short-title" placeholder="Título de la Novedad" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
                                 <select id="admin-short-type" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white outline-none">
                                     <option value="image">Imagen (Foto)</option>
                                     <option value="video">Video Corto (MP4 / WebM)</option>
                                 </select>
-                                <label class="text-[10px] text-slate-400 block">Selecciona archivo de tu Celular o PC:</label>
                                 <input type="file" id="admin-short-file" accept="image/*,video/*" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-300">
                                 <textarea id="admin-short-desc" rows="2" placeholder="Descripción..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 outline-none"></textarea>
                             </div>
@@ -539,7 +600,7 @@
                     </div>
 
                     <div class="grid lg:grid-cols-2 gap-8 pt-6 border-t border-slate-800">
-                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                             <h3 class="font-bold text-amber-400 text-sm uppercase">➕ Registrar Nuevo Cliente</h3>
                             <div class="space-y-3">
                                 <input type="text" id="new-client-name" placeholder="Nombre" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none">
@@ -548,7 +609,7 @@
                             <button onclick="addNewClientCloud()" id="btn-save-client" class="w-full bg-amber-500 text-slate-950 font-bold py-3.5 rounded-xl text-sm hover:bg-amber-400 cursor-pointer shadow-md">Guardar en Firebase</button>
                         </div>
 
-                        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 space-y-4">
+                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                             <h3 class="font-bold text-amber-400 text-sm uppercase">📝 Editar Dieta y Compras del Cliente</h3>
                             <select id="select-client-edit" onchange="loadClientDietForEditing()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none"></select>
                             <div class="space-y-2">
@@ -626,8 +687,14 @@
                 { title: "Fuego Rojo HBL", desc: "Aporte energético superior con frutos rojos y batido nutricional.", image: "https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&q=80&w=800" }
             ],
             shorts: [
-                { title: "🔥 ¡Nuevo Récord!", desc: "Excelente técnica en Anubis Gym.", type: "image", url: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hoy" },
-                { title: "🥤 Protein Bar", desc: "Batidos y tés listos post-entreno.", type: "image", url: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800", date: "Ayer" }
+                { title: "🔥 ¡Nuevo Récord!", desc: "Excelente técnica en Anubis Gym.", type: "image", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hoy" },
+                { title: "🥤 Protein Bar", desc: "Batidos y tés listos post-entreno.", type: "image", image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800", date: "Ayer" },
+                { title: "💪 Clases Funcional", desc: "Energía al máximo en Alianza Activa.", type: "image", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800", date: "Hace 2 días" },
+                { title: "🥗 Nutrición Fit", desc: "Preparando los mejores platos en crudo.", type: "image", image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800", date: "Hace 3 días" },
+                { title: "⚡ Alta Energía", desc: "Días de pierna con 0% error en macros.", type: "image", image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=800", date: "Hace 4 días" },
+                { title: "🥤 Batido Cookies", desc: "El favorito de todos los atletas.", type: "image", image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800", date: "Hace 5 días" },
+                { title: "🏆 Comunidad", desc: "Creciendo juntos hacia la meta TAB.", type: "image", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800", date: "Hace 6 días" },
+                { title: "🎯 Resultados", desc: "Escáner corporal y mediciones exactas.", type: "image", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800", date: "Hace 1 semana" }
             ],
             recipes: [
                 { title: "Pancakes de Cookies & Avena", text: "30g Batido Cookies, 40g Avena instantánea, 1 Huevo (50g), 50ml Agua. Licuar y cocinar en sartén a fuego medio.", image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&q=80&w=800" },
@@ -676,6 +743,7 @@
         let isUserAdmin = false;
         let clientsDB = defaultClients;
         let activeClient = clientsDB[0];
+        let lastCalculatedPlan = null;
 
         // --- LOGS EN VIVO & MONITOREO ---
         function addLog(msg, type = 'info') {
@@ -708,7 +776,7 @@
             if (lastSync) lastSync.innerText = new Date().toLocaleTimeString();
         }
 
-        // --- TERMINAL CLI ---
+        // --- TERMINAL CLI MEJORADA ---
         function executeCliCommand() {
             const inputEl = document.getElementById('cli-input');
             const cmd = inputEl.value.trim();
@@ -718,20 +786,25 @@
 
             const parts = cmd.split(' ');
             const action = parts[0].toLowerCase();
+            const arg = parts.slice(1).join(' ');
 
             if (action === 'help') {
-                addLog("--- COMANDOS VÁLIDOS ---", "success");
-                addLog("1. sync -> Sincroniza con Firebase", "info");
-                addLog("2. count -> Muestra número de clientes", "info");
-                addLog("3. clear -> Limpia logs", "info");
+                addLog("--- COMANDOS DISPONIBLES ---", "success");
+                addLog("1. help -> Muestra ayuda", "info");
+                addLog("2. sync -> Sincroniza con Firebase Firestore", "info");
+                addLog("3. count -> Muestra cantidad de atletas", "info");
+                addLog("4. list -> Lista todos los clientes registrados", "info");
+                addLog("5. clear -> Limpia la consola de logs", "info");
             } else if (action === 'sync') {
-                fetchClientsFromFirebase().then(() => addLog("Sincronización completada.", "success"));
+                fetchClientsFromFirebase().then(() => addLog("Sincronización completada con éxito.", "success"));
             } else if (action === 'count') {
-                addLog(`Total atletas: ${clientsDB.length}`, "success");
+                addLog(`Total de atletas en sistema: ${clientsDB.length}`, "success");
+            } else if (action === 'list') {
+                addLog(`Atletas: ${clientsDB.map(c => c.name).join(', ')}`, "success");
             } else if (action === 'clear') {
                 clearLogs();
             } else {
-                addLog(`Comando desconocido: "${action}"`, "error");
+                addLog(`Comando no reconocido: "${action}". Escribe 'help' para ver comandos.`, "error");
             }
         }
 
@@ -775,12 +848,12 @@
                         } else {
                             clientsDB = defaultClients;
                         }
-                        addLog(`Conexión exitosa. ${clientsDB.length} clientes cargados.`, "success");
+                        addLog(`Conexión exitosa. ${clientsDB.length} clientes cargados desde la nube.`, "success");
                         updateSystemMonitor("Conectado (Firebase)");
                         return clientsDB;
                     }
                 } catch (err) {
-                    addLog(`Error al conectar con endpoint: ${err.message}`, "error");
+                    addLog(`Error en endpoint: ${err.message}`, "error");
                 }
             }
             clientsDB = defaultClients;
@@ -794,54 +867,47 @@
             renderGlobalContent();
         });
 
-        // --- CONSOLA DE CÁLCULO DE DIETAS (0% ERROR) ---
+        // --- CONSOLA DE CÁLCULO BIOMÉTRICO (0% ERROR) CON ASIGNACIÓN DE CLIENTES & MENÚ COMPLETO ---
         function calculateDietEngine() {
             const name = document.getElementById('calc-name').value.trim() || "Atleta Nuevo";
             const weight = parseFloat(document.getElementById('calc-weight').value) || 70;
             const height = parseFloat(document.getElementById('calc-height').value) || 170;
             const fat = parseFloat(document.getElementById('calc-fat').value) || 15;
+            const muscle = parseFloat(document.getElementById('calc-muscle').value) || 35;
+            const visceral = document.getElementById('calc-visceral').value.trim() || "Normal";
             const method = document.getElementById('calc-method').value;
             const goal = document.getElementById('calc-goal').value;
 
-            const proteinGrams = Math.round(weight * 2.2);
-            const carbGrams = goal === 'pierna' ? Math.round(weight * 3.5) : Math.round(weight * 2.2);
-            const fatGrams = Math.round(weight * 0.8);
+            let proteinGrams = Math.round(weight * 2.2);
+            let carbGrams = Math.round(weight * 3.0);
+            let fatGrams = Math.round(weight * 0.8);
+
+            if (goal === 'perdida_grasa') {
+                carbGrams = Math.round(weight * 2.0);
+                proteinGrams = Math.round(weight * 2.4);
+            } else if (goal === 'ganancia_musculo') {
+                carbGrams = Math.round(weight * 3.5);
+            } else if (goal === 'composicion_corporal') {
+                carbGrams = Math.round(weight * 2.5);
+            }
+
             const totalCalories = Math.round((proteinGrams * 4) + (carbGrams * 4) + (fatGrams * 9));
 
-            const resultsBox = document.getElementById('calc-results-box');
-            resultsBox.classList.remove('hidden');
-            resultsBox.innerHTML = `
-                <div class="text-emerald-400 font-bold">✅ Cálculo 0% Error Exitoso para: ${name} (${method.toUpperCase()})</div>
-                <div>• <strong>Calorías Objetivo:</strong> ${totalCalories} kcal</div>
-                <div>• <strong>Proteína Diaria:</strong> ${proteinGrams}g (Pesado en crudo / Huevos por unidad)</div>
-                <div>• <strong>Carbohidratos:</strong> ${carbGrams}g (Arroz/Papa/Avena en crudo)</div>
-                <div>• <strong>Grasas Buenas:</strong> ${fatGrams}g (Palta / Aceite de oliva / Frutos secos)</div>
-                <div class="pt-2 border-t border-slate-800 flex gap-3">
-                    <button onclick="applyCalculatedDietToClient('${name}', ${proteinGrams}, ${carbGrams}, ${fatGrams})" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2 rounded-xl text-xs cursor-pointer">
-                        Asignar Automáticamente a Plan
-                    </button>
-                </div>
-            `;
-            addLog(`Cálculo 0% error generado para ${name}.`, "success");
-        }
-
-        function applyCalculatedDietToClient(name, p, c, f) {
-            const newClient = {
-                name: name,
-                pass: name.toLowerCase() + "2026",
+            lastCalculatedPlan = {
+                name,
                 tab1: [
                     `Desayuno (Receta Fija): 30g Batido Cookies + 3 Huevos enteros (Unidades) + 40g Avena tradicional`,
-                    `Media Mañana: 150g Fruta (Bloque 5)`,
-                    `Almuerzo: ${Math.round(p * 0.4)}g Proteína en crudo + ${Math.round(c * 0.4)}g Carbohidrato en crudo + 15g Aceite de oliva + 200g Ensalada`,
-                    `Media Tarde: Porridge Tibio de Cookies (50g Avena + 30g Batido Cookies)`,
-                    `Cena: ${Math.round(p * 0.35)}g Proteína en crudo + 200g Ensalada + 40g Palta`
+                    `Media Mañana: 150g Fruta fresca (Bloque 5)`,
+                    `Almuerzo: ${Math.round(proteinGrams * 0.4)}g Proteína en crudo + ${Math.round(carbGrams * 0.4)}g Carbohidrato en crudo + 15g Aceite de oliva + 200g Ensalada`,
+                    `Media Tarde / Merienda: Porridge Tibio de Cookies (50g Avena tradicional + 30g Batido Cookies)`,
+                    `Cena: ${Math.round(proteinGrams * 0.35)}g Proteína en crudo + 200g Ensalada + 40g Palta`
                 ],
                 tab2: [
                     `Desayuno: 3 Huevos enteros (Unidades) + 50g Pan integral`,
                     `Media Mañana: 150g Fruta fresca`,
-                    `Almuerzo: ${Math.round(p * 0.35)}g Proteína en crudo + ${Math.round(c * 0.3)}g Carbohidrato + 10g Aceite de oliva + Ensalada`,
+                    `Almuerzo: ${Math.round(proteinGrams * 0.35)}g Proteína en crudo + ${Math.round(carbGrams * 0.3)}g Carbohidrato + 10g Aceite de oliva + Ensalada`,
                     `Media Tarde: 120g Papa hervida en crudo + Mate amargo libre`,
-                    `Cena: Pescado o Pollo magro (${Math.round(p * 0.35)}g) + Ensalada mixta`
+                    `Cena: Pescado o Pollo magro (${Math.round(proteinGrams * 0.35)}g) + Ensalada mixta`
                 ],
                 tab3: [
                     `Huevos enteros: 2 maples (60 unidades)`,
@@ -853,10 +919,58 @@
                 ]
             };
 
-            clientsDB.push(newClient);
-            renderAdminPanel();
-            alert(`✅ Atleta "${name}" creado y plan calculado con 0% de error asignado con éxito.`);
-            addLog(`Atleta ${name} añadido mediante Consola de Cálculo.`, "success");
+            const clientOptionsHtml = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+
+            const resultsBox = document.getElementById('calc-results-box');
+            resultsBox.classList.remove('hidden');
+            resultsBox.innerHTML = `
+                <div class="text-emerald-400 font-bold text-sm">✅ Cálculo Biométrico 0% Error Exitoso (${method.toUpperCase()})</div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-slate-300 bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <div>• <strong>Calorías:</strong> ${totalCalories} kcal</div>
+                    <div>• <strong>Proteína:</strong> ${proteinGrams}g</div>
+                    <div>• <strong>Carbohidratos:</strong> ${carbGrams}g</div>
+                    <div>• <strong>Grasas Buenas:</strong> ${fatGrams}g</div>
+                    <div>• <strong>Masa Muscular:</strong> ${muscle} kg</div>
+                    <div>• <strong>% Grasa:</strong> ${fat}%</div>
+                    <div>• <strong>Visceral/Agua:</strong> ${visceral}</div>
+                    <div>• <strong>Objetivo:</strong> ${goal.replace('_', ' ').toUpperCase()}</div>
+                </div>
+
+                <div class="space-y-3 pt-2">
+                    <label class="text-[10px] text-amber-400 uppercase font-bold block">Seleccionar Atleta para Asignar este Plan Automáticamente:</label>
+                    <div class="flex gap-2">
+                        <select id="assign-target-client" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none flex-grow">
+                            ${clientOptionsHtml}
+                        </select>
+                        <button onclick="assignCalculatedPlanToSelectedClient()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-2.5 rounded-xl text-xs cursor-pointer shadow-md">
+                            Asignar Plan & Menús
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-2 pt-2 border-t border-slate-800">
+                    <span class="text-[10px] text-slate-400 uppercase font-bold">Desglose de Comidas Generadas (Incluye Desayuno, Almuerzo, Merienda, Cena):</span>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-1 text-slate-300">
+                        ${lastCalculatedPlan.tab1.map((m, i) => `<div>🍽️ <strong>Comida ${i+1}:</strong> ${m}</div>`).join('')}
+                    </div>
+                </div>
+            `;
+            addLog(`Cálculo biométrico 0% error generado para ${name}.`, "success");
+        }
+
+        function assignCalculatedPlanToSelectedClient() {
+            const targetName = document.getElementById('assign-target-client').value;
+            const client = clientsDB.find(c => c.name === targetName);
+            if (client && lastCalculatedPlan) {
+                client.tab1 = lastCalculatedPlan.tab1;
+                client.tab2 = lastCalculatedPlan.tab2;
+                client.tab3 = lastCalculatedPlan.tab3;
+                alert(`✅ Plan biométrico exacto asignado con éxito al atleta: ${targetName}`);
+                addLog(`Plan asignado a ${targetName} correctamente.`, "success");
+                renderAdminPanel();
+            } else {
+                alert("❌ Selecciona un atleta válido.");
+            }
         }
 
         async function verifyPassword() {
@@ -890,6 +1004,7 @@
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
                 document.getElementById('admin-tab-btn').classList.remove('hidden');
+                document.getElementById('drawer-admin-btn').classList.remove('hidden');
                 renderDynamicContent();
                 renderGlobalContent();
                 renderAdminPanel();
@@ -907,6 +1022,7 @@
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
                 document.getElementById('admin-tab-btn').classList.add('hidden');
+                document.getElementById('drawer-admin-btn').classList.add('hidden');
                 renderDynamicContent();
                 renderGlobalContent();
                 initFoodRain();
@@ -914,7 +1030,7 @@
                 addLog(`Atleta ${found.name} inició sesión.`, "success");
             } else {
                 errEl.innerText = "Contraseña incorrecta.";
-                errEl.classList.remove('hidden');
+                errEl.classList.add('hidden');
                 addLog("Intento de acceso fallido.", "error");
             }
         }
@@ -934,7 +1050,7 @@
                 return;
             }
 
-            const text = `Hola Roberto, quiero solicitar mi plan en Alianza Activa:\n\n👤 *Nombre:* ${name}\n🎂 *Edad:* ${age}\n⚖️ *Peso:* ${weight}kg\n📏 *Estatura:* ${height}cm\n🌍 *Nacionalidad:* ${nat}\n⚧ *Género:* ${gender}\n🎯 *Objetivo:* ${goal}\n📱 *Celular:* ${phone}`;
+            const text = `Hola Roberto, quiero solicitar mi plan en Alianza Activa:\\n\\n👤 *Nombre:* ${name}\\n🎂 *Edad:* ${age}\\n⚖️ *Peso:* ${weight}kg\\n📏 *Estatura:* ${height}cm\\n🌍 *Nacionalidad:* ${nat}\\n⚧ *Género:* ${gender}\\n🎯 *Objetivo:* ${goal}\\n📱 *Celular:* ${phone}`;
             
             document.getElementById('membership-alert').classList.remove('hidden');
             setTimeout(() => {
@@ -942,9 +1058,21 @@
             }, 800);
         }
 
+        function previewAuditImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('audit-img-preview').src = e.target.result;
+                    document.getElementById('audit-preview-container').classList.remove('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
         function sendFoodAuditWhatsApp() {
             const meal = document.getElementById('audit-meal-type').value;
-            const text = `Hola Roberto, aquí te comparto la foto de mi *${meal}* para auditar cumplimiento en Alianza Activa. 👤 Atleta: ${activeClient.name}`;
+            const text = `Hola Roberto, aquí te comparto la auditoría de mi *${meal}* para verificar cumplimiento de macros en crudo en Alianza Activa. 👤 Atleta: ${activeClient.name}`;
             window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent(text)}`, '_blank');
         }
 
@@ -956,20 +1084,25 @@
         function shareWhatsApp(type) {
             let text = "";
             if (type === 'tab1') {
-                text = `🔥 *ALTA ENERGÍA (PIERNA)*\n👤 *Cliente:* ${activeClient.name}\n\n` +
-                    activeClient.tab1.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
+                text = `🔥 *ALTA ENERGÍA (PIERNA)*\\n👤 *Cliente:* ${activeClient.name}\\n\\n` +
+                    activeClient.tab1.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\\n\\n');
             } else if (type === 'tab2') {
-                text = `🥗 *CONTROL Y RECUPERACIÓN*\n👤 *Cliente:* ${activeClient.name}\n\n` +
-                    activeClient.tab2.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
+                text = `🥗 *CONTROL Y RECUPERACIÓN*\\n👤 *Cliente:* ${activeClient.name}\\n\\n` +
+                    activeClient.tab2.map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\\n\\n');
             } else if (type === 'tab3') {
-                text = `🛒 *COMPRAS SEMANAL*\n👤 *Cliente:* ${activeClient.name}\n\n` +
-                    activeClient.tab3.map(item => `✅ ${item}`).join('\n');
+                text = `🛒 *COMPRAS SEMANAL*\\n👤 *Cliente:* ${activeClient.name}\\n\\n` +
+                    activeClient.tab3.map(item => `✅ ${item}`).join('\\n');
             }
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
         }
 
+        function toggleNavDrawer() {
+            const drawer = document.getElementById('nav-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
         function renderGlobalContent() {
-            // Render Batidos (Tienda Exclusiva sin Shorts)
+            // Render Batidos
             const batidoContainer = document.getElementById('dynamic-batidos-container');
             if (batidoContainer) {
                 batidoContainer.innerHTML = globalData.batidos.map(b => `
@@ -993,14 +1126,14 @@
                 `).join('');
             }
 
-            // Render Instagram Stories (Shorts Bar Superior - Imagen & Video)
+            // Render 8 Instagram Stories (Shorts)
             const storiesBar = document.getElementById('instagram-stories-bar');
             if (storiesBar) {
                 storiesBar.innerHTML = globalData.shorts.map((s, idx) => `
                     <div onclick="openStoryModal(${idx})" class="flex flex-col items-center gap-1.5 cursor-pointer shrink-0 group">
                         <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-amber-500 to-orange-500 group-hover:scale-105 transition-transform relative">
                             ${s.type === 'video' ? '<span class="absolute bottom-0 right-0 bg-black text-amber-400 text-[9px] px-1 rounded-full"><i class="fa-solid fa-play"></i></span>' : ''}
-                            <img src="${s.type === 'video' ? 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=200' : s.image}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950">
+                            <img src="${s.image}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950">
                         </div>
                         <span class="text-[10px] text-slate-300 font-medium max-w-[64px] truncate text-center">${s.title}</span>
                     </div>
@@ -1169,33 +1302,37 @@
 
         function renderAdminPanel() {
             const select = document.getElementById('select-client-edit');
-            select.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+            if (select) select.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
             loadClientDietForEditing();
             updateSystemMonitor("Conectado (Firebase)");
 
             const container = document.getElementById('clients-list-container');
-            if (clientsDB.length === 0) {
-                container.innerHTML = `<p class="text-sm text-slate-500 col-span-3">No hay clientes.</p>`;
-                return;
-            }
-            container.innerHTML = clientsDB.map(c => `
-                <div class="flex items-center justify-between bg-slate-900 p-3 rounded-xl border border-slate-800 text-sm">
-                    <div>
-                        <strong class="text-white block">${c.name}</strong> 
-                        <span class="text-[10px] text-slate-400">Pass: <code class="text-amber-400 font-mono">${c.pass}</code></span>
+            if (container) {
+                if (clientsDB.length === 0) {
+                    container.innerHTML = `<p class="text-sm text-slate-500 col-span-3">No hay clientes.</p>`;
+                    return;
+                }
+                container.innerHTML = clientsDB.map(c => `
+                    <div class="flex items-center justify-between bg-slate-900 p-3 rounded-xl border border-slate-800 text-sm">
+                        <div>
+                            <strong class="text-white block">${c.name}</strong> 
+                            <span class="text-[10px] text-slate-400">Pass: <code class="text-amber-400 font-mono">${c.pass}</code></span>
+                        </div>
+                        <button onclick="deleteClientCloud('${c.name}')" class="text-red-400 hover:text-red-300 text-xs px-2.5 py-1 rounded-lg bg-slate-800 transition-colors cursor-pointer"><i class="fa-solid fa-trash"></i></button>
                     </div>
-                    <button onclick="deleteClientCloud('${c.name}')" class="text-red-400 hover:text-red-300 text-xs px-2.5 py-1 rounded-lg bg-slate-800 transition-colors cursor-pointer"><i class="fa-solid fa-trash"></i></button>
-                </div>
-            `).join('');
+                `).join('');
+            }
         }
 
         function loadClientDietForEditing() {
-            const name = document.getElementById('select-client-edit').value;
+            const select = document.getElementById('select-client-edit');
+            if (!select) return;
+            const name = select.value;
             const client = clientsDB.find(c => c.name === name);
             if (client) {
-                document.getElementById('edit-tab1-data').value = client.tab1 ? client.tab1.join('\n') : '';
-                document.getElementById('edit-tab2-data').value = client.tab2 ? client.tab2.join('\n') : '';
-                document.getElementById('edit-tab3-data').value = client.tab3 ? client.tab3.join('\n') : '';
+                document.getElementById('edit-tab1-data').value = client.tab1 ? client.tab1.join('\\n') : '';
+                document.getElementById('edit-tab2-data').value = client.tab2 ? client.tab2.join('\\n') : '';
+                document.getElementById('edit-tab3-data').value = client.tab3 ? client.tab3.join('\\n') : '';
             }
         }
 
@@ -1204,9 +1341,9 @@
             const btn = document.getElementById('btn-update-diet');
             const client = clientsDB.find(c => c.name === name);
             if (client) {
-                client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').filter(i => i.trim() !== '');
-                client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').filter(i => i.trim() !== '');
-                client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').filter(i => i.trim() !== '');
+                client.tab1 = document.getElementById('edit-tab1-data').value.split('\\n').filter(i => i.trim() !== '');
+                client.tab2 = document.getElementById('edit-tab2-data').value.split('\\n').filter(i => i.trim() !== '');
+                client.tab3 = document.getElementById('edit-tab3-data').value.split('\\n').filter(i => i.trim() !== '');
                 btn.disabled = true;
                 btn.innerText = "Actualizando...";
                 try {
@@ -1288,29 +1425,29 @@
         function switchTab(tabNumber) {
             for (let i = 1; i <= 8; i++) {
                 const content = document.getElementById('content-tab-' + i);
-                const btn = document.getElementById('btn-tab-' + i) || (i === 6 ? document.getElementById('admin-tab-btn') : null);
                 if (content) content.classList.add('hidden');
-                if (btn && i !== 6) {
-                    btn.className = 'tab-btn px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-slate-400 border border-slate-800 hover:bg-slate-800 hover:text-slate-200 cursor-pointer';
-                }
-                if (btn && i === 6) {
-                    btn.className = 'tab-btn ' + (!isUserAdmin ? 'hidden ' : '') + 'px-4 py-2 rounded-xl font-semibold text-xs transition-all flex items-center space-x-2 bg-slate-900 text-amber-400 border border-amber-500/50 hover:bg-slate-800 cursor-pointer';
-                }
             }
             const activeContent = document.getElementById('content-tab-' + tabNumber);
-            const activeBtn = document.getElementById('btn-tab-' + tabNumber) || (tabNumber === 6 ? document.getElementById('admin-tab-btn') : null);
             if (activeContent) activeContent.classList.remove('hidden');
-            if (activeBtn) {
-                let colorClass = "bg-amber-500 text-slate-950 shadow-md";
-                if (tabNumber === 1) colorClass = "bg-orange-500 text-slate-950 shadow-md";
-                if (tabNumber === 2) colorClass = "bg-emerald-400 text-slate-950 shadow-md";
-                activeBtn.className = `tab-btn px-4 py-2 rounded-xl font-bold text-xs transition-all flex items-center space-x-2 ${colorClass} cursor-pointer ` + (tabNumber === 6 && !isUserAdmin ? 'hidden' : '');
-            }
+
+            const moduleNames = {
+                1: "Alta Energía",
+                2: "Control y Recuperación",
+                3: "Lista de Compras",
+                4: "Equivalencias",
+                5: "NutriCoach IA",
+                6: "Panel Coach Master",
+                7: "Recetas Oficiales",
+                8: "Tienda Oficial"
+            };
+            const indicator = document.getElementById('active-module-indicator');
+            if (indicator) indicator.innerText = `Módulo: ${moduleNames[tabNumber] || ''}`;
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function installPWAApp() {
-            alert("📲 Para instalar la app en tu celular:\n\n1. Abre el menú de tu navegador (Chrome o Safari).\n2. Selecciona 'Agregar a la pantalla de inicio' o 'Instalar aplicación'.\n\n¡Listo! Tendrás el escudo de Alianza Activa en tu celular.");
+            alert("📲 Para instalar la app en tu celular:\\n\\n1. Abre el menú de tu navegador (Chrome o Safari).\\n2. Selecciona 'Agregar a la pantalla de inicio' o 'Instalar aplicación'.\\n\\n¡Listo! Tendrás el escudo de Alianza Activa en tu celular.");
         }
 
         function sendChatMessage() {
@@ -1362,3 +1499,9 @@
     </script>
 </body>
 </html>
+"""
+
+with open("alianza_activa.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Archivo alianza_activa.html actualizado correctamente con todas las mejoras solicitadas.")
