@@ -770,7 +770,7 @@
             if (type === 'success') color = "text-emerald-400";
             if (type === 'error') color = "text-red-400";
             if (type === 'warn') color = "text-amber-400";
-            box.innerHTML += `<div class="${color}">[${time}] ${msg}</div>`;
+            box.innerHTML += `<div class="${color}">[${time}]${msg}</div>`;
             box.scrollTop = box.scrollHeight;
         }
 
@@ -1092,10 +1092,10 @@
             let text = "";
             if (type === 'tab1') {
                 text = `🔥 *ALTA ENERGÍA (PIERNA)*\n👤 *Cliente:* ${activeClient.name}\n\n` +
-                    (activeClient.tab1 || []).map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
+                    (activeClient.tab1 || []).map((m, i) => `🍽️ *Comida ${i + 1}:*${m}`).join('\n\n');
             } else if (type === 'tab2') {
                 text = `🥗 *CONTROL Y RECUPERACIÓN*\n👤 *Cliente:* ${activeClient.name}\n\n` +
-                    (activeClient.tab2 || []).map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
+                    (activeClient.tab2 || []).map((m, i) => `🍽️ *Comida ${i + 1}:*${m}`).join('\n\n');
             } else if (type === 'tab3') {
                 text = `🛒 *COMPRAS SEMANAL*\n👤 *Cliente:* ${activeClient.name}\n\n` +
                     (activeClient.tab3 || []).map(item => `✅ ${item}`).join('\n');
@@ -1361,7 +1361,7 @@
                     <div class="flex items-center justify-between bg-slate-900 p-3 rounded-xl border border-slate-800 text-sm">
                         <div>
                             <strong class="text-white block">${c.name}</strong> 
-                            <span class="text-[10px] text-slate-400">Pass: <code class="text-amber-400 font-mono">${c.pass}</code> | <span class="text-emerald-400">P:${c.macroP || 140}g C:${c.macroC || 180}g G:${c.macroF || 50}g</span></span>
+                            <span class="text-[10px] text-slate-400">Pass: <code class="text-amber-400 font-mono">${c.pass}</code> \vert{} <span class="text-emerald-400">P:${c.macroP || 140}g C:${c.macroC \vert{}\vert{} 180}g G:${c.macroF || 50}g</span></span>
                         </div>
                         <button onclick="deleteClientCloud('${c.name}')" class="text-red-400 hover:text-red-300 text-xs px-2.5 py-1 rounded-lg bg-slate-800 transition-colors cursor-pointer"><i class="fa-solid fa-trash"></i></button>
                     </div>
@@ -1462,135 +1462,4 @@
                 food.style.left = `${Math.random() * 100}%`;
                 food.style.animationDuration = `${12 + Math.random() * 20}s`;
                 food.style.animationDelay = `${-(Math.random() * 30)}s`;
-                food.style.fontSize = `${2 + Math.random() * 2}rem`;
-                container.appendChild(food);
-            }
-        }
-
-        function switchTab(tabNumber) {
-            for (let i = 1; i <= 8; i++) {
-                const content = document.getElementById('content-tab-' + i);
-                if (content) content.classList.add('hidden');
-            }
-            const activeContent = document.getElementById('content-tab-' + tabNumber);
-            if (activeContent) activeContent.classList.remove('hidden');
-
-            const moduleNames = {
-                1: "Alta Energía",
-                2: "Control y Recuperación",
-                3: "Lista de Compras",
-                4: "Equivalencias",
-                5: "NutriCoach IA",
-                6: "Panel Coach Master",
-                7: "Recetas Oficiales",
-                8: "Tienda Oficial"
-            };
-            const indicator = document.getElementById('active-module-indicator');
-            if (indicator) indicator.innerText = `Módulo: ${moduleNames[tabNumber] || ''}`;
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function installPWAApp() {
-            alert("📲 Para instalar la app en tu celular:\n\n1. Abre el menú de tu navegador (Chrome o Safari).\n2. Selecciona 'Agregar a la pantalla de inicio'.");
-        }
-
-        async function sendChatMessage() {
-            const inputEl = document.getElementById('chat-input');
-            const container = document.getElementById('chat-messages');
-            const q = inputEl.value.trim();
-            if (!q) return;
-
-            container.innerHTML += `
-                <div class="flex items-start gap-3 justify-end">
-                    <div class="bg-amber-500 text-slate-950 p-4 rounded-2xl rounded-tr-none max-w-[85%] text-sm font-medium shadow-md">${q}</div>
-                </div>`;
-            inputEl.value = '';
-            container.scrollTop = container.scrollHeight;
-
-            const loadingId = 'loading-' + Date.now();
-            container.innerHTML += `
-                <div id="${loadingId}" class="flex items-start gap-3">
-                    <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
-                    <div class="bg-slate-800 text-slate-400 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm italic border border-slate-700">Analizando consulta bajo parámetros y base de datos de Alianza Activa...</div>
-                </div>`;
-            container.scrollTop = container.scrollHeight;
-
-            try {
-                const clientName = activeClient.name || "Atleta";
-                const pTarget = activeClient.macroP || 140;
-                const cTarget = activeClient.macroC || 180;
-                const fTarget = activeClient.macroF || 50;
-
-                const systemInstruction = `Eres el NutriCoach IA oficial de Alianza Activa (creado por el coach Roberto Carlos Senturión en Río Grande). 
-Tus reglas técnicas obligatorias son: 
-- 0% de margen de error en macronutrientes.
-- Todos los alimentos sólidos se pesan estrictamente en crudo (gramos).
-- Los huevos se indican por unidad entera.
-- Mantén la guía de bloques oficial (Bloques 1 al 5).
-El alumno actual que te consulta es ${clientName} y sus metas biométricas exactas son: ${pTarget}g Proteína, ${cTarget}g Carbohidratos y ${fTarget}g Grasas.
-
-BASE DE DATOS NUTRICIONAL OFICIAL (Valores por 100g / 100ml):
-- Verduras y hortalizas: Acelgas (33 kcal, 2.5p, 0.6c, 0.6g), Ajos (139 kcal, 6.7p, 28c, 0.1g), Alcaucil/Alcachofa (64 kcal, 3.4p, 12c, 0.3g), Apio (20 kcal, 1.3p, 3.7c, 0.2g), Berenjena (29 kcal, 1.3p, 5.5c, 0.2g), Berro (21 kcal, 1.7p, 3c, 0.3g), Boniato/Batata (118 kcal, 1.6p, 27c, 0.2g), Calabacín/Zucchini (31 kcal, 1.3p, 6c, 0.2g), Calabaza (24 kcal, 1.3p, 5.4c, 0.2g), Cardo (21 kcal, 1.4p, 3.5c, 0g), Cebolla (47 kcal, 1.4p, 10c, 0.2g), Cebolla de verdeo (39 kcal, 0.9p, 8.4c, 0.2g), Champiñones (28 kcal, 2.4p, 4c, 0.3g), Col/Repollo (28 kcal, 1.4p, 4.3c, 0.2g), Col de Bruselas (54 kcal, 4.8p, 7c, 0.7g), Coliflor (30 kcal, 2.4p, 4.9c, 0.2g), Endivia (22 kcal, 1.5p, 4c, 0.1g), Escarola (37 kcal, 1.5p, 4c, 0.3g), Espárragos (26 kcal, 2.2p, 3.9c, 0g), Espinacas (32 kcal, 3.1p, 3.6c, 0.6g), Guisantes/Arvejas frescas (92 kcal, 6p, 16c, 0.4g), Habas tiernas (64 kcal, 5.4p, 10c, 0.3g), Chauchas/Judías verdes (39 kcal, 2.4p, 7c, 0.2g), Lechuga (18 kcal, 1.2p, 2.9c, 0.2g), Maíz dulce/Choclo (96 kcal, 3.4p, 19c, 1.2g), Nabos (29 kcal, 0.8p, 6c, 0.2g), Patata/Papa cocida (86 kcal, 2p, 19c, 0.1g), Pepino (12 kcal, 0.7p, 2c, 0.1g), Pimiento (22 kcal, 1.2p, 3.8c, 0.2g), Puerros (42 kcal, 2p, 7.5p, 0.4g), Rábanos (20 kcal, 1.2p, 4.2p, 1.1g), Remolacha (40 kcal, 1.6p, 8c, 0.1g), Tomate (22 kcal, 1p, 4c, 0.3g), Zanahoria (42 kcal, 1.2p, 9c, 0.3g).
-- Frutas: Aceitunas (200 kcal, 0.7p, 8c, 20g), Aguacate/Palta (207 kcal, 2.1p, 4.7c, 16.4g), Albaricoque/Damasco (44 kcal, 0.8p, 10c, 0.1g), Arándanos (48 kcal, 0.7p, 14c, 0.3g), Cerezas (77 kcal, 1.2p, 17c, 0.5g), Ciruela (64 kcal, 0.8p, 10c, 0.1g), Dátil (279 kcal, 2.2p, 71c, 0.4g), Frutillas/Fresas (36 kcal, 0.7p, 7c, 0.6g), Kiwi (51 kcal, 1p, 9.1c, 0.6g), Limón (39 kcal, 0.3p, 9c, 0.2g), Mandarina (40 kcal, 0.8p, 9c, 0.1g), Mango (57 kcal, 0.6p, 12.4c, 0.5g), Manzana (52 kcal, 0.3p, 12c, 0.4g), Melocotón/Durazno (52 kcal, 0.5p, 12c, 0.1g), Melón (31 kcal, 0.8p, 6.5c, 0.2g), Naranja (44 kcal, 1.1p, 9c, 0.2g), Pera (61 kcal, 0.4p, 14c, 0.4g), Piña/Ananá (51 kcal, 0.5p, 12c, 0.2g), Plátano/Banana (90 kcal, 1.4p, 20c, 0.5g), Pomelo (30 kcal, 0.6p, 6c, 0.3g), Sandía (30 kcal, 0.4p, 6c, 0.2g), Uva (81 kcal, 1p, 17c, 10g).
-- Carnes y Aves: Asado/Corte vacuno graso (303 kcal, 17.4p, 0c, 25.3g), Carne vacuna semigrasa (176 kcal, 20.2p, 0c, 10.6g), Bife de chorizo / Lomo magro (111 kcal, 20.4p, 0c, 3.3g), Cerdo lomo (290 kcal, 16p, 0c, 25g), Conejo (162 kcal, 22p, 0c, 8g), Cordero pierna (248 kcal, 17p, 0c, 19g), Jamón cocido (289 kcal, 20.9p, 0c, 22.1g), Jamón crudo (380 kcal, 17p, 0c, 35g), Pato (200 kcal, 22p, 0.5c, 14g), Pavo (223 kcal, 31.9p, 0c, 9.6g), Pechuga de pollo sup. (85 kcal, 14.3p, 0c, 3g), Pollo con piel (121 kcal, 20.5p, 0c, 4.3g), Ternera solomillo (90 kcal, 18.8p, 0c, 1.7g).
-- Pescados y Mariscos: Atún fresco (225 kcal, 27p, 0c, 13g), Atún en lata aceite (280 kcal, 25p, 0c, 20g), Bacalao fresco (86 kcal, 17p, 0c, 2g), Calamar/Sepia (82 kcal, 17p, 0.5c, 1.3g), Lenguado (73 kcal, 16p, 0c, 1g), Lubina (118 kcal, 16p, 0c, 6g), Merluza (86 kcal, 17p, 0c, 2g), Pulpo (57 kcal, 10.6p, 1.5c, 1g), Salmón (114 kcal, 16p, 0c, 8g), Salmón ahumado (170 kcal, 20p, 0c, 10g), Sardinas frescas (174 kcal, 21p, 0c, 10g), Trucha (94 kcal, 18p, 0c, 35g).
-- Cereales y Panes: Arroz blanco (354 kcal, 7.6p, 77c, 1.7g), Arroz integral (350 kcal, 8p, 71c, 1.1g), Avena tradicional (367 kcal, 14p, 66.5c, 5g), Harina integral (340 kcal, 10.5p, 71c, 1.5g), Harina refinada (353 kcal, 9.5p, 75c, 1.2g), Pan blanco (255 kcal, 7p, 55c, 0.8g), Pan integral (239 kcal, 8p, 49c, 1.2g), Fideos/Pasta seca (375 kcal, 12.8p, 76.5c, 1.2g).
-- Legumbres: Garbanzos secos (361 kcal, 18p, 61c, 5g), Lentejas secas (336 kcal, 24p, 56c, 1.8g), Soja seca (422 kcal, 35p, 30c, 18g).
-- Grasas y Aceites: Aceite de oliva virgen extra (900 kcal, 0p, 0c, 100g), Manteca de cerdo (670 kcal, 1p, 0c, 70g), Mantequilla (752 kcal, 0.7p, 0.6c, 82g), Palta/Aguacate (207 kcal, 2.1p, 4.7c, 16.4g).
-- Frutos Secos: Almendra (620 kcal, 20p, 17c, 54g), Nueces (660 kcal, 15p, 15c, 60g), Maní/Cacahuete (560 kcal, 23p, 26c, 40g).
-- Huevos y Lácteos: Clara de huevo (48 kcal, 11p, 0.7c, 0.2g), Huevo entero fresco (162 kcal, 13p, 0.6c, 12g), Yema de huevo (368 kcal, 16p, 0.6c, 33g), Leche descremada (34 kcal, 3.5p, 4.4c, 1g), Leche entera (68 kcal, 3.5p, 4.6c, 3.9g), Yogur natural firme (45 kcal, 4.2p, 4.5c, 1.1g), Queso Tybo/Mar del Plata (349 kcal, 29p, 2c, 27g).
-
-Responde de manera motivadora, experta, directa y fundamentada, resolviendo sus dudas de alimentación, equivalencias o menús basándote estrictamente en esta base de datos.`;
-
-                const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-
-                const response = await fetch(geminiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [
-                            { role: "user", parts: [{ text: systemInstruction + "\n\nConsulta del atleta: " + q }] }
-                        ]
-                    })
-                });
-
-                document.getElementById(loadingId)?.remove();
-
-                if (response.ok) {
-                    const data = await response.json();
-                    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No se pudo generar respuesta.";
-                    
-                    container.innerHTML += `
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
-                            <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${replyText.replace(/\n/g, '<br>')}</div>
-                        </div>`;
-                } else {
-                    throw new Error("Error en la conexión con la API de Gemini.");
-                }
-            } catch (err) {
-                document.getElementById(loadingId)?.remove();
-                container.innerHTML += `
-                    <div class="flex items-start gap-3">
-                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
-                        <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">Hubo un error al procesar tu solicitud. Por favor intenta de nuevo.</div>
-                    </div>`;
-            }
-            container.scrollTop = container.scrollHeight;
-        }
-
-        function resetChat() {
-            document.getElementById('chat-messages').innerHTML = `
-                <div class="flex items-start gap-3">
-                    <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0">
-                        <i class="fa-solid fa-robot"></i>
-                    </div>
-                    <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">
-                        Chat reiniciado. ¿En qué te ayudo con tus macros hoy?
-                    </div>
-                </div>`;
-        }
-    </script>
-</body>
-</html>
+                food.style.fontSize = `${2 + Math.random() * 2
