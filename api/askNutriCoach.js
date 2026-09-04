@@ -25,7 +25,8 @@ export default async function handler(req, res) {
     `;
 
     try {
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
+        // CORREGIDO: Se usa un modelo válido (gemini-1.5-flash)
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
         
         const geminiResponse = await fetch(geminiUrl, {
             method: 'POST',
@@ -47,7 +48,6 @@ export default async function handler(req, res) {
 
         if (data.error) {
             console.error("Error de Gemini API:", data.error);
-            // Si el servidor de Google está lleno, damos un mensaje amigable al cliente
             if (data.error.message.includes("high demand") || data.error.code === 503) {
                 return res.status(200).json({ reply: '¡Hola! Estoy procesando muchas consultas de nuestros atletas en este momento. Por favor, pregúntame de nuevo en 30 segundos. 💪' });
             }
