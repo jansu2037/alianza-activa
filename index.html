@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness Alianza Activa - Plataforma de Alto Rendimiento</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <meta name="theme-color" content="#020617">
@@ -53,7 +53,6 @@
 
     <div id="food-rain-container" class="fixed inset-0 pointer-events-none z-1 overflow-hidden"></div>
 
-    <!-- PANTALLA DE ACCESO & FORMULARIO DE MEMBRESÍA -->
     <div id="login-screen" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 max-w-xl w-full shadow-[0_0_50px_rgba(245,158,11,0.2)] space-y-6 my-auto">
             <div class="text-center">
@@ -65,7 +64,6 @@
             </div>
             
             <div class="grid md:grid-cols-2 gap-6">
-                <!-- Columna 1: Acceso Alumnos / Coach -->
                 <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3 h-fit">
                     <h3 class="text-[11px] font-bold text-amber-400 uppercase tracking-widest"><i class="fa-solid fa-key mr-1"></i> Alumnos / Coach</h3>
                     <input type="password" id="access-password" onkeydown="if(event.key==='Enter') verifyPassword()" placeholder="Contraseña..." class="w-full bg-slate-900 border border-slate-700 text-white px-3 py-2.5 rounded-xl text-xs tracking-widest focus:outline-none focus:border-amber-500">
@@ -75,7 +73,6 @@
                     <p id="login-error" class="text-red-400 text-[10px] hidden text-center">Contraseña incorrecta.</p>
                 </div>
 
-                <!-- Columna 2: Compra de Membresía / Formulario Completo -->
                 <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2.5">
                     <h3 class="text-[11px] font-bold text-emerald-400 uppercase tracking-widest"><i class="fa-solid fa-store mr-1"></i> Membresía & Admisión</h3>
                     <div class="space-y-2">
@@ -104,7 +101,6 @@
         </div>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <div id="main-app" class="hidden flex flex-col min-h-screen justify-between">
         <header class="relative bg-slate-950 text-white shadow-2xl border-b border-amber-500/30 overflow-hidden z-10">
             <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=2070')] bg-cover bg-center opacity-85"></div>
@@ -139,14 +135,10 @@
             </div>
         </header>
 
-        <!-- BARRA DE HISTORIAS / SHORTS (ESTILO INSTAGRAM - VISIBLE PARA TODOS) -->
         <div class="bg-slate-950 border-b border-slate-900 py-3 px-4 overflow-x-auto hide-scroll no-print">
-            <div class="max-w-4xl mx-auto flex items-center gap-4" id="instagram-stories-bar">
-                <!-- Se llena dinámicamente con los shorts -->
-            </div>
+            <div class="max-w-4xl mx-auto flex items-center gap-4" id="instagram-stories-bar"></div>
         </div>
 
-        <!-- BARRA DE NAVEGACIÓN COMPACTA -->
         <nav class="bg-slate-950/95 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-xl shadow-xl no-print">
             <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
                 <div class="flex items-center gap-2">
@@ -159,7 +151,6 @@
             </div>
         </nav>
 
-        <!-- MODAL / MENÚ DESPLEGABLE DE MÓDULOS -->
         <div id="nav-drawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
             <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 max-w-2xl w-full shadow-2xl space-y-6 relative">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-4">
@@ -206,7 +197,6 @@
 
         <main class="relative z-10 max-w-4xl mx-auto px-4 py-10 flex-grow w-full space-y-8">
 
-            <!-- SECCIÓN 1: ALTA ENERGÍA -->
             <section id="content-tab-1" class="tab-content space-y-6">
                 <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden relative">
                     <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center opacity-30"></div>
@@ -228,7 +218,6 @@
                 <div id="tab1-meals-container" class="space-y-4"></div>
             </section>
 
-            <!-- SECCIÓN 2: CONTROL Y RECUPERACIÓN -->
             <section id="content-tab-2" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl overflow-hidden relative">
                     <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=1000')] bg-cover bg-center opacity-30"></div>
@@ -250,7 +239,6 @@
                 <div id="tab2-meals-container" class="space-y-4"></div>
             </section>
 
-            <!-- SECCIÓN 3: LISTA DE COMPRAS -->
             <section id="content-tab-3" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
@@ -269,7 +257,6 @@
                 <div id="tab3-shopping-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN 4: GUÍA DE EQUIVALENCIAS -->
             <section id="content-tab-4" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
                     <div class="flex items-center gap-3 mb-2 text-amber-400">
@@ -319,7 +306,6 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN 7: RECETAS OFICIALES -->
             <section id="content-tab-7" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
                     <div class="flex items-center gap-3 mb-2 text-orange-400">
@@ -333,7 +319,6 @@
                 <div id="dynamic-recipes-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN 8: TIENDA OFICIAL (15 PRODUCTOS) -->
             <section id="content-tab-8" class="tab-content hidden space-y-8">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
                     <div class="flex items-center gap-3 mb-2 text-emerald-400">
@@ -347,7 +332,6 @@
                 <div id="dynamic-batidos-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN 5: NUTRICOACH IA INTELIGENTE -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
                     <div>
@@ -383,7 +367,6 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN 6: PANEL COACH MASTER -->
             <section id="content-tab-6" class="tab-content hidden space-y-8">
                 <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 shadow-2xl space-y-8">
                     <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -394,7 +377,6 @@
                         <span class="bg-amber-500/20 text-amber-400 px-4 py-2 rounded-2xl text-xs font-bold border border-amber-500/40 w-fit">Modo Master</span>
                     </div>
 
-                    <!-- CONSOLA DE CÁLCULO AVANZADA -->
                     <div class="bg-slate-950 p-6 md:p-8 rounded-2xl border border-amber-500/50 space-y-6 shadow-inner">
                         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                             <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-calculator"></i> 🧮 Motor Biométrico & Protocolo de Escáner (0% Error)</h3>
@@ -458,7 +440,6 @@
                         <div id="calc-results-box" class="hidden bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4 font-mono text-xs text-slate-300 shadow-xl"></div>
                     </div>
 
-                    <!-- CENTRO DE MONITOREO -->
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex items-center gap-4">
                             <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-xl">
@@ -489,7 +470,6 @@
                         </div>
                     </div>
 
-                    <!-- TERMINAL CLI -->
                     <div class="grid lg:grid-cols-2 gap-8">
                         <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                             <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-terminal"></i> Terminal de Comandos (CLI)</h3>
@@ -511,7 +491,6 @@
                         </div>
                     </div>
 
-                    <!-- EDITOR DE LOS 10 SHORTS / HISTORIAS -->
                     <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                         <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-photo-film"></i> 📱 Editor de Shorts / Historias (1 a 10)</h3>
                         <p class="text-xs text-slate-300">Selecciona el short (1 a 10), sube imagen o video en MP4 y edita su contenido para los estados de los clientes estilo Instagram.</p>
@@ -544,7 +523,6 @@
                         </div>
                     </div>
 
-                    <!-- EDITOR DE TIENDA OFICIAL -->
                     <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                         <h3 class="font-bold text-emerald-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-store"></i> 🛍️ Editor de Tienda Oficial (1 a 15)</h3>
                         <div class="grid md:grid-cols-3 gap-3">
@@ -574,7 +552,6 @@
                         </div>
                     </div>
 
-                    <!-- EDITOR DE LAS 10 RECETAS -->
                     <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                         <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-utensils"></i> 🍳 Editor de Recetas Oficiales (1 a 10)</h3>
                         <div class="grid md:grid-cols-3 gap-3">
@@ -599,7 +576,6 @@
                         </div>
                     </div>
 
-                    <!-- GESTIÓN CLIENTES -->
                     <div class="grid lg:grid-cols-2 gap-8 pt-6 border-t border-slate-800">
                         <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                             <h3 class="font-bold text-amber-400 text-sm uppercase">➕ Registrar Nuevo Cliente</h3>
@@ -659,7 +635,6 @@
         </footer>
     </div>
 
-    <!-- MODAL PARA VER SHORT / HISTORIA -->
     <div id="story-modal" class="fixed inset-0 z-50 bg-black/95 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full overflow-hidden relative shadow-2xl">
             <button onclick="closeStoryModal()" class="absolute top-4 right-4 z-20 bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
@@ -872,7 +847,7 @@
                 tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue || ''),
                 tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue || ''),
                 tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue || '')
-            }
+            };
         }
 
         async function fetchClientsFromFirebase() {
@@ -1519,7 +1494,7 @@
             alert("📲 Para instalar la app en tu celular:\n\n1. Abre el menú de tu navegador (Chrome o Safari).\n2. Selecciona 'Agregar a la pantalla de inicio'.");
         }
 
-        async function sendChatMessage() {
+        function sendChatMessage() {
             const inputEl = document.getElementById('chat-input');
             const container = document.getElementById('chat-messages');
             const q = inputEl.value.trim();
@@ -1532,43 +1507,77 @@
             inputEl.value = '';
             container.scrollTop = container.scrollHeight;
 
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ 
-                            parts: [{ 
-                                text: `Eres el NutriCoach IA de Alianza Activa, un asistente experto en nutrición de alto rendimiento. Atleta actual: ${activeClient.name}. Sus macros objetivo son: ${activeClient.macroP || 140}g de proteína, ${activeClient.macroC || 180}g de carbohidratos y ${activeClient.macroF || 50}g de grasas. Mantén siempre un 0% de error, exige pesaje estricto en crudo y responde a su consulta con razonamiento científico: ${q}` 
-                            }] 
-                        }]
-                    })
-                });
-                
-                const data = await response.json();
+            setTimeout(() => {
+                try {
+                    const query = q.toLowerCase();
+                    const now = new Date();
+                    const dayIndex = now.getDay();
+                    const days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+                    const currentDay = days[dayIndex];
+                    const isHighEnergy = (dayIndex === 1 || dayIndex === 3 || dayIndex === 5);
 
-                // Si la API de Google devuelve un error (ej. 400 o 403), lo capturamos aquí
-                if (!response.ok) {
-                    throw new Error(`Error de API: ${data.error?.message || response.statusText}`);
+                    let replyText = "";
+                    const clientName = activeClient.name || "Atleta";
+                    const pTarget = activeClient.macroP || 140;
+                    const cTarget = activeClient.macroC || 180;
+                    const fTarget = activeClient.macroF || 50;
+
+                    if (query.includes('que me toca') || query.includes('hoy') || query.includes('comer') || query.includes('menu') || query.includes('dieta') || query.includes('comida')) {
+                        const planName = isHighEnergy ? "🔥 Alta Energía (Pierna)" : "🥗 Control y Recuperación";
+                        const meals = isHighEnergy ? (activeClient.tab1 || []) : (activeClient.tab2 || []);
+                        if (meals.length > 0) {
+                            replyText = `Hola <strong>${clientName}</strong>. Hoy es <strong>${currentDay}</strong>, por lo que corresponde el módulo <strong>${planName}</strong>:<br><br>` +
+                                         meals.map((m, idx) => `• <strong>Comida ${idx + 1}:</strong> ${m}`).join('<br>') +
+                                         `<br><br>💡 <em>Recuerda pesar todo estrictamente en crudo (g) y mantener un 0% de error en tus macros (${pTarget}g P / ${cTarget}g C / ${fTarget}g G).</em>`;
+                        } else {
+                            replyText = `¡Hola <strong>${clientName}</strong>! Aún no tienes comidas cargadas en tu plan de hoy. Pídele al coach que configure tu módulo de ${planName}.`;
+                        }
+                    } else if (query.includes('cambiar') || query.includes('sustituir') || query.includes('en vez de') || query.includes('equivalencia') || query.includes('reemplazar') || query.includes('elegir')) {
+                        if (query.includes('pollo') || query.includes('carne') || query.includes('pescado') || query.includes('proteina')) {
+                            replyText = `🥩 <strong>Intercambio Proteico (Bloque 1):</strong> En Alianza Activa puedes sustituir 100g de pechuga de pollo en crudo por:<br>` +
+                                        `• 100g de lomo o ternera magra (en crudo)<br>` +
+                                        `• 120g de pescado blanco / merluza (en crudo)<br>` +
+                                        `• 1 lata de atún al natural<br>` +
+                                        `• 4 claras + 1 huevo entero (en unidades).<br><br>` +
+                                        `🔍 <em>Todo pesado estrictamente en crudo para respetar tus ${pTarget}g de proteína diaria sin pasarte.</em>`;
+                        } else if (query.includes('arroz') || query.includes('papa') || query.includes('batata') || query.includes('avena') || query.includes('pan') || query.includes('carbohidrato')) {
+                            replyText = `🥔 <strong>Intercambio de Carbohidratos (Bloque 2):</strong> Para mantener tus ${cTarget}g de carbohidratos intactos, las equivalencias exactas son:<br>` +
+                                        `• 50g de arroz integral o parboil en crudo equivalen a <strong>200g de papa o batata cruda</strong>.<br>` +
+                                        `• 50g de arroz equivalen a <strong>55g de avena tradicional</strong>.<br>` +
+                                        `• 50g de arroz equivalen a <strong>70g de pan 100% integral</strong>.<br><br>` +
+                                        `⚖️ <em>Pesa siempre en seco/crudo antes de cocinar para mantener un 0% de error en tus macros.</em>`;
+                        } else {
+                            replyText = `🔄 <strong>Sistema de Bloques Alianza Activa:</strong> Para elegir otra comida sin pasarte de tus macros (${pTarget}g P, ${cTarget}g C, ${fTarget}g G), asegúrate de intercambiar alimentos dentro de la misma categoría (Bloque 1 con Bloque 1, Bloque 2 con Bloque 2). Dime qué ingrediente específico quieres cambiar y te doy el gramaje exacto al instante.`;
+                        }
+                    } else if (query.includes('agua') || query.includes('beber') || query.includes('hidratacion')) {
+                        replyText = `💧 <strong>Hidratación Alianza Activa:</strong> Te sugerimos consumir entre 40ml y 50ml de agua por kilo de peso corporal. El mate amargo está permitido libre sin azúcar durante todo el día.`;
+                    } else if (query.includes('macro') || query.includes('caloria') || query.includes('proteina')) {
+                        replyText = `📊 <strong>Tus Metas Biométricas (${clientName}):</strong><br>` +
+                                    `• Proteínas: <strong>${pTarget}g</strong><br>` +
+                                    `• Carbohidratos: <strong>${cTarget}g</strong><br>` +
+                                    `• Grasas Buenas: <strong>${fTarget}g</strong><br><br>` +
+                                    `🎯 Trabajamos con un <strong>0% de margen de error</strong> y pesaje estricto en crudo.`;
+                    } else if (query.includes('hola') || query.includes('saludos') || query.includes('buenas')) {
+                        replyText = `¡Hola <strong>${clientName}</strong>! Soy tu NutriCoach IA de Alianza Activa. Estoy acá para guiarte paso a paso con razonamiento científico, equivalencias exactas y control de macros. ¿Qué consulta tienes hoy?`;
+                    } else {
+                        replyText = `Entendido, <strong>${clientName}</strong>. Analizando tu consulta bajo los parámetros de Alianza Activa (0% error, alimentos en crudo y sistema de bloques): para mantener tus macros de ${pTarget}g P / ${cTarget}g C / ${fTarget}g G, asegúrate de mantener las proporciones exactas de tu plan. Si necesitas cambiar algún alimento específico o calcular equivalencias sin pasarte, dímelo con confianza y te doy el gramaje exacto.`;
+                    }
+
+                    container.innerHTML += `
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
+                            <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${replyText}</div>
+                        </div>`;
+                    container.scrollTop = container.scrollHeight;
+                } catch(err) {
+                    container.innerHTML += `
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
+                            <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">Hubo un error al procesar tu solicitud. Por favor intenta de nuevo.</div>
+                        </div>`;
+                    container.scrollTop = container.scrollHeight;
                 }
-                
-                const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || "La API no devolvió texto.";
-
-                container.innerHTML += `
-                    <div class="flex items-start gap-3">
-                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
-                        <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${replyText.replace(/\n/g, '<br>')}</div>
-                    </div>`;
-            } catch(err) {
-                container.innerHTML += `
-                    <div class="flex items-start gap-3">
-                        <div class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                        <div class="bg-red-950/50 text-red-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-red-900 shadow-md">
-                            <strong>Fallo de conexión:</strong> ${err.message}
-                        </div>
-                    </div>`;
-            }
-            container.scrollTop = container.scrollHeight;
+            }, 500);
         }
 
         function resetChat() {
