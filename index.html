@@ -1486,4 +1486,99 @@
                 8: "Tienda Oficial"
             };
             const indicator = document.getElementById('active-module-indicator');
-            if (
+            if (indicator) indicator.innerText = `Módulo: ${moduleNames[tabNumber] || ''}`;
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function installPWAApp() {
+            alert("📲 Para instalar la app en tu celular:\n\n1. Abre el menú de tu navegador (Chrome o Safari).\n2. Selecciona 'Agregar a la pantalla de inicio'.");
+        }
+
+        async function sendChatMessage() {
+            const inputEl = document.getElementById('chat-input');
+            const container = document.getElementById('chat-messages');
+            const q = inputEl.value.trim();
+            if (!q) return;
+
+            container.innerHTML += `
+                <div class="flex items-start gap-3 justify-end">
+                    <div class="bg-amber-500 text-slate-950 p-4 rounded-2xl rounded-tr-none max-w-[85%] text-sm font-medium shadow-md">${q}</div>
+                </div>`;
+            inputEl.value = '';
+            container.scrollTop = container.scrollHeight;
+
+            const loadingId = 'loading-' + Date.now();
+            container.innerHTML += `
+                <div id="${loadingId}" class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
+                    <div class="bg-slate-800 text-slate-400 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm italic border border-slate-700">Analizando consulta bajo parámetros de Alianza Activa...</div>
+                </div>`;
+            container.scrollTop = container.scrollHeight;
+
+            try {
+                const clientName = activeClient.name || "Atleta";
+                const pTarget = activeClient.macroP || 140;
+                const cTarget = activeClient.macroC || 180;
+                const fTarget = activeClient.macroF || 50;
+
+                const systemInstruction = `Eres el NutriCoach IA oficial de Alianza Activa (creado por el coach Roberto Carlos Senturión en Río Grande). 
+Tus reglas técnicas obligatorias son: 
+- 0% de margen de error en macronutrientes.
+- Todos los alimentos sólidos se pesan estrictamente en crudo (gramos).
+- Los huevos se indican por unidad entera.
+- Mantén la guía de bloques oficial (Bloques 1 al 5).
+El alumno actual que te consulta es ${clientName} y sus metas biométricas exactas son: ${pTarget}g Proteína, ${cTarget}g Carbohidratos y ${fTarget}g Grasas.
+Responde de manera motivadora, experta, directa y fundamentada, resolviendo sus dudas de alimentación, equivalencias o menús.`;
+
+                const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+
+                const response = await fetch(geminiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [
+                            { role: "user", parts: [{ text: systemInstruction + "\n\nConsulta del atleta: " + q }] }
+                        ]
+                    })
+                });
+
+                document.getElementById(loadingId)?.remove();
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No se pudo generar respuesta.";
+                    
+                    container.innerHTML += `
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
+                            <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${replyText.replace(/\n/g, '<br>')}</div>
+                        </div>`;
+                } else {
+                    throw new Error("Error en la conexión con la API de Gemini.");
+                }
+            } catch (err) {
+                document.getElementById(loadingId)?.remove();
+                container.innerHTML += `
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
+                        <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">Hubo un error al procesar tu solicitud. Por favor intenta de nuevo.</div>
+                    </div>`;
+            }
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function resetChat() {
+            document.getElementById('chat-messages').innerHTML = `
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">
+                        Chat reiniciado. ¿En qué te ayudo con tus macros hoy?
+                    </div>
+                </div>`;
+        }
+    </script>
+</body>
+</html>
