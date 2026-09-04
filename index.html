@@ -1546,7 +1546,13 @@
                 });
                 
                 const data = await response.json();
-                const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No se pudo obtener respuesta del servidor.";
+
+                // Si la API de Google devuelve un error (ej. 400 o 403), lo capturamos aquí
+                if (!response.ok) {
+                    throw new Error(`Error de API: ${data.error?.message || response.statusText}`);
+                }
+                
+                const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || "La API no devolvió texto.";
 
                 container.innerHTML += `
                     <div class="flex items-start gap-3">
@@ -1556,8 +1562,10 @@
             } catch(err) {
                 container.innerHTML += `
                     <div class="flex items-start gap-3">
-                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
-                        <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">Error de conexión con la API de Gemini. Revisa tu clave de API o tu conexión a internet.</div>
+                        <div class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="bg-red-950/50 text-red-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-red-900 shadow-md">
+                            <strong>Fallo de conexión:</strong> ${err.message}
+                        </div>
                     </div>`;
             }
             container.scrollTop = container.scrollHeight;
