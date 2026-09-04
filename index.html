@@ -338,7 +338,7 @@
                 <div id="dynamic-batidos-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN CALCULADORA DE INTERCAMBIOS DE ALIMENTOS Y ANTOJOS (DIETA FLEXIBLE) -->
+            <!-- SECCIÓN CALCULADORA DE INTERCAMBIOS DE ALIMENTOS Y ANTOJOS (DIETA FLEXIBLE) - REDISEÑADA EN 2 PASOS CON BÚSQUEDA -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl space-y-6">
                     <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
@@ -357,46 +357,81 @@
                         <p class="text-slate-300">Puedes incluir antojos de comida chatarra o bebidas alcohólicas de manera ocasional, siempre y cuando cumplas estrictamente con tus calorías y macronutrientes totales del día. ¡La disciplina y el control de los totales no se negocian para alcanzar los resultados!</p>
                     </div>
 
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div class="space-y-2">
-                            <label class="text-xs font-bold text-amber-400 uppercase tracking-widest">1. Selecciona la Categoría</label>
-                            <select id="exchange-group" onchange="updateExchangeOptions()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-amber-500 cursor-pointer">
-                                <option value="verduras">Verduras y Hortalizas</option>
-                                <option value="frutas">Frutas</option>
-                                <option value="carnes">Carnes, Aves y Embutidos</option>
-                                <option value="pescados">Pescados y Mariscos</option>
-                                <option value="cereales">Cereales y Panes</option>
-                                <option value="legumbres">Legumbres</option>
-                                <option value="aceites">Aceites y Grasas</option>
-                                <option value="frutos_secos">Frutos Secos</option>
-                                <option value="huevos">Huevos</option>
-                                <option value="lacteos">Lácteos y Derivados</option>
-                                <option value="bolleria">Bollería y Comida Chatarra</option>
-                                <option value="salsas">Salsas y Condimentos</option>
-                                <option value="azucares">Azúcares y Dulces</option>
-                                <option value="bebidas">Bebidas y Alcohol (por 100 ml)</option>
-                            </select>
+                    <!-- FLUJO INTERACTIVO EN DOS PASOS CLAROS -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- PASO 1: Alimento Base -->
+                        <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4">
+                            <h3 class="text-xs font-bold text-amber-400 uppercase tracking-widest flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center text-[10px]">1</span> Paso 1: Alimento Base Original
+                            </h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="text-[10px] text-slate-400 block mb-1">Categoría</label>
+                                    <select id="exchange-group" onchange="updateExchangeOptions()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-amber-500 cursor-pointer">
+                                        <option value="verduras">Verduras y Hortalizas</option>
+                                        <option value="frutas">Frutas</option>
+                                        <option value="carnes">Carnes, Aves y Embutidos</option>
+                                        <option value="pescados">Pescados y Mariscos</option>
+                                        <option value="cereales">Cereales y Panes</option>
+                                        <option value="legumbres">Legumbres</option>
+                                        <option value="aceites">Aceites y Grasas</option>
+                                        <option value="frutos_secos">Frutos Secos</option>
+                                        <option value="huevos">Huevos</option>
+                                        <option value="lacteos">Lácteos y Derivados</option>
+                                        <option value="bolleria">Bollería y Comida Chatarra</option>
+                                        <option value="salsas">Salsas y Condimentos</option>
+                                        <option value="azucares">Azúcares y Dulces</option>
+                                        <option value="bebidas">Bebidas y Alcohol (por 100 ml)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="text-[10px] text-slate-400 block mb-1">Filtrar Alimento / Buscar</label>
+                                    <input type="text" id="exchange-search-filter" oninput="filterExchangeBaseFood()" placeholder="Escribe para buscar..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-500 mb-2">
+                                    
+                                    <label class="text-[10px] text-slate-400 block mb-1">Seleccionar Alimento Original</label>
+                                    <select id="exchange-base-food" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-amber-500 cursor-pointer">
+                                        <!-- Se llena dinámicamente -->
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="text-[10px] text-slate-400 block mb-1">Cantidad Asignada (Gramos o ml)</label>
+                                    <input type="number" id="exchange-amount" value="100" placeholder="Ej: 100" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-amber-500">
+                                </div>
+                            </div>
                         </div>
-                        <div class="space-y-2">
-                            <label class="text-xs font-bold text-amber-400 uppercase tracking-widest">2. Alimento Base / Antojo</label>
-                            <select id="exchange-base-food" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-amber-500 cursor-pointer">
-                                <!-- Se llena dinámicamente -->
-                            </select>
+
+                        <!-- PASO 2: Alimento Destino / Equivalencia -->
+                        <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4 flex flex-col justify-between">
+                            <div class="space-y-3">
+                                <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-widest flex items-center gap-2">
+                                    <span class="w-5 h-5 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-[10px]">2</span> Paso 2: Alimento Destino / Equivalencia
+                                </h3>
+                                <div>
+                                    <label class="text-[10px] text-slate-400 block mb-1">Filtrar Alimento Destino</label>
+                                    <input type="text" id="exchange-target-filter" oninput="filterExchangeTargetFood()" placeholder="Busca tu sustituto o antojo..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-emerald-500 mb-2">
+
+                                    <label class="text-[10px] text-slate-400 block mb-1">Sustituir por (Proteína, Carbohidrato, Grasa o Antojo)</label>
+                                    <select id="exchange-target-food" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-emerald-500 cursor-pointer">
+                                        <!-- Se llena dinámicamente con todos los alimentos disponibles -->
+                                    </select>
+                                </div>
+                                <p class="text-[11px] text-slate-400 leading-relaxed italic pt-2">La calculadora procesará la equivalencia matemática exacta manteniendo el rigor del coach (0% error).</p>
+                            </div>
+
+                            <button onclick="calculateFoodExchange()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-xs transition-all shadow-md cursor-pointer flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-calculator"></i> Calcular Equivalencia Exacta
+                            </button>
                         </div>
                     </div>
 
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold text-amber-400 uppercase tracking-widest">3. Cantidad asignada o deseada (Gramos o ml)</label>
-                        <input type="number" id="exchange-amount" value="100" placeholder="Ej: 100" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-amber-500">
-                    </div>
-
-                    <button onclick="calculateFoodExchange()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl text-sm transition-all shadow-md cursor-pointer flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-calculator"></i> Calcular Equivalencias Exactas
-                    </button>
-
+                    <!-- Resultado Individual del Paso 2 y Listado Completo -->
                     <div id="exchange-results-box" class="hidden space-y-4 pt-4 border-t border-slate-800">
-                        <h3 class="text-sm font-bold text-emerald-400 uppercase tracking-wider">Opciones de Intercambio & Impacto en Macros (0% Error):</h3>
-                        <div id="exchange-results-list" class="grid md:grid-cols-2 gap-4"></div>
+                        <div id="exchange-direct-result" class="bg-emerald-950/30 border border-emerald-500/50 rounded-2xl p-5 text-center space-y-2">
+                            <!-- Resultado directo del Paso 1 al Paso 2 -->
+                        </div>
+                        
+                        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider pt-2">Otras equivalencias en la misma categoría (0% Error):</h3>
+                        <div id="exchange-results-list" class="grid md:grid-cols-2 gap-3"></div>
                     </div>
                 </div>
             </section>
@@ -1103,21 +1138,69 @@
             if (!groupSelect || !foodSelect) return;
             const group = groupSelect.value;
             const items = exchangeDatabase[group] || [];
+            
             foodSelect.innerHTML = items.map((item, idx) => `<option value="${idx}">${item.name}</option>`).join('');
+            
+            // Actualizar también el selector global del paso 2 (todos los alimentos combinados)
+            populateTargetFoodSelect();
+        }
+
+        function populateTargetFoodSelect(filterText = "") {
+            const targetSelect = document.getElementById('exchange-target-food');
+            if (!targetSelect) return;
+            
+            let allItems = [];
+            for (const cat in exchangeDatabase) {
+                exchangeDatabase[cat].forEach(item => {
+                    allItems.push({ ...item, category: cat });
+                });
+            }
+
+            const filtered = filterText 
+                ? allItems.filter(i => i.name.toLowerCase().includes(filterText.toLowerCase()))
+                : allItems;
+
+            targetSelect.innerHTML = filtered.map((item) => {
+                // Encontrar índice original y categoría
+                return `<option value="${item.name}">${item.name} (${item.category.toUpperCase()}) - Ratio: ${item.ratio} kcal</option>`;
+            }).join('');
+        }
+
+        function filterExchangeBaseFood() {
+            const filter = document.getElementById('exchange-search-filter').value.toLowerCase();
+            const groupSelect = document.getElementById('exchange-group');
+            const foodSelect = document.getElementById('exchange-base-food');
+            if (!groupSelect || !foodSelect) return;
+            
+            const group = groupSelect.value;
+            const items = exchangeDatabase[group] || [];
+            const filtered = items.map((item, idx) => ({ ...item, originalIdx: idx }))
+                                  .filter(item => item.name.toLowerCase().includes(filter));
+
+            foodSelect.innerHTML = filtered.map(item => `<option value="${item.originalIdx}">${item.name}</option>`).join('');
+        }
+
+        function filterExchangeTargetFood() {
+            const filter = document.getElementById('exchange-target-filter').value;
+            populateTargetFoodSelect(filter);
         }
 
         function calculateFoodExchange() {
             const groupSelect = document.getElementById('exchange-group');
             const foodSelect = document.getElementById('exchange-base-food');
             const amountInput = document.getElementById('exchange-amount');
+            const targetSelect = document.getElementById('exchange-target-food');
             const resultsBox = document.getElementById('exchange-results-box');
+            const directResultBox = document.getElementById('exchange-direct-result');
             const resultsList = document.getElementById('exchange-results-list');
 
-            if (!groupSelect || !foodSelect || !amountInput || !resultsBox || !resultsList) return;
+            if (!groupSelect || !foodSelect || !amountInput || !resultsBox || !targetSelect) return;
 
             const group = groupSelect.value;
             const foodIdx = parseInt(foodSelect.value);
             const baseAmount = parseFloat(amountInput.value) || 0;
+            const targetName = targetSelect.value;
+
             const items = exchangeDatabase[group] || [];
             const baseItem = items[foodIdx];
 
@@ -1126,7 +1209,27 @@
                 return;
             }
 
+            // Buscar el item destino global
+            let targetItem = null;
+            for (const cat in exchangeDatabase) {
+                const found = exchangeDatabase[cat].find(i => i.name === targetName);
+                if (found) { targetItem = found; break; }
+            }
+
             resultsBox.classList.remove('hidden');
+
+            // Calcular resultado directo para el Paso 2 seleccionado
+            if (targetItem) {
+                const directAmount = targetItem.ratio === 0 ? 0 : Math.round((baseAmount * baseItem.ratio) / targetItem.ratio);
+                directResultBox.innerHTML = `
+                    <div class="text-xs text-emerald-400 font-bold uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Resultado Paso 2 (Equivalencia Exacta)</div>
+                    <div class="text-lg font-black text-white mt-1">${baseAmount}g de <span class="text-amber-400">${baseItem.name}</span> equivalen exactamente a:</div>
+                    <div class="text-2xl font-black text-emerald-400 my-1">${directAmount} gramos / ml</div>
+                    <p class="text-xs text-slate-300">de <strong class="text-white">${targetItem.name}</strong> (${targetItem.desc})</p>
+                `;
+            }
+
+            // Listado completo de la categoría actual
             resultsList.innerHTML = items.map(item => {
                 const equivalentAmount = item.ratio === 0 ? 0 : Math.round((baseAmount * baseItem.ratio) / item.ratio);
                 const isSelected = item.name === baseItem.name;
