@@ -38,6 +38,7 @@
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
+        /* Estilos específicos para la nueva IA */
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
@@ -338,9 +339,10 @@
                 <div id="dynamic-batidos-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN IA -->
+            <!-- SECCIÓN IA ACTUALIZADA -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
                 
+                <!-- New AI Header -->
                 <div class="bg-white/90 backdrop-blur-md border border-emerald-100 rounded-2xl p-4 flex flex-wrap justify-between items-center gap-2 shadow-sm">
                     <div class="flex items-center space-x-3">
                         <div class="bg-emerald-600 text-white p-2.5 rounded-2xl shadow-md shadow-emerald-200">
@@ -361,6 +363,7 @@
                     </div>
                 </div>
 
+                <!-- New AI Main Content (Tabs) -->
                 <div class="bg-white rounded-3xl shadow-xl shadow-slate-100 border border-slate-100 overflow-hidden flex flex-col h-[600px] relative">
                     
                     <!-- TAB CHAT -->
@@ -382,7 +385,7 @@
                                 <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0 mt-1">AA</div>
                                 <div class="bg-white p-4 rounded-2xl rounded-tl-sm shadow-sm border border-slate-100 max-w-[85%] text-sm text-slate-700 leading-relaxed">
                                     <p id="ai-welcome-msg" class="font-semibold text-emerald-900 mb-1">¡Hola! Bienvenido a Alianza Activa.</p>
-                                    <p>Soy tu asesor nutricional inteligente. Estoy conectado con nuestra base de datos oficial de alimentos y programas. ¿En qué puedo ayudarte hoy con tus metas de salud?</p>
+                                    <p>Soy tu asesor nutricional inteligente. Estoy conectado con nuestra base de datos oficial de alimentos (con detalles de calorías, proteínas, carbohidratos, grasas, fibra y colesterol) y programas. ¿En qué puedo ayudarte hoy con tus metas de salud?</p>
                                 </div>
                             </div>
                         </div>
@@ -723,7 +726,7 @@
     </div>
 
     <script>
-        const API_KEY = "AQ.Ab8RN6JPqjgvA2zAzLIY-FQ_HjA-wpfIEb503lX0-2zYs5GQhA";
+        const API_KEY = "AIzaSyA2Sk6s2i2_bcJ_fJc4BEyMw3y9hU79_Nw";
         const PROJECT_ID = "alianza-activa";
 
         let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
@@ -1570,7 +1573,7 @@
         }
 
         // =========================================================================
-        // IA Y VISIÓN ARTIFICIAL (GEMINI API CORREGIDA)
+        // NUEVAS FUNCIONES DE LA IA
         // =========================================================================
         
         let currentBase64Image = null;
@@ -1744,7 +1747,7 @@ Responde siempre de forma profesional, amable, motivadora y utilizando esta base
 
         async function callGeminiAPI(systemPrompt, userPrompt) {
             const apiKey = API_KEY;
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
             
             const payload = {
                 contents: [
@@ -1774,7 +1777,7 @@ Responde siempre de forma profesional, amable, motivadora y utilizando esta base
 
         async function callGeminiWithImage(systemPrompt, userPrompt, base64DataUrl) {
             const apiKey = API_KEY;
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
             
             const base64Data = base64DataUrl.split(',')[1];
             const mimeType = base64DataUrl.split(';')[0].split(':')[1];
