@@ -38,6 +38,7 @@
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
 
+        /* Estilos específicos para la nueva IA */
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
@@ -141,7 +142,8 @@
         </header>
 
         <div class="bg-slate-950 border-b border-slate-900 py-3 px-4 overflow-x-auto hide-scroll no-print">
-            <div class="max-w-4xl mx-auto flex items-center gap-4" id="instagram-stories-bar"></div>
+            <div class="max-w-4xl mx-auto flex items-center gap-4" id="instagram-stories-bar">
+            </div>
         </div>
 
         <nav class="bg-slate-950/95 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-xl shadow-xl no-print">
@@ -340,6 +342,7 @@
             <!-- SECCIÓN IA ACTUALIZADA -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
                 
+                <!-- New AI Header -->
                 <div class="bg-white/90 backdrop-blur-md border border-emerald-100 rounded-2xl p-4 flex flex-wrap justify-between items-center gap-2 shadow-sm">
                     <div class="flex items-center space-x-3">
                         <div class="bg-emerald-600 text-white p-2.5 rounded-2xl shadow-md shadow-emerald-200">
@@ -360,6 +363,7 @@
                     </div>
                 </div>
 
+                <!-- New AI Main Content (Tabs) -->
                 <div class="bg-white rounded-3xl shadow-xl shadow-slate-100 border border-slate-100 overflow-hidden flex flex-col h-[600px] relative">
                     
                     <!-- TAB CHAT -->
@@ -722,13 +726,8 @@
     </div>
 
     <script>
-        <!-- Fragmento seguro para manejar la API Key en producción -->
-<script>
-    // La clave es cargada de forma segura desde el entorno o un módulo externo privado
-    const API_KEY = window.ALIANZA_CONFIG ? window.ALIANZA_CONFIG.API_KEY : "";
-    const PROJECT_ID = "alianza-activa";
-    // ...resto del sistema
-</script>
+        const API_KEY = "AIzaSyA2Sk6s2i2_bcJ_fJc4BEyMw3y9hU79_Nw";
+        const PROJECT_ID = "alianza-activa";
 
         let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
 
@@ -1573,6 +1572,10 @@
             alert("📲 Para instalar la app en tu celular:\n\n1. Abre el menú de tu navegador (Chrome o Safari).\n2. Selecciona 'Agregar a la pantalla de inicio'.");
         }
 
+        // =========================================================================
+        // NUEVAS FUNCIONES DE LA IA
+        // =========================================================================
+        
         let currentBase64Image = null;
 
         function switchAITab(tabId) {
@@ -1589,7 +1592,7 @@
         }
 
         const ALIANZA_SYSTEM_PROMPT = `Eres el Asistente Experto de "Alianza Activa", una empresa líder en nutrición y bienestar inteligente. 
-Tu objetivo es ayudar a los clientes con información precisa sobre nutrición, dietas, alimentos y los servicios de Alianza Activa.
+Tu objetivo es ayudar a clientes y entrenadores con información precisa sobre nutrición, dietas, alimentos y los servicios de Alianza Activa.
 
 INFORMACIÓN OFICIAL DE ALIANZA ACTIVA:
 - Misión: Ayudar a las personas a transformar su estilo de vida mediante hábitos saludables sostenibles, asesoría nutricional experta y acompañamiento continuo.
@@ -1743,7 +1746,8 @@ Responde siempre de forma profesional, amable, motivadora y utilizando esta base
         }
 
         async function callGeminiAPI(systemPrompt, userPrompt) {
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+            const apiKey = API_KEY;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
             
             const payload = {
                 contents: [
@@ -1772,7 +1776,8 @@ Responde siempre de forma profesional, amable, motivadora y utilizando esta base
         }
 
         async function callGeminiWithImage(systemPrompt, userPrompt, base64DataUrl) {
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+            const apiKey = API_KEY;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
             
             const base64Data = base64DataUrl.split(',')[1];
             const mimeType = base64DataUrl.split(';')[0].split(':')[1];
