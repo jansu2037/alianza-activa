@@ -338,7 +338,7 @@
                 <div id="dynamic-batidos-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN CALCULADORA DE INTERCAMBIOS DE ALIMENTOS -->
+            <!-- SECCIÓN CALCULADORA DE INTERCAMBIOS DE ALIMENTOS Y ANTOJOS (DIETA FLEXIBLE) -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl space-y-6">
                     <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
@@ -346,9 +346,15 @@
                             <i class="fa-solid fa-arrows-rotate"></i>
                         </div>
                         <div>
-                            <h2 class="text-xl md:text-2xl font-bold text-white">Calculadora de Intercambios Inteligentes</h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Calcula equivalencias exactas para no salirte de tu plan manteniendo el 0% de error en macronutrientes.</p>
+                            <h2 class="text-xl md:text-2xl font-bold text-white">Calculadora de Intercambios Inteligentes & Antojos</h2>
+                            <p class="text-xs text-slate-400 mt-0.5">Calcula equivalencias exactas para alimentos, comida chatarra o bebidas alcohólicas manteniendo el control de tus macros y calorías (Dieta Flexible).</p>
                         </div>
+                    </div>
+
+                    <!-- Consejo Profesional del Coach Integrado -->
+                    <div class="bg-amber-500/10 border border-amber-500/40 rounded-2xl p-4 text-xs text-amber-300 space-y-1">
+                        <div class="font-bold flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation"></i> Nota Profesional del Coach (Dieta Flexible):</div>
+                        <p class="text-slate-300">Puedes incluir antojos de comida chatarra o bebidas alcohólicas de manera ocasional, siempre y cuando cumplas estrictamente con tus calorías y macronutrientes totales del día. ¡La disciplina y el control de los totales no se negocian para alcanzar los resultados!</p>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
@@ -365,14 +371,14 @@
                                 <option value="frutos_secos">Frutos Secos</option>
                                 <option value="huevos">Huevos</option>
                                 <option value="lacteos">Lácteos y Derivados</option>
-                                <option value="bolleria">Bollería</option>
+                                <option value="bolleria">Bollería y Comida Chatarra</option>
                                 <option value="salsas">Salsas y Condimentos</option>
                                 <option value="azucares">Azúcares y Dulces</option>
-                                <option value="bebidas">Bebidas (por 100 ml)</option>
+                                <option value="bebidas">Bebidas y Alcohol (por 100 ml)</option>
                             </select>
                         </div>
                         <div class="space-y-2">
-                            <label class="text-xs font-bold text-amber-400 uppercase tracking-widest">2. Alimento Base</label>
+                            <label class="text-xs font-bold text-amber-400 uppercase tracking-widest">2. Alimento Base / Antojo</label>
                             <select id="exchange-base-food" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-amber-500 cursor-pointer">
                                 <!-- Se llena dinámicamente -->
                             </select>
@@ -380,7 +386,7 @@
                     </div>
 
                     <div class="space-y-2">
-                        <label class="text-xs font-bold text-amber-400 uppercase tracking-widest">3. Cantidad asignada en tu plan (Gramos o ml)</label>
+                        <label class="text-xs font-bold text-amber-400 uppercase tracking-widest">3. Cantidad asignada o deseada (Gramos o ml)</label>
                         <input type="number" id="exchange-amount" value="100" placeholder="Ej: 100" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-amber-500">
                     </div>
 
@@ -389,7 +395,7 @@
                     </button>
 
                     <div id="exchange-results-box" class="hidden space-y-4 pt-4 border-t border-slate-800">
-                        <h3 class="text-sm font-bold text-emerald-400 uppercase tracking-wider">Opciones de Intercambio Permitidas (0% Error Macros):</h3>
+                        <h3 class="text-sm font-bold text-emerald-400 uppercase tracking-wider">Opciones de Intercambio & Impacto en Macros (0% Error):</h3>
                         <div id="exchange-results-list" class="grid md:grid-cols-2 gap-4"></div>
                     </div>
                 </div>
@@ -763,7 +769,7 @@
         let activeClient = clientsDB[0];
         let lastCalculatedPlan = null;
 
-        // Base de datos completa de intercambios con los alimentos provistos
+        // Base de datos completa de intercambios incluyendo bollería, comida chatarra y bebidas alcohólicas
         const exchangeDatabase = {
             verduras: [
                 { name: "Acelgas", ratio: 33, desc: "Rico en micronutrientes y fibra." },
@@ -938,7 +944,7 @@
                 { name: "Salmonete", ratio: 97, desc: "Pescado de roca sabroso." },
                 { name: "Sardina en lata (aceite vegetal)", ratio: 192, desc: "Sardinas en conserva." },
                 { name: "Sardinas frescas", ratio: 174, desc: "Pescado azul nutritivo." },
-                { name: "Trucha", ratio: 94, desc: "Pescado de río saludable." }
+                { name: "Trufa", ratio: 94, desc: "Pescado de río saludable." }
             ],
             cereales: [
                 { name: "Arroz blanco", ratio: 354, desc: "Carbohidrato de rápida absorción." },
@@ -1024,7 +1030,7 @@
             ],
             bolleria: [
                 { name: "Bizcochuelo / Bizcocho", ratio: 456, desc: "Bollería horneada." },
-                { name: "Medialunas / Facturas / Donut", ratio: 456, desc: "Bollería tradicional." },
+                { name: "Medialunas / Facturas / Donut / Chatarra", ratio: 456, desc: "Antojo / Bollería alta en calorías." },
                 { name: "Galletas tipo María", ratio: 436, desc: "Galletas dulces secas." },
                 { name: "Magdalenas", ratio: 469, desc: "Ponqués esponjosos." },
                 { name: "Vainillas (Melindros)", ratio: 440, desc: "Galletas alargadas." },
@@ -1066,28 +1072,28 @@
                 { name: "Turrón tipo maní / Alicante", ratio: 486, desc: "Dulce de frutos secos." }
             ],
             bebidas: [
-                { name: "Aguardiente / Caña", ratio: 280, desc: "Alcohol destilado." },
-                { name: "Anís", ratio: 312, desc: "Licor anisado." },
+                { name: "Aguardiente / Caña (Alcohol)", ratio: 280, desc: "Bebida alcohólica destilada alta en calorías." },
+                { name: "Anís (Alcohol)", ratio: 312, desc: "Licor anisado." },
                 { name: "Batido lácteo cacao", ratio: 100, desc: "Bebida chocolatada." },
-                { name: "Brandy", ratio: 243, desc: "Bebida alcohólica." },
+                { name: "Brandy (Alcohol)", ratio: 243, desc: "Bebida alcohólica." },
                 { name: "Cacao a la taza", ratio: 439, desc: "Bebida caliente espesa." },
                 { name: "Café negro amargo", ratio: 5, desc: "Estimulante sin calorías." },
-                { name: "Cava / Champagne", ratio: 65, desc: "Vino espumoso." },
-                { name: "Cerveza negra", ratio: 37, desc: "Bebida de malta." },
-                { name: "Cerveza rubia", ratio: 45, desc: "Cerveza tradicional." },
-                { name: "Coñac", ratio: 243, desc: "Destilado." },
-                { name: "Ginebra", ratio: 244, desc: "Licor." },
+                { name: "Cava / Champagne (Alcohol)", ratio: 65, desc: "Vino espumoso." },
+                { name: "Cerveza negra (Alcohol)", ratio: 37, desc: "Bebida de malta." },
+                { name: "Cerveza rubia (Alcohol)", ratio: 45, desc: "Cerveza tradicional." },
+                { name: "Coñac (Alcohol)", ratio: 243, desc: "Destilado." },
+                { name: "Ginebra (Alcohol)", ratio: 244, desc: "Licor." },
                 { name: "Leche de almendras comercial", ratio: 33, desc: "Bebida vegetal." },
-                { name: "Gaseosas / Refrescos carbonatados", ratio: 48, desc: "Refresco azucarado." },
-                { name: "Ron", ratio: 244, desc: "Destilado." },
-                { name: "Sidra dulce", ratio: 40, desc: "Bebida de manzana." },
-                { name: "Sidra seca", ratio: 40, desc: "Sidra." },
+                { name: "Gaseosas / Refrescos azucarados", ratio: 48, desc: "Refresco azucarado." },
+                { name: "Ron (Alcohol)", ratio: 244, desc: "Destilado." },
+                { name: "Sidra dulce (Alcohol)", ratio: 40, desc: "Bebida de manzana." },
+                { name: "Sidra seca (Alcohol)", ratio: 40, desc: "Sidra." },
                 { name: "Té amargo", ratio: 2, desc: "Infusión libre." },
-                { name: "Vermut dulce", ratio: 160, desc: "Vino aromatizado." },
-                { name: "Vino de mesa tinto/blanco", ratio: 60, desc: "Vino." },
-                { name: "Vino dulce / Jerez", ratio: 160, desc: "Vino generoso." },
-                { name: "Vino Oporto", ratio: 160, desc: "Vino licoroso." },
-                { name: "Whisky", ratio: 244, desc: "Destilado añejo." }
+                { name: "Vermut dulce (Alcohol)", ratio: 160, desc: "Vino aromatizado." },
+                { name: "Vino de mesa tinto/blanco (Alcohol)", ratio: 60, desc: "Vino." },
+                { name: "Vino dulce / Jerez (Alcohol)", ratio: 160, desc: "Vino generoso." },
+                { name: "Vino Oporto (Alcohol)", ratio: 160, desc: "Vino licoroso." },
+                { name: "Whisky (Alcohol)", ratio: 244, desc: "Destilado añejo." }
             ]
         };
 
