@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness Alianza Activa - Plataforma de Alto Rendimiento</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <meta name="theme-color" content="#020617">
@@ -872,7 +872,7 @@
                 tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue || ''),
                 tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue || ''),
                 tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue || '')
-            };
+            }
         }
 
         async function fetchClientsFromFirebase() {
@@ -1519,7 +1519,7 @@
             alert("📲 Para instalar la app en tu celular:\n\n1. Abre el menú de tu navegador (Chrome o Safari).\n2. Selecciona 'Agregar a la pantalla de inicio'.");
         }
 
-        function sendChatMessage() {
+        async function sendChatMessage() {
             const inputEl = document.getElementById('chat-input');
             const container = document.getElementById('chat-messages');
             const q = inputEl.value.trim();
@@ -1532,77 +1532,35 @@
             inputEl.value = '';
             container.scrollTop = container.scrollHeight;
 
-            setTimeout(() => {
-                try {
-                    const query = q.toLowerCase();
-                    const now = new Date();
-                    const dayIndex = now.getDay();
-                    const days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-                    const currentDay = days[dayIndex];
-                    const isHighEnergy = (dayIndex === 1 || dayIndex === 3 || dayIndex === 5);
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ 
+                            parts: [{ 
+                                text: `Eres el NutriCoach IA de Alianza Activa, un asistente experto en nutrición de alto rendimiento. Atleta actual: ${activeClient.name}. Sus macros objetivo son: ${activeClient.macroP || 140}g de proteína, ${activeClient.macroC || 180}g de carbohidratos y ${activeClient.macroF || 50}g de grasas. Mantén siempre un 0% de error, exige pesaje estricto en crudo y responde a su consulta con razonamiento científico: ${q}` 
+                            }] 
+                        }]
+                    })
+                });
+                
+                const data = await response.json();
+                const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No se pudo obtener respuesta del servidor.";
 
-                    let replyText = "";
-                    const clientName = activeClient.name || "Atleta";
-                    const pTarget = activeClient.macroP || 140;
-                    const cTarget = activeClient.macroC || 180;
-                    const fTarget = activeClient.macroF || 50;
-
-                    if (query.includes('que me toca') || query.includes('hoy') || query.includes('comer') || query.includes('menu') || query.includes('dieta') || query.includes('comida')) {
-                        const planName = isHighEnergy ? "🔥 Alta Energía (Pierna)" : "🥗 Control y Recuperación";
-                        const meals = isHighEnergy ? (activeClient.tab1 || []) : (activeClient.tab2 || []);
-                        if (meals.length > 0) {
-                            replyText = `Hola <strong>${clientName}</strong>. Hoy es <strong>${currentDay}</strong>, por lo que corresponde el módulo <strong>${planName}</strong>:<br><br>` +
-                                         meals.map((m, idx) => `• <strong>Comida ${idx + 1}:</strong> ${m}`).join('<br>') +
-                                         `<br><br>💡 <em>Recuerda pesar todo estrictamente en crudo (g) y mantener un 0% de error en tus macros (${pTarget}g P / ${cTarget}g C / ${fTarget}g G).</em>`;
-                        } else {
-                            replyText = `¡Hola <strong>${clientName}</strong>! Aún no tienes comidas cargadas en tu plan de hoy. Pídele al coach que configure tu módulo de ${planName}.`;
-                        }
-                    } else if (query.includes('cambiar') || query.includes('sustituir') || query.includes('en vez de') || query.includes('equivalencia') || query.includes('reemplazar') || query.includes('elegir')) {
-                        if (query.includes('pollo') || query.includes('carne') || query.includes('pescado') || query.includes('proteina')) {
-                            replyText = `🥩 <strong>Intercambio Proteico (Bloque 1):</strong> En Alianza Activa puedes sustituir 100g de pechuga de pollo en crudo por:<br>` +
-                                        `• 100g de lomo o ternera magra (en crudo)<br>` +
-                                        `• 120g de pescado blanco / merluza (en crudo)<br>` +
-                                        `• 1 lata de atún al natural<br>` +
-                                        `• 4 claras + 1 huevo entero (en unidades).<br><br>` +
-                                        `🔍 <em>Todo pesado estrictamente en crudo para respetar tus ${pTarget}g de proteína diaria sin pasarte.</em>`;
-                        } else if (query.includes('arroz') || query.includes('papa') || query.includes('batata') || query.includes('avena') || query.includes('pan') || query.includes('carbohidrato')) {
-                            replyText = `🥔 <strong>Intercambio de Carbohidratos (Bloque 2):</strong> Para mantener tus ${cTarget}g de carbohidratos intactos, las equivalencias exactas son:<br>` +
-                                        `• 50g de arroz integral o parboil en crudo equivalen a <strong>200g de papa o batata cruda</strong>.<br>` +
-                                        `• 50g de arroz equivalen a <strong>55g de avena tradicional</strong>.<br>` +
-                                        `• 50g de arroz equivalen a <strong>70g de pan 100% integral</strong>.<br><br>` +
-                                        `⚖️ <em>Pesa siempre en seco/crudo antes de cocinar para mantener un 0% de error en tus macros.</em>`;
-                        } else {
-                            replyText = `🔄 <strong>Sistema de Bloques Alianza Activa:</strong> Para elegir otra comida sin pasarte de tus macros (${pTarget}g P, ${cTarget}g C, ${fTarget}g G), asegúrate de intercambiar alimentos dentro de la misma categoría (Bloque 1 con Bloque 1, Bloque 2 con Bloque 2). Dime qué ingrediente específico quieres cambiar y te doy el gramaje exacto al instante.`;
-                        }
-                    } else if (query.includes('agua') || query.includes('beber') || query.includes('hidratacion')) {
-                        replyText = `💧 <strong>Hidratación Alianza Activa:</strong> Te sugerimos consumir entre 40ml y 50ml de agua por kilo de peso corporal. El mate amargo está permitido libre sin azúcar durante todo el día.`;
-                    } else if (query.includes('macro') || query.includes('caloria') || query.includes('proteina')) {
-                        replyText = `📊 <strong>Tus Metas Biométricas (${clientName}):</strong><br>` +
-                                    `• Proteínas: <strong>${pTarget}g</strong><br>` +
-                                    `• Carbohidratos: <strong>${cTarget}g</strong><br>` +
-                                    `• Grasas Buenas: <strong>${fTarget}g</strong><br><br>` +
-                                    `🎯 Trabajamos con un <strong>0% de margen de error</strong> y pesaje estricto en crudo.`;
-                    } else if (query.includes('hola') || query.includes('saludos') || query.includes('buenas')) {
-                        replyText = `¡Hola <strong>${clientName}</strong>! Soy tu NutriCoach IA de Alianza Activa. Estoy acá para guiarte paso a paso con razonamiento científico, equivalencias exactas y control de macros. ¿Qué consulta tienes hoy?`;
-                    } else {
-                        replyText = `Entendido, <strong>${clientName}</strong>. Analizando tu consulta bajo los parámetros de Alianza Activa (0% error, alimentos en crudo y sistema de bloques): para mantener tus macros de ${pTarget}g P / ${cTarget}g C / ${fTarget}g G, asegúrate de mantener las proporciones exactas de tu plan. Si necesitas cambiar algún alimento específico o calcular equivalencias sin pasarte, dímelo con confianza y te doy el gramaje exacto.`;
-                    }
-
-                    container.innerHTML += `
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
-                            <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${replyText}</div>
-                        </div>`;
-                    container.scrollTop = container.scrollHeight;
-                } catch(err) {
-                    container.innerHTML += `
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
-                            <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">Hubo un error al procesar tu solicitud. Por favor intenta de nuevo.</div>
-                        </div>`;
-                    container.scrollTop = container.scrollHeight;
-                }
-            }, 500);
+                container.innerHTML += `
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
+                        <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">${replyText.replace(/\n/g, '<br>')}</div>
+                    </div>`;
+            } catch(err) {
+                container.innerHTML += `
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
+                        <div class="bg-slate-800 text-slate-200 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed border border-slate-700 shadow-md">Error de conexión con la API de Gemini. Revisa tu clave de API o tu conexión a internet.</div>
+                    </div>`;
+            }
+            container.scrollTop = container.scrollHeight;
         }
 
         function resetChat() {
