@@ -338,7 +338,7 @@
                 <div id="dynamic-batidos-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN CALCULADORA DE INTERCAMBIOS DE ALIMENTOS (REEMPLAZO DE IA) -->
+            <!-- SECCIÓN CALCULADORA DE INTERCAMBIOS DE ALIMENTOS -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl space-y-6">
                     <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
@@ -353,16 +353,26 @@
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="space-y-2">
-                            <label class="text-xs font-bold text-amber-400 uppercase tracking-widest">1. Selecciona el Grupo de Alimento</label>
+                            <label class="text-xs font-bold text-amber-400 uppercase tracking-widest">1. Selecciona la Categoría</label>
                             <select id="exchange-group" onchange="updateExchangeOptions()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-amber-500 cursor-pointer">
-                                <option value="proteinas">Bloque 1: Proteínas Magras</option>
-                                <option value="carbohidratos">Bloque 2: Carbohidratos</option>
-                                <option value="grasas">Bloque 3: Grasas Buenas</option>
-                                <option value="verduras">Bloque 4: Verduras / Ensaladas</option>
+                                <option value="verduras">Verduras y Hortalizas</option>
+                                <option value="frutas">Frutas</option>
+                                <option value="carnes">Carnes, Aves y Embutidos</option>
+                                <option value="pescados">Pescados y Mariscos</option>
+                                <option value="cereales">Cereales y Panes</option>
+                                <option value="legumbres">Legumbres</option>
+                                <option value="aceites">Aceites y Grasas</option>
+                                <option value="frutos_secos">Frutos Secos</option>
+                                <option value="huevos">Huevos</option>
+                                <option value="lacteos">Lácteos y Derivados</option>
+                                <option value="bolleria">Bollería</option>
+                                <option value="salsas">Salsas y Condimentos</option>
+                                <option value="azucares">Azúcares y Dulces</option>
+                                <option value="bebidas">Bebidas (por 100 ml)</option>
                             </select>
                         </div>
                         <div class="space-y-2">
-                            <label class="text-xs font-bold text-amber-400 uppercase tracking-widest">2. Alimento que te toca (Base)</label>
+                            <label class="text-xs font-bold text-amber-400 uppercase tracking-widest">2. Alimento Base</label>
                             <select id="exchange-base-food" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-amber-500 cursor-pointer">
                                 <!-- Se llena dinámicamente -->
                             </select>
@@ -370,8 +380,8 @@
                     </div>
 
                     <div class="space-y-2">
-                        <label class="text-xs font-bold text-amber-400 uppercase tracking-widest">3. Cantidad asignada en tu plan (Gramos)</label>
-                        <input type="number" id="exchange-amount" value="100" placeholder="Ej: 150" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-amber-500">
+                        <label class="text-xs font-bold text-amber-400 uppercase tracking-widest">3. Cantidad asignada en tu plan (Gramos o ml)</label>
+                        <input type="number" id="exchange-amount" value="100" placeholder="Ej: 100" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-amber-500">
                     </div>
 
                     <button onclick="calculateFoodExchange()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl text-sm transition-all shadow-md cursor-pointer flex items-center justify-center gap-2">
@@ -753,32 +763,331 @@
         let activeClient = clientsDB[0];
         let lastCalculatedPlan = null;
 
-        // Base de datos de intercambios para la calculadora
+        // Base de datos completa de intercambios con los alimentos provistos
         const exchangeDatabase = {
-            proteinas: [
-                { name: "Pechuga de pollo / Pavo (crudo)", ratio: 1.0, desc: "Proteína magra de referencia con perfil completo de aminoácidos esenciales." },
-                { name: "Lomo de ternera / Peceto magro (crudo)", ratio: 1.0, desc: "Aporte equivalente en proteína con menor contenido graso." },
-                { name: "Pescado blanco (Merluza / Gatuzo)", ratio: 1.2, desc: "Digestión rápida y excelente densidad proteica por gramo." },
-                { name: "Lomo de atún al natural (en lata)", ratio: 0.8, desc: "Práctico y con perfil lipídico cardiosaludable." },
-                { name: "Claras de huevo", ratio: 2.2, desc: "Valor biológico máximo sin aporte de grasas saturadas." }
-            ],
-            carbohidratos: [
-                { name: "Arroz integral / Parboil (en crudo)", ratio: 1.0, desc: "Carbohidrato complejo de absorción sostenida y alto glucógeno." },
-                { name: "Papa / Batata / Boniato (en crudo)", ratio: 3.3, desc: "Excelente fuente de potasio, fibra y energía limpia para entrenar." },
-                { name: "Avena tradicional en copos", ratio: 0.9, desc: "Rica en fibra soluble beta-glucano para control glucémico." },
-                { name: "Pan 100% integral", ratio: 1.1, desc: "Alternativa práctica para desayunos y meriendas." },
-                { name: "Fideos secos integrales / Quinoa (crudo)", ratio: 0.85, desc: "Carga óptima de carbohidratos complejos." }
-            ],
-            grasas: [
-                { name: "Aceite de oliva virgen extra", ratio: 1.0, desc: "Ácidos grasos monoinsaturados esenciales para salud hormonal." },
-                { name: "Palta (Aguacate)", ratio: 3.5, desc: "Grasas saludables y fibra dietética de alta calidad." },
-                { name: "Nueces / Almendras naturales", ratio: 1.0, desc: "Densidad calórica saludable con omega y antioxidantes." },
-                { name: "Yema de huevo", ratio: 1.2, desc: "Colina y grasas naturales integrales." }
-            ],
             verduras: [
-                { name: "Espinaca / Acelga / Brócoli", ratio: 1.0, desc: "Volumen alto, calorías casi nulas, rico en micronutrientes." },
-                { name: "Lechuga / Radicheta / Pepino", ratio: 1.2, desc: "Hidratación y fibra para control de saciedad." },
-                { name: "Zucchini / Zapallito / Espárragos", ratio: 1.1, desc: "Digestión ligera y versatilidad culinaria." }
+                { name: "Acelgas", ratio: 33, desc: "Rico en micronutrientes y fibra." },
+                { name: "Ajos", ratio: 139, desc: "Condimento aromático denso en nutrientes." },
+                { name: "Alcaucil (Alcachofa)", ratio: 64, desc: "Favorece la función hepática y digestiva." },
+                { name: "Apio", ratio: 20, desc: "Bajo en calorías, alto contenido de agua." },
+                { name: "Berenjena", ratio: 29, desc: "Versátil y rica en antioxidantes." },
+                { name: "Berro", ratio: 21, desc: "Hortaliza de hoja verde nutritiva." },
+                { name: "Boniato / Batata", ratio: 118, desc: "Carbohidrato complejo de calidad." },
+                { name: "Calabacín / Zucchini", ratio: 31, desc: "Digestivo y liviano." },
+                { name: "Calabaza", ratio: 24, desc: "Aporte de vitamina A y fibra." },
+                { name: "Cardo", ratio: 21, desc: "Bajo aporte calórico." },
+                { name: "Cebolla", ratio: 47, desc: "Versátil en preparaciones." },
+                { name: "Cebolla de verdeo (tierna)", ratio: 39, desc: "Aroma y sabor fresco." },
+                { name: "Champiñones", ratio: 28, desc: "Buen aporte de textura y minerales." },
+                { name: "Col / Repollo", ratio: 28, desc: "Rico en vitamina C y fibra." },
+                { name: "Col de Bruselas", ratio: 54, desc: "Nutritivo y saciante." },
+                { name: "Coliflor", ratio: 30, desc: "Excelente sustituto bajo en carbos." },
+                { name: "Endivia", ratio: 22, desc: "Hojas crujientes y amargas." },
+                { name: "Escarola", ratio: 37, desc: "Ideal para ensaladas." },
+                { name: "Espárragos", ratio: 26, desc: "Efecto diurético natural." },
+                { name: "Espárragos en lata", ratio: 24, desc: "Prácticos y listos para consumir." },
+                { name: "Espinacas", ratio: 32, desc: "Ricas en hierro y magnesio." },
+                { name: "Espinacas congeladas", ratio: 25, desc: "Prácticas para licuados o cocción." },
+                { name: "Grelos", ratio: 11, desc: "Muy bajo en calorías." },
+                { name: "Guisantes / Arvejas frescas", ratio: 92, desc: "Leguminosa tierna con carbohidratos." },
+                { name: "Arvejas congeladas", ratio: 71, desc: "Fuente de proteína vegetal y carbohidratos." },
+                { name: "Habas tiernas", ratio: 64, desc: "Saciantes y nutritivas." },
+                { name: "Chauchas (Judías verdes)", ratio: 39, desc: "Fibra y volumen." },
+                { name: "Lechuga", ratio: 18, desc: "Hidratación y volumen." },
+                { name: "Maíz dulce (Choclo)", ratio: 96, desc: "Carbohidrato amiláceo." },
+                { name: "Nabos", ratio: 29, desc: "Raíz nutritiva." },
+                { name: "Patata / Papa cocida", ratio: 86, desc: "Potasio y energía limpia." },
+                { name: "Patatas fritas comerciales", ratio: 544, desc: "Alta densidad calórica y grasas." },
+                { name: "Pepino", ratio: 12, desc: "Alto contenido de agua." },
+                { name: "Perejil", ratio: 55, desc: "Hierbas aromáticas densas." },
+                { name: "Pimiento", ratio: 22, desc: "Rico en vitamina C." },
+                { name: "Puerros", ratio: 42, desc: "Sabor suave y fibra." },
+                { name: "Puré de patata instantáneo", ratio: 357, desc: "Versión deshidratada." },
+                { name: "Rábanos", ratio: 20, desc: "Picor característico y pocas calorías." },
+                { name: "Remolacha", ratio: 40, desc: "Antioxidantes y óxido nítrico." },
+                { name: "Setas", ratio: 28, desc: "Hongos comestibles nutritivos." },
+                { name: "Soja, Brotes", ratio: 50, desc: "Proteína vegetal ligera." },
+                { name: "Tomate", ratio: 22, desc: "Licopeno y frescura." },
+                { name: "Tomate triturado en conserva", ratio: 39, desc: "Base para salsas." },
+                { name: "Tomate, Zumo", ratio: 21, desc: "Bebida vegetal hidratante." },
+                { name: "Trufa", ratio: 92, desc: "Hongo fino gourmet." },
+                { name: "Zanahoria", ratio: 42, desc: "Vitamina A y betacarotenos." }
+            ],
+            frutas: [
+                { name: "Aceitunas", ratio: 200, desc: "Grasas saludables y sabor." },
+                { name: "Aguacate / Palta", ratio: 207, desc: "Grasas monoinsaturadas." },
+                { name: "Albaricoque / Damasco", ratio: 44, desc: "Vitamina A y antioxidantes." },
+                { name: "Arándanos", ratio: 48, desc: "Antioxidantes potentes." },
+                { name: "Caqui", ratio: 64, desc: "Fruta dulce de temporada." },
+                { name: "Cerezas", ratio: 77, desc: "Antiinflamatorias naturales." },
+                { name: "Chirimoya", ratio: 78, desc: "Dulce y energética." },
+                { name: "Ciruela", ratio: 64, desc: "Fibra y tránsito intestinal." },
+                { name: "Ciruela pasa", ratio: 290, desc: "Concentrado de fibra." },
+                { name: "Coco", ratio: 630, desc: "Grasas saturadas naturales de coco." },
+                { name: "Dátil", ratio: 279, desc: "Energía rápida pre-entreno." },
+                { name: "Dátil seco", ratio: 306, desc: "Alto en azúcares naturales." },
+                { name: "Frambuesa", ratio: 40, desc: "Baja en azúcar, alta en fibra." },
+                { name: "Frutillas / Fresas", ratio: 36, desc: "Vitamina C y bajo índice glucémico." },
+                { name: "Granada", ratio: 32, desc: "Polifenoles y antioxidantes." },
+                { name: "Higo", ratio: 80, desc: "Energía y minerales." },
+                { name: "Higo seco", ratio: 275, desc: "Fruta deshidratada densa." },
+                { name: "Kiwi", ratio: 51, desc: "Vitamina C y digestión." },
+                { name: "Limón", ratio: 39, desc: "Vitamina C y aderezo." },
+                { name: "Mandarina", ratio: 40, desc: "Vitamina C y frescura." },
+                { name: "Mango", ratio: 57, desc: "Vitamina A y C." },
+                { name: "Manzana", ratio: 52, desc: "Pectina y saciedad." },
+                { name: "Melocotón / Durazno", ratio: 52, desc: "Jugoso y nutritivo." },
+                { name: "Durazno en almíbar", ratio: 84, desc: "Mayor concentración de azúcar." },
+                { name: "Melón", ratio: 31, desc: "Alto contenido de agua." },
+                { name: "Membrillo", ratio: 33, desc: "Aromático y fibroso." },
+                { name: "Moras", ratio: 37, desc: "Antioxidantes." },
+                { name: "Naranja", ratio: 44, desc: "Clásico aporte cítrico." },
+                { name: "Nectarina", ratio: 64, desc: "Variedad de durazno suave." },
+                { name: "Nísperos", ratio: 97, desc: "Dulces y refrescantes." },
+                { name: "Papaya", ratio: 45, desc: "Enzima papaína digestiva." },
+                { name: "Pera", ratio: 61, desc: "Fibra y potasio." },
+                { name: "Piña / Ananá", ratio: 51, desc: "Enzima bromelina antiinflamatoria." },
+                { name: "Ananá en almíbar", ratio: 84, desc: "Piña conservada en almíbar." },
+                { name: "Plátano / Banana", ratio: 90, desc: "Potasio y energía para entrenar." },
+                { name: "Pomelo", ratio: 30, desc: "Cítrico bajo en calorías." },
+                { name: "Sandía", ratio: 30, desc: "Hidratación máxima." },
+                { name: "Uva", ratio: 81, desc: "Resveratrol y energía." },
+                { name: "Uva pasa", ratio: 324, desc: "Uva deshidratada." },
+                { name: "Zumo de naranja exprimido", ratio: 82, desc: "Vitamina C líquida." },
+                { name: "Zumos de fruta envasados", ratio: 45, desc: "Bebida frutal comercial." }
+            ],
+            carnes: [
+                { name: "Panceta / Bacon", ratio: 665, desc: "Grasa y proteína ahumada." },
+                { name: "Asado / Corte graso vacuno", ratio: 303, desc: "Corte vacuno sabroso y graso." },
+                { name: "Carne vacuna semigrasa (Picada común/Paleta)", ratio: 176, desc: "Proteína económica y versátil." },
+                { name: "Bife de chorizo / Lomo vacuno magro", ratio: 111, desc: "Corte magro de alta calidad." },
+                { name: "Butifarra", ratio: 326, desc: "Embutido cárnico." },
+                { name: "Butifarra cocida", ratio: 390, desc: "Embutido cocido." },
+                { name: "Salchicha Parrillera / Fresca", ratio: 326, desc: "Embutido fresco para asar." },
+                { name: "Caballo", ratio: 110, desc: "Carne roja magra." },
+                { name: "Cerdo, chuleta", ratio: 330, desc: "Corte de cerdo con grasa." },
+                { name: "Cerdo, hígado", ratio: 154, desc: "Viscera rica en hierro y vitamina A." },
+                { name: "Cerdo, lomo", ratio: 290, desc: "Corte magro de cerdo." },
+                { name: "Chicharrón", ratio: 601, desc: "Snack graso de cerdo." },
+                { name: "Chorizo / Sobrasada", ratio: 468, desc: "Embutido curado denso." },
+                { name: "Codorniz", ratio: 114, desc: "Ave magra." },
+                { name: "Conejo", ratio: 162, desc: "Carne blanca magra y saludable." },
+                { name: "Cordero, costillas", ratio: 215, desc: "Corte sabroso de cordero." },
+                { name: "Cordero, hígado", ratio: 132, desc: "Viscera nutritiva." },
+                { name: "Cordero, pierna", ratio: 248, desc: "Corte tierno de cordero." },
+                { name: "Foie-gras", ratio: 518, desc: "Delicia de hígado graso." },
+                { name: "Gallina", ratio: 369, desc: "Carne de ave madura." },
+                { name: "Jamón Crudo (País)", ratio: 380, desc: "Jamón curado." },
+                { name: "Jamón Cocido (York)", ratio: 289, desc: "Jamón magro cocido." },
+                { name: "Lomo embuchado", ratio: 380, desc: "Embutido magro curado." },
+                { name: "Mortadela", ratio: 265, desc: "Fiambre procesado." },
+                { name: "Pato", ratio: 200, desc: "Carne de ave grasa." },
+                { name: "Pavo", ratio: 223, desc: "Proteína blanca magra." },
+                { name: "Perdiz", ratio: 114, desc: "Ave de caza." },
+                { name: "Pis de cerdo (Manitas)", ratio: 290, desc: "Colágeno y gelatina." },
+                { name: "Pollo deshuesado (Suprema)", ratio: 85, desc: "Proteína magra por excelencia." },
+                { name: "Pollo entero con piel", ratio: 121, desc: "Aporte de grasas naturales." },
+                { name: "Pollo, hígado", ratio: 129, desc: "Viscera de pollo rica en nutrientes." },
+                { name: "Salchicha de Viena (Frankfurt)", ratio: 315, desc: "Salchicha procesada." },
+                { name: "Salchichas frescas", ratio: 326, desc: "Embutido fresco." },
+                { name: "Salchichón / Salamín", ratio: 294, desc: "Embutido picado curado." },
+                { name: "Ternera, bistec (Bife angosto/ancho)", ratio: 181, desc: "Bistec de ternera." },
+                { name: "Ternera, chuleta", ratio: 168, desc: "Chuleta tierna." },
+                { name: "Ternera, hígado", ratio: 140, desc: "Viscera de alta biodisponibilidad." },
+                { name: "Ternera, lengua", ratio: 207, desc: "Corte tierno." },
+                { name: "Ternera, riñón", ratio: 86, desc: "Viscera magra." },
+                { name: "Ternera, sesos", ratio: 111, desc: "Tejido rico en lípidos." },
+                { name: "Ternera, solomillo", ratio: 90, desc: "El corte más magro y tierno." },
+                { name: "Tripa / Chinchulín", ratio: 100, desc: "Corte tradicional." }
+            ],
+            pescados: [
+                { name: "Almejas / Berberechos", ratio: 50, desc: "Marisco rico en hierro." },
+                { name: "Anchoas", ratio: 175, desc: "Pescado azul salado en conserva." },
+                { name: "Anguila", ratio: 200, desc: "Pescado graso nutritivo." },
+                { name: "Arenque ahumado", ratio: 224, desc: "Omega 3 y sabor ahumado." },
+                { name: "Arenque seco", ratio: 122, desc: "Pescado deshidratado." },
+                { name: "Atún fresco", ratio: 225, desc: "Proteína marina de alta calidad." },
+                { name: "Atún en lata (aceite vegetal)", ratio: 280, desc: "Conservado en aceite." },
+                { name: "Bacalao fresco", ratio: 86, desc: "Pescado blanco magro." },
+                { name: "Bacalao salado", ratio: 108, desc: "Conservado en sal." },
+                { name: "Bacalao seco", ratio: 322, desc: "Concentrado proteico." },
+                { name: "Besugo", ratio: 118, desc: "Pescado blanco sabroso." },
+                { name: "Boquerón", ratio: 151, desc: "Pescado azul fresco." },
+                { name: "Caballa", ratio: 153, desc: "Rico en ácidos grasos omega 3." },
+                { name: "Calamar / Sepia", ratio: 82, desc: "Marisco cefalópodo magro." },
+                { name: "Cangrejo", ratio: 85, desc: "Carne de cangrejo ligera." },
+                { name: "Caracoles", ratio: 67, desc: "Molusco terrestre." },
+                { name: "Caviar", ratio: 233, desc: "Huevas de pescado gourmet." },
+                { name: "Chanquete", ratio: 79, desc: "Pescado pequeño." },
+                { name: "Chirla", ratio: 50, desc: "Molusco bivalvo." },
+                { name: "Cigala", ratio: 70, desc: "Crustáceo fino." },
+                { name: "Congrio", ratio: 144, desc: "Pescado de roca." },
+                { name: "Gallo", ratio: 73, desc: "Pescado plano magro." },
+                { name: "Gambas / Langostinos", ratio: 96, desc: "Crustáceos ricos en proteína." },
+                { name: "Langosta", ratio: 70, desc: "Marisco fino." },
+                { name: "Lenguado", ratio: 73, desc: "Pescado blanco de fácil digestión." },
+                { name: "Lubina", ratio: 118, desc: "Pescado blanco noble." },
+                { name: "Mejillón", ratio: 72, desc: "Molusco rico en zinc y hierro." },
+                { name: "Merluza", ratio: 86, desc: "Pescado blanco clásico de dieta." },
+                { name: "Mero", ratio: 118, desc: "Pescado de roca firme." },
+                { name: "Ostras", ratio: 80, desc: "Molusco rico en minerales." },
+                { name: "Pulpo", ratio: 57, desc: "Cefalópodo bajo en grasa." },
+                { name: "Rape", ratio: 86, desc: "Pescado blanco de textura firme." },
+                { name: "Salmón", ratio: 114, desc: "Pescado azul rico en omega 3." },
+                { name: "Salmón ahumado", ratio: 170, desc: "Salmón curado y ahumado." },
+                { name: "Salmonete", ratio: 97, desc: "Pescado de roca sabroso." },
+                { name: "Sardina en lata (aceite vegetal)", ratio: 192, desc: "Sardinas en conserva." },
+                { name: "Sardinas frescas", ratio: 174, desc: "Pescado azul nutritivo." },
+                { name: "Trucha", ratio: 94, desc: "Pescado de río saludable." }
+            ],
+            cereales: [
+                { name: "Arroz blanco", ratio: 354, desc: "Carbohidrato de rápida absorción." },
+                { name: "Arroz integral", ratio: 350, desc: "Carbohidrato complejo con fibra." },
+                { name: "Avena (tradicional/instantánea)", ratio: 367, desc: "Avena para porridge y pancakes." },
+                { name: "Harina de trigo, integral", ratio: 340, desc: "Harina con salvado." },
+                { name: "Harina de trigo, refinada (000/0000)", ratio: 353, desc: "Harina blanca común." },
+                { name: "Pan de molde, blanco", ratio: 233, desc: "Pan suave procesado." },
+                { name: "Pan de molde, integral", ratio: 216, desc: "Pan integral en rodajas." },
+                { name: "Pan de trigo, blanco (Flauta/Mignón)", ratio: 255, desc: "Pan fresco de panadería." },
+                { name: "Pan de trigo, integral", ratio: 239, desc: "Pan artesanal integral." },
+                { name: "Fideos / Pasta seca", ratio: 375, desc: "Pasta de sémola." },
+                { name: "Sémola de trigo", ratio: 375, desc: "Base para pastas." },
+                { name: "Tapioca", ratio: 338, desc: "Almidón de yuca." }
+            ],
+            legumbres: [
+                { name: "Garbanzos secos", ratio: 361, desc: "Leguminosa rica en proteína y fibra." },
+                { name: "Guisantes / Arvejas secas", ratio: 317, desc: "Secas y nutritivas." },
+                { name: "Habas secas", ratio: 343, desc: "Proteína vegetal densa." },
+                { name: "Judías / Porotos secos", ratio: 330, desc: "Variedad de porotos." },
+                { name: "Lentejas secas", ratio: 336, desc: "Hierro y carbohidratos complejos." },
+                { name: "Soja en grano seca", ratio: 422, desc: "Proteína vegetal completa." }
+            ],
+            aceites: [
+                { name: "Aceite de cacahuete", ratio: 900, desc: "Grasas vegetales." },
+                { name: "Aceite de girasol", ratio: 900, desc: "Aceite vegetal común." },
+                { name: "Aceite de maíz", ratio: 900, desc: "Aceite de maíz." },
+                { name: "Aceite de oliva virgen extra", ratio: 900, desc: "El mejor aceite para la salud." },
+                { name: "Aceite de soja", ratio: 900, desc: "Aceite de soja." },
+                { name: "Aceitunas en conserva", ratio: 149, desc: "Aceitunas en salmuera." },
+                { name: "Manteca de cerdo", ratio: 670, desc: "Grasa animal tradicional." },
+                { name: "Mantequilla", ratio: 752, desc: "Lácteo graso." },
+                { name: "Margarina vegetal", ratio: 752, desc: "Grasa vegetal untable." }
+            ],
+            frutos_secos: [
+                { name: "Almendra", ratio: 620, desc: "Fruto seco rico en vitamina E." },
+                { name: "Avellana", ratio: 656, desc: "Grasas saludables y sabor." },
+                { name: "Cacahuete / Maní", ratio: 560, desc: "Leguminosa oleaginosa proteica." },
+                { name: "Castaña", ratio: 199, desc: "Fruto seco bajo en grasa." },
+                { name: "Nueces", ratio: 660, desc: "Omega 3 vegetal." },
+                { name: "Piñones", ratio: 660, desc: "Semillas oleaginosas finas." },
+                { name: "Pipas de girasol", ratio: 535, desc: "Semillas ricas en magnesio." },
+                { name: "Pistacho", ratio: 586, desc: "Antioxidantes y potasio." }
+            ],
+            huevos: [
+                { name: "Clara de huevo", ratio: 48, desc: "Proteína pura sin grasa." },
+                { name: "Huevo duro", ratio: 147, desc: "Huevo cocido entero." },
+                { name: "Huevo entero fresco", ratio: 162, desc: "Proteína y yema nutritiva." },
+                { name: "Yema de huevo", ratio: 368, desc: "Grasas y colina." }
+            ],
+            lacteos: [
+                { name: "Cuajada / Requesón", ratio: 96, desc: "Lácteo fresco suave." },
+                { name: "Flan de huevo", ratio: 116, desc: "Postre lácteo." },
+                { name: "Flan de vainilla", ratio: 102, desc: "Postre dulce." },
+                { name: "Helados lácteos", ratio: 204, desc: "Helado cremoso." },
+                { name: "Leche condensada", ratio: 350, desc: "Leche azucarada espesa." },
+                { name: "Leche condensada sin azúcar", ratio: 160, desc: "Versión reducida." },
+                { name: "Leche de cabra (por 100 ml)", ratio: 72, desc: "Leche caprina." },
+                { name: "Leche de oveja (por 100 ml)", ratio: 96, desc: "Leche ovina rica." },
+                { name: "Leche en polvo entera", ratio: 500, desc: "Leche deshidratada." },
+                { name: "Leche descremada (por 100 ml)", ratio: 34, desc: "Sin grasa." },
+                { name: "Leche entera (por 100 ml)", ratio: 68, desc: "Lácteo completo." },
+                { name: "Leche semidescremada (por 100 ml)", ratio: 49, desc: "Punto intermedio." },
+                { name: "Postre tipo Mousse", ratio: 177, desc: "Postre aireado." },
+                { name: "Crema de leche / Nata", ratio: 298, desc: "Lácteo graso." },
+                { name: "Natillas", ratio: 116, desc: "Postre tradicional." },
+                { name: "Queso blanco descremado (Untable)", ratio: 68, desc: "Queso untable light." },
+                { name: "Queso Camembert", ratio: 312, desc: "Queso blando madurado." },
+                { name: "Queso Tybo / Mar del Plata (Bola)", ratio: 349, desc: "Queso argentino clásico." },
+                { name: "Queso Cremoso de Burgos", ratio: 174, desc: "Queso fresco." },
+                { name: "Queso Emmental", ratio: 415, desc: "Queso suizo con ojos." },
+                { name: "Queso en porciones", ratio: 280, desc: "Queso fundido procesado." },
+                { name: "Queso Gruyère", ratio: 391, desc: "Queso curado." },
+                { name: "Queso Pategrás / Mancha", ratio: 376, desc: "Queso semiduro." },
+                { name: "Queso Parmesano / Sardo", ratio: 393, desc: "Queso duro rallar." },
+                { name: "Queso Roquefort / Azul", ratio: 405, desc: "Queso de pasta azul." },
+                { name: "Requesón / Ricota", ratio: 96, desc: "Ricota fresca." },
+                { name: "Yogur descremado", ratio: 42, desc: "Yogur light." },
+                { name: "Yogur descremado con frutas", ratio: 90, desc: "Yogur con fruta." },
+                { name: "Yogur entero con crema", ratio: 60, desc: "Yogur entero." },
+                { name: "Yogur natural con fruta", ratio: 98, desc: "Yogur con pulpa." },
+                { name: "Yogur natural firme", ratio: 45, desc: "Yogur natural." }
+            ],
+            bolleria: [
+                { name: "Bizcochuelo / Bizcocho", ratio: 456, desc: "Bollería horneada." },
+                { name: "Medialunas / Facturas / Donut", ratio: 456, desc: "Bollería tradicional." },
+                { name: "Galletas tipo María", ratio: 436, desc: "Galletas dulces secas." },
+                { name: "Magdalenas", ratio: 469, desc: "Ponqués esponjosos." },
+                { name: "Vainillas (Melindros)", ratio: 440, desc: "Galletas alargadas." },
+                { name: "Masa pascualina / Tarta cocida", ratio: 527, desc: "Masa para tartas." },
+                { name: "Masa de hojaldre cocida", ratio: 565, desc: "Masa hojaldrada grasa." },
+                { name: "Galletas dulces de té", ratio: 456, desc: "Galletas surtidas." }
+            ],
+            salsas: [
+                { name: "Azafrán", ratio: 352, desc: "Especia fina." },
+                { name: "Salsa blanca / Bechamel", ratio: 115, desc: "Salsa láctea espesa." },
+                { name: "Canela", ratio: 255, desc: "Especia aromática." },
+                { name: "Cubito de caldo", ratio: 259, desc: "Caldo concentrado." },
+                { name: "Ají molido / Guindilla picante", ratio: 47.2, desc: "Condimento picante." },
+                { name: "Ketchup", ratio: 98, desc: "Salsa de tomate dulce." },
+                { name: "Laurel", ratio: 353, desc: "Hoja aromática." },
+                { name: "Levadura", ratio: 164, desc: "Agente leudante." },
+                { name: "Mayonesa", ratio: 718, desc: "Emulsión grasa." },
+                { name: "Mostaza", ratio: 15, desc: "Condimento bajo en calorías." },
+                { name: "Nuez moscada", ratio: 506, desc: "Especia." },
+                { name: "Orégano", ratio: 308, desc: "Hierba seca." },
+                { name: "Perejil deshidratado", ratio: 59.1, desc: "Hierba." },
+                { name: "Pimentón", ratio: 357, desc: "Especia roja." },
+                { name: "Pimienta", ratio: 280, desc: "Condimento picante." },
+                { name: "Sal fina o gruesa", ratio: 0, desc: "Sal mineral sin calorías." },
+                { name: "Salsa de tomate en conserva", ratio: 86, desc: "Salsa." },
+                { name: "Sofrito criollo", ratio: 116, desc: "Base de verduras cocinadas." }
+            ],
+            azucares: [
+                { name: "Azúcar blanco / común", ratio: 380, desc: "Carbohidrato simple." },
+                { name: "Cacao en polvo, con azúcar", ratio: 366, desc: "Cacao dulce." },
+                { name: "Chocolate con leche", ratio: 550, desc: "Chocolate dulce." },
+                { name: "Chocolate amargo/semiamargo", ratio: 530, desc: "Cacao rico en antioxidantes." },
+                { name: "Compota de manzana/fruta", ratio: 66, desc: "Puré de fruta dulce." },
+                { name: "Crema de chocolate con avellanas", ratio: 549, desc: "Untable dulce." },
+                { name: "Dulce de membrillo", ratio: 215, desc: "Dulce tradicional." },
+                { name: "Mermelada con azúcar", ratio: 280, desc: "Fruta con azúcar." },
+                { name: "Mermelada diet / sin azúcar", ratio: 145, desc: "Versión light." },
+                { name: "Miel de abejas", ratio: 300, desc: "Endulzante natural." },
+                { name: "Turrón tipo maní / Alicante", ratio: 486, desc: "Dulce de frutos secos." }
+            ],
+            bebidas: [
+                { name: "Aguardiente / Caña", ratio: 280, desc: "Alcohol destilado." },
+                { name: "Anís", ratio: 312, desc: "Licor anisado." },
+                { name: "Batido lácteo cacao", ratio: 100, desc: "Bebida chocolatada." },
+                { name: "Brandy", ratio: 243, desc: "Bebida alcohólica." },
+                { name: "Cacao a la taza", ratio: 439, desc: "Bebida caliente espesa." },
+                { name: "Café negro amargo", ratio: 5, desc: "Estimulante sin calorías." },
+                { name: "Cava / Champagne", ratio: 65, desc: "Vino espumoso." },
+                { name: "Cerveza negra", ratio: 37, desc: "Bebida de malta." },
+                { name: "Cerveza rubia", ratio: 45, desc: "Cerveza tradicional." },
+                { name: "Coñac", ratio: 243, desc: "Destilado." },
+                { name: "Ginebra", ratio: 244, desc: "Licor." },
+                { name: "Leche de almendras comercial", ratio: 33, desc: "Bebida vegetal." },
+                { name: "Gaseosas / Refrescos carbonatados", ratio: 48, desc: "Refresco azucarado." },
+                { name: "Ron", ratio: 244, desc: "Destilado." },
+                { name: "Sidra dulce", ratio: 40, desc: "Bebida de manzana." },
+                { name: "Sidra seca", ratio: 40, desc: "Sidra." },
+                { name: "Té amargo", ratio: 2, desc: "Infusión libre." },
+                { name: "Vermut dulce", ratio: 160, desc: "Vino aromatizado." },
+                { name: "Vino de mesa tinto/blanco", ratio: 60, desc: "Vino." },
+                { name: "Vino dulce / Jerez", ratio: 160, desc: "Vino generoso." },
+                { name: "Vino Oporto", ratio: 160, desc: "Vino licoroso." },
+                { name: "Whisky", ratio: 244, desc: "Destilado añejo." }
             ]
         };
 
@@ -813,7 +1122,7 @@
 
             resultsBox.classList.remove('hidden');
             resultsList.innerHTML = items.map(item => {
-                const equivalentAmount = Math.round((baseAmount * baseItem.ratio) / item.ratio);
+                const equivalentAmount = item.ratio === 0 ? 0 : Math.round((baseAmount * baseItem.ratio) / item.ratio);
                 const isSelected = item.name === baseItem.name;
                 return `
                     <div class="bg-slate-950 p-4 rounded-2xl border ${isSelected ? 'border-emerald-500/60 bg-emerald-950/20' : 'border-slate-800'} space-y-2">
@@ -821,7 +1130,7 @@
                             <strong class="text-white text-xs">${item.name}</strong>
                             ${isSelected ? '<span class="text-[9px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-bold">Base</span>' : ''}
                         </div>
-                        <div class="text-emerald-400 text-sm font-bold">${equivalentAmount} gramos</div>
+                        <div class="text-emerald-400 text-sm font-bold">${equivalentAmount} gramos/ml</div>
                         <p class="text-[11px] text-slate-400 leading-relaxed">${item.desc}</p>
                     </div>
                 `;
