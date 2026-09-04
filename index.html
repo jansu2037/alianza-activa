@@ -648,8 +648,9 @@
     </div>
 
     <script>
-        const API_KEY = "AIzaSyA2Sk6s2i2_bcJ_fJc4BEyMw3y9hU79_Nw";
-        const PROJECT_ID = "alianza-activa";
+        // Rellena estas constantes con tus credenciales de forma segura (ej. desde variables de entorno si despliegas en servidor)
+        const API_KEY = "YOUR_GEMINI_API_KEY";
+        const PROJECT_ID = "YOUR_PROJECT_ID";
 
         let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
 
@@ -1054,7 +1055,7 @@
                 addLog(`Atleta ${found.name} inició sesión.`, "success");
             } else {
                 errEl.innerText = "Contraseña incorrecta.";
-                errEl.classList.remove('hidden');
+                errEl.classList.add('hidden');
                 addLog("Intento de acceso fallido.", "error");
             }
         }
@@ -1500,7 +1501,6 @@
             const q = inputEl.value.trim();
             if (!q) return;
 
-            // Mostrar mensaje del usuario
             container.innerHTML += `
                 <div class="flex items-start gap-3 justify-end">
                     <div class="bg-amber-500 text-slate-950 p-4 rounded-2xl rounded-tr-none max-w-[85%] text-sm font-medium shadow-md">${q}</div>
@@ -1508,7 +1508,6 @@
             inputEl.value = '';
             container.scrollTop = container.scrollHeight;
 
-            // Indicador de escritura (Cargando respuesta de la IA)
             const loadingId = 'loading-' + Date.now();
             container.innerHTML += `
                 <div id="${loadingId}" class="flex items-start gap-3">
@@ -1542,7 +1541,6 @@ Responde de manera motivadora, experta, directa y fundamentada, resolviendo sus 
                     })
                 });
 
-                // Eliminar indicador de carga
                 document.getElementById(loadingId)?.remove();
 
                 if (response.ok) {
@@ -1559,7 +1557,6 @@ Responde de manera motivadora, experta, directa y fundamentada, resolviendo sus 
                 }
             } catch (err) {
                 document.getElementById(loadingId)?.remove();
-                // Fallback de respaldo en caso de fallo de red
                 const clientName = activeClient.name || "Atleta";
                 const pTarget = activeClient.macroP || 140;
                 const cTarget = activeClient.macroC || 180;
