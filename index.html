@@ -137,7 +137,7 @@
 
         <div class="bg-slate-950 border-b border-slate-900 py-3 px-4 overflow-x-auto hide-scroll no-print">
             <div class="max-w-4xl mx-auto flex items-center gap-4" id="instagram-stories-bar">
-                </div>
+            </div>
         </div>
 
         <nav class="bg-slate-950/95 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-xl shadow-xl no-print">
@@ -1512,7 +1512,7 @@
             container.innerHTML += `
                 <div id="${loadingId}" class="flex items-start gap-3">
                     <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-sm shrink-0"><i class="fa-solid fa-robot"></i></div>
-                    <div class="bg-slate-800 text-slate-400 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm italic border border-slate-700">Analizando consulta bajo parámetros de Alianza Activa...</div>
+                    <div class="bg-slate-800 text-slate-400 p-4 rounded-2xl rounded-tl-none max-w-[85%] text-sm italic border border-slate-700">Analizando consulta bajo parámetros y base de datos de Alianza Activa...</div>
                 </div>`;
             container.scrollTop = container.scrollHeight;
 
@@ -1529,9 +1529,21 @@ Tus reglas técnicas obligatorias son:
 - Los huevos se indican por unidad entera.
 - Mantén la guía de bloques oficial (Bloques 1 al 5).
 El alumno actual que te consulta es ${clientName} y sus metas biométricas exactas son: ${pTarget}g Proteína, ${cTarget}g Carbohidratos y ${fTarget}g Grasas.
-Responde de manera motivadora, experta, directa y fundamentada, resolviendo sus dudas de alimentación, equivalencias o menús.`;
 
-                const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+BASE DE DATOS NUTRICIONAL OFICIAL (Valores por 100g / 100ml):
+- Verduras y hortalizas: Acelgas (33 kcal, 2.5p, 0.6c, 0.6g), Ajos (139 kcal, 6.7p, 28c, 0.1g), Alcaucil/Alcachofa (64 kcal, 3.4p, 12c, 0.3g), Apio (20 kcal, 1.3p, 3.7c, 0.2g), Berenjena (29 kcal, 1.3p, 5.5c, 0.2g), Berro (21 kcal, 1.7p, 3c, 0.3g), Boniato/Batata (118 kcal, 1.6p, 27c, 0.2g), Calabacín/Zucchini (31 kcal, 1.3p, 6c, 0.2g), Calabaza (24 kcal, 1.3p, 5.4c, 0.2g), Cardo (21 kcal, 1.4p, 3.5c, 0g), Cebolla (47 kcal, 1.4p, 10c, 0.2g), Cebolla de verdeo (39 kcal, 0.9p, 8.4c, 0.2g), Champiñones (28 kcal, 2.4p, 4c, 0.3g), Col/Repollo (28 kcal, 1.4p, 4.3c, 0.2g), Col de Bruselas (54 kcal, 4.8p, 7c, 0.7g), Coliflor (30 kcal, 2.4p, 4.9c, 0.2g), Endivia (22 kcal, 1.5p, 4c, 0.1g), Escarola (37 kcal, 1.5p, 4c, 0.3g), Espárragos (26 kcal, 2.2p, 3.9c, 0g), Espinacas (32 kcal, 3.1p, 3.6c, 0.6g), Guisantes/Arvejas frescas (92 kcal, 6p, 16c, 0.4g), Habas tiernas (64 kcal, 5.4p, 10c, 0.3g), Chauchas/Judías verdes (39 kcal, 2.4p, 7c, 0.2g), Lechuga (18 kcal, 1.2p, 2.9c, 0.2g), Maíz dulce/Choclo (96 kcal, 3.4p, 19c, 1.2g), Nabos (29 kcal, 0.8p, 6c, 0.2g), Patata/Papa cocida (86 kcal, 2p, 19c, 0.1g), Pepino (12 kcal, 0.7p, 2c, 0.1g), Pimiento (22 kcal, 1.2p, 3.8c, 0.2g), Puerros (42 kcal, 2p, 7.5p, 0.4g), Rábanos (20 kcal, 1.2p, 4.2p, 1.1g), Remolacha (40 kcal, 1.6p, 8c, 0.1g), Tomate (22 kcal, 1p, 4c, 0.3g), Zanahoria (42 kcal, 1.2p, 9c, 0.3g).
+- Frutas: Aceitunas (200 kcal, 0.7p, 8c, 20g), Aguacate/Palta (207 kcal, 2.1p, 4.7c, 16.4g), Albaricoque/Damasco (44 kcal, 0.8p, 10c, 0.1g), Arándanos (48 kcal, 0.7p, 14c, 0.3g), Cerezas (77 kcal, 1.2p, 17c, 0.5g), Ciruela (64 kcal, 0.8p, 10c, 0.1g), Dátil (279 kcal, 2.2p, 71c, 0.4g), Frutillas/Fresas (36 kcal, 0.7p, 7c, 0.6g), Kiwi (51 kcal, 1p, 9.1c, 0.6g), Limón (39 kcal, 0.3p, 9c, 0.2g), Mandarina (40 kcal, 0.8p, 9c, 0.1g), Mango (57 kcal, 0.6p, 12.4c, 0.5g), Manzana (52 kcal, 0.3p, 12c, 0.4g), Melocotón/Durazno (52 kcal, 0.5p, 12c, 0.1g), Melón (31 kcal, 0.8p, 6.5c, 0.2g), Naranja (44 kcal, 1.1p, 9c, 0.2g), Pera (61 kcal, 0.4p, 14c, 0.4g), Piña/Ananá (51 kcal, 0.5p, 12c, 0.2g), Plátano/Banana (90 kcal, 1.4p, 20c, 0.5g), Pomelo (30 kcal, 0.6p, 6c, 0.3g), Sandía (30 kcal, 0.4p, 6c, 0.2g), Uva (81 kcal, 1p, 17c, 10g).
+- Carnes y Aves: Asado/Corte vacuno graso (303 kcal, 17.4p, 0c, 25.3g), Carne vacuna semigrasa (176 kcal, 20.2p, 0c, 10.6g), Bife de chorizo / Lomo magro (111 kcal, 20.4p, 0c, 3.3g), Cerdo lomo (290 kcal, 16p, 0c, 25g), Conejo (162 kcal, 22p, 0c, 8g), Cordero pierna (248 kcal, 17p, 0c, 19g), Jamón cocido (289 kcal, 20.9p, 0c, 22.1g), Jamón crudo (380 kcal, 17p, 0c, 35g), Pato (200 kcal, 22p, 0.5c, 14g), Pavo (223 kcal, 31.9p, 0c, 9.6g), Pechuga de pollo sup. (85 kcal, 14.3p, 0c, 3g), Pollo con piel (121 kcal, 20.5p, 0c, 4.3g), Ternera solomillo (90 kcal, 18.8p, 0c, 1.7g).
+- Pescados y Mariscos: Atún fresco (225 kcal, 27p, 0c, 13g), Atún en lata aceite (280 kcal, 25p, 0c, 20g), Bacalao fresco (86 kcal, 17p, 0c, 2g), Calamar/Sepia (82 kcal, 17p, 0.5c, 1.3g), Lenguado (73 kcal, 16p, 0c, 1g), Lubina (118 kcal, 16p, 0c, 6g), Merluza (86 kcal, 17p, 0c, 2g), Pulpo (57 kcal, 10.6p, 1.5c, 1g), Salmón (114 kcal, 16p, 0c, 8g), Salmón ahumado (170 kcal, 20p, 0c, 10g), Sardinas frescas (174 kcal, 21p, 0c, 10g), Trucha (94 kcal, 18p, 0c, 35g).
+- Cereales y Panes: Arroz blanco (354 kcal, 7.6p, 77c, 1.7g), Arroz integral (350 kcal, 8p, 71c, 1.1g), Avena tradicional (367 kcal, 14p, 66.5c, 5g), Harina integral (340 kcal, 10.5p, 71c, 1.5g), Harina refinada (353 kcal, 9.5p, 75c, 1.2g), Pan blanco (255 kcal, 7p, 55c, 0.8g), Pan integral (239 kcal, 8p, 49c, 1.2g), Fideos/Pasta seca (375 kcal, 12.8p, 76.5c, 1.2g).
+- Legumbres: Garbanzos secos (361 kcal, 18p, 61c, 5g), Lentejas secas (336 kcal, 24p, 56c, 1.8g), Soja seca (422 kcal, 35p, 30c, 18g).
+- Grasas y Aceites: Aceite de oliva virgen extra (900 kcal, 0p, 0c, 100g), Manteca de cerdo (670 kcal, 1p, 0c, 70g), Mantequilla (752 kcal, 0.7p, 0.6c, 82g), Palta/Aguacate (207 kcal, 2.1p, 4.7c, 16.4g).
+- Frutos Secos: Almendra (620 kcal, 20p, 17c, 54g), Nueces (660 kcal, 15p, 15c, 60g), Maní/Cacahuete (560 kcal, 23p, 26c, 40g).
+- Huevos y Lácteos: Clara de huevo (48 kcal, 11p, 0.7c, 0.2g), Huevo entero fresco (162 kcal, 13p, 0.6c, 12g), Yema de huevo (368 kcal, 16p, 0.6c, 33g), Leche descremada (34 kcal, 3.5p, 4.4c, 1g), Leche entera (68 kcal, 3.5p, 4.6c, 3.9g), Yogur natural firme (45 kcal, 4.2p, 4.5c, 1.1g), Queso Tybo/Mar del Plata (349 kcal, 29p, 2c, 27g).
+
+Responde de manera motivadora, experta, directa y fundamentada, resolviendo sus dudas de alimentación, equivalencias o menús basándote estrictamente en esta base de datos.`;
+
+                const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
                 const response = await fetch(geminiUrl, {
                     method: 'POST',
