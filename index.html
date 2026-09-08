@@ -712,12 +712,51 @@
         </div>
     </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, deleteDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        window.initFirebase = async function() {
+            try {
+                if (typeof __firebase_config === 'undefined') return false;
+                const app = initializeApp(JSON.parse(__firebase_config));
+                const db = getFirestore(app);
+                const auth = getAuth(app);
+                
+                if (typeof __initial_auth_token !== 'undefined') {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                window._db = db;
+                window._appId = typeof __app_id !== 'undefined' ? __app_id : 'alianza-activa';
+                return true;
+            } catch (e) {
+                console.error("Firebase init failed:", e);
+                return false;
+            }
+        };
+
+        window.fbGetGlobal = async () => {
+            if (!window._db) return null;
+            const snap = await getDoc(doc(window._db, 'artifacts', window._appId, 'public', 'data', 'config', 'globalData'));
+            return snap.exists() ? snap.data() : null;
+        };
+        window.fbSetGlobal = async (data) => window._db && await setDoc(doc(window._db, 'artifacts', window._appId, 'public', 'data', 'config', 'globalData'), data);
+        
+        window.fbGetClients = async () => {
+            if (!window._db) return null;
+            const snap = await getDocs(collection(window._db, 'artifacts', window._appId, 'public', 'data', 'clients'));
+            let res = [];
+            snap.forEach(d => res.push(d.data()));
+            return res;
+        };
+        window.fbSetClient = async (client) => window._db && await setDoc(doc(window._db, 'artifacts', window._appId, 'public', 'data', 'clients', client.name), client);
+        window.fbDelClient = async (name) => window._db && await deleteDoc(doc(window._db, 'artifacts', window._appId, 'public', 'data', 'clients', name));
+    </script>
+
     <script>
-        const API_KEY = "AQ.Ab8RN6JPqjgvA2zAzLIY-FQ_HjA-wpfIEb503lX0-2zYs5GQhA";
-        const PROJECT_ID = "alianza-activa";
-
-        let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
-
         let globalData = {
             batidos: [
                 { title: "Batido Cookies & High Protein", desc: "Ideal post-entreno para recuperación muscular máxima. Aporta 30g de F1 Cookies y alta saciedad.", image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800" },
@@ -1068,14 +1107,12 @@
 
         async function fetchGlobalDataFromCloud() {
             try {
-                const res = await fetch(`${FIRESTORE_BASE}/_GLOBAL_DATA_?key=${API_KEY}`);
-                if (res.ok) {
-                    const doc = await res.json();
-                    if (doc.fields && doc.fields.jsonData) {
-                        const parsed = JSON.parse(doc.fields.jsonData.stringValue);
-                        if (parsed.batidos) globalData.batidos = parsed.batidos;
-                        if (parsed.shorts) globalData.shorts = parsed.shorts;
-                        if (parsed.recipes) globalData.recipes = parsed.recipes;
+                if (window.fbGetGlobal) {
+                    const data = await window.fbGetGlobal();
+                    if (data) {
+                        if (data.batidos) globalData.batidos = data.batidos;
+                        if (data.shorts) globalData.shorts = data.shorts;
+                        if (data.recipes) globalData.recipes = data.recipes;
                     }
                 }
             } catch(e) { console.log("Cargando globalData local."); }
@@ -1083,12 +1120,7 @@
 
         async function saveGlobalDataToCloud() {
             try {
-                const body = { fields: { jsonData: { stringValue: JSON.stringify(globalData) } } };
-                await fetch(`${FIRESTORE_BASE}/_GLOBAL_DATA_?key=${API_KEY}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(body)
-                });
+                if (window.fbSetGlobal) await window.fbSetGlobal(globalData);
             } catch(e) {}
         }
 
@@ -1152,71 +1184,42 @@
             }
         }
 
-        function toFirestoreDoc(client) {
-            return {
-                fields: {
-                    name: { stringValue: client.name },
-                    pass: { stringValue: client.pass },
-                    macroP: { integerValue: client.macroP || 140 },
-                    macroC: { integerValue: client.macroC || 180 },
-                    macroF: { integerValue: client.macroF || 50 },
-                    tab1: { arrayValue: { values: (client.tab1 || []).map(v => ({ stringValue: v })) } },
-                    tab2: { arrayValue: { values: (client.tab2 || []).map(v => ({ stringValue: v })) } },
-                    tab3: { arrayValue: { values: (client.tab3 || []).map(v => ({ stringValue: v })) } }
-                }
-            };
-        }
-
-        function fromFirestoreDoc(doc) {
-            const f = doc.fields || {};
-            return {
-                name: f.name?.stringValue || '',
-                pass: f.pass?.stringValue || f.pass?.integerValue || '',
-                macroP: Number(f.macroP?.integerValue || f.macroP?.doubleValue || 140),
-                macroC: Number(f.macroC?.integerValue || f.macroC?.doubleValue || 180),
-                macroF: Number(f.macroF?.integerValue || f.macroF?.doubleValue || 50),
-                tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue || ''),
-                tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue || ''),
-                tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue || '')
-            };
-        }
-
         async function fetchClientsFromFirebase() {
-            addLog("Conectando a Firebase Firestore...", "info");
-            const endpoints = [
-                `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
-                `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
-            ];
-            for (const ep of endpoints) {
-                try {
-                    const res = await fetch(`${ep}?key=${API_KEY}`);
-                    const data = await res.json();
-                    if (res.ok) {
-                        FIRESTORE_BASE = ep;
-                        if (data.documents && data.documents.length > 0) {
-                            clientsDB = data.documents
-                                .filter(doc => !doc.name.includes('_GLOBAL_DATA_'))
-                                .map(fromFirestoreDoc);
-                        } else {
-                            clientsDB = defaultClients;
-                        }
-                        addLog(`Conexión exitosa. ${clientsDB.length} clientes cargados.`, "success");
-                        updateSystemMonitor("Conectado (Firebase)");
-                        return clientsDB;
+            addLog("Conectando a base de datos...", "info");
+            try {
+                const isReady = window.initFirebase ? await window.initFirebase() : false;
+                if (isReady) {
+                    const cloudClients = await window.fbGetClients();
+                    if (cloudClients && cloudClients.length > 0) {
+                        clientsDB = cloudClients;
+                    } else {
+                        clientsDB = defaultClients;
+                        for (const c of clientsDB) await window.fbSetClient(c);
                     }
-                } catch (err) {}
-            }
+                    addLog(`Conexión exitosa. ${clientsDB.length} clientes cargados.`, "success");
+                    updateSystemMonitor("Conectado (Nube)");
+                    return clientsDB;
+                }
+            } catch (err) { console.log(err); }
+            
             clientsDB = defaultClients;
             addLog("Usando datos locales por defecto.", "warn");
             updateSystemMonitor("Modo Local", true);
             return clientsDB;
         }
 
-        window.addEventListener('DOMContentLoaded', async () => {
-            await fetchGlobalDataFromCloud();
-            await fetchClientsFromFirebase();
-            renderGlobalContent();
-            updateMacroExchangeOptions();
+        function waitForFirebase(cb) {
+            if (window.initFirebase) cb();
+            else setTimeout(() => waitForFirebase(cb), 50);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            waitForFirebase(async () => {
+                await fetchClientsFromFirebase();
+                await fetchGlobalDataFromCloud();
+                renderGlobalContent();
+                updateMacroExchangeOptions();
+            });
         });
 
         function calculateDietEngine() {
@@ -1645,30 +1648,14 @@
                 tab3: ["Lista de compras"]
             };
             try {
-                let saved = false;
-                const endpoints = [
-                    FIRESTORE_BASE,
-                    `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
-                    `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
-                ];
-                for (const ep of endpoints) {
-                    try {
-                        const url = `${ep}/${encodeURIComponent(name)}?key=${API_KEY}`;
-                        const res = await fetch(url, {
-                            method: 'PATCH',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(toFirestoreDoc(newClient))
-                        });
-                        if (res.ok) { FIRESTORE_BASE = ep; saved = true; break; }
-                    } catch(e) {}
-                }
-                if (saved) {
-                    addLog(`Cliente "${name}" guardado en Firebase.`, "success");
+                if (window.fbSetClient) {
+                    await window.fbSetClient(newClient);
+                    addLog(`Cliente "${name}" guardado.`, "success");
                     document.getElementById('new-client-name').value = "";
                     document.getElementById('new-client-pass').value = "";
                     await fetchClientsFromFirebase();
                     renderAdminPanel();
-                } else { throw new Error("No se pudo conectar a Firebase."); }
+                } else { throw new Error("Sistema en modo local. No se guardó en la nube."); }
             } catch (err) {
                 addLog(`Error: ${err.message}`, "error");
                 alert("❌ Error: " + err.message);
@@ -1785,14 +1772,11 @@
                 btn.disabled = true;
                 btn.innerText = "Actualizando...";
                 try {
-                    const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
-                    await fetch(url, {
-                        method: 'PATCH',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(toFirestoreDoc(client))
-                    });
-                    addLog(`Plan de "${name}" actualizado.`, "success");
-                    alert(`✅ Plan y Compras de "${name}" actualizados.`);
+                    if (window.fbSetClient) {
+                        await window.fbSetClient(client);
+                        addLog(`Plan de "${name}" actualizado.`, "success");
+                        alert(`✅ Plan y Compras de "${name}" actualizados.`);
+                    } else { throw new Error("Sistema en modo local."); }
                 } catch(err) {
                     addLog(`Error al actualizar: ${err.message}`, "error");
                     alert("❌ Error: " + err.message);
@@ -1803,9 +1787,9 @@
 
         async function deleteClientCloud(name) {
             if (name === "Angela") { alert("No se puede eliminar la cuenta base."); return; }
-            if(confirm(`¿Eliminar a "${name}" de Firebase?`)) {
+            if(confirm(`¿Eliminar a "${name}"?`)) {
                 try {
-                    await fetch(`${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`, { method: 'DELETE' });
+                    if (window.fbDelClient) await window.fbDelClient(name);
                     addLog(`Cliente "${name}" eliminado.`, "warn");
                     await fetchClientsFromFirebase();
                     renderAdminPanel();
