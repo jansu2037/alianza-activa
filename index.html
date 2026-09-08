@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
+
+<html lang="es" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Alianza Activa - Plataforma de Alto Rendimiento</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Fitness Alianza Activa & NutriAI Elite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <meta name="theme-color" content="#020617">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; }
         ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -59,8 +56,8 @@
                 <div class="w-16 h-16 mx-auto rounded-full bg-slate-950 border-2 border-amber-500 flex items-center justify-center text-amber-400 text-2xl shadow-inner mb-3">
                     <i class="fa-solid fa-shield-halved"></i>
                 </div>
-                <h2 class="text-2xl font-black text-white">Fitness Alianza Activa</h2>
-                <p class="text-slate-400 text-xs mt-1">Plataforma de Alto Rendimiento</p>
+                <h2 class="text-2xl font-black text-white">Fitness Alianza Activa & NutriAI</h2>
+                <p class="text-slate-400 text-xs mt-1">Plataforma de Alto Rendimiento & Asistente IA</p>
             </div>
             
             <div class="grid md:grid-cols-2 gap-6">
@@ -115,13 +112,13 @@
                 </div>
                 <div class="space-y-3 z-10 flex flex-col items-center">
                     <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/40 text-amber-400 text-xs font-bold uppercase tracking-[0.2em] shadow-lg backdrop-blur-md">
-                        <i class="fa-solid fa-book-open"></i> Guía de Alimentación Oficial
+                        <i class="fa-solid fa-book-open"></i> Guía de Alimentación Oficial & IA Nutricional
                     </span>
                     <h1 id="header-client-title" class="text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 drop-shadow-lg pb-1">
                         Fitness Alianza Activa
                     </h1>
                     <p class="text-slate-300 font-medium text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-                        Plan nutricional personalizado de 7 días para rendimiento máximo.
+                        Plan nutricional personalizado y Asistente IA con base de datos oficial.
                     </p>
                     <div class="pt-2 no-print flex flex-wrap gap-3 justify-center">
                         <button onclick="window.print()" class="bg-slate-900/90 hover:bg-slate-800 border border-amber-500/50 text-amber-400 text-xs font-bold px-4 py-2 rounded-xl transition-all flex items-center gap-2 shadow-md cursor-pointer">
@@ -186,6 +183,10 @@
                     <button onclick="switchTab(5); toggleNavDrawer();" class="bg-slate-950 hover:bg-emerald-500/20 border border-slate-800 hover:border-emerald-500/60 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
                         <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-calculator"></i></div>
                         <span class="text-xs font-bold text-white">Intercambios</span>
+                    </button>
+                    <button onclick="switchTab(9); toggleNavDrawer();" class="bg-slate-950 hover:bg-teal-500/20 border border-slate-800 hover:border-teal-500/60 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-robot"></i></div>
+                        <span class="text-xs font-bold text-teal-400">NutriBot AI</span>
                     </button>
                     <button id="drawer-admin-btn" onclick="switchTab(6); toggleNavDrawer();" class="hidden bg-slate-950 hover:bg-amber-500/20 border border-amber-500/50 p-4 rounded-2xl flex flex-col items-center text-center gap-2 transition-all cursor-pointer group">
                         <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-sliders"></i></div>
@@ -332,7 +333,7 @@
                 <div id="dynamic-batidos-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN CALCULADORA DE INTERCAMBIOS POR MACRONUTRIENTE (DIETA FLEXIBLE - 0% ERROR) -->
+            <!-- SECCIÓN CALCULADORA DE INTERCAMBIOS POR MACRONUTRIENTE -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl space-y-6">
                     <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
@@ -341,18 +342,16 @@
                         </div>
                         <div>
                             <h2 class="text-xl md:text-2xl font-bold text-white">Calculadora de Intercambios por Macronutriente</h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Selecciona el macronutriente que deseas cambiar (Carbohidrato, Proteína, Grasa o Antojos), elige tu alimento original y obtén las opciones exactas sin salir de tus macros.</p>
+                            <p class="text-xs text-slate-400 mt-0.5">Selecciona el macronutriente que deseas cambiar, elige tu alimento original y obtén las opciones exactas sin salir de tus macros.</p>
                         </div>
                     </div>
 
-                    <!-- Nota del Coach -->
                     <div class="bg-amber-500/10 border border-amber-500/40 rounded-2xl p-4 text-xs text-amber-300 space-y-1">
                         <div class="font-bold flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation"></i> Nota Profesional del Coach (Precisión 0% Error):</div>
-                        <p class="text-slate-300">Selecciona el grupo de macronutriente que deseas intercambiar. El sistema te mostrará todas las alternativas con su gramaje exacto correspondiente para mantener tus totales diarios intactos.</p>
+                        <p class="text-slate-300">Selecciona el grupo de macronutriente que deseas intercambiar para mantener tus totales diarios intactos.</p>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-6">
-                        <!-- PASO 1: Selección de Macronutriente y Alimento Base -->
                         <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4">
                             <h3 class="text-xs font-bold text-amber-400 uppercase tracking-widest flex items-center gap-2">
                                 <span class="w-5 h-5 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center text-[10px]">1</span> Seleccionar Grupo & Alimento Base
@@ -361,10 +360,10 @@
                                 <div>
                                     <label class="text-[10px] text-slate-400 block mb-1">Tipo de Macronutriente</label>
                                     <select id="macro-group-type" onchange="updateMacroExchangeOptions()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-amber-500 cursor-pointer font-bold text-amber-300">
-                                        <option value="carbohidratos">🌾 Carbohidratos (Arroz, Papa, Avena, Pan, Frutas...)</option>
+                                        <option value="carbohidratos">🌾 Carbohidratos (Arroz, Papa, Avena, Pan...)</option>
                                         <option value="proteinas">🥩 Proteínas (Carnes, Pescados, Huevos...)</option>
                                         <option value="grasas">🥑 Grasas (Aceites, Frutos secos...)</option>
-                                        <option value="antojos">🍫 Antojos y Extras (Bollería, Azúcares, Bebidas)</option>
+                                        <option value="antojos">🍫 Antojos y Extras</option>
                                     </select>
                                 </div>
                                 <div>
@@ -372,9 +371,7 @@
                                     <input type="text" id="exchange-search-filter" oninput="filterExchangeBaseFood()" placeholder="Escribe para buscar..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-500 mb-2">
                                     
                                     <label class="text-[10px] text-slate-400 block mb-1">Alimento Original en tu Plan</label>
-                                    <select id="exchange-base-food" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-amber-500 cursor-pointer">
-                                        <!-- Se llena dinámicamente -->
-                                    </select>
+                                    <select id="exchange-base-food" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-amber-500 cursor-pointer"></select>
                                 </div>
                                 <div>
                                     <label class="text-[10px] text-slate-400 block mb-1">Cantidad Asignada (Gramos o ml)</label>
@@ -383,13 +380,12 @@
                             </div>
                         </div>
 
-                        <!-- PASO 2: Acción y Resultado Directo -->
                         <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4 flex flex-col justify-between">
                             <div class="space-y-3">
                                 <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-widest flex items-center gap-2">
                                     <span class="w-5 h-5 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-[10px]">2</span> Ventana de Opciones Equivalentes
                                 </h3>
-                                <p class="text-[11px] text-slate-300 leading-relaxed pt-1">Al hacer clic en calcular, la calculadora generará automáticamente todas las opciones de intercambio dentro del mismo macronutriente seleccionado, indicando los gramos exactos para que puedas elegir tu sustituto sin salir de tus macros.</p>
+                                <p class="text-[11px] text-slate-300 leading-relaxed pt-1">Genera automáticamente todas las opciones de intercambio dentro del mismo macronutriente seleccionado.</p>
                             </div>
 
                             <button onclick="calculateMacroExchange()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl text-xs transition-all shadow-md cursor-pointer flex items-center justify-center gap-2">
@@ -398,20 +394,89 @@
                         </div>
                     </div>
 
-                    <!-- Ventana de Resultados de Equivalencias (Se muestra debajo) -->
                     <div id="exchange-results-box" class="hidden space-y-4 pt-4 border-t border-slate-800">
-                        <div id="exchange-direct-result" class="bg-emerald-950/30 border border-emerald-500/50 rounded-2xl p-5 text-center space-y-2">
-                            <!-- Resumen del cálculo principal -->
-                        </div>
-                        
+                        <div id="exchange-direct-result" class="bg-emerald-950/30 border border-emerald-500/50 rounded-2xl p-5 text-center space-y-2"></div>
                         <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider pt-2 flex items-center gap-2">
-                            <i class="fa-solid fa-list-check"></i> Opciones de sustitución exacta en el mismo grupo de macronutriente (0% Error):
+                            <i class="fa-solid fa-list-check"></i> Opciones de sustitución exacta (0% Error):
                         </h3>
                         <div id="exchange-results-list" class="grid md:grid-cols-2 gap-3 max-h-96 overflow-y-auto pr-1"></div>
                     </div>
                 </div>
             </section>
 
+            <section id="content-tab-9" class="tab-content hidden space-y-6">
+                <div class="bg-slate-900 border border-teal-500/40 rounded-3xl p-6 md:p-8 shadow-2xl space-y-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-4 gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-teal-500/10 text-teal-400 border border-teal-500/30 flex items-center justify-center text-2xl">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl md:text-2xl font-black text-white">NutriBot AI & Analizador de Platos</h2>
+                                <p class="text-xs text-teal-300 mt-0.5">Asistente inteligente conectado con Gemini y la base de datos oficial de Alianza Activa.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="switchAiSub('chat')" id="aiSubBtnChat" class="px-4 py-2 text-xs font-bold rounded-xl bg-teal-600 text-white cursor-pointer shadow">Asesor IA (Chat)</button>
+                            <button onclick="switchAiSub('analyzer')" id="aiSubBtnAnalyzer" class="px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-300 cursor-pointer">Analizador Visual</button>
+                        </div>
+                    </div>
+
+                    <!-- AI Subview: Chat -->
+                    <div id="aiSubViewChat" class="flex flex-col h-[550px] bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden">
+                        <div class="bg-gradient-to-r from-teal-700 to-emerald-800 p-3.5 text-white flex justify-between items-center text-xs">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-300 animate-pulse"></span>
+                                <span class="font-bold">Asistente IA Alianza Activa (Gemini Flash 3)</span>
+                            </div>
+                            <button onclick="clearAiChat()" class="bg-white/10 hover:bg-white/20 px-2.5 py-1 rounded-lg transition"><i class="fa-solid fa-rotate-right mr-1"></i> Reiniciar</button>
+                        </div>
+                        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 text-xs">
+                            <div class="flex items-start space-x-2">
+                                <div class="w-7 h-7 rounded-full bg-teal-600 text-white flex items-center justify-center font-bold text-xs shrink-0">AA</div>
+                                <div class="bg-slate-900 p-3 rounded-2xl border border-slate-800 max-w-[85%] text-slate-200 leading-relaxed">
+                                    ¡Hola! Soy tu NutriBot de IA. Pregúntame sobre equivalencias, calorías, macros, recetas o planes de Alianza Activa.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-slate-900 border-t border-slate-800 flex gap-2">
+                            <input type="text" id="chat-input" onkeydown="if(event.key==='Enter') handleChatSubmit(event)" placeholder="Escribe tu consulta nutricional..." class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-teal-500">
+                            <button onclick="sendChatFromInput()" class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-4 py-2 rounded-xl text-xs cursor-pointer shadow">Enviar</button>
+                        </div>
+                    </div>
+
+                    <!-- AI Subview: Plate Analyzer -->
+                    <div id="aiSubViewAnalyzer" class="hidden flex flex-col h-[550px] bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden p-6 overflow-y-auto">
+                        <div class="max-w-xl mx-auto w-full space-y-4 text-center">
+                            <h3 class="text-base font-bold text-white">Sube una foto de tu plato</h3>
+                            <p class="text-xs text-slate-400">Obtén un desglose automático de calorías, macros y sugerencias mediante visión artificial.</p>
+                            
+                            <div class="border-2 border-dashed border-slate-700 hover:border-teal-500 rounded-2xl p-6 bg-slate-900 transition cursor-pointer relative group">
+                                <input type="file" id="image-input" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10" onchange="handleImageUpload(event)">
+                                <div id="upload-placeholder" class="space-y-2">
+                                    <div class="w-12 h-12 bg-teal-500/10 text-teal-400 rounded-xl mx-auto flex items-center justify-center text-lg"><i class="fa-solid fa-camera"></i></div>
+                                    <p class="text-xs font-semibold text-slate-300">Haz clic para subir una foto o arrástrala</p>
+                                </div>
+                                <div id="image-preview-container" class="hidden relative">
+                                    <img id="image-preview" src="" alt="Vista previa" class="max-h-48 mx-auto rounded-xl object-contain">
+                                    <button type="button" onclick="resetImage(event)" class="absolute top-2 right-2 bg-slate-950 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs z-20"><i class="fa-solid fa-xmark"></i></button>
+                                </div>
+                            </div>
+
+                            <button onclick="analyzePlate()" id="analyze-btn" disabled class="w-full bg-teal-600 hover:bg-teal-500 disabled:bg-slate-800 disabled:text-slate-600 text-slate-950 font-bold py-3 rounded-xl text-xs transition cursor-pointer shadow">
+                                Analizar Plato con IA
+                            </button>
+
+                            <div id="analyzer-result" class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-left text-xs hidden space-y-2">
+                                <h4 class="font-bold text-teal-400 flex items-center gap-1.5"><i class="fa-solid fa-clipboard-check"></i> Reporte Nutricional</h4>
+                                <div id="analyzer-content" class="text-slate-300 space-y-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: PANEL COACH -->
             <section id="content-tab-6" class="tab-content hidden space-y-8">
                 <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 shadow-2xl space-y-8">
                     <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -538,7 +603,7 @@
 
                     <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                         <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-photo-film"></i> 📱 Editor de Shorts / Historias (1 a 10)</h3>
-                        <p class="text-xs text-slate-300">Selecciona el short (1 a 10), sube imagen o video en MP4 y edita su contenido para los estados de los clientes estilo Instagram.</p>
+                        <p class="text-xs text-slate-300">Selecciona el short (1 a 10), sube imagen o video en MP4 y edita su contenido para los estados de los clientes.</p>
                         <div class="grid md:grid-cols-3 gap-3">
                             <select id="edit-short-index" onchange="loadShortForEditing()" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
                                 <option value="0">Short 1: ¡Nuevo Récord!</option>
@@ -668,8 +733,8 @@
                         <i class="fa-solid fa-shield-halved text-3xl text-amber-400 drop-shadow"></i>
                     </div>
                     <div>
-                        <p class="font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 text-base md:text-lg tracking-widest uppercase drop-shadow-md">Fitness Alianza Activa</p>
-                        <p class="text-slate-300 font-medium mt-0.5 text-xs" id="footer-client-subtitle">Nutrición de Alto Rendimiento</p>
+                        <p class="font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 text-base md:text-lg tracking-widest uppercase drop-shadow-md">Fitness Alianza Activa & NutriAI</p>
+                        <p class="text-slate-300 font-medium mt-0.5 text-xs" id="footer-client-subtitle">Nutrición de Alto Rendimiento & IA</p>
                     </div>
                 </div>
                 <div class="w-20 h-px bg-amber-500/40"></div>
@@ -680,6 +745,7 @@
         </footer>
     </div>
 
+    <!-- Modal para Historias / Shorts -->
     <div id="story-modal" class="fixed inset-0 z-50 bg-black/95 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full overflow-hidden relative shadow-2xl">
             <button onclick="closeStoryModal()" class="absolute top-4 right-4 z-20 bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
@@ -693,9 +759,8 @@
     </div>
 
     <script>
-        const API_KEY = "AIzaSyA2Sk6s2i2_bcJ_fJc4BEyMw3y9hU79_Nw";
+        const API_KEY = "";
         const PROJECT_ID = "alianza-activa";
-
         let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
 
         let globalData = {
@@ -779,183 +844,69 @@
         let clientsDB = defaultClients;
         let activeClient = clientsDB[0];
         let lastCalculatedPlan = null;
+        let currentBase64Image = null;
 
-        // Base de datos completa de intercambios (Sin caballo en carnes)
         const exchangeDatabase = {
             carbohidratos: {
                 cereales: [
                     { name: "Arroz blanco", ratio: 354, desc: "Carbohidrato de rápida absorción." },
                     { name: "Arroz integral", ratio: 350, desc: "Carbohidrato complejo con fibra." },
                     { name: "Avena (tradicional/instantánea)", ratio: 367, desc: "Avena para porridge y pancakes." },
-                    { name: "Harina de trigo, integral", ratio: 340, desc: "Harina con salvado." },
-                    { name: "Harina de trigo, refinada (000/0000)", ratio: 353, desc: "Harina blanca común." },
-                    { name: "Pan de molde, blanco", ratio: 233, desc: "Pan suave procesado." },
                     { name: "Pan de molde, integral", ratio: 216, desc: "Pan integral en rodajas." },
-                    { name: "Pan de trigo, blanco (Flauta/Mignón)", ratio: 255, desc: "Pan fresco de panadería." },
-                    { name: "Pan de trigo, integral", ratio: 239, desc: "Pan artesanal integral." },
-                    { name: "Fideos / Pasta seca", ratio: 375, desc: "Pasta de sémola." },
-                    { name: "Sémola de trigo", ratio: 375, desc: "Base para pastas." },
-                    { name: "Tapioca", ratio: 338, desc: "Almidón de yuca." }
+                    { name: "Fideos / Pasta seca", ratio: 375, desc: "Pasta de sémola." }
                 ],
                 legumbres: [
                     { name: "Garbanzos secos", ratio: 361, desc: "Leguminosa rica en proteína y fibra." },
-                    { name: "Guisantes / Arvejas secas", ratio: 317, desc: "Secas y nutritivas." },
-                    { name: "Habas secas", ratio: 343, desc: "Proteína vegetal densa." },
-                    { name: "Judías / Porotos secos", ratio: 330, desc: "Variedad de porotos." },
-                    { name: "Lentejas secas", ratio: 336, desc: "Hierro y carbohidratos complejos." },
-                    { name: "Soja en grano seca", ratio: 422, desc: "Proteína vegetal completa." }
+                    { name: "Lentejas secas", ratio: 336, desc: "Hierro y carbohidratos complejos." }
                 ],
                 frutas: [
-                    { name: "Albaricoque / Damasco", ratio: 44, desc: "Vitamina A y antioxidantes." },
-                    { name: "Arándanos", ratio: 48, desc: "Antioxidantes potentes." },
-                    { name: "Caqui", ratio: 64, desc: "Fruta dulce de temporada." },
-                    { name: "Cerezas", ratio: 77, desc: "Antiinflamatorias naturales." },
-                    { name: "Chirimoya", ratio: 78, desc: "Dulce y energética." },
-                    { name: "Ciruela", ratio: 64, desc: "Fibra y tránsito intestinal." },
-                    { name: "Ciruela pasa", ratio: 290, desc: "Concentrado de fibra." },
-                    { name: "Dátil", ratio: 279, desc: "Energía rápida pre-entreno." },
-                    { name: "Dátil seco", ratio: 306, desc: "Alto en azúcares naturales." },
-                    { name: "Frambuesa", ratio: 40, desc: "Baja en azúcar, alta en fibra." },
                     { name: "Frutillas / Fresas", ratio: 36, desc: "Vitamina C y bajo índice glucémico." },
-                    { name: "Granada", ratio: 32, desc: "Polifenoles y antioxidantes." },
-                    { name: "Higo", ratio: 80, desc: "Energía y minerales." },
-                    { name: "Higo seco", ratio: 275, desc: "Fruta deshidratada densa." },
                     { name: "Kiwi", ratio: 51, desc: "Vitamina C y digestión." },
-                    { name: "Mandarina", ratio: 40, desc: "Vitamina C y frescura." },
-                    { name: "Mango", ratio: 57, desc: "Vitamina A y C." },
                     { name: "Manzana", ratio: 52, desc: "Pectina y saciedad." },
-                    { name: "Melocotón / Durazno", ratio: 52, desc: "Jugoso y nutritivo." },
-                    { name: "Durazno en almíbar", ratio: 84, desc: "Mayor concentración de azúcar." },
-                    { name: "Melón", ratio: 31, desc: "Alto contenido de agua." },
-                    { name: "Membrillo", ratio: 33, desc: "Aromático y fibroso." },
-                    { name: "Moras", ratio: 37, desc: "Antioxidantes." },
-                    { name: "Naranja", ratio: 44, desc: "Clásico aporte cítrico." },
-                    { name: "Nectarina", ratio: 64, desc: "Variedad de durazno suave." },
-                    { name: "Nísperos", ratio: 97, desc: "Dulces y refrescantes." },
-                    { name: "Papaya", ratio: 45, desc: "Enzima papaína digestiva." },
-                    { name: "Pera", ratio: 61, desc: "Fibra y potasio." },
-                    { name: "Piña / Ananá", ratio: 51, desc: "Enzima bromelina antiinflamatoria." },
-                    { name: "Ananá en almíbar", ratio: 84, desc: "Piña conservada en almíbar." },
-                    { name: "Plátano / Banana", ratio: 90, desc: "Potasio y energía para entrenar." },
-                    { name: "Pomelo", ratio: 30, desc: "Cítrico bajo en calorías." },
-                    { name: "Sandía", ratio: 30, desc: "Hidratación máxima." },
-                    { name: "Uva", ratio: 81, desc: "Resveratrol y energía." },
-                    { name: "Uva pasa", ratio: 324, desc: "Uva deshidratada." },
-                    { name: "Zumo de naranja exprimido", ratio: 82, desc: "Vitamina C líquida." },
-                    { name: "Zumos de fruta envasados", ratio: 45, desc: "Bebida frutal comercial." }
+                    { name: "Plátano / Banana", ratio: 90, desc: "Potasio y energía para entrenar." }
                 ],
                 verduras_con_almidon: [
                     { name: "Boniato / Batata", ratio: 118, desc: "Carbohidrato complejo de calidad." },
-                    { name: "Patata / Papa cocida", ratio: 86, desc: "Potasio y energía limpia." },
-                    { name: "Maíz dulce (Choclo)", ratio: 96, desc: "Carbohidrato amiláceo." },
-                    { name: "Puré de patata instantáneo", ratio: 357, desc: "Versión deshidratada." }
+                    { name: "Patata / Papa cocida", ratio: 86, desc: "Potasio y energía limpia." }
                 ]
             },
             proteinas: {
                 carnes: [
-                    { name: "Panceta / Bacon", ratio: 665, desc: "Grasa y proteína ahumada." },
-                    { name: "Asado / Corte graso vacuno", ratio: 303, desc: "Corte vacuno sabroso y graso." },
-                    { name: "Carne vacuna semigrasa (Picada común/Paleta)", ratio: 176, desc: "Proteína económica y versátil." },
-                    { name: "Bife de chorizo / Lomo vacuno magro", ratio: 111, desc: "Corte magro de alta calidad." },
-                    { name: "Butifarra", ratio: 326, desc: "Embutido cárnico." },
-                    { name: "Butifarra cocida", ratio: 390, desc: "Embutido cocido." },
-                    { name: "Salchicha Parrillera / Fresca", ratio: 326, desc: "Embutido fresco para asar." },
-                    { name: "Cerdo, chuleta", ratio: 330, desc: "Corte de cerdo con grasa." },
-                    { name: "Cerdo, hígado", ratio: 154, desc: "Viscera rica en hierro y vitamina A." },
-                    { name: "Cerdo, lomo", ratio: 290, desc: "Corte magro de cerdo." },
-                    { name: "Chorizo / Sobrasada", ratio: 468, desc: "Embutido curado denso." },
-                    { name: "Codorniz", ratio: 114, desc: "Ave magra." },
-                    { name: "Conejo", ratio: 162, desc: "Carne blanca magra y saludable." },
-                    { name: "Cordero, costillas", ratio: 215, desc: "Corte sabroso de cordero." },
-                    { name: "Cordero, hígado", ratio: 132, desc: "Viscera nutritiva." },
-                    { name: "Cordero, pierna", ratio: 248, desc: "Corte tierno de cordero." },
-                    { name: "Gallina", ratio: 369, desc: "Carne de ave madura." },
-                    { name: "Jamón Crudo (País)", ratio: 380, desc: "Jamón curado." },
-                    { name: "Jamón Cocido (York)", ratio: 289, desc: "Jamón magro cocido." },
-                    { name: "Lomo embuchado", ratio: 380, desc: "Embutido magro curado." },
-                    { name: "Mortadela", ratio: 265, desc: "Fiambre procesado." },
-                    { name: "Pato", ratio: 200, desc: "Carne de ave grasa." },
-                    { name: "Pavo", ratio: 223, desc: "Proteína blanca magra." },
-                    { name: "Perdiz", ratio: 114, desc: "Ave de caza." },
                     { name: "Pollo deshuesado (Suprema)", ratio: 85, desc: "Proteína magra por excelencia." },
-                    { name: "Pollo entero con piel", ratio: 121, desc: "Aporte de grasas naturales." },
-                    { name: "Pollo, hígado", ratio: 129, desc: "Viscera de pollo rica en nutrientes." },
-                    { name: "Salchicha de Viena (Frankfurt)", ratio: 315, desc: "Salchicha procesada." },
-                    { name: "Salchichón / Salamín", ratio: 294, desc: "Embutido picado curado." },
-                    { name: "Ternera, bistec (Bife angosto/ancho)", ratio: 181, desc: "Bistec de ternera." },
-                    { name: "Ternera, chuleta", ratio: 168, desc: "Chuleta tierna." },
-                    { name: "Ternera, hígado", ratio: 140, desc: "Viscera de alta biodisponibilidad." },
-                    { name: "Ternera, lengua", ratio: 207, desc: "Corte tierno." },
-                    { name: "Ternera, riñón", ratio: 86, desc: "Viscera magra." },
-                    { name: "Ternera, sesos", ratio: 111, desc: "Tejido rico en lípidos." },
-                    { name: "Ternera, solomillo", ratio: 90, desc: "El corte más magro y tierno." }
+                    { name: "Bife de chorizo / Lomo vacuno magro", ratio: 111, desc: "Corte magro de alta calidad." },
+                    { name: "Cerdo, lomo", ratio: 290, desc: "Corte magro de cerdo." },
+                    { name: "Pavo", ratio: 223, desc: "Proteína blanca magra." }
                 ],
                 pescados: [
-                    { name: "Almejas / Berberechos", ratio: 50, desc: "Marisco rico en hierro." },
-                    { name: "Anchoas", ratio: 175, desc: "Pescado azul salado en conserva." },
-                    { name: "Anguila", ratio: 200, desc: "Pescado graso nutritivo." },
-                    { name: "Arenque ahumado", ratio: 224, desc: "Omega 3 y sabor ahumado." },
                     { name: "Atún fresco", ratio: 225, desc: "Proteína marina de alta calidad." },
-                    { name: "Atún en lata (aceite vegetal)", ratio: 280, desc: "Conservado en aceite." },
-                    { name: "Bacalao fresco", ratio: 86, desc: "Pescado blanco magro." },
-                    { name: "Bacalao salado", ratio: 108, desc: "Conservado en sal." },
-                    { name: "Besugo", ratio: 118, desc: "Pescado blanco sabroso." },
-                    { name: "Boquerón", ratio: 151, desc: "Pescado azul fresco." },
-                    { name: "Caballa", ratio: 153, desc: "Rico en ácidos grasos omega 3." },
-                    { name: "Calamar / Sepia", ratio: 82, desc: "Marisco cefalópodo magro." },
-                    { name: "Cangrejo", ratio: 85, desc: "Carne de cangrejo ligera." },
-                    { name: "Caviar", ratio: 233, desc: "Huevas de pescado gourmet." },
-                    { name: "Gambas / Langostinos", ratio: 96, desc: "Crustáceos ricos en proteína." },
-                    { name: "Lenguado", ratio: 73, desc: "Pescado blanco de fácil digestión." },
-                    { name: "Lubina", ratio: 118, desc: "Pescado blanco noble." },
-                    { name: "Mejillón", ratio: 72, desc: "Molusco rico en zinc y hierro." },
                     { name: "Merluza", ratio: 86, desc: "Pescado blanco clásico de dieta." },
-                    { name: "Mero", ratio: 118, desc: "Pescado de roca firme." },
-                    { name: "Pulpo", ratio: 57, desc: "Cefalópodo bajo en grasa." },
-                    { name: "Rape", ratio: 86, desc: "Pescado blanco de textura firme." },
-                    { name: "Salmón", ratio: 114, desc: "Pescado azul rico en omega 3." },
-                    { name: "Salmón ahumado", ratio: 170, desc: "Salmón curado y ahumado." },
-                    { name: "Sardinas frescas", ratio: 174, desc: "Pescado azul nutritivo." }
+                    { name: "Salmón", ratio: 114, desc: "Pescado azul rico en omega 3." }
                 ],
                 huevos: [
                     { name: "Clara de huevo", ratio: 48, desc: "Proteína pura sin grasa." },
-                    { name: "Huevo duro", ratio: 147, desc: "Huevo cocido entero." },
-                    { name: "Huevo entero fresco", ratio: 162, desc: "Proteína y yema nutritiva." },
-                    { name: "Yema de huevo", ratio: 368, desc: "Grasas y colina." }
+                    { name: "Huevo entero fresco", ratio: 162, desc: "Proteína y yema nutritiva." }
                 ]
             },
             grasas: {
                 aceites_y_grasas: [
                     { name: "Aceite de oliva virgen extra", ratio: 900, desc: "El mejor aceite para la salud." },
-                    { name: "Aceite de girasol / maíz", ratio: 900, desc: "Aceite vegetal común." },
-                    { name: "Mantequilla", ratio: 752, desc: "Lácteo graso." },
-                    { name: "Margarina vegetal", ratio: 752, desc: "Grasa vegetal untable." },
-                    { name: "Aguacate / Palta", ratio: 207, desc: "Grasas monoinsaturadas." },
-                    { name: "Aceitunas", ratio: 200, desc: "Grasas saludables y sabor." }
+                    { name: "Aguacate / Palta", ratio: 207, desc: "Grasas monoinsaturadas." }
                 ],
                 frutos_secos: [
                     { name: "Almendra", ratio: 620, desc: "Fruto seco rico en vitamina E." },
-                    { name: "Avellana", ratio: 656, desc: "Grasas saludables y sabor." },
-                    { name: "Cacahuete / Maní", ratio: 560, desc: "Leguminosa oleaginosa proteica." },
-                    { name: "Nueces", ratio: 660, desc: "Omega 3 vegetal." },
-                    { name: "Pipas de girasol", ratio: 535, desc: "Semillas ricas en magnesio." },
-                    { name: "Pistacho", ratio: 586, desc: "Antioxidantes y potasio." }
+                    { name: "Nueces", ratio: 660, desc: "Omega 3 vegetal." }
                 ]
             },
             antojos: {
                 bolleria_y_extras: [
-                    { name: "Bizcochuelo / Bizcocho", ratio: 456, desc: "Bollería horneada." },
-                    { name: "Medialunas / Facturas / Donut", ratio: 456, desc: "Antojo / Bollería alta en calorías." },
-                    { name: "Galletas tipo María", ratio: 436, desc: "Galletas dulces secas." },
-                    { name: "Chocolate con leche", ratio: 550, desc: "Chocolate dulce." },
                     { name: "Chocolate amargo/semiamargo", ratio: 530, desc: "Cacao rico en antioxidantes." },
-                    { name: "Helados lácteos", ratio: 204, desc: "Helado cremoso." },
-                    { name: "Gaseosas / Refrescos azucarados", ratio: 48, desc: "Refresco azucarado." },
-                    { name: "Cerveza rubia (Alcohol)", ratio: 45, desc: "Bebida de malta." },
-                    { name: "Vino tinto/blanco (Alcohol)", ratio: 60, desc: "Vino." }
+                    { name: "Galletas tipo María", ratio: 436, desc: "Galletas dulces secas." }
                 ]
             }
         };
+
+        const ALIANZA_SYSTEM_PROMPT = `Eres el Asistente Experto de "Alianza Activa", una plataforma de alto rendimiento y nutrición. 
+Ayuda a clientes y entrenadores con información precisa sobre nutrición, dietas, alimentos y los servicios oficiales. Responde siempre de forma profesional, amable y motivadora.`;
 
         function updateMacroExchangeOptions() {
             const macroType = document.getElementById('macro-group-type').value;
@@ -969,7 +920,6 @@
                     items.push({ ...item, subcategory: sub });
                 });
             }
-
             foodSelect.innerHTML = items.map((item, idx) => `<option value="${idx}">${item.name} (${item.subcategory.toUpperCase()})</option>`).join('');
         }
 
@@ -1015,22 +965,18 @@
             }
 
             const baseItem = items[foodIdx];
-
             if (!baseItem || baseAmount <= 0) {
                 alert("Por favor ingresa una cantidad válida.");
                 return;
             }
 
             resultsBox.classList.remove('hidden');
-
-            // Resultado directo del alimento elegido
             directResultBox.innerHTML = `
                 <div class="text-xs text-emerald-400 font-bold uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Alimento Base Seleccionado</div>
                 <div class="text-lg font-black text-white mt-1">${baseAmount}g de <span class="text-amber-400">${baseItem.name}</span></div>
                 <p class="text-xs text-slate-300 mt-1">Categoría: <strong class="text-white">${macroType.toUpperCase()}</strong> (${baseItem.desc})</p>
             `;
 
-            // Listado de todas las demás opciones equivalentes dentro del mismo macronutriente
             resultsList.innerHTML = items.map(item => {
                 const equivalentAmount = item.ratio === 0 ? 0 : Math.round((baseAmount * baseItem.ratio) / item.ratio);
                 const isSelected = item.name === baseItem.name;
@@ -1061,7 +1007,7 @@
                         if (parsed.recipes) globalData.recipes = parsed.recipes;
                     }
                 }
-            } catch(e) { console.log("Cargando globalData local."); }
+            } catch(e) {}
         }
 
         async function saveGlobalDataToCloud() {
@@ -1165,32 +1111,18 @@
         }
 
         async function fetchClientsFromFirebase() {
-            addLog("Conectando a Firebase Firestore...", "info");
-            const endpoints = [
-                `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
-                `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
-            ];
-            for (const ep of endpoints) {
-                try {
-                    const res = await fetch(`${ep}?key=${API_KEY}`);
-                    const data = await res.json();
-                    if (res.ok) {
-                        FIRESTORE_BASE = ep;
-                        if (data.documents && data.documents.length > 0) {
-                            clientsDB = data.documents
-                                .filter(doc => !doc.name.includes('_GLOBAL_DATA_'))
-                                .map(fromFirestoreDoc);
-                        } else {
-                            clientsDB = defaultClients;
-                        }
-                        addLog(`Conexión exitosa. ${clientsDB.length} clientes cargados.`, "success");
-                        updateSystemMonitor("Conectado (Firebase)");
-                        return clientsDB;
-                    }
-                } catch (err) {}
-            }
+            try {
+                const res = await fetch(`${FIRESTORE_BASE}?key=${API_KEY}`);
+                const data = await res.json();
+                if (res.ok && data.documents) {
+                    clientsDB = data.documents
+                        .filter(doc => !doc.name.includes('_GLOBAL_DATA_'))
+                        .map(fromFirestoreDoc);
+                    updateSystemMonitor("Conectado (Firebase)");
+                    return clientsDB;
+                }
+            } catch (err) {}
             clientsDB = defaultClients;
-            addLog("Usando datos locales por defecto.", "warn");
             updateSystemMonitor("Modo Local", true);
             return clientsDB;
         }
@@ -1231,31 +1163,29 @@
                 macroC: carbGrams,
                 macroF: fatGrams,
                 tab1: [
-                    `Desayuno (Receta Fija): 30g Batido Cookies + 3 Huevos enteros + 40g Avena tradicional`,
-                    `Media Mañana: 150g Fruta fresca (Bloque 5)`,
+                    `Desayuno: 30g Batido Cookies + 3 Huevos enteros + 40g Avena tradicional`,
+                    `Media Mañana: 150g Fruta fresca`,
                     `Almuerzo: ${Math.round(proteinGrams * 0.4)}g Proteína en crudo + ${Math.round(carbGrams * 0.4)}g Carbohidrato en crudo + 15g Aceite de oliva + 200g Ensalada`,
-                    `Media Tarde / Merienda: Porridge Tibio de Cookies (50g Avena tradicional + 30g Batido Cookies)`,
+                    `Merienda: Porridge Tibio de Cookies (50g Avena + 30g Batido)`,
                     `Cena: ${Math.round(proteinGrams * 0.35)}g Proteína en crudo + 200g Ensalada + 40g Palta`
                 ],
                 tab2: [
                     `Desayuno: 3 Huevos enteros + 50g Pan integral`,
                     `Media Mañana: 150g Fruta fresca`,
-                    `Almuerzo: ${Math.round(proteinGrams * 0.35)}g Proteína en crudo + ${Math.round(carbGrams * 0.3)}g Carbohidrato + 10g Aceite de oliva + Ensalada`,
-                    `Media Tarde: 120g Papa hervida en crudo + Mate amargo libre`,
-                    `Cena: Pescado o Pollo magro (${Math.round(proteinGrams * 0.35)}g) + Ensalada mixta`
+                    `Almuerzo: ${Math.round(proteinGrams * 0.35)}g Proteína + ${Math.round(carbGrams * 0.3)}g Carbohidrato + 10g Aceite`,
+                    `Media Tarde: 120g Papa hervida`,
+                    `Cena: Pescado o Pollo magro + Ensalada mixta`
                 ],
                 tab3: [
                     `Huevos enteros: 2 maples (60 unidades)`,
                     `Pechuga de pollo o carne magra: 2 kg en crudo`,
                     `Arroz integral / Parboil: 600g en crudo`,
                     `Avena tradicional: 500g`,
-                    `Batido Cookies HBL: 1 pote`,
-                    `Frutas y verduras frescas: 4 kg`
+                    `Batido Cookies HBL: 1 pote`
                 ]
             };
 
             const clientOptionsHtml = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
-
             const resultsBox = document.getElementById('calc-results-box');
             resultsBox.classList.remove('hidden');
             resultsBox.innerHTML = `
@@ -1265,14 +1195,9 @@
                     <div>• <strong>Proteína:</strong> ${proteinGrams}g</div>
                     <div>• <strong>Carbohidratos:</strong> ${carbGrams}g</div>
                     <div>• <strong>Grasas Buenas:</strong> ${fatGrams}g</div>
-                    <div>• <strong>Masa Muscular:</strong> ${muscle} kg</div>
-                    <div>• <strong>% Grasa:</strong> ${fat}%</div>
-                    <div>• <strong>Visceral/Agua:</strong> ${visceral}</div>
-                    <div>• <strong>Objetivo:</strong> ${goal.replace('_', ' ').toUpperCase()}</div>
                 </div>
-
                 <div class="space-y-3 pt-2">
-                    <label class="text-[10px] text-amber-400 uppercase font-bold block">Seleccionar Atleta para Asignar este Plan Automáticamente:</label>
+                    <label class="text-[10px] text-amber-400 uppercase font-bold block">Asignar a Atleta:</label>
                     <div class="flex gap-2">
                         <select id="assign-target-client" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none flex-grow">
                             ${clientOptionsHtml}
@@ -1283,7 +1208,7 @@
                     </div>
                 </div>
             `;
-            addLog(`Cálculo biométrico 0% error generado para ${name}.`, "success");
+            addLog(`Cálculo biométrico generado para ${name}.`, "success");
         }
 
         function assignCalculatedPlanToSelectedClient() {
@@ -1297,7 +1222,6 @@
                 client.tab2 = lastCalculatedPlan.tab2;
                 client.tab3 = lastCalculatedPlan.tab3;
                 alert(`✅ Plan y macros exactos asignados con éxito al atleta: ${targetName}`);
-                addLog(`Plan asignado a ${targetName} correctamente.`, "success");
                 renderAdminPanel();
             } else {
                 alert("❌ Selecciona un atleta válido.");
@@ -1340,7 +1264,6 @@
                 };
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
-                document.getElementById('admin-tab-btn')?.classList.remove('hidden');
                 document.getElementById('drawer-admin-btn').classList.remove('hidden');
                 renderDynamicContent();
                 renderGlobalContent();
@@ -1390,7 +1313,6 @@
             }
 
             const text = `Hola Roberto, quiero solicitar mi plan en Alianza Activa:\n\n👤 *Nombre:* ${name}\n🎂 *Edad:* ${age}\n⚖️ *Peso:* ${weight}kg\n📏 *Estatura:* ${height}cm\n🌍 *Nacionalidad:* ${nat}\n⚧ *Género:* ${gender}\n🎯 *Objetivo:* ${goal}\n📱 *Celular:* ${phone}`;
-            
             document.getElementById('membership-alert').classList.remove('hidden');
             setTimeout(() => {
                 window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent(text)}`, '_blank');
@@ -1528,14 +1450,12 @@
                     renderGlobalContent();
                     await saveGlobalDataToCloud();
                     alert(`✅ Short ${Number(idx)+1} actualizado con éxito.`);
-                    addLog(`Short ${Number(idx)+1} editado correctamente.`, "success");
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
                 renderGlobalContent();
                 await saveGlobalDataToCloud();
                 alert(`✅ Short ${Number(idx)+1} actualizado con éxito.`);
-                addLog(`Short ${Number(idx)+1} editado correctamente.`, "success");
             }
         }
 
@@ -1564,14 +1484,12 @@
                     renderGlobalContent();
                     await saveGlobalDataToCloud();
                     alert(`✅ Receta ${Number(idx)+1} actualizada con éxito.`);
-                    addLog(`Receta ${Number(idx)+1} editada correctamente.`, "success");
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
                 renderGlobalContent();
                 await saveGlobalDataToCloud();
                 alert(`✅ Receta ${Number(idx)+1} actualizada con éxito.`);
-                addLog(`Receta ${Number(idx)+1} editada correctamente.`, "success");
             }
         }
 
@@ -1600,14 +1518,12 @@
                     renderGlobalContent();
                     await saveGlobalDataToCloud();
                     alert(`✅ Producto ${Number(idx)+1} actualizado en Tienda.`);
-                    addLog(`Producto Tienda ${Number(idx)+1} editado.`, "success");
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
                 renderGlobalContent();
                 await saveGlobalDataToCloud();
                 alert(`✅ Producto ${Number(idx)+1} actualizado en Tienda.`);
-                addLog(`Producto Tienda ${Number(idx)+1} editado.`, "success");
             }
         }
 
@@ -1628,35 +1544,22 @@
                 tab3: ["Lista de compras"]
             };
             try {
-                let saved = false;
-                const endpoints = [
-                    FIRESTORE_BASE,
-                    `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
-                    `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
-                ];
-                for (const ep of endpoints) {
-                    try {
-                        const url = `${ep}/${encodeURIComponent(name)}?key=${API_KEY}`;
-                        const res = await fetch(url, {
-                            method: 'PATCH',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(toFirestoreDoc(newClient))
-                        });
-                        if (res.ok) { FIRESTORE_BASE = ep; saved = true; break; }
-                    } catch(e) {}
-                }
-                if (saved) {
+                const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
+                const res = await fetch(url, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(toFirestoreDoc(newClient))
+                });
+                if (res.ok) {
                     addLog(`Cliente "${name}" guardado en Firebase.`, "success");
                     document.getElementById('new-client-name').value = "";
                     document.getElementById('new-client-pass').value = "";
                     await fetchClientsFromFirebase();
                     renderAdminPanel();
-                } else { throw new Error("No se pudo conectar a Firebase."); }
+                } else { throw new Error("Error al guardar en Firebase."); }
             } catch (err) {
-                addLog(`Error: ${err.message}`, "error");
                 alert("❌ Error: " + err.message);
-            }
-            finally { btn.disabled = false; btn.innerText = "Guardar en Firebase"; }
+            } finally { btn.disabled = false; btn.innerText = "Guardar en Firebase"; }
         }
 
         function renderAdminPanel() {
@@ -1712,13 +1615,10 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(toFirestoreDoc(client))
                     });
-                    addLog(`Plan de "${name}" actualizado.`, "success");
                     alert(`✅ Plan y Compras de "${name}" actualizados.`);
                 } catch(err) {
-                    addLog(`Error al actualizar: ${err.message}`, "error");
                     alert("❌ Error: " + err.message);
-                }
-                finally { btn.disabled = false; btn.innerText = "Actualizar Plan"; }
+                } finally { btn.disabled = false; btn.innerText = "Actualizar Plan"; }
             }
         }
 
@@ -1727,7 +1627,6 @@
             if(confirm(`¿Eliminar a "${name}" de Firebase?`)) {
                 try {
                     await fetch(`${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`, { method: 'DELETE' });
-                    addLog(`Cliente "${name}" eliminado.`, "warn");
                     await fetchClientsFromFirebase();
                     renderAdminPanel();
                 } catch(e) { alert("Error al eliminar."); }
@@ -1780,7 +1679,7 @@
         }
 
         function switchTab(tabNumber) {
-            for (let i = 1; i <= 8; i++) {
+            for (let i = 1; i <= 9; i++) {
                 const content = document.getElementById('content-tab-' + i);
                 if (content) content.classList.add('hidden');
             }
@@ -1795,7 +1694,8 @@
                 5: "Calculadora de Intercambios",
                 6: "Panel Coach Master",
                 7: "Recetas Oficiales",
-                8: "Tienda Oficial"
+                8: "Tienda Oficial",
+                9: "NutriBot AI"
             };
             const indicator = document.getElementById('active-module-indicator');
             if (indicator) indicator.innerText = `Módulo: ${moduleNames[tabNumber] || ''}`;
@@ -1803,8 +1703,190 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        function switchAiSub(sub) {
+            const chatView = document.getElementById('aiSubViewChat');
+            const analyzerView = document.getElementById('aiSubViewAnalyzer');
+            const btnChat = document.getElementById('aiSubBtnChat');
+            const btnAnalyzer = document.getElementById('aiSubBtnAnalyzer');
+
+            if (sub === 'chat') {
+                chatView.classList.remove('hidden');
+                analyzerView.classList.add('hidden');
+                btnChat.className = "px-4 py-2 text-xs font-bold rounded-xl bg-teal-600 text-white cursor-pointer shadow";
+                btnAnalyzer.className = "px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-300 cursor-pointer";
+            } else {
+                chatView.classList.add('hidden');
+                analyzerView.classList.remove('hidden');
+                btnAnalyzer.className = "px-4 py-2 text-xs font-bold rounded-xl bg-teal-600 text-white cursor-pointer shadow";
+                btnChat.className = "px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-300 cursor-pointer";
+            }
+        }
+
+        // AI NutriBot & Plate Analyzer Functions
+        function appendAiMessage(sender, text, isHtml = false) {
+            const container = document.getElementById('chat-messages');
+            if (!container) return;
+            const isUser = sender === 'user';
+            const wrapper = document.createElement('div');
+            wrapper.className = `flex items-start space-x-2 ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`;
+            
+            const avatar = document.createElement('div');
+            avatar.className = `w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shrink-0 ${isUser ? 'bg-slate-800 text-white' : 'bg-teal-600 text-white'}`;
+            avatar.innerText = isUser ? 'Tú' : 'AA';
+
+            const bubble = document.createElement('div');
+            bubble.className = `p-3 rounded-2xl border max-w-[85%] text-xs leading-relaxed ${isUser ? 'bg-teal-600 text-white border-teal-500' : 'bg-slate-900 text-slate-200 border-slate-800'}`;
+            
+            if (isHtml) bubble.innerHTML = text;
+            else bubble.innerText = text;
+
+            wrapper.appendChild(avatar);
+            wrapper.appendChild(bubble);
+            container.appendChild(wrapper);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendChatFromInput() {
+            const input = document.getElementById('chat-input');
+            if (!input) return;
+            const text = input.value.trim();
+            if (!text) return;
+            input.value = '';
+            processAiChatMessage(text);
+        }
+
+        async function processAiChatMessage(text) {
+            appendAiMessage('user', text);
+            const container = document.getElementById('chat-messages');
+            const loadingId = 'loading-' + Date.now();
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = loadingId;
+            loadingDiv.className = `flex items-start space-x-2`;
+            loadingDiv.innerHTML = `
+                <div class="w-7 h-7 rounded-full bg-teal-600 text-white flex items-center justify-center font-bold text-xs shrink-0">AA</div>
+                <div class="bg-slate-900 p-3 rounded-2xl border border-slate-800 text-xs text-slate-400 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-notch animate-spin text-teal-400"></i> Consultando base nutricional oficial...
+                </div>
+            `;
+            container.appendChild(loadingDiv);
+            container.scrollTop = container.scrollHeight;
+
+            try {
+                const responseText = await callGeminiAPI(ALIANZA_SYSTEM_PROMPT, text);
+                document.getElementById(loadingId)?.remove();
+                appendAiMessage('ai', formatAIResponse(responseText), true);
+            } catch (err) {
+                document.getElementById(loadingId)?.remove();
+                appendAiMessage('ai', 'Lo siento, no pude conectar con el servidor de IA.');
+            }
+        }
+
+        function clearAiChat() {
+            const container = document.getElementById('chat-messages');
+            if (container) {
+                container.innerHTML = `
+                    <div class="flex items-start space-x-2">
+                        <div class="w-7 h-7 rounded-full bg-teal-600 text-white flex items-center justify-center font-bold text-xs shrink-0">AA</div>
+                        <div class="bg-slate-900 p-3 rounded-2xl border border-slate-800 max-w-[85%] text-xs text-slate-200 leading-relaxed">
+                            Chat reiniciado. ¿En qué puedo ayudarte hoy?
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function formatAIResponse(text) {
+            return text.replace(/\*\*(.*?)\*\*/g, '<strong class="text-teal-300">$1</strong>').replace(/\n/g, '<br>');
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                currentBase64Image = e.target.result;
+                document.getElementById('upload-placeholder').classList.add('hidden');
+                const previewContainer = document.getElementById('image-preview-container');
+                previewContainer.classList.remove('hidden');
+                document.getElementById('image-preview').src = currentBase64Image;
+                document.getElementById('analyze-btn').removeAttribute('disabled');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function resetImage(event) {
+            event.stopPropagation();
+            currentBase64Image = null;
+            document.getElementById('image-input').value = '';
+            document.getElementById('image-preview-container').classList.add('hidden');
+            document.getElementById('upload-placeholder').classList.remove('hidden');
+            document.getElementById('analyze-btn').setAttribute('disabled', 'true');
+            document.getElementById('analyzer-result').classList.add('hidden');
+        }
+
+        async function analyzePlate() {
+            if (!currentBase64Image) return;
+            const analyzeBtn = document.getElementById('analyze-btn');
+            analyzeBtn.setAttribute('disabled', 'true');
+            analyzeBtn.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin mr-2"></i> Analizando plato...`;
+
+            const resultContainer = document.getElementById('analyzer-result');
+            const contentEl = document.getElementById('analyzer-content');
+            resultContainer.classList.remove('hidden');
+            contentEl.innerHTML = `<p class="text-slate-400 italic">Desglosando ingredientes y macronutrientes...</p>`;
+
+            try {
+                const prompt = "Analiza esta foto de comida. Identifica los ingredientes visibles, calcula calorías aproximadas, proteínas, carbohidratos y grasas según la base nutricional de Alianza Activa, y da sugerencias breves.";
+                const text = await callGeminiWithImage(ALIANZA_SYSTEM_PROMPT, prompt, currentBase64Image);
+                contentEl.innerHTML = formatAIResponse(text);
+            } catch (err) {
+                contentEl.innerHTML = `<p class="text-red-400">Error al analizar la imagen.</p>`;
+            } finally {
+                analyzeBtn.removeAttribute('disabled');
+                analyzeBtn.innerHTML = `Analizar Plato con IA`;
+            }
+        }
+
+        async function callGeminiAPI(systemPrompt, userPrompt) {
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: userPrompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+            const res = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            return data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sin respuesta.';
+        }
+
+        async function callGeminiWithImage(systemPrompt, userPrompt, base64DataUrl) {
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
+            const base64Data = base64DataUrl.split(',')[1];
+            const mimeType = base64DataUrl.split(';')[0].split(':')[1];
+            const payload = {
+                contents: [{
+                    role: "user",
+                    parts: [
+                        { text: userPrompt },
+                        { inlineData: { mimeType: mimeType, data: base64Data } }
+                    ]
+                }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+            const res = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            return data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sin respuesta.';
+        }
+
         function installPWAApp() {
-            alert("📲 Para instalar la app en tu celular:\n\n1. Abre el menú de tu navegador (Chrome o Safari).\n2. Selecciona 'Agregar a la pantalla de inicio'.");
+            alert("📲 Para instalar la app:\n\n1. Abre el menú de tu navegador.\n2. Selecciona 'Agregar a la pantalla de inicio'.");
         }
     </script>
 </body>
