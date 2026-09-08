@@ -332,6 +332,7 @@
                 <div id="dynamic-batidos-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
+            <!-- SECCIÓN CALCULADORA DE INTERCAMBIOS POR MACRONUTRIENTE (DIETA FLEXIBLE - 0% ERROR) -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl space-y-6">
                     <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
@@ -344,12 +345,14 @@
                         </div>
                     </div>
 
+                    <!-- Nota del Coach -->
                     <div class="bg-amber-500/10 border border-amber-500/40 rounded-2xl p-4 text-xs text-amber-300 space-y-1">
                         <div class="font-bold flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation"></i> Nota Profesional del Coach (Precisión 0% Error):</div>
                         <p class="text-slate-300">Selecciona el grupo de macronutriente que deseas intercambiar. El sistema te mostrará todas las alternativas con su gramaje exacto correspondiente para mantener tus totales diarios intactos.</p>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-6">
+                        <!-- PASO 1: Selección de Macronutriente y Alimento Base -->
                         <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4">
                             <h3 class="text-xs font-bold text-amber-400 uppercase tracking-widest flex items-center gap-2">
                                 <span class="w-5 h-5 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center text-[10px]">1</span> Seleccionar Grupo & Alimento Base
@@ -369,7 +372,9 @@
                                     <input type="text" id="exchange-search-filter" oninput="filterExchangeBaseFood()" placeholder="Escribe para buscar..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-500 mb-2">
                                     
                                     <label class="text-[10px] text-slate-400 block mb-1">Alimento Original en tu Plan</label>
-                                    <select id="exchange-base-food" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-amber-500 cursor-pointer"></select>
+                                    <select id="exchange-base-food" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-amber-500 cursor-pointer">
+                                        <!-- Se llena dinámicamente -->
+                                    </select>
                                 </div>
                                 <div>
                                     <label class="text-[10px] text-slate-400 block mb-1">Cantidad Asignada (Gramos o ml)</label>
@@ -378,6 +383,7 @@
                             </div>
                         </div>
 
+                        <!-- PASO 2: Acción y Resultado Directo -->
                         <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4 flex flex-col justify-between">
                             <div class="space-y-3">
                                 <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-widest flex items-center gap-2">
@@ -392,8 +398,12 @@
                         </div>
                     </div>
 
+                    <!-- Ventana de Resultados de Equivalencias (Se muestra debajo) -->
                     <div id="exchange-results-box" class="hidden space-y-4 pt-4 border-t border-slate-800">
-                        <div id="exchange-direct-result" class="bg-emerald-950/30 border border-emerald-500/50 rounded-2xl p-5 text-center space-y-2"></div>
+                        <div id="exchange-direct-result" class="bg-emerald-950/30 border border-emerald-500/50 rounded-2xl p-5 text-center space-y-2">
+                            <!-- Resumen del cálculo principal -->
+                        </div>
+                        
                         <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider pt-2 flex items-center gap-2">
                             <i class="fa-solid fa-list-check"></i> Opciones de sustitución exacta en el mismo grupo de macronutriente (0% Error):
                         </h3>
@@ -407,7 +417,7 @@
                     <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
                             <h2 class="text-2xl md:text-3xl font-black text-white flex items-center gap-3"><i class="fa-solid fa-sliders text-amber-400"></i> Panel Coach Master & Consola</h2>
-                            <p class="text-slate-400 text-xs md:text-sm mt-1">Generador de Dietas Biométricas (0% Error), Escáner 8 Electrodos, Editor de Shorts, Terminal CLI y Gestión de Alumnos.</p>
+                            <p class="text-slate-400 text-xs md:text-sm mt-1">Generador de Dietas Biométricas (0% Error), Escáner 32 Métricas, Editor de Shorts, Terminal CLI y Gestión de Alumnos.</p>
                         </div>
                         <span class="bg-amber-500/20 text-amber-400 px-4 py-2 rounded-2xl text-xs font-bold border border-amber-500/40 w-fit">Modo Master</span>
                     </div>
@@ -624,36 +634,6 @@
                         <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                             <h3 class="font-bold text-amber-400 text-sm uppercase">📝 Editar Dieta y Compras del Cliente</h3>
                             <select id="select-client-edit" onchange="loadClientDietForEditing()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none"></select>
-                            
-                            <div class="bg-slate-900 border border-slate-700 rounded-xl p-4 space-y-3">
-                                <h4 class="text-xs font-bold text-emerald-400 uppercase flex items-center gap-2"><i class="fa-solid fa-bolt"></i> Motor de Auto-Generación Rápida</h4>
-                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                                    <input type="number" id="quick-weight" placeholder="Peso (kg)" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
-                                    <input type="number" id="quick-height" placeholder="Altura (cm)" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
-                                    <input type="number" id="quick-age" placeholder="Edad" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
-                                    <select id="quick-gender" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
-                                        <option value="male">Masculino</option>
-                                        <option value="female">Femenino</option>
-                                    </select>
-                                    <select id="quick-activity" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
-                                        <option value="1.2">Sedentario</option>
-                                        <option value="1.375">Ligero</option>
-                                        <option value="1.55" selected>Moderado</option>
-                                        <option value="1.725">Intenso</option>
-                                    </select>
-                                    <select id="quick-goal" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
-                                        <option value="0.82" selected>Pérdida Óptima (18%)</option>
-                                        <option value="0.88">Recomposición (12%)</option>
-                                        <option value="1.10">Volumen (10%)</option>
-                                    </select>
-                                    <select id="quick-protein" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
-                                        <option value="2.0">Proteína 2.0g/kg</option>
-                                        <option value="2.4" selected>Proteína 2.4g/kg</option>
-                                    </select>
-                                    <button onclick="autoGenerateEditDiet()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-lg text-[10px] shadow-md transition-all uppercase tracking-wider cursor-pointer">Generar Textos</button>
-                                </div>
-                            </div>
-
                             <div class="space-y-2">
                                 <label class="text-[10px] text-slate-400">Alta Energía (1 por línea)</label>
                                 <textarea id="edit-tab1-data" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-200 font-mono outline-none"></textarea>
@@ -712,51 +692,12 @@
         </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, deleteDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        window.initFirebase = async function() {
-            try {
-                if (typeof __firebase_config === 'undefined') return false;
-                const app = initializeApp(JSON.parse(__firebase_config));
-                const db = getFirestore(app);
-                const auth = getAuth(app);
-                
-                if (typeof __initial_auth_token !== 'undefined') {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-                window._db = db;
-                window._appId = typeof __app_id !== 'undefined' ? __app_id : 'alianza-activa';
-                return true;
-            } catch (e) {
-                console.error("Firebase init failed:", e);
-                return false;
-            }
-        };
-
-        window.fbGetGlobal = async () => {
-            if (!window._db) return null;
-            const snap = await getDoc(doc(window._db, 'artifacts', window._appId, 'public', 'data', 'config', 'globalData'));
-            return snap.exists() ? snap.data() : null;
-        };
-        window.fbSetGlobal = async (data) => window._db && await setDoc(doc(window._db, 'artifacts', window._appId, 'public', 'data', 'config', 'globalData'), data);
-        
-        window.fbGetClients = async () => {
-            if (!window._db) return null;
-            const snap = await getDocs(collection(window._db, 'artifacts', window._appId, 'public', 'data', 'clients'));
-            let res = [];
-            snap.forEach(d => res.push(d.data()));
-            return res;
-        };
-        window.fbSetClient = async (client) => window._db && await setDoc(doc(window._db, 'artifacts', window._appId, 'public', 'data', 'clients', client.name), client);
-        window.fbDelClient = async (name) => window._db && await deleteDoc(doc(window._db, 'artifacts', window._appId, 'public', 'data', 'clients', name));
-    </script>
-
     <script>
+        const API_KEY = "AIzaSyA2Sk6s2i2_bcJ_fJc4BEyMw3y9hU79_Nw";
+        const PROJECT_ID = "alianza-activa";
+
+        let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
+
         let globalData = {
             batidos: [
                 { title: "Batido Cookies & High Protein", desc: "Ideal post-entreno para recuperación muscular máxima. Aporta 30g de F1 Cookies y alta saciedad.", image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&q=80&w=800" },
@@ -839,6 +780,7 @@
         let activeClient = clientsDB[0];
         let lastCalculatedPlan = null;
 
+        // Base de datos completa de intercambios (Sin caballo en carnes)
         const exchangeDatabase = {
             carbohidratos: {
                 cereales: [
@@ -1081,12 +1023,14 @@
 
             resultsBox.classList.remove('hidden');
 
+            // Resultado directo del alimento elegido
             directResultBox.innerHTML = `
                 <div class="text-xs text-emerald-400 font-bold uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Alimento Base Seleccionado</div>
                 <div class="text-lg font-black text-white mt-1">${baseAmount}g de <span class="text-amber-400">${baseItem.name}</span></div>
                 <p class="text-xs text-slate-300 mt-1">Categoría: <strong class="text-white">${macroType.toUpperCase()}</strong> (${baseItem.desc})</p>
             `;
 
+            // Listado de todas las demás opciones equivalentes dentro del mismo macronutriente
             resultsList.innerHTML = items.map(item => {
                 const equivalentAmount = item.ratio === 0 ? 0 : Math.round((baseAmount * baseItem.ratio) / item.ratio);
                 const isSelected = item.name === baseItem.name;
@@ -1107,12 +1051,14 @@
 
         async function fetchGlobalDataFromCloud() {
             try {
-                if (window.fbGetGlobal) {
-                    const data = await window.fbGetGlobal();
-                    if (data) {
-                        if (data.batidos) globalData.batidos = data.batidos;
-                        if (data.shorts) globalData.shorts = data.shorts;
-                        if (data.recipes) globalData.recipes = data.recipes;
+                const res = await fetch(`${FIRESTORE_BASE}/_GLOBAL_DATA_?key=${API_KEY}`);
+                if (res.ok) {
+                    const doc = await res.json();
+                    if (doc.fields && doc.fields.jsonData) {
+                        const parsed = JSON.parse(doc.fields.jsonData.stringValue);
+                        if (parsed.batidos) globalData.batidos = parsed.batidos;
+                        if (parsed.shorts) globalData.shorts = parsed.shorts;
+                        if (parsed.recipes) globalData.recipes = parsed.recipes;
                     }
                 }
             } catch(e) { console.log("Cargando globalData local."); }
@@ -1120,7 +1066,12 @@
 
         async function saveGlobalDataToCloud() {
             try {
-                if (window.fbSetGlobal) await window.fbSetGlobal(globalData);
+                const body = { fields: { jsonData: { stringValue: JSON.stringify(globalData) } } };
+                await fetch(`${FIRESTORE_BASE}/_GLOBAL_DATA_?key=${API_KEY}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
             } catch(e) {}
         }
 
@@ -1184,42 +1135,71 @@
             }
         }
 
-        async function fetchClientsFromFirebase() {
-            addLog("Conectando a base de datos...", "info");
-            try {
-                const isReady = window.initFirebase ? await window.initFirebase() : false;
-                if (isReady) {
-                    const cloudClients = await window.fbGetClients();
-                    if (cloudClients && cloudClients.length > 0) {
-                        clientsDB = cloudClients;
-                    } else {
-                        clientsDB = defaultClients;
-                        for (const c of clientsDB) await window.fbSetClient(c);
-                    }
-                    addLog(`Conexión exitosa. ${clientsDB.length} clientes cargados.`, "success");
-                    updateSystemMonitor("Conectado (Nube)");
-                    return clientsDB;
+        function toFirestoreDoc(client) {
+            return {
+                fields: {
+                    name: { stringValue: client.name },
+                    pass: { stringValue: client.pass },
+                    macroP: { integerValue: client.macroP || 140 },
+                    macroC: { integerValue: client.macroC || 180 },
+                    macroF: { integerValue: client.macroF || 50 },
+                    tab1: { arrayValue: { values: (client.tab1 || []).map(v => ({ stringValue: v })) } },
+                    tab2: { arrayValue: { values: (client.tab2 || []).map(v => ({ stringValue: v })) } },
+                    tab3: { arrayValue: { values: (client.tab3 || []).map(v => ({ stringValue: v })) } }
                 }
-            } catch (err) { console.log(err); }
-            
+            };
+        }
+
+        function fromFirestoreDoc(doc) {
+            const f = doc.fields || {};
+            return {
+                name: f.name?.stringValue || '',
+                pass: f.pass?.stringValue || f.pass?.integerValue || '',
+                macroP: Number(f.macroP?.integerValue || f.macroP?.doubleValue || 140),
+                macroC: Number(f.macroC?.integerValue || f.macroC?.doubleValue || 180),
+                macroF: Number(f.macroF?.integerValue || f.macroF?.doubleValue || 50),
+                tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue || ''),
+                tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue || ''),
+                tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue || '')
+            };
+        }
+
+        async function fetchClientsFromFirebase() {
+            addLog("Conectando a Firebase Firestore...", "info");
+            const endpoints = [
+                `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
+                `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
+            ];
+            for (const ep of endpoints) {
+                try {
+                    const res = await fetch(`${ep}?key=${API_KEY}`);
+                    const data = await res.json();
+                    if (res.ok) {
+                        FIRESTORE_BASE = ep;
+                        if (data.documents && data.documents.length > 0) {
+                            clientsDB = data.documents
+                                .filter(doc => !doc.name.includes('_GLOBAL_DATA_'))
+                                .map(fromFirestoreDoc);
+                        } else {
+                            clientsDB = defaultClients;
+                        }
+                        addLog(`Conexión exitosa. ${clientsDB.length} clientes cargados.`, "success");
+                        updateSystemMonitor("Conectado (Firebase)");
+                        return clientsDB;
+                    }
+                } catch (err) {}
+            }
             clientsDB = defaultClients;
             addLog("Usando datos locales por defecto.", "warn");
             updateSystemMonitor("Modo Local", true);
             return clientsDB;
         }
 
-        function waitForFirebase(cb) {
-            if (window.initFirebase) cb();
-            else setTimeout(() => waitForFirebase(cb), 50);
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            waitForFirebase(async () => {
-                await fetchClientsFromFirebase();
-                await fetchGlobalDataFromCloud();
-                renderGlobalContent();
-                updateMacroExchangeOptions();
-            });
+        window.addEventListener('DOMContentLoaded', async () => {
+            await fetchGlobalDataFromCloud();
+            await fetchClientsFromFirebase();
+            renderGlobalContent();
+            updateMacroExchangeOptions();
         });
 
         function calculateDietEngine() {
@@ -1504,7 +1484,7 @@
             if (s.type === 'video') {
                 container.innerHTML = `<video src="${s.image}" autoplay controls class="w-full h-full object-cover"></video>`;
             } else {
-                container.innerHTML = `<img src="${s.image}" alt="${s.title}" class="w-full h-full object-contain">`;
+                container.innerHTML = `<img src="${s.image}" alt="${s.title}" class="w-full h-full object-cover">`;
             }
             document.getElementById('modal-story-title').innerText = s.title;
             document.getElementById('modal-story-desc').innerText = s.desc;
@@ -1648,14 +1628,30 @@
                 tab3: ["Lista de compras"]
             };
             try {
-                if (window.fbSetClient) {
-                    await window.fbSetClient(newClient);
-                    addLog(`Cliente "${name}" guardado.`, "success");
+                let saved = false;
+                const endpoints = [
+                    FIRESTORE_BASE,
+                    `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`,
+                    `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/clients`
+                ];
+                for (const ep of endpoints) {
+                    try {
+                        const url = `${ep}/${encodeURIComponent(name)}?key=${API_KEY}`;
+                        const res = await fetch(url, {
+                            method: 'PATCH',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(toFirestoreDoc(newClient))
+                        });
+                        if (res.ok) { FIRESTORE_BASE = ep; saved = true; break; }
+                    } catch(e) {}
+                }
+                if (saved) {
+                    addLog(`Cliente "${name}" guardado en Firebase.`, "success");
                     document.getElementById('new-client-name').value = "";
                     document.getElementById('new-client-pass').value = "";
                     await fetchClientsFromFirebase();
                     renderAdminPanel();
-                } else { throw new Error("Sistema en modo local. No se guardó en la nube."); }
+                } else { throw new Error("No se pudo conectar a Firebase."); }
             } catch (err) {
                 addLog(`Error: ${err.message}`, "error");
                 alert("❌ Error: " + err.message);
@@ -1699,60 +1695,6 @@
             }
         }
 
-        function autoGenerateEditDiet() {
-            const weight = parseFloat(document.getElementById('quick-weight').value);
-            const height = parseFloat(document.getElementById('quick-height').value);
-            const age = parseFloat(document.getElementById('quick-age').value) || 30;
-            const gender = document.getElementById('quick-gender').value;
-            const activity = parseFloat(document.getElementById('quick-activity').value);
-            const goal = parseFloat(document.getElementById('quick-goal').value);
-            const proteinRatio = parseFloat(document.getElementById('quick-protein').value);
-
-            if (!weight || !height) {
-                alert("Por favor ingresa Peso y Altura para usar el motor rápido.");
-                return;
-            }
-
-            let bmr = (10 * weight) + (6.25 * height) - (5 * age) + (gender === 'male' ? 5 : -161);
-            const targetCalories = Math.round(bmr * activity * goal);
-            
-            const proteinGrams = Math.round(weight * proteinRatio);
-            const fatGrams = Math.max(Math.round(weight * 0.85), Math.round((targetCalories * 0.25) / 9));
-            const carbGrams = Math.max(50, Math.round((targetCalories - (proteinGrams * 4) - (fatGrams * 9)) / 4));
-
-            const tab1 = [
-                `Desayuno (Receta Fija): 30g Batido Cookies + 3 Huevos enteros + 40g Avena tradicional`,
-                `Media Mañana: 150g Fruta fresca (Bloque 5)`,
-                `Almuerzo: ${Math.round(proteinGrams * 0.4)}g Proteína en crudo + ${Math.round(carbGrams * 0.4)}g Carbohidrato en crudo + 15g Aceite de oliva + 200g Ensalada`,
-                `Media Tarde / Merienda: Porridge Tibio de Cookies (50g Avena tradicional + 30g Batido Cookies)`,
-                `Cena: ${Math.round(proteinGrams * 0.35)}g Proteína en crudo + 200g Ensalada + 40g Palta`
-            ];
-
-            const tab2 = [
-                `Desayuno: 3 Huevos enteros + 50g Pan integral`,
-                `Media Mañana: 150g Fruta fresca`,
-                `Almuerzo: ${Math.round(proteinGrams * 0.35)}g Proteína en crudo + ${Math.round(carbGrams * 0.3)}g Carbohidrato + 10g Aceite de oliva + Ensalada`,
-                `Media Tarde: 120g Papa hervida en crudo + Mate amargo libre`,
-                `Cena: Pescado o Pollo magro (${Math.round(proteinGrams * 0.35)}g) + Ensalada mixta`
-            ];
-
-            const tab3 = [
-                `Huevos enteros: 2 maples (60 unidades)`,
-                `Pechuga de pollo o carne magra: 2 kg en crudo`,
-                `Arroz integral / Parboil: 600g en crudo`,
-                `Avena tradicional: 500g`,
-                `Batido Cookies HBL: 1 pote`,
-                `Frutas y verduras frescas: 4 kg`
-            ];
-
-            document.getElementById('edit-tab1-data').value = tab1.join('\n');
-            document.getElementById('edit-tab2-data').value = tab2.join('\n');
-            document.getElementById('edit-tab3-data').value = tab3.join('\n');
-            
-            window._tempQuickMacros = { macroP: proteinGrams, macroC: carbGrams, macroF: fatGrams };
-            addLog(`Motor rápido: Macros generados (${targetCalories} kcal). Haz clic en Actualizar Plan para guardar.`, "success");
-        }
-
         async function saveClientDietCloud() {
             const name = document.getElementById('select-client-edit').value;
             const btn = document.getElementById('btn-update-diet');
@@ -1761,22 +1703,17 @@
                 client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').filter(i => i.trim() !== '');
                 client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').filter(i => i.trim() !== '');
                 client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').filter(i => i.trim() !== '');
-                
-                if (window._tempQuickMacros) {
-                    client.macroP = window._tempQuickMacros.macroP;
-                    client.macroC = window._tempQuickMacros.macroC;
-                    client.macroF = window._tempQuickMacros.macroF;
-                    window._tempQuickMacros = null;
-                }
-
                 btn.disabled = true;
                 btn.innerText = "Actualizando...";
                 try {
-                    if (window.fbSetClient) {
-                        await window.fbSetClient(client);
-                        addLog(`Plan de "${name}" actualizado.`, "success");
-                        alert(`✅ Plan y Compras de "${name}" actualizados.`);
-                    } else { throw new Error("Sistema en modo local."); }
+                    const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
+                    await fetch(url, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(toFirestoreDoc(client))
+                    });
+                    addLog(`Plan de "${name}" actualizado.`, "success");
+                    alert(`✅ Plan y Compras de "${name}" actualizados.`);
                 } catch(err) {
                     addLog(`Error al actualizar: ${err.message}`, "error");
                     alert("❌ Error: " + err.message);
@@ -1787,9 +1724,9 @@
 
         async function deleteClientCloud(name) {
             if (name === "Angela") { alert("No se puede eliminar la cuenta base."); return; }
-            if(confirm(`¿Eliminar a "${name}"?`)) {
+            if(confirm(`¿Eliminar a "${name}" de Firebase?`)) {
                 try {
-                    if (window.fbDelClient) await window.fbDelClient(name);
+                    await fetch(`${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`, { method: 'DELETE' });
                     addLog(`Cliente "${name}" eliminado.`, "warn");
                     await fetchClientsFromFirebase();
                     renderAdminPanel();
