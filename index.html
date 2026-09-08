@@ -624,6 +624,36 @@
                         <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4">
                             <h3 class="font-bold text-amber-400 text-sm uppercase">📝 Editar Dieta y Compras del Cliente</h3>
                             <select id="select-client-edit" onchange="loadClientDietForEditing()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none"></select>
+                            
+                            <div class="bg-slate-900 border border-slate-700 rounded-xl p-4 space-y-3">
+                                <h4 class="text-xs font-bold text-emerald-400 uppercase flex items-center gap-2"><i class="fa-solid fa-bolt"></i> Motor de Auto-Generación Rápida</h4>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                    <input type="number" id="quick-weight" placeholder="Peso (kg)" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                                    <input type="number" id="quick-height" placeholder="Altura (cm)" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                                    <input type="number" id="quick-age" placeholder="Edad" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                                    <select id="quick-gender" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                                        <option value="male">Masculino</option>
+                                        <option value="female">Femenino</option>
+                                    </select>
+                                    <select id="quick-activity" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                                        <option value="1.2">Sedentario</option>
+                                        <option value="1.375">Ligero</option>
+                                        <option value="1.55" selected>Moderado</option>
+                                        <option value="1.725">Intenso</option>
+                                    </select>
+                                    <select id="quick-goal" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                                        <option value="0.82" selected>Pérdida Óptima (18%)</option>
+                                        <option value="0.88">Recomposición (12%)</option>
+                                        <option value="1.10">Volumen (10%)</option>
+                                    </select>
+                                    <select id="quick-protein" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                                        <option value="2.0">Proteína 2.0g/kg</option>
+                                        <option value="2.4" selected>Proteína 2.4g/kg</option>
+                                    </select>
+                                    <button onclick="autoGenerateEditDiet()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-lg text-[10px] shadow-md transition-all uppercase tracking-wider cursor-pointer">Generar Textos</button>
+                                </div>
+                            </div>
+
                             <div class="space-y-2">
                                 <label class="text-[10px] text-slate-400">Alta Energía (1 por línea)</label>
                                 <textarea id="edit-tab1-data" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-200 font-mono outline-none"></textarea>
@@ -1471,7 +1501,7 @@
             if (s.type === 'video') {
                 container.innerHTML = `<video src="${s.image}" autoplay controls class="w-full h-full object-cover"></video>`;
             } else {
-                container.innerHTML = `<img src="${s.image}" alt="${s.title}" class="w-full h-full object-cover">`;
+                container.innerHTML = `<img src="${s.image}" alt="${s.title}" class="w-full h-full object-contain">`;
             }
             document.getElementById('modal-story-title').innerText = s.title;
             document.getElementById('modal-story-desc').innerText = s.desc;
@@ -1682,6 +1712,60 @@
             }
         }
 
+        function autoGenerateEditDiet() {
+            const weight = parseFloat(document.getElementById('quick-weight').value);
+            const height = parseFloat(document.getElementById('quick-height').value);
+            const age = parseFloat(document.getElementById('quick-age').value) || 30;
+            const gender = document.getElementById('quick-gender').value;
+            const activity = parseFloat(document.getElementById('quick-activity').value);
+            const goal = parseFloat(document.getElementById('quick-goal').value);
+            const proteinRatio = parseFloat(document.getElementById('quick-protein').value);
+
+            if (!weight || !height) {
+                alert("Por favor ingresa Peso y Altura para usar el motor rápido.");
+                return;
+            }
+
+            let bmr = (10 * weight) + (6.25 * height) - (5 * age) + (gender === 'male' ? 5 : -161);
+            const targetCalories = Math.round(bmr * activity * goal);
+            
+            const proteinGrams = Math.round(weight * proteinRatio);
+            const fatGrams = Math.max(Math.round(weight * 0.85), Math.round((targetCalories * 0.25) / 9));
+            const carbGrams = Math.max(50, Math.round((targetCalories - (proteinGrams * 4) - (fatGrams * 9)) / 4));
+
+            const tab1 = [
+                `Desayuno (Receta Fija): 30g Batido Cookies + 3 Huevos enteros + 40g Avena tradicional`,
+                `Media Mañana: 150g Fruta fresca (Bloque 5)`,
+                `Almuerzo: ${Math.round(proteinGrams * 0.4)}g Proteína en crudo + ${Math.round(carbGrams * 0.4)}g Carbohidrato en crudo + 15g Aceite de oliva + 200g Ensalada`,
+                `Media Tarde / Merienda: Porridge Tibio de Cookies (50g Avena tradicional + 30g Batido Cookies)`,
+                `Cena: ${Math.round(proteinGrams * 0.35)}g Proteína en crudo + 200g Ensalada + 40g Palta`
+            ];
+
+            const tab2 = [
+                `Desayuno: 3 Huevos enteros + 50g Pan integral`,
+                `Media Mañana: 150g Fruta fresca`,
+                `Almuerzo: ${Math.round(proteinGrams * 0.35)}g Proteína en crudo + ${Math.round(carbGrams * 0.3)}g Carbohidrato + 10g Aceite de oliva + Ensalada`,
+                `Media Tarde: 120g Papa hervida en crudo + Mate amargo libre`,
+                `Cena: Pescado o Pollo magro (${Math.round(proteinGrams * 0.35)}g) + Ensalada mixta`
+            ];
+
+            const tab3 = [
+                `Huevos enteros: 2 maples (60 unidades)`,
+                `Pechuga de pollo o carne magra: 2 kg en crudo`,
+                `Arroz integral / Parboil: 600g en crudo`,
+                `Avena tradicional: 500g`,
+                `Batido Cookies HBL: 1 pote`,
+                `Frutas y verduras frescas: 4 kg`
+            ];
+
+            document.getElementById('edit-tab1-data').value = tab1.join('\n');
+            document.getElementById('edit-tab2-data').value = tab2.join('\n');
+            document.getElementById('edit-tab3-data').value = tab3.join('\n');
+            
+            window._tempQuickMacros = { macroP: proteinGrams, macroC: carbGrams, macroF: fatGrams };
+            addLog(`Motor rápido: Macros generados (${targetCalories} kcal). Haz clic en Actualizar Plan para guardar.`, "success");
+        }
+
         async function saveClientDietCloud() {
             const name = document.getElementById('select-client-edit').value;
             const btn = document.getElementById('btn-update-diet');
@@ -1690,6 +1774,14 @@
                 client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').filter(i => i.trim() !== '');
                 client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').filter(i => i.trim() !== '');
                 client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').filter(i => i.trim() !== '');
+                
+                if (window._tempQuickMacros) {
+                    client.macroP = window._tempQuickMacros.macroP;
+                    client.macroC = window._tempQuickMacros.macroC;
+                    client.macroF = window._tempQuickMacros.macroF;
+                    window._tempQuickMacros = null;
+                }
+
                 btn.disabled = true;
                 btn.innerText = "Actualizando...";
                 try {
