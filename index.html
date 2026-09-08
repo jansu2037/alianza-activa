@@ -332,7 +332,6 @@
                 <div id="dynamic-batidos-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN CALCULADORA DE INTERCAMBIOS POR MACRONUTRIENTE (DIETA FLEXIBLE - 0% ERROR) -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl space-y-6">
                     <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
@@ -345,15 +344,12 @@
                         </div>
                     </div>
 
-                    <!-- Nota del Coach -->
                     <div class="bg-amber-500/10 border border-amber-500/40 rounded-2xl p-4 text-xs text-amber-300 space-y-1">
                         <div class="font-bold flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation"></i> Nota Profesional del Coach (Precisión 0% Error):</div>
                         <p class="text-slate-300">Selecciona el grupo de macronutriente que deseas intercambiar. El sistema te mostrará todas las alternativas con su gramaje exacto correspondiente para mantener tus totales diarios intactos.</p>
                     </div>
 
-                    <!-- FLUJO INTERACTIVO POR MACRONUTRIENTE -->
                     <div class="grid md:grid-cols-2 gap-6">
-                        <!-- PASO 1: Selección de Macronutriente y Alimento Base -->
                         <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4">
                             <h3 class="text-xs font-bold text-amber-400 uppercase tracking-widest flex items-center gap-2">
                                 <span class="w-5 h-5 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center text-[10px]">1</span> Seleccionar Grupo & Alimento Base
@@ -373,9 +369,7 @@
                                     <input type="text" id="exchange-search-filter" oninput="filterExchangeBaseFood()" placeholder="Escribe para buscar..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-500 mb-2">
                                     
                                     <label class="text-[10px] text-slate-400 block mb-1">Alimento Original en tu Plan</label>
-                                    <select id="exchange-base-food" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-amber-500 cursor-pointer">
-                                        <!-- Se llena dinámicamente -->
-                                    </select>
+                                    <select id="exchange-base-food" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none focus:border-amber-500 cursor-pointer"></select>
                                 </div>
                                 <div>
                                     <label class="text-[10px] text-slate-400 block mb-1">Cantidad Asignada (Gramos o ml)</label>
@@ -384,7 +378,6 @@
                             </div>
                         </div>
 
-                        <!-- PASO 2: Acción y Resultado Directo -->
                         <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-4 flex flex-col justify-between">
                             <div class="space-y-3">
                                 <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-widest flex items-center gap-2">
@@ -399,12 +392,8 @@
                         </div>
                     </div>
 
-                    <!-- Ventana de Resultados de Equivalencias (Se muestra debajo) -->
                     <div id="exchange-results-box" class="hidden space-y-4 pt-4 border-t border-slate-800">
-                        <div id="exchange-direct-result" class="bg-emerald-950/30 border border-emerald-500/50 rounded-2xl p-5 text-center space-y-2">
-                            <!-- Resumen del cálculo principal -->
-                        </div>
-                        
+                        <div id="exchange-direct-result" class="bg-emerald-950/30 border border-emerald-500/50 rounded-2xl p-5 text-center space-y-2"></div>
                         <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider pt-2 flex items-center gap-2">
                             <i class="fa-solid fa-list-check"></i> Opciones de sustitución exacta en el mismo grupo de macronutriente (0% Error):
                         </h3>
@@ -418,7 +407,7 @@
                     <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
                             <h2 class="text-2xl md:text-3xl font-black text-white flex items-center gap-3"><i class="fa-solid fa-sliders text-amber-400"></i> Panel Coach Master & Consola</h2>
-                            <p class="text-slate-400 text-xs md:text-sm mt-1">Generador de Dietas Biométricas (0% Error), Escáner 32 Métricas, Editor de Shorts, Terminal CLI y Gestión de Alumnos.</p>
+                            <p class="text-slate-400 text-xs md:text-sm mt-1">Generador de Dietas Biométricas (0% Error), Escáner 8 Electrodos, Editor de Shorts, Terminal CLI y Gestión de Alumnos.</p>
                         </div>
                         <span class="bg-amber-500/20 text-amber-400 px-4 py-2 rounded-2xl text-xs font-bold border border-amber-500/40 w-fit">Modo Master</span>
                     </div>
@@ -694,7 +683,7 @@
     </div>
 
     <script>
-        const API_KEY = "AIzaSyA2Sk6s2i2_bcJ_fJc4BEyMw3y9hU79_Nw";
+        const API_KEY = "AQ.Ab8RN6JPqjgvA2zAzLIY-FQ_HjA-wpfIEb503lX0-2zYs5GQhA";
         const PROJECT_ID = "alianza-activa";
 
         let FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/default/documents/clients`;
@@ -781,7 +770,6 @@
         let activeClient = clientsDB[0];
         let lastCalculatedPlan = null;
 
-        // Base de datos completa de intercambios (Sin caballo en carnes)
         const exchangeDatabase = {
             carbohidratos: {
                 cereales: [
@@ -1024,14 +1012,12 @@
 
             resultsBox.classList.remove('hidden');
 
-            // Resultado directo del alimento elegido
             directResultBox.innerHTML = `
                 <div class="text-xs text-emerald-400 font-bold uppercase tracking-wider"><i class="fa-solid fa-circle-check"></i> Alimento Base Seleccionado</div>
                 <div class="text-lg font-black text-white mt-1">${baseAmount}g de <span class="text-amber-400">${baseItem.name}</span></div>
                 <p class="text-xs text-slate-300 mt-1">Categoría: <strong class="text-white">${macroType.toUpperCase()}</strong> (${baseItem.desc})</p>
             `;
 
-            // Listado de todas las demás opciones equivalentes dentro del mismo macronutriente
             resultsList.innerHTML = items.map(item => {
                 const equivalentAmount = item.ratio === 0 ? 0 : Math.round((baseAmount * baseItem.ratio) / item.ratio);
                 const isSelected = item.name === baseItem.name;
