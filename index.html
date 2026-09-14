@@ -1471,6 +1471,79 @@
             document.getElementById('edit-short-type').value = s.type || 'image';
         }
 
+        function compressAndConvertVideo(file, callback) {
+            const video = document.createElement('video');
+            video.src = URL.createObjectURL(file);
+            video.muted = true;
+            video.playsInline = true;
+            
+            showToast("🔄 Optimizando y comprimiendo video...", "success");
+
+            video.onloadedmetadata = () => {
+                video.play();
+                const canvas = document.createElement('canvas');
+                const maxWidth = 360;
+                const scale = maxWidth / video.videoWidth;
+                canvas.width = maxWidth;
+                canvas.height = Math.round(video.videoHeight * (scale < 1 ? scale : 1));
+                
+                const ctx = canvas.getContext('2d');
+                
+                let stream;
+                try {
+                    stream = canvas.captureStream(25);
+                } catch(e) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => callback(e.target.result);
+                    reader.readAsDataURL(file);
+                    return;
+                }
+                
+                let mimeType = 'video/webm;codecs=vp8';
+                if (!MediaRecorder.isTypeSupported(mimeType)) {
+                    mimeType = 'video/webm';
+                }
+                
+                let recorder;
+                try {
+                    recorder = new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 300000 });
+                } catch(e) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => callback(e.target.result);
+                    reader.readAsDataURL(file);
+                    return;
+                }
+
+                const chunks = [];
+                recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+                recorder.onstop = () => {
+                    const blob = new Blob(chunks, { type: 'video/webm' });
+                    const reader = new FileReader();
+                    reader.onload = e => callback(e.target.result);
+                    reader.readAsDataURL(blob);
+                };
+                
+                recorder.start();
+                
+                function draw() {
+                    if (video.ended || video.paused || video.currentTime > 30) {
+                        try { recorder.stop(); } catch(err) {}
+                        video.remove();
+                        return;
+                    }
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    requestAnimationFrame(draw);
+                }
+                draw();
+            };
+
+            video.onerror = () => {
+                const reader = new FileReader();
+                reader.onload = e => callback(e.target.result);
+                reader.readAsDataURL(file);
+            };
+        }
+
         async function saveShortEdit() {
             const idx = parseInt(document.getElementById('edit-short-index').value);
             const fileInput = document.getElementById('edit-short-file');
@@ -1482,23 +1555,25 @@
 
             if (fileInput.files && fileInput.files[0]) {
                 const file = fileInput.files[0];
-                if (file.size > 900 * 1024) {
-                    showToast("⚠️ El video es muy pesado (>900KB). Por favor sube un video corto o comprimido para que Firestore lo guarde correctamente.", "error");
-                    return;
-                }
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    globalData.shorts[idx].image = e.target.result;
-                    if (file.type.startsWith('video/')) {
+                if (file.type.startsWith('video/')) {
+                    compressAndConvertVideo(file, async function(compressedDataUrl) {
+                        globalData.shorts[idx].image = compressedDataUrl;
                         globalData.shorts[idx].type = 'video';
-                    } else {
+                        await saveGlobalDataToCloud();
+                        showToast("✅ Short de video comprimido y publicado para todos.");
+                        addLog(`Short #${idx+1} (video) optimizado y publicado en la nube.`, "success");
+                    });
+                } else {
+                    const reader = new FileReader();
+                    reader.onload = async function(e) {
+                        globalData.shorts[idx].image = e.target.result;
                         globalData.shorts[idx].type = 'image';
-                    }
-                    await saveGlobalDataToCloud();
-                    showToast("✅ Short / Historia publicado para todos los clientes.");
-                    addLog(`Short #${idx+1} publicado en la nube.`, "success");
-                };
-                reader.readAsDataURL(file);
+                        await saveGlobalDataToCloud();
+                        showToast("✅ Short / Historia publicado para todos los clientes.");
+                        addLog(`Short #${idx+1} publicado en la nube.`, "success");
+                    };
+                    reader.readAsDataURL(file);
+                }
             } else {
                 await saveGlobalDataToCloud();
                 showToast("✅ Short / Historia publicado para todos los clientes.");
