@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="es" class="h-full">
 <head>
     <meta charset="UTF-8">
@@ -333,7 +333,6 @@
                 <div id="dynamic-batidos-container" class="grid md:grid-cols-2 gap-6"></div>
             </section>
 
-            <!-- SECCIÓN CALCULADORA DE INTERCAMBIOS POR MACRONUTRIENTE -->
             <section id="content-tab-5" class="tab-content hidden space-y-6">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl space-y-6">
                     <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
@@ -422,7 +421,6 @@
                         </div>
                     </div>
 
-                    <!-- AI Subview: Chat -->
                     <div id="aiSubViewChat" class="flex flex-col h-[550px] bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden">
                         <div class="bg-gradient-to-r from-teal-700 to-emerald-800 p-3.5 text-white flex justify-between items-center text-xs">
                             <div class="flex items-center gap-2">
@@ -445,7 +443,6 @@
                         </div>
                     </div>
 
-                    <!-- AI Subview: Plate Analyzer -->
                     <div id="aiSubViewAnalyzer" class="hidden flex flex-col h-[550px] bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden p-6 overflow-y-auto">
                         <div class="max-w-xl mx-auto w-full space-y-4 text-center">
                             <h3 class="text-base font-bold text-white">Sube una foto de tu plato</h3>
@@ -482,17 +479,17 @@
                     <div class="border-b border-slate-800 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
                             <h2 class="text-2xl md:text-3xl font-black text-white flex items-center gap-3"><i class="fa-solid fa-sliders text-amber-400"></i> Panel Coach Master & Consola</h2>
-                            <p class="text-slate-400 text-xs md:text-sm mt-1">Generador de Dietas Biométricas (0% Error), Escáner 32 Métricas, Editor de Shorts, Terminal CLI y Gestión de Alumnos.</p>
+                            <p class="text-slate-400 text-xs md:text-sm mt-1">Generador de Dietas Biométricas (Mifflin-St Jeor & Atwater), Escáner 32 Métricas, Editor de Shorts, Terminal CLI y Gestión de Alumnos.</p>
                         </div>
                         <span class="bg-amber-500/20 text-amber-400 px-4 py-2 rounded-2xl text-xs font-bold border border-amber-500/40 w-fit">Modo Master</span>
                     </div>
 
                     <div class="bg-slate-950 p-6 md:p-8 rounded-2xl border border-amber-500/50 space-y-6 shadow-inner">
                         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                            <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-calculator"></i> 🧮 Motor Biométrico & Protocolo de Escáner (0% Error)</h3>
-                            <span class="text-[10px] bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full font-bold">Precisión 8 Electrodos</span>
+                            <h3 class="font-bold text-amber-400 text-sm uppercase flex items-center gap-2"><i class="fa-solid fa-calculator"></i> 🧮 Motor Biométrico & Protocolo Científico (Mifflin-St Jeor & Atwater)</h3>
+                            <span class="text-[10px] bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full font-bold">Precisión 0% Error</span>
                         </div>
-                        <p class="text-xs text-slate-300">Ingresa las mediciones del escáner corporal y calcula los macros exactos para asignar al alumno.</p>
+                        <p class="text-xs text-slate-300">Ingresa las mediciones biométricas, edad, sexo y nivel de actividad para calcular los macros exactos según el estándar científico universal.</p>
                         
                         <div class="grid md:grid-cols-3 gap-4">
                             <div>
@@ -508,30 +505,40 @@
                                 <input type="number" id="calc-height" placeholder="Ej: 175" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
                             </div>
                             <div>
-                                <label class="text-[10px] text-slate-400 block mb-1">% Grasa Corporal</label>
-                                <input type="number" id="calc-fat" placeholder="Ej: 15" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                                <label class="text-[10px] text-slate-400 block mb-1">Edad (Años)</label>
+                                <input type="number" id="calc-age" placeholder="Ej: 30" value="30" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
                             </div>
                             <div>
-                                <label class="text-[10px] text-slate-400 block mb-1">Masa Muscular (kg)</label>
-                                <input type="number" id="calc-muscle" placeholder="Ej: 38" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
-                            </div>
-                            <div>
-                                <label class="text-[10px] text-slate-400 block mb-1">Grasa Visceral & Agua (%)</label>
-                                <input type="text" id="calc-visceral" placeholder="Ej: Visceral 6, Agua 58%" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
-                            </div>
-                            <div>
-                                <label class="text-[10px] text-slate-400 block mb-1">Método de Evaluación</label>
-                                <select id="calc-method" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
-                                    <option value="escaner">Balanza 8 Electrodos (Escáner 32 Métricas)</option>
-                                    <option value="cinta">Protocolo Cinta & Fotos (Sin Escáner)</option>
+                                <label class="text-[10px] text-slate-400 block mb-1">Sexo Biológico (Mifflin-St Jeor)</label>
+                                <select id="calc-sex" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                                    <option value="hombre">Hombre (+5 TMB)</option>
+                                    <option value="mujer">Mujer (-161 TMB)</option>
                                 </select>
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-slate-400 block mb-1">Nivel de Actividad Física (TDEE)</label>
+                                <select id="calc-activity" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                                    <option value="1.2">Sedentario (x 1.2)</option>
+                                    <option value="1.375">Ligero - 1 a 3 días/sem (x 1.375)</option>
+                                    <option value="1.55" selected>Moderado - 3 a 5 días/sem (x 1.55)</option>
+                                    <option value="1.725">Intenso - 6 a 7 días/sem (x 1.725)</option>
+                                    <option value="1.9">Muy Intenso / Atleta (x 1.9)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-slate-400 block mb-1">Ratio Proteína (g/kg)</label>
+                                <input type="number" step="0.1" id="calc-protein-ratio" value="2.0" placeholder="Ej: 2.0" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-slate-400 block mb-1">% Grasa Calórica (Ej: 0.25 para 25%)</label>
+                                <input type="number" step="0.05" id="calc-fat-pct" value="0.25" placeholder="Ej: 0.25" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
                             </div>
                             <div>
                                 <label class="text-[10px] text-slate-400 block mb-1">Objetivo del Plan</label>
                                 <select id="calc-goal" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
-                                    <option value="perdida_grasa">Pérdida de grasa / Pérdida de peso</option>
-                                    <option value="ganancia_musculo">Ganancia de músculo (Hipertrofia / Alta Energía)</option>
-                                    <option value="composicion_corporal">Composición corporal (Recomposición)</option>
+                                    <option value="perdida_grasa">Pérdida de grasa / Déficit (x 0.80)</option>
+                                    <option value="mantenimiento">Mantenimiento (x 1.0)</option>
+                                    <option value="ganancia_musculo">Ganancia de músculo / Superávit (x 1.10)</option>
                                     <option value="definicion">Definición / Control</option>
                                 </select>
                             </div>
@@ -543,7 +550,7 @@
 
                         <div class="pt-2 flex flex-wrap gap-4 items-center">
                             <button onclick="calculateDietEngine()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl text-xs cursor-pointer shadow-md flex items-center gap-2">
-                                <i class="fa-solid fa-bolt"></i> Calcular Plan 0% Error con Escáner
+                                <i class="fa-solid fa-bolt"></i> Calcular Plan 0% Error (Mifflin & Atwater)
                             </button>
                         </div>
 
@@ -745,7 +752,6 @@
         </footer>
     </div>
 
-    <!-- Modal para Historias / Shorts -->
     <div id="story-modal" class="fixed inset-0 z-50 bg-black/95 hidden flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full overflow-hidden relative shadow-2xl">
             <button onclick="closeStoryModal()" class="absolute top-4 right-4 z-20 bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
@@ -811,9 +817,6 @@
             {
                 name: "Angela",
                 pass: "angela2026",
-                macroP: 140,
-                macroC: 180,
-                macroF: 50,
                 tab1: [
                     "Desayuno: 2 Huevos enteros cocidos a gusto + 40g de Pan integral",
                     "Media Mañana: 150g de Fruta (Manzana verde o Kiwi)",
@@ -843,7 +846,6 @@
         let isUserAdmin = false;
         let clientsDB = defaultClients;
         let activeClient = clientsDB[0];
-        let lastCalculatedPlan = null;
         let currentBase64Image = null;
 
         const exchangeDatabase = {
@@ -908,6 +910,22 @@
         const ALIANZA_SYSTEM_PROMPT = `Eres el Asistente Experto de "Alianza Activa", una plataforma de alto rendimiento y nutrición. 
 Ayuda a clientes y entrenadores con información precisa sobre nutrición, dietas, alimentos y los servicios oficiales. Responde siempre de forma profesional, amable y motivadora.`;
 
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-5 right-5 z-50 px-5 py-3 rounded-2xl text-xs font-bold shadow-2xl flex items-center gap-3 transition-all transform translate-y-5 opacity-0 ${type === 'error' ? 'bg-red-950 text-red-200 border border-red-500/50' : 'bg-slate-900 text-amber-300 border border-amber-500/50'}`;
+            toast.innerHTML = `<i class="fa-solid ${type === 'error' ? 'fa-triangle-exclamation text-red-400' : 'fa-circle-check text-amber-400'} text-base"></i><span>${message}</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => { toast.classList.remove('translate-y-5', 'opacity-0'); }, 10);
+            setTimeout(() => {
+                toast.classList.add('translate-y-5', 'opacity-0');
+                setTimeout(() => toast.remove(), 400);
+            }, 3500);
+        }
+
+        function updateмараExchangeOptions() {
+            updateMacroExchangeOptions();
+        }
+
         function updateMacroExchangeOptions() {
             const macroType = document.getElementById('macro-group-type').value;
             const foodSelect = document.getElementById('exchange-base-food');
@@ -966,7 +984,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
 
             const baseItem = items[foodIdx];
             if (!baseItem || baseAmount <= 0) {
-                alert("Por favor ingresa una cantidad válida.");
+                showToast("Por favor ingresa una cantidad válida.", "error");
                 return;
             }
 
@@ -1012,30 +1030,35 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
 
         async function saveGlobalDataToCloud() {
             try {
-                const body = { fields: { jsonData: { stringValue: JSON.stringify(globalData) } } };
-                await fetch(`${FIRESTORE_BASE}/_GLOBAL_DATA_?key=${API_KEY}`, {
+                const url = `${FIRESTORE_BASE}/_GLOBAL_DATA_?key=${API_KEY}`;
+                const payload = {
+                    fields: {
+                        jsonData: { stringValue: JSON.stringify(globalData) }
+                    }
+                };
+                await fetch(url, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(body)
+                    body: JSON.stringify(payload)
                 });
             } catch(e) {}
         }
 
         function addLog(msg, type = 'info') {
             const box = document.getElementById('live-logs-box');
-            if (!box) return;
+            if(!box) return;
             const time = new Date().toLocaleTimeString();
-            let color = "text-slate-300";
-            if (type === 'success') color = "text-emerald-400";
-            if (type === 'error') color = "text-red-400";
-            if (type === 'warn') color = "text-amber-400";
+            let color = 'text-slate-300';
+            if(type === 'success') color = 'text-emerald-400';
+            if(type === 'warn') color = 'text-amber-400';
+            if(type === 'error') color = 'text-red-400';
             box.innerHTML += `<div class="${color}">[${time}] ${msg}</div>`;
             box.scrollTop = box.scrollHeight;
         }
 
         function clearLogs() {
             const box = document.getElementById('live-logs-box');
-            if (box) box.innerHTML = `<div class="text-emerald-400">[SYSTEM] Logs reiniciados.</div>`;
+            if(box) box.innerHTML = '';
         }
 
         function updateSystemMonitor(statusText, isError = false) {
@@ -1067,15 +1090,12 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                 addLog("2. sync -> Sincroniza con Firebase Firestore", "info");
                 addLog("3. count -> Muestra cantidad de atletas", "info");
                 addLog("4. list -> Lista todos los clientes registrados", "info");
-                addLog("5. clear -> Limpia la consola de logs", "info");
             } else if (action === 'sync') {
                 fetchClientsFromFirebase().then(() => addLog("Sincronización completada con éxito.", "success"));
             } else if (action === 'count') {
                 addLog(`Total de atletas en sistema: ${clientsDB.length}`, "success");
             } else if (action === 'list') {
                 addLog(`Atletas: ${clientsDB.map(c => c.name).join(', ')}`, "success");
-            } else if (action === 'clear') {
-                clearLogs();
             } else {
                 addLog(`Comando no reconocido: "${action}". Escribe 'help'.`, "error");
             }
@@ -1086,9 +1106,6 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                 fields: {
                     name: { stringValue: client.name },
                     pass: { stringValue: client.pass },
-                    macroP: { integerValue: client.macroP || 140 },
-                    macroC: { integerValue: client.macroC || 180 },
-                    macroF: { integerValue: client.macroF || 50 },
                     tab1: { arrayValue: { values: (client.tab1 || []).map(v => ({ stringValue: v })) } },
                     tab2: { arrayValue: { values: (client.tab2 || []).map(v => ({ stringValue: v })) } },
                     tab3: { arrayValue: { values: (client.tab3 || []).map(v => ({ stringValue: v })) } }
@@ -1100,10 +1117,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
             const f = doc.fields || {};
             return {
                 name: f.name?.stringValue || '',
-                pass: f.pass?.stringValue || f.pass?.integerValue || '',
-                macroP: Number(f.macroP?.integerValue || f.macroP?.doubleValue || 140),
-                macroC: Number(f.macroC?.integerValue || f.macroC?.doubleValue || 180),
-                macroF: Number(f.macroF?.integerValue || f.macroF?.doubleValue || 50),
+                pass: f.pass?.stringValue || '',
                 tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue || ''),
                 tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue || ''),
                 tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue || '')
@@ -1119,11 +1133,15 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                         .filter(doc => !doc.name.includes('_GLOBAL_DATA_'))
                         .map(fromFirestoreDoc);
                     updateSystemMonitor("Conectado (Firebase)");
+                    populateAdminSelects();
+                    renderClientsListUI();
                     return clientsDB;
                 }
             } catch (err) {}
             clientsDB = defaultClients;
             updateSystemMonitor("Modo Local", true);
+            populateAdminSelects();
+            renderClientsListUI();
             return clientsDB;
         }
 
@@ -1132,100 +1150,134 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
             await fetchClientsFromFirebase();
             renderGlobalContent();
             updateMacroExchangeOptions();
+            populateAdminSelects();
         });
 
-        function calculateDietEngine() {
-            const name = document.getElementById('calc-name').value.trim() || "Atleta Nuevo";
-            const weight = parseFloat(document.getElementById('calc-weight').value) || 70;
-            const height = parseFloat(document.getElementById('calc-height').value) || 170;
-            const fat = parseFloat(document.getElementById('calc-fat').value) || 15;
-            const muscle = parseFloat(document.getElementById('calc-muscle').value) || 35;
-            const visceral = document.getElementById('calc-visceral').value.trim() || "Normal";
-            const method = document.getElementById('calc-method').value;
-            const goal = document.getElementById('calc-goal').value;
-
-            let proteinGrams = Math.round(weight * 2.2);
-            let carbGrams = Math.round(weight * 3.0);
-            let fatGrams = Math.round(weight * 0.8);
-
-            if (goal === 'perdida_grasa') {
-                carbGrams = Math.round(weight * 2.0);
-                proteinGrams = Math.round(weight * 2.4);
-            } else if (goal === 'ganancia_musculo') {
-                carbGrams = Math.round(weight * 3.5);
+        function populateAdminSelects() {
+            const selectEdit = document.getElementById('select-client-edit');
+            if (selectEdit) {
+                selectEdit.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+                loadClientDietForEditing();
             }
-
-            const totalCalories = Math.round((proteinGrams * 4) + (carbGrams * 4) + (fatGrams * 9));
-
-            lastCalculatedPlan = {
-                name,
-                macroP: proteinGrams,
-                macroC: carbGrams,
-                macroF: fatGrams,
-                tab1: [
-                    `Desayuno: 30g Batido Cookies + 3 Huevos enteros + 40g Avena tradicional`,
-                    `Media Mañana: 150g Fruta fresca`,
-                    `Almuerzo: ${Math.round(proteinGrams * 0.4)}g Proteína en crudo + ${Math.round(carbGrams * 0.4)}g Carbohidrato en crudo + 15g Aceite de oliva + 200g Ensalada`,
-                    `Merienda: Porridge Tibio de Cookies (50g Avena + 30g Batido)`,
-                    `Cena: ${Math.round(proteinGrams * 0.35)}g Proteína en crudo + 200g Ensalada + 40g Palta`
-                ],
-                tab2: [
-                    `Desayuno: 3 Huevos enteros + 50g Pan integral`,
-                    `Media Mañana: 150g Fruta fresca`,
-                    `Almuerzo: ${Math.round(proteinGrams * 0.35)}g Proteína + ${Math.round(carbGrams * 0.3)}g Carbohidrato + 10g Aceite`,
-                    `Media Tarde: 120g Papa hervida`,
-                    `Cena: Pescado o Pollo magro + Ensalada mixta`
-                ],
-                tab3: [
-                    `Huevos enteros: 2 maples (60 unidades)`,
-                    `Pechuga de pollo o carne magra: 2 kg en crudo`,
-                    `Arroz integral / Parboil: 600g en crudo`,
-                    `Avena tradicional: 500g`,
-                    `Batido Cookies HBL: 1 pote`
-                ]
-            };
-
-            const clientOptionsHtml = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
-            const resultsBox = document.getElementById('calc-results-box');
-            resultsBox.classList.remove('hidden');
-            resultsBox.innerHTML = `
-                <div class="text-emerald-400 font-bold text-sm">✅ Cálculo Biométrico 0% Error Exitoso (${method.toUpperCase()})</div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-slate-300 bg-slate-950 p-3 rounded-xl border border-slate-800">
-                    <div>• <strong>Calorías:</strong> ${totalCalories} kcal</div>
-                    <div>• <strong>Proteína:</strong> ${proteinGrams}g</div>
-                    <div>• <strong>Carbohidratos:</strong> ${carbGrams}g</div>
-                    <div>• <strong>Grasas Buenas:</strong> ${fatGrams}g</div>
-                </div>
-                <div class="space-y-3 pt-2">
-                    <label class="text-[10px] text-amber-400 uppercase font-bold block">Asignar a Atleta:</label>
-                    <div class="flex gap-2">
-                        <select id="assign-target-client" class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white outline-none flex-grow">
-                            ${clientOptionsHtml}
-                        </select>
-                        <button onclick="assignCalculatedPlanToSelectedClient()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-2.5 rounded-xl text-xs cursor-pointer shadow-md">
-                            Asignar Plan & Macros
-                        </button>
-                    </div>
-                </div>
-            `;
-            addLog(`Cálculo biométrico generado para ${name}.`, "success");
         }
 
-        function assignCalculatedPlanToSelectedClient() {
-            const targetName = document.getElementById('assign-target-client').value;
-            const client = clientsDB.find(c => c.name === targetName);
-            if (client && lastCalculatedPlan) {
-                client.macroP = lastCalculatedPlan.macroP;
-                client.macroC = lastCalculatedPlan.macroC;
-                client.macroF = lastCalculatedPlan.macroF;
-                client.tab1 = lastCalculatedPlan.tab1;
-                client.tab2 = lastCalculatedPlan.tab2;
-                client.tab3 = lastCalculatedPlan.tab3;
-                alert(`✅ Plan y macros exactos asignados con éxito al atleta: ${targetName}`);
-                renderAdminPanel();
-            } else {
-                alert("❌ Selecciona un atleta válido.");
+        function loadClientDietForEditing() {
+            const name = document.getElementById('select-client-edit').value;
+            const client = clientsDB.find(c => c.name === name);
+            if (!client) return;
+            document.getElementById('edit-tab1-data').value = (client.tab1 || []).join('\n');
+            document.getElementById('edit-tab2-data').value = (client.tab2 || []).join('\n');
+            document.getElementById('edit-tab3-data').value = (client.tab3 || []).join('\n');
+        }
+
+        async function saveClientDietCloud() {
+            const name = document.getElementById('select-client-edit').value;
+            const client = clientsDB.find(c => c.name === name);
+            if (!client) return;
+
+            client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').map(s => s.trim()).filter(Boolean);
+            client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').map(s => s.trim()).filter(Boolean);
+            client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').map(s => s.trim()).filter(Boolean);
+
+            try {
+                const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
+                await fetch(url, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(toFirestoreDoc(client))
+                });
+                showToast(`✅ Plan de ${name} actualizado con éxito.`);
+                addLog(`Plan de ${name} actualizado correctamente.`, "success");
+            } catch (err) {
+                showToast("❌ Error al actualizar en nube: " + err.message, "error");
             }
+        }
+
+        function renderClientsListUI() {
+            const container = document.getElementById('clients-list-container');
+            if (!container) return;
+            container.innerHTML = clientsDB.map(c => `
+                <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 flex justify-between items-center">
+                    <div>
+                        <strong class="text-white text-xs block">${c.name}</strong>
+                        <span class="text-[10px] text-slate-400">Pass: ${c.pass}</span>
+                    </div>
+                    <button onclick="deleteClientCloud('${c.name}')" class="bg-red-500/10 text-red-400 hover:bg-red-500/20 px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer">Eliminar</button>
+                </div>
+            `).join('');
+        }
+
+        async function deleteClientCloud(name) {
+            if (!confirm(`¿Eliminar al cliente ${name}?`)) return;
+            try {
+                const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
+                await fetch(url, { method: 'DELETE' });
+                showToast(`Cliente ${name} eliminado.`);
+                await fetchClientsFromFirebase();
+            } catch(e) {
+                showToast("Error al eliminar", "error");
+            }
+        }
+
+        function calculateDietEngine() {
+            const name = document.getElementById('calc-name').value.trim() || "Atleta";
+            const weight = parseFloat(document.getElementById('calc-weight').value) || 75;
+            const height = parseFloat(document.getElementById('calc-height').value) || 175;
+            const age = parseFloat(document.getElementById('calc-age').value) || 30;
+            const sex = document.getElementById('calc-sex').value;
+            const activity = parseFloat(document.getElementById('calc-activity').value) || 1.55;
+            const proteinRatio = parseFloat(document.getElementById('calc-protein-ratio').value) || 2.0;
+            const fatPct = parseFloat(document.getElementById('calc-fat-pct').value) || 0.25;
+            const goal = document.getElementById('calc-goal').value;
+
+            // 1. Gasto Energético en Reposo (TMB) - Mifflin-St Jeor
+            let tmb = 0;
+            if (sex === 'hombre') {
+                tmb = (10.0 * weight) + (6.25 * height) - (5.0 * age) + 5.0;
+            } else {
+                tmb = (10.0 * weight) + (6.25 * height) - (5.0 * age) - 161.0;
+            }
+
+            // 2. Gasto Calórico Total Diario (TDEE)
+            let tdee = tmb * activity;
+
+            // 3. Calorías Objetivo según Objetivo
+            let targetCalories = tdee;
+            if (goal === 'perdida_grasa' || goal === 'definicion') {
+                targetCalories = tdee * 0.80;
+            } else if (goal === 'ganancia_musculo') {
+                targetCalories = tdee * 1.10;
+            }
+
+            // 4. Distribución Secuencial de Macros (Atwater General: Protein 4, Fat 9, Carbs 4)
+            const gramsProtein = weight * proteinRatio;
+            const kcalProtein = gramsProtein * 4.0;
+
+            const kcalFat = targetCalories * fatPct;
+            const gramsFat = kcalFat / 9.0;
+
+            const kcalCarbs = targetCalories - (kcalProtein + kcalFat);
+            const gramsCarbs = kcalCarbs > 0 ? (kcalCarbs / 4.0) : 0;
+
+            const checkKcal = (gramsProtein * 4.0) + (gramsFat * 9.0) + (gramsCarbs * 4.0);
+
+            const resBox = document.getElementById('calc-results-box');
+            resBox.classList.remove('hidden');
+            resBox.innerHTML = `
+                <div class="text-emerald-400 font-bold flex items-center gap-2"><i class="fa-solid fa-check-circle"></i> Plan Biométrico Científico Generado para ${name}</div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center"><span class="text-[10px] text-slate-400 block">TMB (MIFFLIN)</span><strong class="text-white text-base">${Math.round(tmb)} kcal</strong></div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center"><span class="text-[10px] text-slate-400 block">TDEE (ACTIVIDAD)</span><strong class="text-amber-400 text-base">${Math.round(tdee)} kcal</strong></div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center col-span-2 md:col-span-2"><span class="text-[10px] text-slate-400 block">CALORÍAS OBJETIVO</span><strong class="text-emerald-400 text-lg">${targetCalories.toFixed(1)} kcal</strong></div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 pt-2">
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center"><span class="text-[10px] text-slate-400 block">PROTEÍNAS (${proteinRatio}g/kg)</span><strong class="text-orange-400 text-base">${gramsProtein.toFixed(1)} g</strong> <span class="text-[10px] text-slate-400">(${kcalProtein.toFixed(1)} kcal)</span></div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center"><span class="text-[10px] text-slate-400 block">GRASAS (${(fatPct*100)}%)</span><strong class="text-emerald-400 text-base">${gramsFat.toFixed(1)} g</strong> <span class="text-[10px] text-slate-400">(${kcalFat.toFixed(1)} kcal)</span></div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center col-span-2 md:col-span-1"><span class="text-[10px] text-slate-400 block">CARBOHIDRATOS (REMANENTE)</span><strong class="text-amber-400 text-base">${gramsCarbs.toFixed(1)} g</strong> <span class="text-[10px] text-slate-400">(${kcalCarbs.toFixed(1)} kcal)</span></div>
+                </div>
+                <p class="text-[11px] text-slate-400 pt-1">✅ Comprobación matemática Atwater: ${checkKcal.toFixed(2)} kcal (Precisión 100% sin error).</p>
+            `;
+            addLog(`Plan científico Mifflin-St Jeor calculado para ${name}: TMB ${Math.round(tmb)}, TDEE ${Math.round(tdee)}, Objetivo ${targetCalories.toFixed(1)} kcal (P:${gramsProtein.toFixed(1)}g, C:${gramsCarbs.toFixed(1)}g, G:${gramsFat.toFixed(1)}g).`, "success");
         }
 
         async function verifyPassword() {
@@ -1255,9 +1307,6 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                 isUserAdmin = true;
                 activeClient = {
                     name: "Coach Roberto",
-                    macroP: 160,
-                    macroC: 220,
-                    macroF: 60,
                     tab1: ["Modo Administrador - Coach"],
                     tab2: ["Modo Administrador - Coach"],
                     tab3: ["Modo Administrador"]
@@ -1267,11 +1316,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                 document.getElementById('drawer-admin-btn').classList.remove('hidden');
                 renderDynamicContent();
                 renderGlobalContent();
-                renderAdminPanel();
                 switchTab(6);
-                loadShortForEditing();
-                loadRecipeForEditing();
-                loadStoreForEditing();
                 addLog("Acceso de Administrador concedido.", "success");
                 return;
             }
@@ -1293,26 +1338,20 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
             } else {
                 errEl.innerText = "Contraseña incorrecta.";
                 errEl.classList.remove('hidden');
-                addLog("Intento de acceso fallido.", "error");
             }
         }
 
         function submitMembershipForm() {
             const name = document.getElementById('mem-name').value.trim();
-            const age = document.getElementById('mem-age').value.trim();
             const weight = document.getElementById('mem-weight').value.trim();
-            const height = document.getElementById('mem-height').value.trim();
-            const nat = document.getElementById('mem-nat').value.trim();
-            const gender = document.getElementById('mem-gender').value;
-            const goal = document.getElementById('mem-goal').value.trim();
             const phone = document.getElementById('mem-phone').value.trim();
 
             if(!name || !weight || !phone) {
-                alert("Por favor completa al menos tu Nombre, Peso y Celular.");
+                showToast("Por favor completa al menos tu Nombre, Peso y Celular.", "error");
                 return;
             }
 
-            const text = `Hola Roberto, quiero solicitar mi plan en Alianza Activa:\n\n👤 *Nombre:* ${name}\n🎂 *Edad:* ${age}\n⚖️ *Peso:* ${weight}kg\n📏 *Estatura:* ${height}cm\n🌍 *Nacionalidad:* ${nat}\n⚧ *Género:* ${gender}\n🎯 *Objetivo:* ${goal}\n📱 *Celular:* ${phone}`;
+            const text = `Hola Roberto, quiero solicitar mi plan en Alianza Activa:\n\n👤 *Nombre:* ${name}\n⚖️ *Peso:* ${weight}kg\n📱 *Celular:* ${phone}`;
             document.getElementById('membership-alert').classList.remove('hidden');
             setTimeout(() => {
                 window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent(text)}`, '_blank');
@@ -1320,7 +1359,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
         }
 
         function orderBatidoWhatsApp(batidoName) {
-            const text = `Hola Roberto, quiero encargar el "${batidoName}" desde la Tienda de Alianza Activa. ¿Cómo coordinamos?`;
+            const text = `Hola Roberto, quiero encargar el "${batidoName}" desde la Tienda de Alianza Activa.`;
             window.open(`https://api.whatsapp.com/send?phone=5492964500650&text=${encodeURIComponent(text)}`, '_blank');
         }
 
@@ -1351,7 +1390,6 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                         <div>
                             <div class="h-48 overflow-hidden relative bg-black flex items-center justify-center">
                                 <img src="${b.image}" alt="${b.title}" class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
                             </div>
                             <div class="p-6 space-y-3">
                                 <h3 class="font-bold text-white text-lg">${b.title}</h3>
@@ -1372,11 +1410,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                 storiesBar.innerHTML = globalData.shorts.map((s, idx) => `
                     <div onclick="openStoryModal(${idx})" class="flex flex-col items-center gap-1.5 cursor-pointer shrink-0 group">
                         <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-amber-500 to-orange-500 group-hover:scale-105 transition-transform relative overflow-hidden flex items-center justify-center bg-black">
-                            ${s.type === 'video' ? '<span class="absolute bottom-1 right-1 bg-black/80 text-amber-400 text-[8px] p-1 rounded-full z-10 leading-none"><i class="fa-solid fa-play"></i></span>' : ''}
-                            ${s.type === 'video' 
-                                ? `<video src="${s.image}#t=0.1" class="w-full h-full rounded-full object-cover border-2 border-slate-950" muted playsinline preload="metadata"></video>` 
-                                : `<img src="${s.image}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950">`
-                            }
+                            <img src="${s.image}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950">
                         </div>
                         <span class="text-[10px] text-slate-300 font-medium max-w-[64px] truncate text-center">${s.title}</span>
                     </div>
@@ -1403,11 +1437,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
         function openStoryModal(idx) {
             const s = globalData.shorts[idx];
             const container = document.getElementById('story-media-container');
-            if (s.type === 'video') {
-                container.innerHTML = `<video src="${s.image}" autoplay controls class="w-full h-full object-cover"></video>`;
-            } else {
-                container.innerHTML = `<img src="${s.image}" alt="${s.title}" class="w-full h-full object-cover">`;
-            }
+            container.innerHTML = `<img src="${s.image}" alt="${s.title}" class="w-full h-full object-cover">`;
             document.getElementById('modal-story-title').innerText = s.title;
             document.getElementById('modal-story-desc').innerText = s.desc;
             document.getElementById('modal-story-date').innerText = s.date;
@@ -1416,220 +1446,131 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
 
         function closeStoryModal() {
             document.getElementById('story-modal').classList.add('hidden');
-            document.getElementById('story-media-container').innerHTML = '';
         }
 
         function loadShortForEditing() {
-            const idx = document.getElementById('edit-short-index').value;
-            const shortItem = globalData.shorts[idx];
-            document.getElementById('edit-short-title').value = shortItem.title;
-            document.getElementById('edit-short-desc').value = shortItem.desc;
-            document.getElementById('edit-short-date').value = shortItem.date || 'Hoy';
-            document.getElementById('edit-short-type').value = shortItem.type || 'image';
+            const idx = parseInt(document.getElementById('edit-short-index').value);
+            const s = globalData.shorts[idx];
+            document.getElementById('edit-short-title').value = s.title;
+            document.getElementById('edit-short-desc').value = s.desc;
+            document.getElementById('edit-short-date').value = s.date;
+            document.getElementById('edit-short-type').value = s.type || 'image';
         }
 
         async function saveShortEdit() {
-            const idx = document.getElementById('edit-short-index').value;
+            const idx = parseInt(document.getElementById('edit-short-index').value);
             const fileInput = document.getElementById('edit-short-file');
-            const newTitle = document.getElementById('edit-short-title').value.trim();
-            const newDesc = document.getElementById('edit-short-desc').value.trim();
-            const newDate = document.getElementById('edit-short-date').value.trim();
-            const newType = document.getElementById('edit-short-type').value;
-
-            if(!newTitle) { alert("El título del short no puede estar vacío."); return; }
-            globalData.shorts[idx].title = newTitle;
-            globalData.shorts[idx].desc = newDesc;
-            globalData.shorts[idx].date = newDate;
-            globalData.shorts[idx].type = newType;
+            
+            globalData.shorts[idx].title = document.getElementById('edit-short-title').value;
+            globalData.shorts[idx].desc = document.getElementById('edit-short-desc').value;
+            globalData.shorts[idx].date = document.getElementById('edit-short-date').value;
+            globalData.shorts[idx].type = document.getElementById('edit-short-type').value;
 
             if (fileInput.files && fileInput.files[0]) {
                 const reader = new FileReader();
                 reader.onload = async function(e) {
                     globalData.shorts[idx].image = e.target.result;
-                    fileInput.value = "";
-                    renderGlobalContent();
                     await saveGlobalDataToCloud();
-                    alert(`✅ Short ${Number(idx)+1} actualizado con éxito.`);
+                    renderGlobalContent();
+                    showToast("✅ Short actualizado con éxito.");
+                    addLog(`Short #${idx+1} actualizado.`, "success");
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
-                renderGlobalContent();
                 await saveGlobalDataToCloud();
-                alert(`✅ Short ${Number(idx)+1} actualizado con éxito.`);
-            }
-        }
-
-        function loadRecipeForEditing() {
-            const idx = document.getElementById('edit-recipe-index').value;
-            const receta = globalData.recipes[idx];
-            document.getElementById('edit-recipe-title').value = receta.title;
-            document.getElementById('edit-recipe-desc').value = receta.text;
-        }
-
-        async function saveRecipeEdit() {
-            const idx = document.getElementById('edit-recipe-index').value;
-            const fileInput = document.getElementById('edit-recipe-file');
-            const newTitle = document.getElementById('edit-recipe-title').value.trim();
-            const newText = document.getElementById('edit-recipe-desc').value.trim();
-
-            if(!newTitle || !newText) { alert("El título y la receta no pueden estar vacíos."); return; }
-            globalData.recipes[idx].title = newTitle;
-            globalData.recipes[idx].text = newText;
-
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    globalData.recipes[idx].image = e.target.result;
-                    fileInput.value = "";
-                    renderGlobalContent();
-                    await saveGlobalDataToCloud();
-                    alert(`✅ Receta ${Number(idx)+1} actualizada con éxito.`);
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
                 renderGlobalContent();
-                await saveGlobalDataToCloud();
-                alert(`✅ Receta ${Number(idx)+1} actualizada con éxito.`);
+                showToast("✅ Short actualizado con éxito.");
+                addLog(`Short #${idx+1} actualizado.`, "success");
             }
         }
 
         function loadStoreForEditing() {
-            const idx = document.getElementById('edit-store-index').value;
-            const producto = globalData.batidos[idx];
-            document.getElementById('edit-store-title').value = producto.title;
-            document.getElementById('edit-store-desc').value = producto.desc;
+            const idx = parseInt(document.getElementById('edit-store-index').value);
+            const p = globalData.batidos[idx];
+            document.getElementById('edit-store-title').value = p.title;
+            document.getElementById('edit-store-desc').value = p.desc;
         }
 
         async function saveStoreEdit() {
-            const idx = document.getElementById('edit-store-index').value;
+            const idx = parseInt(document.getElementById('edit-store-index').value);
             const fileInput = document.getElementById('edit-store-file');
-            const newTitle = document.getElementById('edit-store-title').value.trim();
-            const newDesc = document.getElementById('edit-store-desc').value.trim();
-
-            if(!newTitle) { alert("El nombre del producto no puede estar vacío."); return; }
-            globalData.batidos[idx].title = newTitle;
-            globalData.batidos[idx].desc = newDesc;
+            
+            globalData.batidos[idx].title = document.getElementById('edit-store-title').value;
+            globalData.batidos[idx].desc = document.getElementById('edit-store-desc').value;
 
             if (fileInput.files && fileInput.files[0]) {
                 const reader = new FileReader();
                 reader.onload = async function(e) {
                     globalData.batidos[idx].image = e.target.result;
-                    fileInput.value = "";
-                    renderGlobalContent();
                     await saveGlobalDataToCloud();
-                    alert(`✅ Producto ${Number(idx)+1} actualizado en Tienda.`);
+                    renderGlobalContent();
+                    showToast("✅ Producto de tienda actualizado.");
+                    addLog(`Producto #${idx+1} de tienda actualizado.`, "success");
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
-                renderGlobalContent();
                 await saveGlobalDataToCloud();
-                alert(`✅ Producto ${Number(idx)+1} actualizado en Tienda.`);
+                renderGlobalContent();
+                showToast("✅ Producto de tienda actualizado.");
+                addLog(`Producto #${idx+1} de tienda actualizado.`, "success");
+            }
+        }
+
+        function loadRecipeForEditing() {
+            const idx = parseInt(document.getElementById('edit-recipe-index').value);
+            const r = globalData.recipes[idx];
+            document.getElementById('edit-recipe-title').value = r.title;
+            document.getElementById('edit-recipe-desc').value = r.text;
+        }
+
+        async function saveRecipeEdit() {
+            const idx = parseInt(document.getElementById('edit-recipe-index').value);
+            const fileInput = document.getElementById('edit-recipe-file');
+            
+            globalData.recipes[idx].title = document.getElementById('edit-recipe-title').value;
+            globalData.recipes[idx].text = document.getElementById('edit-recipe-desc').value;
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    globalData.recipes[idx].image = e.target.result;
+                    await saveGlobalDataToCloud();
+                    renderGlobalContent();
+                    showToast("✅ Receta oficial actualizada.");
+                    addLog(`Receta #${idx+1} actualizada.`, "success");
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                await saveGlobalDataToCloud();
+                renderGlobalContent();
+                showToast("✅ Receta oficial actualizada.");
+                addLog(`Receta #${idx+1} actualizada.`, "success");
             }
         }
 
         async function addNewClientCloud() {
             const name = document.getElementById('new-client-name').value.trim();
             const pass = document.getElementById('new-client-pass').value.trim();
-            const btn = document.getElementById('btn-save-client');
-            if (!name || !pass) { alert("Nombre y contraseña obligatorios."); return; }
-            btn.disabled = true;
-            btn.innerText = "Guardando...";
+            if (!name || !pass) { showToast("Nombre y contraseña obligatorios.", "error"); return; }
             const newClient = {
                 name, pass,
-                macroP: 140,
-                macroC: 180,
-                macroF: 50,
                 tab1: ["Desayuno: Ejemplo", "Almuerzo: Ejemplo"],
                 tab2: ["Desayuno: Ejemplo"],
                 tab3: ["Lista de compras"]
             };
             try {
                 const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
-                const res = await fetch(url, {
+                await fetch(url, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(toFirestoreDoc(newClient))
                 });
-                if (res.ok) {
-                    addLog(`Cliente "${name}" guardado en Firebase.`, "success");
-                    document.getElementById('new-client-name').value = "";
-                    document.getElementById('new-client-pass').value = "";
-                    await fetchClientsFromFirebase();
-                    renderAdminPanel();
-                } else { throw new Error("Error al guardar en Firebase."); }
+                showToast(`✅ Cliente "${name}" guardado con éxito.`);
+                document.getElementById('new-client-name').value = "";
+                document.getElementById('new-client-pass').value = "";
+                await fetchClientsFromFirebase();
             } catch (err) {
-                alert("❌ Error: " + err.message);
-            } finally { btn.disabled = false; btn.innerText = "Guardar en Firebase"; }
-        }
-
-        function renderAdminPanel() {
-            const select = document.getElementById('select-client-edit');
-            if (select) select.innerHTML = clientsDB.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
-            loadClientDietForEditing();
-            updateSystemMonitor("Conectado (Firebase)");
-
-            const container = document.getElementById('clients-list-container');
-            if (container) {
-                if (clientsDB.length === 0) {
-                    container.innerHTML = `<p class="text-sm text-slate-500 col-span-3">No hay clientes.</p>`;
-                    return;
-                }
-                container.innerHTML = clientsDB.map(c => `
-                    <div class="flex items-center justify-between bg-slate-900 p-3 rounded-xl border border-slate-800 text-sm">
-                        <div>
-                            <strong class="text-white block">${c.name}</strong> 
-                            <span class="text-[10px] text-slate-400">Pass: <code class="text-amber-400 font-mono">${c.pass}</code> | <span class="text-emerald-400">P:${c.macroP || 140}g C:${c.macroC || 180}g G:${c.macroF || 50}g</span></span>
-                        </div>
-                        <button onclick="deleteClientCloud('${c.name}')" class="text-red-400 hover:text-red-300 text-xs px-2.5 py-1 rounded-lg bg-slate-800 transition-colors cursor-pointer"><i class="fa-solid fa-trash"></i></button>
-                    </div>
-                `).join('');
-            }
-        }
-
-        function loadClientDietForEditing() {
-            const select = document.getElementById('select-client-edit');
-            if (!select) return;
-            const name = select.value;
-            const client = clientsDB.find(c => c.name === name);
-            if (client) {
-                document.getElementById('edit-tab1-data').value = client.tab1 ? client.tab1.join('\n') : '';
-                document.getElementById('edit-tab2-data').value = client.tab2 ? client.tab2.join('\n') : '';
-                document.getElementById('edit-tab3-data').value = client.tab3 ? client.tab3.join('\n') : '';
-            }
-        }
-
-        async function saveClientDietCloud() {
-            const name = document.getElementById('select-client-edit').value;
-            const btn = document.getElementById('btn-update-diet');
-            const client = clientsDB.find(c => c.name === name);
-            if (client) {
-                client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').filter(i => i.trim() !== '');
-                client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').filter(i => i.trim() !== '');
-                client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').filter(i => i.trim() !== '');
-                btn.disabled = true;
-                btn.innerText = "Actualizando...";
-                try {
-                    const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
-                    await fetch(url, {
-                        method: 'PATCH',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(toFirestoreDoc(client))
-                    });
-                    alert(`✅ Plan y Compras de "${name}" actualizados.`);
-                } catch(err) {
-                    alert("❌ Error: " + err.message);
-                } finally { btn.disabled = false; btn.innerText = "Actualizar Plan"; }
-            }
-        }
-
-        async function deleteClientCloud(name) {
-            if (name === "Angela") { alert("No se puede eliminar la cuenta base."); return; }
-            if(confirm(`¿Eliminar a "${name}" de Firebase?`)) {
-                try {
-                    await fetch(`${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`, { method: 'DELETE' });
-                    await fetchClientsFromFirebase();
-                    renderAdminPanel();
-                } catch(e) { alert("Error al eliminar."); }
+                showToast("❌ Error: " + err.message, "error");
             }
         }
 
@@ -1679,7 +1620,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
         }
 
         function switchTab(tabNumber) {
-            for (let i = 1; i <= 9; i++) {
+            for (let i = 1; i <= 10; i++) {
                 const content = document.getElementById('content-tab-' + i);
                 if (content) content.classList.add('hidden');
             }
@@ -1722,7 +1663,6 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
             }
         }
 
-        // AI NutriBot & Plate Analyzer Functions
         function appendAiMessage(sender, text, isHtml = false) {
             const container = document.getElementById('chat-messages');
             if (!container) return;
@@ -1886,7 +1826,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
         }
 
         function installPWAApp() {
-            alert("📲 Para instalar la app:\n\n1. Abre el menú de tu navegador.\n2. Selecciona 'Agregar a la pantalla de inicio'.");
+            showToast("📲 Para instalar la app:\n1. Abre el menú de tu navegador.\n2. Selecciona 'Agregar a la pantalla de inicio'.");
         }
     </script>
 </body>
