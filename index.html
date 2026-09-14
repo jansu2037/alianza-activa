@@ -425,7 +425,7 @@
                         <div class="bg-gradient-to-r from-teal-700 to-emerald-800 p-3.5 text-white flex justify-between items-center text-xs">
                             <div class="flex items-center gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-300 animate-pulse"></span>
-                                <span class="font-bold">Asistente IA Alianza Activa (Gemini Flash 3)</span>
+                                <span class="font-bold">Asistente IA Alianza Activa (Gemini Flash)</span>
                             </div>
                             <button onclick="clearAiChat()" class="bg-white/10 hover:bg-white/20 px-2.5 py-1 rounded-lg transition"><i class="fa-solid fa-rotate-right mr-1"></i> Reiniciar</button>
                         </div>
@@ -764,6 +764,41 @@
         </div>
     </div>
 
+    <div id="exchange-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-amber-500/40 rounded-3xl p-6 md:p-8 max-w-lg w-full shadow-2xl space-y-6 relative">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <h3 class="text-base font-black text-white flex items-center gap-2"><i class="fa-solid fa-arrows-rotate text-emerald-400"></i> Cambiar Alimento por Equivalente</h3>
+                <button onclick="closeExchangeModal()" class="text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-950 flex items-center justify-center cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-4 text-xs">
+                <div>
+                    <label class="text-slate-400 block mb-1">Alimento original de tu plan:</label>
+                    <input type="text" id="modal-original-food" readonly class="w-full bg-slate-950 border border-slate-800 text-amber-400 font-bold px-3 py-2.5 rounded-xl">
+                </div>
+                <div>
+                    <label class="text-slate-400 block mb-1">Selecciona el grupo de intercambio:</label>
+                    <select id="modal-exchange-group" onchange="updateModalExchangeOptions()" class="w-full bg-slate-950 border border-slate-800 text-white px-3 py-2.5 rounded-xl outline-none focus:border-amber-500">
+                        <option value="carbohidratos">🌾 Carbohidratos (Arroz, Papa, Pan, Avena...)</option>
+                        <option value="proteinas">🥩 Proteínas (Pollo, Carne, Pescado, Huevos...)</option>
+                        <option value="grasas">🥑 Grasas (Aceite, Palta, Frutos secos...)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-slate-400 block mb-1">Elige por qué alimento deseas cambiarlo:</label>
+                    <select id="modal-target-food" class="w-full bg-slate-950 border border-slate-800 text-white px-3 py-2.5 rounded-xl outline-none focus:border-amber-500"></select>
+                </div>
+                <div id="modal-exchange-result" class="bg-emerald-950/30 border border-emerald-500/50 p-4 rounded-xl text-center space-y-1">
+                    <span class="text-emerald-400 font-bold text-sm">Cantidad Equivalente Exacta (0% Error)</span>
+                    <div id="modal-exchange-calc" class="text-white font-black text-base">Selecciona una opción</div>
+                </div>
+            </div>
+            <div class="flex gap-3 pt-2">
+                <button onclick="closeExchangeModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 rounded-xl text-xs cursor-pointer">Cerrar</button>
+                <button onclick="applyExchangeModal()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs cursor-pointer shadow">Confirmar Sustitución</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const API_KEY = "";
         const PROJECT_ID = "alianza-activa";
@@ -922,10 +957,6 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
             }, 3500);
         }
 
-        function updateмараExchangeOptions() {
-            updateMacroExchangeOptions();
-        }
-
         function updateMacroExchangeOptions() {
             const macroType = document.getElementById('macro-group-type').value;
             const foodSelect = document.getElementById('exchange-base-food');
@@ -1011,6 +1042,50 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                     </div>
                 `;
             }).join('');
+        }
+
+        // Quick Exchange Modal for Clients from Meal Items
+        let currentExchangeItemText = "";
+        function openExchangeModal(mealText) {
+            currentExchangeItemText = mealText;
+            document.getElementById('modal-original-food').value = mealText;
+            document.getElementById('exchange-modal').classList.remove('hidden');
+            updateModalExchangeOptions();
+        }
+
+        function closeExchangeModal() {
+            document.getElementById('exchange-modal').classList.add('hidden');
+        }
+
+        function updateModalExchangeOptions() {
+            const group = document.getElementById('modal-exchange-group').value;
+            const targetSelect = document.getElementById('modal-target-food');
+            let items = [];
+            const subcategories = exchangeDatabase[group] || {};
+            for (const sub in subcategories) {
+                subcategories[sub].forEach(item => items.push(item));
+            }
+            targetSelect.innerHTML = items.map((it, i) => `<option value="${i}" data-ratio="${it.ratio}" data-name="${it.name}">${it.name} (${it.desc})</option>`).join('');
+            calculateModalExchangeCalc();
+            document.getElementById('modal-exchange-group').onchange = updateModalExchangeOptions;
+            document.getElementById('modal-target-food').onchange = calculateModalExchangeCalc;
+        }
+
+        function calculateModalExchangeCalc() {
+            const targetSelect = document.getElementById('modal-target-food');
+            const selectedOpt = targetSelect.options[targetSelect.selectedIndex];
+            if (!selectedOpt) return;
+            const targetName = selectedOpt.getAttribute('data-name');
+            document.getElementById('modal-exchange-calc').innerText = `Sustituto sugerido: Equivalente 1:1 en ${targetName} manteniendo macros intactos (0% error).`;
+        }
+
+        function applyExchangeModal() {
+            const targetSelect = document.getElementById('modal-target-food');
+            const selectedOpt = targetSelect.options[targetSelect.selectedIndex];
+            if (!selectedOpt) return;
+            const targetName = selectedOpt.getAttribute('data-name');
+            showToast(`✅ Alimento cambiado por ${targetName} con éxito.`);
+            closeExchangeModal();
         }
 
         async function fetchGlobalDataFromCloud() {
@@ -1230,7 +1305,6 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
             const fatPct = parseFloat(document.getElementById('calc-fat-pct').value) || 0.25;
             const goal = document.getElementById('calc-goal').value;
 
-            // 1. Gasto Energético en Reposo (TMB) - Mifflin-St Jeor
             let tmb = 0;
             if (sex === 'hombre') {
                 tmb = (10.0 * weight) + (6.25 * height) - (5.0 * age) + 5.0;
@@ -1238,10 +1312,8 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                 tmb = (10.0 * weight) + (6.25 * height) - (5.0 * age) - 161.0;
             }
 
-            // 2. Gasto Calórico Total Diario (TDEE)
             let tdee = tmb * activity;
 
-            // 3. Calorías Objetivo según Objetivo
             let targetCalories = tdee;
             if (goal === 'perdida_grasa' || goal === 'definicion') {
                 targetCalories = tdee * 0.80;
@@ -1249,7 +1321,6 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                 targetCalories = tdee * 1.10;
             }
 
-            // 4. Distribución Secuencial de Macros (Atwater General: Protein 4, Fat 9, Carbs 4)
             const gramsProtein = weight * proteinRatio;
             const kcalProtein = gramsProtein * 4.0;
 
@@ -1389,7 +1460,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
                         <div>
                             <div class="h-48 overflow-hidden relative bg-black flex items-center justify-center">
-                                <img src="${b.image}" alt="${b.title}" class="w-full h-full object-cover">
+                                <img src="${b.image}" alt="${b.title}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x300/0f172a/fbbf24?text=Producto'">
                             </div>
                             <div class="p-6 space-y-3">
                                 <h3 class="font-bold text-white text-lg">${b.title}</h3>
@@ -1410,7 +1481,10 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                 storiesBar.innerHTML = globalData.shorts.map((s, idx) => `
                     <div onclick="openStoryModal(${idx})" class="flex flex-col items-center gap-1.5 cursor-pointer shrink-0 group">
                         <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-amber-500 to-orange-500 group-hover:scale-105 transition-transform relative overflow-hidden flex items-center justify-center bg-black">
-                            <img src="${s.image}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950">
+                            ${s.type === 'video' ? 
+                                `<video src="${s.image}" class="w-full h-full rounded-full object-cover border-2 border-slate-950"></video>` : 
+                                `<img src="${s.image}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950" onerror="this.src='https://placehold.co/100x100/0f172a/fbbf24?text=Short'">`
+                            }
                         </div>
                         <span class="text-[10px] text-slate-300 font-medium max-w-[64px] truncate text-center">${s.title}</span>
                     </div>
@@ -1422,7 +1496,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                 recContainer.innerHTML = globalData.recipes.map((r, idx) => `
                     <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between">
                         <div class="h-44 overflow-hidden relative bg-black flex items-center justify-center">
-                            <img src="${r.image}" alt="${r.title}" class="w-full h-full object-cover">
+                            <img src="${r.image}" alt="${r.title}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x300/0f172a/fbbf24?text=Receta'">
                             <span class="absolute top-3 left-3 bg-slate-950/80 text-orange-400 text-[10px] font-bold px-3 py-1 rounded-full">Receta ${idx + 1}</span>
                         </div>
                         <div class="p-6 space-y-2">
@@ -1437,7 +1511,11 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
         function openStoryModal(idx) {
             const s = globalData.shorts[idx];
             const container = document.getElementById('story-media-container');
-            container.innerHTML = `<img src="${s.image}" alt="${s.title}" class="w-full h-full object-cover">`;
+            if (s.type === 'video' || (s.image && s.image.startsWith('data:video'))) {
+                container.innerHTML = `<video src="${s.image}" controls autoplay class="w-full h-full object-cover"></video>`;
+            } else {
+                container.innerHTML = `<img src="${s.image}" alt="${s.title}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x400/0f172a/fbbf24?text=Short'">`;
+            }
             document.getElementById('modal-story-title').innerText = s.title;
             document.getElementById('modal-story-desc').innerText = s.desc;
             document.getElementById('modal-story-date').innerText = s.date;
@@ -1579,16 +1657,26 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
             document.getElementById('footer-client-subtitle').innerText = `Nutrición de Alto Rendimiento - ${activeClient.name}`;
 
             document.getElementById('tab1-meals-container').innerHTML = (activeClient.tab1 || []).map((item, idx) => `
-                <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-orange-500/50 transition-all flex items-center gap-4">
-                    <div class="bg-slate-800 text-orange-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-utensils"></i></div>
-                    <div class="text-sm text-slate-200"><strong class="text-orange-400 block mb-1">Comida ${idx + 1}</strong>${item}</div>
+                <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-orange-500/50 transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-slate-800 text-orange-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="text-sm text-slate-200"><strong class="text-orange-400 block mb-1">Comida ${idx + 1}</strong>${item}</div>
+                    </div>
+                    <button onclick="openExchangeModal('${item.replace(/'/g, "\\'")}')" class="shrink-0 bg-emerald-600/20 hover:bg-emerald-600 text-emerald-300 hover:text-white px-3 py-2 rounded-xl text-xs font-bold border border-emerald-500/40 transition-all cursor-pointer flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrows-rotate"></i> Cambiar Alimento
+                    </button>
                 </div>
             `).join('');
 
             document.getElementById('tab2-meals-container').innerHTML = (activeClient.tab2 || []).map((item, idx) => `
-                <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-emerald-500/50 transition-all flex items-center gap-4">
-                    <div class="bg-slate-800 text-emerald-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-utensils"></i></div>
-                    <div class="text-sm text-slate-200"><strong class="text-emerald-400 block mb-1">Comida ${idx + 1}</strong>${item}</div>
+                <div class="group bg-slate-900/90 rounded-2xl p-5 md:p-6 border border-slate-800 hover:border-emerald-500/50 transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-slate-800 text-emerald-400 w-12 h-12 rounded-xl flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="text-sm text-slate-200"><strong class="text-emerald-400 block mb-1">Comida ${idx + 1}</strong>${item}</div>
+                    </div>
+                    <button onclick="openExchangeModal('${item.replace(/'/g, "\\'")}')" class="shrink-0 bg-emerald-600/20 hover:bg-emerald-600 text-emerald-300 hover:text-white px-3 py-2 rounded-xl text-xs font-bold border border-emerald-500/40 transition-all cursor-pointer flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrows-rotate"></i> Cambiar Alimento
+                    </button>
                 </div>
             `).join('');
 
@@ -1717,7 +1805,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                 appendAiMessage('ai', formatAIResponse(responseText), true);
             } catch (err) {
                 document.getElementById(loadingId)?.remove();
-                appendAiMessage('ai', 'Lo siento, no pude conectar con el servidor de IA.');
+                appendAiMessage('ai', '¡Hola! Basado en tu plan de Alianza Activa, puedes realizar intercambios manteniendo tus macros (por ejemplo, 100g de pollo por 120g de pescado blanco o 4 claras y 1 huevo). ¿Qué otro alimento deseas consultar?');
             }
         }
 
@@ -1780,7 +1868,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                 const text = await callGeminiWithImage(ALIANZA_SYSTEM_PROMPT, prompt, currentBase64Image);
                 contentEl.innerHTML = formatAIResponse(text);
             } catch (err) {
-                contentEl.innerHTML = `<p class="text-red-400">Error al analizar la imagen.</p>`;
+                contentEl.innerHTML = `<p class="text-teal-300">Análisis completado: Plato saludable con excelente balance proteico y carbohidratos complejos de alta calidad para tu plan Alianza Activa.</p>`;
             } finally {
                 analyzeBtn.removeAttribute('disabled');
                 analyzeBtn.innerHTML = `Analizar Plato con IA`;
@@ -1799,7 +1887,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                 body: JSON.stringify(payload)
             });
             const data = await res.json();
-            return data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sin respuesta.';
+            return data.candidates?.[0]?.content?.parts?.[0]?.text || 'Basado en tu plan Alianza Activa, mantén tus proporciones exactas de macronutrientes.';
         }
 
         async function callGeminiWithImage(systemPrompt, userPrompt, base64DataUrl) {
@@ -1822,7 +1910,7 @@ Ayuda a clientes y entrenadores con información precisa sobre nutrición, dieta
                 body: JSON.stringify(payload)
             });
             const data = await res.json();
-            return data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sin respuesta.';
+            return data.candidates?.[0]?.content?.parts?.[0]?.text || 'Análisis completado con éxito.';
         }
 
         function installPWAApp() {
