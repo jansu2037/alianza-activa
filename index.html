@@ -692,6 +692,7 @@
                         <option value="proteinas">🥩 Carnes, Pollo y Cerdos (Argenfood)</option>
                         <option value="grasas">🥑 Aceites, Grasas y Palta (Argenfood)</option>
                         <option value="huevos">🥚 Huevos y Derivados (Argenfood)</option>
+                        <option value="verduras">🥦 Verduras y Hortalizas (Argenfood)</option>
                     </select>
                 </div>
                 <div>
@@ -793,7 +794,7 @@
         let clientsDB = defaultClients;
         let activeClient = clientsDB[0];
 
-        // EXCHANGE DATABASE LOADED FROM OFFICIAL ARGENFOOD (UNLU) PDF DATA
+        // EXCHANGE DATABASE LOADED FROM OFFICIAL ARGENFOOD (UNLU) PDF DATA (INCLUDING VERDURAS)
         const exchangeDatabase = {
             carbohidratos: {
                 cereales_y_panificados: [
@@ -1021,6 +1022,7 @@
                         if (parsed.batidos) globalData.batidos = parsed.batidos;
                         if (parsed.shorts) globalData.shorts = parsed.shorts;
                         if (parsed.recipes) globalData.recipes = parsed.recipes;
+                        renderGlobalContent();
                     }
                 }
             } catch(e) {}
@@ -1039,6 +1041,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
+                renderGlobalContent();
             } catch(e) {}
         }
 
@@ -1488,16 +1491,14 @@
                         globalData.shorts[idx].type = 'image';
                     }
                     await saveGlobalDataToCloud();
-                    renderGlobalContent();
-                    showToast("✅ Short / Historia actualizado con éxito.");
-                    addLog(`Short #${idx+1} actualizado.`, "success");
+                    showToast("✅ Short / Historia publicado para todos los clientes.");
+                    addLog(`Short #${idx+1} publicado en la nube.`, "success");
                 };
                 reader.readAsDataURL(file);
             } else {
                 await saveGlobalDataToCloud();
-                renderGlobalContent();
-                showToast("✅ Short / Historia actualizado con éxito.");
-                addLog(`Short #${idx+1} actualizado.`, "success");
+                showToast("✅ Short / Historia publicado para todos los clientes.");
+                addLog(`Short #${idx+1} publicado en la nube.`, "success");
             }
         }
 
@@ -1520,16 +1521,14 @@
                 reader.onload = async function(e) {
                     globalData.batidos[idx].image = e.target.result;
                     await saveGlobalDataToCloud();
-                    renderGlobalContent();
-                    showToast("✅ Producto de tienda actualizado.");
-                    addLog(`Producto #${idx+1} de tienda actualizado.`, "success");
+                    showToast("✅ Producto de tienda actualizado para todos.");
+                    addLog(`Producto #${idx+1} de tienda actualizado en la nube.`, "success");
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
                 await saveGlobalDataToCloud();
-                renderGlobalContent();
-                showToast("✅ Producto de tienda actualizado.");
-                addLog(`Producto #${idx+1} de tienda actualizado.`, "success");
+                showToast("✅ Producto de tienda actualizado para todos.");
+                addLog(`Producto #${idx+1} de tienda actualizado en la nube.`, "success");
             }
         }
 
@@ -1552,16 +1551,14 @@
                 reader.onload = async function(e) {
                     globalData.recipes[idx].image = e.target.result;
                     await saveGlobalDataToCloud();
-                    renderGlobalContent();
-                    showToast("✅ Receta oficial actualizada.");
-                    addLog(`Receta #${idx+1} actualizada.`, "success");
+                    showToast("✅ Receta oficial publicada para todos.");
+                    addLog(`Receta #${idx+1} publicada en la nube.`, "success");
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
                 await saveGlobalDataToCloud();
-                renderGlobalContent();
-                showToast("✅ Receta oficial actualizada.");
-                addLog(`Receta #${idx+1} actualizada.`, "success");
+                showToast("✅ Receta oficial publicada para todos.");
+                addLog(`Receta #${idx+1} publicada en la nube.`, "success");
             }
         }
 
@@ -1646,7 +1643,10 @@
             }
         }
 
-        function switchTab(tabNumber) {
+        async function switchTab(tabNumber) {
+            // Always fetch latest global content from cloud when switching tabs so clients instantly see admin updates
+            await fetchGlobalDataFromCloud();
+
             for (let i = 1; i <= 10; i++) {
                 const content = document.getElementById('content-tab-' + i);
                 if (content) content.classList.add('hidden');
