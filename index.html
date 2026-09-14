@@ -1418,7 +1418,7 @@
                     <div onclick="openStoryModal(${idx})" class="flex flex-col items-center gap-1.5 cursor-pointer shrink-0 group">
                         <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-amber-500 to-orange-500 group-hover:scale-105 transition-transform relative overflow-hidden flex items-center justify-center bg-black">
                             ${s.type === 'video' || (s.image && s.image.startsWith('data:video')) ? 
-                                `<video src="${s.image}" class="w-full h-full rounded-full object-cover border-2 border-slate-950" muted></video>` : 
+                                `<video src="${s.image}" class="w-full h-full rounded-full object-cover border-2 border-slate-950" muted autoplay loop playsinline></video>` : 
                                 `<img src="${s.image}" alt="${s.title}" class="w-full h-full rounded-full object-cover border-2 border-slate-950" onerror="this.src='https://placehold.co/100x100/0f172a/fbbf24?text=Short'">`
                             }
                         </div>
@@ -1482,6 +1482,10 @@
 
             if (fileInput.files && fileInput.files[0]) {
                 const file = fileInput.files[0];
+                if (file.size > 900 * 1024) {
+                    showToast("⚠️ El video es muy pesado (>900KB). Por favor sube un video corto o comprimido para que Firestore lo guarde correctamente.", "error");
+                    return;
+                }
                 const reader = new FileReader();
                 reader.onload = async function(e) {
                     globalData.shorts[idx].image = e.target.result;
