@@ -617,12 +617,12 @@
                             <h3 class="font-bold text-amber-400 text-sm uppercase">📝 Editar Dieta y Compras del Cliente</h3>
                             <select id="select-client-edit" onchange="loadClientDietForEditing()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white outline-none"></select>
                             <div class="space-y-2">
-                                <label class="text-[10px] text-slate-400">Alta Energía (1 por línea)</label>
-                                <textarea id="edit-tab1-data" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-200 font-mono outline-none"></textarea>
-                                <label class="text-[10px] text-slate-400">Control (1 por línea)</label>
-                                <textarea id="edit-tab2-data" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-200 font-mono outline-none"></textarea>
-                                <label class="text-[10px] text-slate-400">Lista de Compras (1 por línea)</label>
-                                <textarea id="edit-tab3-data" rows="2" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-200 font-mono outline-none"></textarea>
+                                <label class="text-[10px] text-slate-400">Alta Energía (Pega todo tu texto con saltos de línea)</label>
+                                <textarea id="edit-tab1-data" rows="6" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-200 font-mono outline-none"></textarea>
+                                <label class="text-[10px] text-slate-400">Control (Pega todo tu texto con saltos de línea)</label>
+                                <textarea id="edit-tab2-data" rows="6" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-200 font-mono outline-none"></textarea>
+                                <label class="text-[10px] text-slate-400">Lista de Compras (Pega todo tu texto con saltos de línea)</label>
+                                <textarea id="edit-tab3-data" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2 text-xs text-slate-200 font-mono outline-none"></textarea>
                             </div>
                             <button onclick="saveClientDietCloud()" id="btn-update-diet" class="w-full bg-emerald-500 text-slate-950 font-bold py-3 rounded-xl text-sm hover:bg-emerald-400 cursor-pointer shadow-md">Actualizar Plan</button>
                         </div>
@@ -764,29 +764,65 @@
             {
                 name: "Angela",
                 pass: "angela2026",
-                tab1: [
-                    "Desayuno: 2 Huevos enteros cocidos a gusto + 40g de Pan integral",
-                    "Media Mañana: 150g de Fruta (Manzana verde o Kiwi)",
-                    "Almuerzo: 210g de Pechuga de pollo en crudo + 60g Arroz integral + 200g Ensalada",
-                    "Media Tarde: 2 Huevos enteros + 60g Pan integral",
-                    "Cena: Lunes: 200g Lomo magro + Ensalada + 40g Palta"
-                ],
-                tab2: [
-                    "Desayuno: 2 Huevos enteros + 40g Pan integral",
-                    "Media Mañana: 150g Fruta (Sin proteína)",
-                    "Almuerzo: 150g Proteína + 50g Carbohidrato + 10g Aceite de oliva + 200g Ensalada",
-                    "Media Tarde: 2 Huevos enteros + 120g Papa o Batata en crudo",
-                    "Cena: Rotación de pescado y pollo magro con vegetales"
-                ],
-                tab3: [
-                    "Huevos: 1 maple de 30 unidades",
-                    "Pechuga de pollo: 1.5 kg en crudo",
-                    "Carne roja magra: 450g",
-                    "Pan integral: 1 paquete (460g)",
-                    "Arroz integral o Parboil: 500g",
-                    "Fruta fresca: 1.2 kg",
-                    "Vegetales verdes: 3 kg"
-                ]
+                tab1: `🍳 1. DESAYUNO:
+
+2 Huevos enteros (unidad) cocidos a gusto (revueltos, a la plancha o duros).
+40g de Pan integral.
+
+🍏 2. MEDIA MAÑANA:
+
+150g de Fruta (Manzana verde o Kiwi).
+
+🥩 3. ALMUERZO:
+
+210g de Proteína en crudo (Lomo de ternera magro o pechuga de pollo).
+60g de Arroz integral o Parboil (pesado en crudo).
+200g de Ensalada (Espinaca o brócoli).
+
+🥪 4. MEDIA TARDE / MERIENDA:
+
+2 Huevos enteros (unidad) cocidos a gusto.
+60g de Pan integral.
+
+🐟 5. CENA (Rotación de Proteínas):
+
+Lunes (Carne Roja): 200g de Lomo de ternera magro en crudo + 200g de Ensalada + 40g de Palta.
+Miércoles (Pollo): 200g de Pechuga de pollo en crudo + 200g de Ensalada + 60g de Zapallo.
+Viernes (Pescado): 200g de Pescado blanco (Merluza/Gatuzo) en crudo + 200g de Ensalada + 40g de Palta.`,
+                tab2: `🍳 1. DESAYUNO:
+
+2 Huevos enteros (unidad) cocidos a gusto.
+40g de Pan integral.
+
+🍏 2. MEDIA MAÑANA:
+
+150g de Fruta (Manzana verde o Kiwi).
+
+🥩 3. ALMUERZO:
+
+150g de Proteína (Pechuga de pollo o carne magra en crudo).
+50g de Carbohidrato (Arroz integral o legumbres en crudo).
+10g de Aceite de oliva.
+200g de Ensalada.
+
+🥪 4. MEDIA TARDE / MERIENDA:
+
+2 Huevos enteros (unidad).
+120g de Papa o Batata hervida (pesada en crudo).
+
+🐟 5. CENA (Rotación de Proteínas):
+
+Martes (Pollo): 150g de Pechuga de pollo en crudo + 200g de Ensalada + 40g de Palta.
+Jueves (Pescado): 150g de Pescado blanco o Atún al natural + 200g de Ensalada + 80g de Zapallo.
+Sábado (Pescado): 150g de Pescado blanco + 200g de Ensalada + 40g de Palta.
+Domingo (Pescado): 150g de Pescado blanco o Atún al natural + 200g de Ensalada + 80g de Zapallo.`,
+                tab3: `Huevos: 1 maple de 30 unidades
+Pechuga de pollo: 1.5 kg en crudo
+Carne roja magra: 450g
+Pan integral: 1 paquete (460g)
+Arroz integral o Parboil: 500g
+Fruta fresca: 1.2 kg
+Vegetales verdes: 3 kg`
             }
         ];
 
@@ -794,7 +830,6 @@
         let clientsDB = defaultClients;
         let activeClient = clientsDB[0];
 
-        // EXCHANGE DATABASE LOADED FROM OFFICIAL ARGENFOOD (UNLU) PDF DATA (INCLUDING VERDURAS)
         const exchangeDatabase = {
             carbohidratos: {
                 cereales_y_panificados: [
@@ -1107,21 +1142,29 @@
                 fields: {
                     name: { stringValue: client.name },
                     pass: { stringValue: client.pass },
-                    tab1: { arrayValue: { values: (client.tab1 || []).map(v => ({ stringValue: v })) } },
-                    tab2: { arrayValue: { values: (client.tab2 || []).map(v => ({ stringValue: v })) } },
-                    tab3: { arrayValue: { values: (client.tab3 || []).map(v => ({ stringValue: v })) } }
+                    tab1: { stringValue: typeof client.tab1 === 'string' ? client.tab1 : (client.tab1 || []).join('\n') },
+                    tab2: { stringValue: typeof client.tab2 === 'string' ? client.tab2 : (client.tab2 || []).join('\n') },
+                    tab3: { stringValue: typeof client.tab3 === 'string' ? client.tab3 : (client.tab3 || []).join('\n') }
                 }
             };
         }
 
         function fromFirestoreDoc(doc) {
             const f = doc.fields || {};
+            const parseField = (field) => {
+                if (!field) return '';
+                if (field.stringValue !== undefined) return field.stringValue;
+                if (field.arrayValue && field.arrayValue.values) {
+                    return field.arrayValue.values.map(v => v.stringValue || '').join('\n');
+                }
+                return '';
+            };
             return {
                 name: f.name?.stringValue || '',
                 pass: f.pass?.stringValue || '',
-                tab1: (f.tab1?.arrayValue?.values || []).map(v => v.stringValue || ''),
-                tab2: (f.tab2?.arrayValue?.values || []).map(v => v.stringValue || ''),
-                tab3: (f.tab3?.arrayValue?.values || []).map(v => v.stringValue || '')
+                tab1: parseField(f.tab1),
+                tab2: parseField(f.tab2),
+                tab3: parseField(f.tab3)
             };
         }
 
@@ -1176,9 +1219,15 @@
             const name = document.getElementById('select-client-edit').value;
             const client = clientsDB.find(c => c.name === name);
             if (!client) return;
-            document.getElementById('edit-tab1-data').value = (client.tab1 || []).join('\n');
-            document.getElementById('edit-tab2-data').value = (client.tab2 || []).join('\n');
-            document.getElementById('edit-tab3-data').value = (client.tab3 || []).join('\n');
+
+            const formatForTextarea = (val) => {
+                if (Array.isArray(val)) return val.join('\n');
+                return val || '';
+            };
+
+            document.getElementById('edit-tab1-data').value = formatForTextarea(client.tab1);
+            document.getElementById('edit-tab2-data').value = formatForTextarea(client.tab2);
+            document.getElementById('edit-tab3-data').value = formatForTextarea(client.tab3);
         }
 
         async function saveClientDietCloud() {
@@ -1186,9 +1235,9 @@
             const client = clientsDB.find(c => c.name === name);
             if (!client) return;
 
-            client.tab1 = document.getElementById('edit-tab1-data').value.split('\n').map(s => s.trim()).filter(Boolean);
-            client.tab2 = document.getElementById('edit-tab2-data').value.split('\n').map(s => s.trim()).filter(Boolean);
-            client.tab3 = document.getElementById('edit-tab3-data').value.split('\n').map(s => s.trim()).filter(Boolean);
+            client.tab1 = document.getElementById('edit-tab1-data').value;
+            client.tab2 = document.getElementById('edit-tab2-data').value;
+            client.tab3 = document.getElementById('edit-tab3-data').value;
 
             try {
                 const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
@@ -1314,9 +1363,9 @@
                 isUserAdmin = true;
                 activeClient = {
                     name: "Coach Roberto",
-                    tab1: ["Modo Administrador - Coach"],
-                    tab2: ["Modo Administrador - Coach"],
-                    tab3: ["Modo Administrador"]
+                    tab1: "Modo Administrador - Coach",
+                    tab2: "Modo Administrador - Coach",
+                    tab3: "Modo Administrador"
                 };
                 document.getElementById('login-screen').classList.add('hidden');
                 document.getElementById('main-app').classList.remove('hidden');
@@ -1372,15 +1421,13 @@
 
         function shareWhatsApp(type) {
             let text = "";
+            const formatContent = (val) => Array.isArray(val) ? val.join('\n') : (val || '');
             if (type === 'tab1') {
-                text = `🔥 *ALTA ENERGÍA (PIERNA)*\n👤 *Cliente:* ${activeClient.name}\n\n` +
-                    (activeClient.tab1 || []).map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
+                text = `🔥 *ALTA ENERGÍA (PIERNA)*\n👤 *Cliente:* ${activeClient.name}\n\n` + formatContent(activeClient.tab1);
             } else if (type === 'tab2') {
-                text = `🥗 *CONTROL Y RECUPERACIÓN*\n👤 *Cliente:* ${activeClient.name}\n\n` +
-                    (activeClient.tab2 || []).map((m, i) => `🍽️ *Comida ${i + 1}:* ${m}`).join('\n\n');
+                text = `🥗 *CONTROL Y RECUPERACIÓN*\n👤 *Cliente:* ${activeClient.name}\n\n` + formatContent(activeClient.tab2);
             } else if (type === 'tab3') {
-                text = `🛒 *COMPRAS SEMANAL*\n👤 *Cliente:* ${activeClient.name}\n\n` +
-                    (activeClient.tab3 || []).map(item => `✅ ${item}`).join('\n');
+                text = `🛒 *COMPRAS SEMANAL*\n👤 *Cliente:* ${activeClient.name}\n\n` + formatContent(activeClient.tab3);
             }
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
         }
@@ -1647,9 +1694,9 @@
             if (!name || !pass) { showToast("Nombre y contraseña obligatorios.", "error"); return; }
             const newClient = {
                 name, pass,
-                tab1: ["Desayuno: Ejemplo", "Almuerzo: Ejemplo"],
-                tab2: ["Desayuno: Ejemplo"],
-                tab3: ["Lista de compras"]
+                tab1: "Desayuno: Ejemplo\nAlmuerzo: Ejemplo",
+                tab2: "Desayuno: Ejemplo",
+                tab3: "Lista de compras"
             };
             try {
                 const url = `${FIRESTORE_BASE}/${encodeURIComponent(name)}?key=${API_KEY}`;
@@ -1671,24 +1718,27 @@
             document.getElementById('header-client-title').innerText = `Fitness Alianza Activa - ${activeClient.name}`;
             document.getElementById('footer-client-subtitle').innerText = `Nutrición de Alto Rendimiento - ${activeClient.name}`;
 
+            const formatContent = (val) => {
+                if (Array.isArray(val)) return val.join('\n');
+                return val || '';
+            };
+
             document.getElementById('tab1-meals-container').innerHTML = `
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
-                    <div class="text-sm md:text-base text-slate-200 leading-relaxed whitespace-pre-line font-sans">${(activeClient.tab1 || []).join('\n')}</div>
+                    <div class="text-sm md:text-base text-slate-200 leading-relaxed whitespace-pre-line font-sans">${formatContent(activeClient.tab1)}</div>
                 </div>
             `;
 
             document.getElementById('tab2-meals-container').innerHTML = `
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-xl">
-                    <div class="text-sm md:text-base text-slate-200 leading-relaxed whitespace-pre-line font-sans">${(activeClient.tab2 || []).join('\n')}</div>
+                    <div class="text-sm md:text-base text-slate-200 leading-relaxed whitespace-pre-line font-sans">${formatContent(activeClient.tab2)}</div>
                 </div>
             `;
 
             document.getElementById('tab3-shopping-container').innerHTML = `
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-sm space-y-4 md:col-span-2">
                     <h3 class="font-bold text-amber-400 border-b border-slate-800 pb-2">Artículos a Comprar</h3>
-                    <ul class="space-y-3 text-sm text-slate-300">
-                        ${(activeClient.tab3 || []).map(item => `<li class="flex items-start gap-3"><i class="fa-solid fa-check text-amber-400 mt-1"></i><span>${item}</span></li>`).join('')}
-                    </ul>
+                    <div class="text-sm text-slate-300 whitespace-pre-line leading-relaxed">${formatContent(activeClient.tab3)}</div>
                 </div>
             `;
         }
@@ -1711,7 +1761,6 @@
         }
 
         async function switchTab(tabNumber) {
-            // Always fetch latest global content from cloud when switching tabs so clients instantly see admin updates
             await fetchGlobalDataFromCloud();
 
             for (let i = 1; i <= 10; i++) {
